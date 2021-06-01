@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    tools:context=".About">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/title_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="81dp"
+        android:layout_alignParentTop="true"
+        app:cardElevation="5dp">
+
+        <RelativeLayout
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/backtoselldetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:background="#ffffff"
+                android:padding="10dp"
+                android:src="@drawable/ic_arrow_back_black_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/quicksand_medium"
+                android:text="ABOUT BOOX"
+                android:textAlignment="center"
+                android:textColor="#7435E4"
+                android:textSize="20dp" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand_medium"
+                android:padding="10dp"
+                android:text="About Developer"
+                android:textColor="#7241C8"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="This App is Designed and Developed by Rishi Dholkheria."
+                android:textColor="#3F51B5" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Please provide your feedback on Playstore !"
+                android:textColor="#3F51B5" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Boox is an app for Book Lovers!  Boox help you exchange your Books at best offers.
+You can Sell-Purchase-Rent your books easily through this app.
+You can also exchange your college notes on Boox.
+"
+                android:textColor="#3F51B5" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/quicksand_medium"
+                android:padding="10dp"
+                android:text="Guide To BOOX"
+                android:textColor="#7241C8"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:adjustViewBounds="true"
+                android:background="#ffffff"
+                android:scaleType="fitCenter"
+                android:src="@drawable/booxx" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/karla"
+                android:padding="10dp"
+                android:text="SELLING"
+                android:textColor="#6426D1"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="It is very user friendly platform to sell books.Just a few basic details such as Mrp, Offered Price, Category, Description and an Image is required to prepare an advertisement of your book.
+When you confirm advertisemnt of your it will be visible to all other users.Anyone interested in your book can request you to purchase.You can contact your buyer at your own convinience.
+When you accept request of any Buyer then your book will be Sold. You can contact your buyer on mode of exchange of book as well as amount.
+
+Note : You can only add one book in an advertisement or a set of book in a whole. Option for same Book more than one in quantity is not provided yet but soon will be available!"
+                android:textColor="#3F51B5"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/karla"
+                android:padding="10dp"
+                android:text="BUYING"
+                android:textColor="#6426D1"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="Buying on Boox will be a great experience for you. You can compare Mrp and Offered price which allows you to have a better comparison.
+Bookmark option is available so that you can select all books you are interested in.All bookmarked books will appear in your Books Cart.
+You can request any book you wish to purchase. Your request will reach the seller and he can contact you accordingly.
+When your request is accepted you can contact your seller you can contact seller on mode of exchange of book as well as amount.
+"
+                android:textColor="#3F51B5"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/karla"
+                android:padding="10dp"
+                android:text="RENT"
+                android:textColor="#6426D1"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="Buying on Boox will be a great experience for you. You can compare Mrp and Offered price which allows you to have a better comparison.
+Bookmark option is available so that you can select all books you are interested in.All bookmarked books will appear in your Books Cart.
+You can request any book you wish to purchase. Your request will reach the seller and he can contact you accordingly.
+When your request is accepted you can contact your seller you can contact seller on mode of exchange of book as well as amount.
+"
+                android:textColor="#3F51B5"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="If you are intrested in just reading books rather than keeping them you can rent book of your choice on timely bases through Boox.
+You can request any book which you wish to read.When your request is accepted you can lend that book from the seller for a certain time.
+Security Deposit(30% of Book MRP) will be added from the seller side which should be refundable when you return that book
+"
+                android:textColor="#3F51B5"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/karla"
+                android:padding="10dp"
+                android:text="FILTER"
+                android:textColor="#6426D1"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="There is a filter option above Purchase Book list and Rent Book list which allows you to filter Book Category of your choice."
+                android:textColor="#3F51B5"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="Notes is an option for students who wish to Sell there College/School notes of previous class if they wish to make some pocket money out of it.
+Anyone who is need of ready made notes can check it out on Boox.
+"
+                android:textColor="#3F51B5"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/karla"
+                android:padding="10dp"
+                android:text="REPORT/COMPLAINT"
+                android:textColor="#6426D1"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="There is an option of Report Book for cases if the seller has posted something inappropriate or anything offensive etc. Book will be removed as soon as possible in this case."
+                android:textColor="#3F51B5"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="Note: Develepor is not responsible in any exchange of Book or Money. Seller-Buyer must contact each other to have no confusion.
+Develepor is nowhere responsible in case of any fraud.This app is built on faith of users only and develepor must not be held guilty for any of these situations.
+."
+                android:textColor="#3F51B5"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/karla"
+                android:padding="10dp"
+                android:text="DELETE ACCOUNT"
+                android:textColor="#6426D1"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="Your can delete your Account through 'Delete Account' option. Any data after deleting your account will not return."
+                android:textColor="#3F51B5"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/quicksand_medium"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="Happy Reading!"
+                android:textColor="#6426D1"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

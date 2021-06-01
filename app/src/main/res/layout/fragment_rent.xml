@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RentFragment">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/rent_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/main_container"/>
+
+
+        <com.luseen.spacenavigation.SpaceNavigationView
+            android:id="@+id/space"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:active_item_color="#5404E4"
+            app:inactive_centre_button_icon_color="#51FFFFFF"
+            app:inactive_item_color="#000000"
+            android:layout_alignParentBottom="true"
+            app:centre_button_color="#5B13DC"
+            app:active_centre_button_icon_color="#ffffff"
+            app:active_centre_button_background_color="#7435E4"
+            app:space_background_color="#BD9EF4"
+            app:centre_button_icon="@drawable/ic_add_circle_black_24dp"
+            app:space_item_icon_size="20dp"
+            app:space_item_icon_only_size="@dimen/space_item_icon_only_size"
+            app:space_item_text_size="@dimen/space_item_text_default_size" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</FrameLayout>

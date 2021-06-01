@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "960726045554",
+    "firebase_url": "https://boox-89bbe.firebaseio.com",
+    "project_id": "boox-89bbe",
+    "storage_bucket": "boox-89bbe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:960726045554:android:0adc9001348b64d9a0c3eb",
+        "android_client_info": {
+          "package_name": "com.attendit.booxapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "960726045554-747sade6a96p8inahuilchjjd1vj5jb2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtbogiGASSt5r-S3ijpnRMn7Gk6SzCiow"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "960726045554-747sade6a96p8inahuilchjjd1vj5jb2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
