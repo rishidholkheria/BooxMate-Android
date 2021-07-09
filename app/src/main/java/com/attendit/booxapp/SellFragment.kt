@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.attendit.booxapp.adapter.SellAdapter
+import com.attendit.booxapp.databinding.FragmentSellBinding
 import com.attendit.booxapp.model.BookModel
 import com.attendit.booxapp.model.SellModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -21,37 +22,25 @@ import java.util.*
  */
 class SellFragment : Fragment(), View.OnClickListener {
 
-    lateinit var sellrecycle: RecyclerView
     lateinit var mDatabase: DatabaseReference
-
-    var myLayoutManager: LinearLayoutManager? = null
     var mynewadapter: SellAdapter? = null
+    lateinit var binding: FragmentSellBinding
 
     private val TAG = "SellFragment"
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_sell, container, false)
-        //udata = sell_data();
-
-        sellrecycle = view.findViewById(R.id.sellrecycler)
+        binding = FragmentSellBinding.inflate(inflater, container, false)
 
         var myDataListModel: ArrayList<BookModel> = ArrayList()
-        var cadapter = SellAdapter(requireContext(), myDataListModel)
-        sellrecycle.adapter = cadapter
-
-        mDatabase =
-                FirebaseDatabase.getInstance().getReference("books")
+        mDatabase = FirebaseDatabase.getInstance().getReference("books")
 
 
-        var sellfab: FloatingActionButton = view.findViewById(R.id.sellbtn)
+        var sellfab: FloatingActionButton = binding.sellbtn
         sellfab.setOnClickListener(View.OnClickListener { startActivity(Intent(context, SellDetails::class.java)) })
 
-        sellrecycle.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        Log.d("debugMode", "The application stopped after this")
+        binding.sellrecycler.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         mynewadapter = SellAdapter(requireContext(), myDataListModel)
-        sellrecycle!!.adapter = mynewadapter
-
+        binding.sellrecycler!!.adapter = mynewadapter
 
         mDatabase.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -73,8 +62,7 @@ class SellFragment : Fragment(), View.OnClickListener {
             }
         })
 
-        return view
-
+        return binding.root
     }
 
     override fun onClick(v: View) {}

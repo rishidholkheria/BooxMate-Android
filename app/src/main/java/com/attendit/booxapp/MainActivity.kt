@@ -11,6 +11,8 @@ import androidx.viewpager.widget.ViewPager
 import com.attendit.booxapp.adapter.ViewPagerAdapter
 import com.attendit.booxapp.adapter.ViewPagerAdapter.Companion.addFragment
 import com.attendit.booxapp.data.Prefs.putStringPrefs
+import com.attendit.booxapp.databinding.ActivityMainBinding
+import com.attendit.booxapp.databinding.MainActivityBinding
 import com.attendit.booxapp.model.BookModel
 import com.attendit.booxapp.model.UserModel
 import com.google.android.material.tabs.TabLayout
@@ -23,21 +25,16 @@ import com.google.firebase.database.ValueEventListener
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    //  private Toolbar toolbar;
-    private var tabLayout: TabLayout? = null
-    private var viewPager: ViewPager? = null
-    private var menu: ImageButton? = null
-//    private val menuitems: Spinner? = null
+
     private val mFirebaseAuth = FirebaseAuth.getInstance()
     private val mAuthStateListener: AuthStateListener? = null
-//    var recyclerView: RecyclerView? = null
-//    var arrayList: ArrayList<BookModel>? = null
 
-    lateinit var recyclerView: RecyclerView
+    lateinit var binding: MainActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
+        binding = MainActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val i = intent
         if (i.getStringExtra("type") != null) {
@@ -56,10 +53,8 @@ class MainActivity : AppCompatActivity() {
 
 
 //        toolbar = (Toolbar) findViewById(R.id.mytoolbar);
-        tabLayout = findViewById<View>(R.id.tablayout) as TabLayout
-        viewPager = findViewById<View>(R.id.myViewPager) as ViewPager
-        menu = findViewById<View>(R.id.menu_icon) as ImageButton
-        menu!!.setOnClickListener { }
+
+        binding.menuIcon!!.setOnClickListener { }
         putStringPrefs(applicationContext, "current_userid", mFirebaseAuth.currentUser!!.uid)
         //        logout.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -72,8 +67,8 @@ class MainActivity : AppCompatActivity() {
 //        });
 
         //  setSupportActionBar(toolbar);
-        setupViewPager(viewPager)
-        tabLayout!!.setupWithViewPager(viewPager)
+        setupViewPager(binding.myViewPager)
+        binding.tablayout!!.setupWithViewPager(binding.myViewPager)
     }
 
     private val userDetails: Unit

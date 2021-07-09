@@ -51,8 +51,6 @@ class SellAdapter() : RecyclerView.Adapter<SellAdapter.ViewHolder>() {
         var book_status: TextView = v.findViewById(R.id.book_status)
         var book_price: TextView = v.findViewById(R.id.price)
 
-        //        var status_dot: ImageView
-//        var book_image: ImageView
         var item: SellModel? = null
 
         fun bind(sellModel: BookModel) {
@@ -72,7 +70,7 @@ class SellAdapter() : RecyclerView.Adapter<SellAdapter.ViewHolder>() {
                 public override fun onClick(v: View) {
                     val i: Intent = Intent(myContext, SellBookDetails::class.java)
                     i.putExtra("btitle", book_name.getText().toString().trim({ it <= ' ' }))
-                    i.putExtra("image", item!!.bookimageLink)
+//                    i.putExtra("image", item!!.bookimageLink)
                     myContext.startActivity(i)
                 }
             })

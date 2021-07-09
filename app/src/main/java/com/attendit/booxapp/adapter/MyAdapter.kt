@@ -22,21 +22,20 @@ import kotlin.collections.ArrayList
 class MyAdapter() : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 
     lateinit var context: Context
-    lateinit var myDataModel: ArrayList<BookModel?>
-
+    lateinit var myDataModel: ArrayList<BookModel>
     protected var mListener: ItemListener? = null
     private var firebaseUser = FirebaseAuth.getInstance().currentUser
 
     constructor(
-        context: Context,
-        myDataModel: ArrayList<BookModel?>
-    ):this(){
+            context: Context,
+            myDataModel: ArrayList<BookModel>
+    ) : this() {
         this.context = context
         this.myDataModel = myDataModel
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return  ViewHolder(LayoutInflater.from(context).inflate(R.layout.one_row, parent, false))
+        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.one_row, parent, false))
     }
 
     override fun onBindViewHolder(holder: MyAdapter.ViewHolder, position: Int) {
@@ -49,27 +48,26 @@ class MyAdapter() : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
         return myDataModel.size
     }
 
-    inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener{
+    inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
-        val tv_title: TextView =  v.findViewById(R.id.tv_title)
+        val tv_title: TextView = v.findViewById(R.id.tv_title)
         val tv_location: TextView = v.findViewById(R.id.tv_location)
         val tv_price: TextView = v.findViewById(R.id.tv_price)
         val iv_bookmark: ImageView = v.findViewById(R.id.iv_bookmark)
-        val imageView: ImageView =  v.findViewById(R.id.imageView)
+        val imageView: ImageView = v.findViewById(R.id.imageView)
 
-        fun bind(bookModel: BookModel?) {
+        var item: BookModel? = null
 
-            //Glide.with(mContext).load(item.getImagelink()).into(imageView);
+        fun bind(bookModel: BookModel) {
             tv_title.text = bookModel!!.title
             tv_location.text = bookModel!!.location
             tv_price.text = bookModel!!.offeredprice
-
         }
 
 
-          override fun onClick(view: View) {
+        override fun onClick(view: View) {
             if (mListener != null) {
-                //mListener.onItemClick(item);
+//                mListener!!.onItemClick(item);
             }
         }
 
@@ -77,9 +75,8 @@ class MyAdapter() : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
     }
 
 
-
     interface ItemListener {
-        fun onItemClick(item: BookModel?)
+        fun onItemClick(item: BookModel)
     }
 
     private fun isSaved(bookID: String, imageView: ImageView) {
