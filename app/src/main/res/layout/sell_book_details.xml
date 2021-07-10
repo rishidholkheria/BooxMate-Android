@@ -75,7 +75,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/title1"
+                        android:id="@+id/bookName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -107,6 +107,7 @@
                                 android:src="@drawable/ic_category" />
 
                             <TextView
+                                android:id="@+id/bookCtgry"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
@@ -118,18 +119,18 @@
                         </LinearLayout>
 
                         <TextView
-                            android:id="@+id/tv_date"
+                            android:id="@+id/bookLoc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:layout_weight="1"
                             android:fontFamily="@font/karla"
-                            android:text="17 February 2020"
+                            android:text="Karol Bagh, Delhi"
                             android:textColor="@android:color/black"
                             android:textSize="14sp" />
 
                         <TextView
-                            android:id="@+id/tv_price"
+                            android:id="@+id/bookOfferedPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -170,6 +171,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/bookMrp"
                         android:layout_width="120dp"
                         android:layout_height="25dp"
                         android:layout_gravity="center_horizontal"
@@ -206,6 +208,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/bookOffrdPrice"
                         android:layout_width="120dp"
                         android:layout_height="25dp"
                         android:layout_gravity="center_horizontal"
@@ -228,6 +231,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/bookDesc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -274,6 +278,7 @@ kjnsdloiwdlkslklmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
                         android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/bookSellerName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -286,19 +291,20 @@ kjnsdloiwdlkslklmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
                         android:textColor="#000000"
                         android:textSize="13sp" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:drawableStart="@drawable/ic_black_pin"
-                        android:drawablePadding="7dp"
-                        android:paddingStart="5dp"
-                        android:fontFamily="@font/karla"
-                        android:paddingTop="5dp"
-                        android:paddingEnd="5dp"
-                        android:text="Karol Bagh Delhi"
-                        android:textColor="#000000"
-                        android:textSize="13sp" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/bookSellerAddress"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:drawableStart="@drawable/ic_black_pin"-->
+<!--                        android:drawablePadding="7dp"-->
+<!--                        android:paddingStart="5dp"-->
+<!--                        android:fontFamily="@font/karla"-->
+<!--                        android:paddingTop="5dp"-->
+<!--                        android:paddingEnd="5dp"-->
+<!--                        android:text="Date of Posting"-->
+<!--                        android:textColor="#000000"-->
+<!--                        android:textSize="13sp" />-->
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -317,6 +323,7 @@ kjnsdloiwdlkslklmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
                             android:src="@drawable/ic_seller_mail" />
 
                         <TextView
+                            android:id="@+id/bookSellerEmail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"

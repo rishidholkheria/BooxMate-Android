@@ -17,9 +17,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
 import java.util.*
 
-/**
- * A simple [Fragment] subclass.
- */
 class SellFragment : Fragment(), View.OnClickListener {
 
     lateinit var mDatabase: DatabaseReference

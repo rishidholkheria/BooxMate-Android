@@ -33,6 +33,7 @@ class ConfirmPost : AppCompatActivity() {
     private var storage: FirebaseStorage? = null
     private var storageReference: StorageReference? = null
     var databasesellbooks: DatabaseReference? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_post)
@@ -91,7 +92,7 @@ class ConfirmPost : AppCompatActivity() {
         val book_description = bookdesc!!.text.toString().trim { it <= ' ' }
         if (!TextUtils.isEmpty(book_name)) {
             val id = databasesellbooks!!.push().key
-            val book = BookModel(book_name, book_location, book_mrp, book_offeredprice, id, book_category, null, book_description, "Rishi", "rd@gmail.com", "Karol bagh", image_link)
+            val book = BookModel(book_name, book_location, book_mrp, book_offeredprice, id, book_category, true, book_description, "Rishi", "rd@gmail.com", "")
             databasesellbooks!!.child(id!!).setValue(book)
             Toast.makeText(this, "Book Added", Toast.LENGTH_LONG).show()
             val i = Intent(this@ConfirmPost, MainActivity::class.java)

@@ -53,7 +53,14 @@ class PurchaseFragment : Fragment() {
                     if (myDataListModelInternal != null) {
                         var title : String? = myDataListModelInternal.title
                         var offered_price: String? = myDataListModelInternal.offeredprice
-                        myDataListModel.add(BookModel(title, offered_price, ""))
+                        var mrp: String? = myDataListModelInternal.mrp
+                        var location: String? = myDataListModelInternal.location
+                        var category: String? = myDataListModelInternal.mrp
+                        var description: String? = myDataListModelInternal.description
+                        var sellerName: String? = myDataListModelInternal.seller_name
+                        var sellerEmail: String? = myDataListModelInternal.seller_email
+
+                        myDataListModel.add(BookModel(title, location, mrp, offered_price, "id", category, true, description, sellerName, sellerEmail, ""))
                     }
                 }
                 adapter!!.notifyDataSetChanged()

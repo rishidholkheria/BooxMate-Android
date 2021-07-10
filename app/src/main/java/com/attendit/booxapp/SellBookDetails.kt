@@ -28,9 +28,21 @@ class SellBookDetails : AppCompatActivity() {
         val bundle = intent.extras
         var book_title: String? = bundle!!.getString("booktitle", "Book Title")
         var offered_price: String? = bundle!!.getString("oprice", "Offered Price")
+        var mrp: String? = bundle!!.getString("mrp", "mrp")
+        var loc: String? = bundle!!.getString("location", "Offered Price")
+        var category: String? = bundle!!.getString("ctgry", "Book Title")
+        var description: String? = bundle!!.getString("desc", "Description...")
+        var sellername: String? = bundle!!.getString("sellername", "Book Title")
+        var selleremail: String? = bundle!!.getString("selleremail", "Offered Price")
 
-        binding.title1.text = book_title
-        binding.tvPrice.text = offered_price
+
+        binding.bookName.text = book_title
+        binding.bookOfferedPrice.text = offered_price
+        binding.bookCtgry.text = category
+        binding.bookMrp.text = mrp
+        binding.bookDesc.text = description
+        binding.bookSellerName.text = sellername
+        binding.bookSellerEmail.text = selleremail
 //        Toast.makeText(applicationContext, book_title, Toast.LENGTH_SHORT).show()
     }
 }

@@ -54,10 +54,17 @@ class MyAdapter(private val context: Context, val myDataModel: ArrayList<BookMod
             binding.tvLocation.text = bookModel.location
             binding.tvPrice.text = bookModel.offeredprice
 
+
             binding.root.setOnClickListener(View.OnClickListener {
                 val bundle = Bundle()
                 bundle.putString("booktitle", bookModel.title)
                 bundle.putString("oprice", bookModel.offeredprice)
+                bundle.putString("mrp", bookModel.mrp)
+                bundle.putString("location", bookModel.location)
+                bundle.putString("ctgry", bookModel.category)
+                bundle.putString("sellername", bookModel.seller_name)
+                bundle.putString("selleremail", bookModel.seller_email)
+                bundle.putString("desc", bookModel.description)
 //                Toast.makeText(context,bookModel.title, Toast.LENGTH_SHORT).show()
                 var intent = Intent(context, SellBookDetails::class.java)
                 intent.putExtras(bundle)
