@@ -2,14 +2,20 @@ package com.attendit.booxapp.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.attendit.booxapp.BookDetails
 import com.attendit.booxapp.R
+import com.attendit.booxapp.SellBookDetails
+import com.attendit.booxapp.databinding.FragmentPurchaseBinding
+import com.attendit.booxapp.databinding.FragmentSellBinding
+import com.attendit.booxapp.databinding.OneRowBinding
 import com.attendit.booxapp.model.BookModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -19,65 +25,47 @@ import com.google.firebase.database.ValueEventListener
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MyAdapter() : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
+class MyAdapter(private val context: Context, val myDataModel: ArrayList<BookModel>) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 
-    lateinit var context: Context
-    lateinit var myDataModel: ArrayList<BookModel>
-    protected var mListener: ItemListener? = null
     private var firebaseUser = FirebaseAuth.getInstance().currentUser
 
-    constructor(
-            context: Context,
-            myDataModel: ArrayList<BookModel>
-    ) : this() {
-        this.context = context
-        this.myDataModel = myDataModel
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.one_row, parent, false))
+        return ViewHolder(
+                OneRowBinding.inflate(
+                        LayoutInflater.from(context),
+                        parent,
+                        false
+                )
+        )
     }
 
     override fun onBindViewHolder(holder: MyAdapter.ViewHolder, position: Int) {
-
-        holder.bind(myDataModel[position])
-
+        holder.bind(context, myDataModel[position])
     }
 
     override fun getItemCount(): Int {
         return myDataModel.size
     }
-
-    inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
-
-        val tv_title: TextView = v.findViewById(R.id.tv_title)
-        val tv_location: TextView = v.findViewById(R.id.tv_location)
-        val tv_price: TextView = v.findViewById(R.id.tv_price)
-        val iv_bookmark: ImageView = v.findViewById(R.id.iv_bookmark)
-        val imageView: ImageView = v.findViewById(R.id.imageView)
+    inner class ViewHolder(private val binding: OneRowBinding) : RecyclerView.ViewHolder(binding.root) {
 
         var item: BookModel? = null
+        fun bind( context: Context, bookModel: BookModel) {
+            binding.tvTitle.text = bookModel.title
+            binding.tvLocation.text = bookModel.location
+            binding.tvPrice.text = bookModel.offeredprice
 
-        fun bind(bookModel: BookModel) {
-            tv_title.text = bookModel!!.title
-            tv_location.text = bookModel!!.location
-            tv_price.text = bookModel!!.offeredprice
+            binding.root.setOnClickListener(View.OnClickListener {
+                val bundle = Bundle()
+                bundle.putString("booktitle", bookModel.title)
+                bundle.putString("oprice", bookModel.offeredprice)
+//                Toast.makeText(context,bookModel.title, Toast.LENGTH_SHORT).show()
+                var intent = Intent(context, SellBookDetails::class.java)
+                intent.putExtras(bundle)
+                context.startActivity(intent)
+            })
         }
-
-
-        override fun onClick(view: View) {
-            if (mListener != null) {
-//                mListener!!.onItemClick(item);
-            }
-        }
-
-
     }
 
-
-    interface ItemListener {
-        fun onItemClick(item: BookModel)
-    }
 
     private fun isSaved(bookID: String, imageView: ImageView) {
         val reference = FirebaseDatabase.getInstance().reference.child("Bookmarked").child(firebaseUser!!.uid)
@@ -91,7 +79,6 @@ class MyAdapter() : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
                     imageView.tag = "bookmark"
                 }
             }
-
             override fun onCancelled(error: DatabaseError) {}
         })
     }

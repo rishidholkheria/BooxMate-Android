@@ -51,12 +51,12 @@ class SellAdapter() : RecyclerView.Adapter<SellAdapter.ViewHolder>() {
         var book_status: TextView = v.findViewById(R.id.book_status)
         var book_price: TextView = v.findViewById(R.id.price)
 
-        var item: SellModel? = null
+        var item: BookModel? = null
 
-        fun bind(sellModel: BookModel) {
-            book_name.text = sellModel.title
+        fun bind(bookModel: BookModel) {
+            book_name.text = bookModel.title
 //            book_status.text = sellModel.sellstatus
-            book_price.text = sellModel.offeredprice
+            book_price.text = bookModel.offeredprice
         }
 
         override fun onClick(view: View) {
@@ -80,6 +80,6 @@ class SellAdapter() : RecyclerView.Adapter<SellAdapter.ViewHolder>() {
 
 
     open interface ItemListener {
-        fun onItemClick(item: SellModel?)
+        fun onItemClick(item: BookModel?)
     }
 }

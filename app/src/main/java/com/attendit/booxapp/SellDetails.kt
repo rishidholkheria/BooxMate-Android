@@ -40,6 +40,7 @@ class SellDetails : AppCompatActivity() {
                 val intent = Intent(this@SellDetails, BookPhoto::class.java)
                 intent.putExtras(bundle!!)
                 startActivity(intent)
+
             }
         })
     }

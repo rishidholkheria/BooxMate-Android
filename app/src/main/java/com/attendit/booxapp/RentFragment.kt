@@ -16,8 +16,10 @@ import java.util.*
  */
 class RentFragment : Fragment() {
     var navigationView: SpaceNavigationView? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_rent, container, false)
         val fragmentList: MutableList<Fragment> = ArrayList()
