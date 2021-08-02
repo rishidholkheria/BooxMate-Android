@@ -57,7 +57,7 @@
             android:paddingTop="10dp">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/bookImage"
                 android:layout_width="match_parent"
                 android:layout_height="230dp"
                 android:adjustViewBounds="true"
@@ -231,7 +231,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/bookDesc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -242,14 +241,14 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/bookDesc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/karla"
                     android:padding="5dp"
                     android:text="NCERT Exampler is best book for boards. The condition of these books is also good.
-NCERT Exampler is best book for boards. The condition of these books is also good.
-kjnsdloiwdlkslklmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"
+NCERT Exampler is best book for boards."
                     android:textColor="#000000"
                     android:textSize="14sp" />
 
