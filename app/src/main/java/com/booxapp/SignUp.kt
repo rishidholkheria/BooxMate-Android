@@ -19,6 +19,7 @@ class SignUp : AppCompatActivity() {
     var password: EditText? = null
     var loc: EditText? = null
     var mFirebaseAuth: FirebaseAuth? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)

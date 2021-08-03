@@ -2,27 +2,19 @@ package com.booxapp
 
 import android.os.Bundle
 import android.view.Menu
-import android.view.View
-import android.widget.ImageButton
-import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.booxapp.adapter.ViewPagerAdapter
 import com.booxapp.adapter.ViewPagerAdapter.Companion.addFragment
 import com.booxapp.data.Prefs.putStringPrefs
-import com.booxapp.databinding.ActivityMainBinding
 import com.booxapp.databinding.MainActivityBinding
-import com.booxapp.model.BookModel
 import com.booxapp.model.UserModel
-import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
