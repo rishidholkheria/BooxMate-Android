@@ -1,111 +1,126 @@
 package com.booxapp
 
 import android.Manifest
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.ContentValues
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
 import android.view.View
+import android.webkit.MimeTypeMap
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.booxapp.BookPhoto
 import com.booxapp.data.Prefs.putStringPrefs
+import com.booxapp.databinding.BookPhotoBinding
+import com.booxapp.databinding.ProgressBinding
+import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.database.R
+import com.google.firebase.storage.StorageReference
 import java.io.ByteArrayOutputStream
+import java.io.IOException
+import com.google.android.gms.tasks.OnSuccessListener
 
 class BookPhoto : AppCompatActivity() {
-    private var book_photo: ImageView? = null
-    private var bookbtn: Button? = null
+
+    private val PERMISSION_CODE = 1000
+    private val GALLERY_REQUEST = 9
+    private val CAMERA_REQUEST = 11
+    private var filePath: Uri? = null
+    lateinit var builder: AlertDialog.Builder
+    private lateinit var progressBinding: ProgressBinding
+    lateinit var dialog: Dialog
+    private var storageReference: StorageReference? = null
+
+    lateinit var binding: BookPhotoBinding
     private var bundle: Bundle? = null
-    private val bmp: Bitmap? = null
-    private var selectedImage: Uri? = null
-    private val file: Uri? = null
-    private var name: TextView? = null
-    private var desc: TextView? = null
-    private var category: TextView? = null
-    private var mrp: EditText? = null
-    private var offeredprice: EditText? = null
-    private var location: EditText? = null
-    private var confirm_page: FloatingActionButton? = null
-    private var backbtn2: ImageButton? = null
-    private val REQUEST_CAMERA = 1
-    private val SELECT_FILE = 0
 
     //final Integer PERMISSION_REQUEST_CODE = 0;
     private val book_image_string: String? = null
     private var image_path: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.book_photo)
-        book_photo = findViewById<View>(R.id.bookimage) as ImageView
-        bookbtn = findViewById<View>(R.id.btnbook) as Button
-        confirm_page = findViewById(R.id.proceedfab)
-        mrp = findViewById(R.id.mrp)
-        offeredprice = findViewById(R.id.offered_price)
-        location = findViewById(R.id.location)
-        name = findViewById(R.id.b_title)
-        desc = findViewById(R.id.b_desc)
-        category = findViewById(R.id.b_cat)
+        binding = BookPhotoBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         bundle = Bundle()
+
         val getbundle = intent.extras
         if (getbundle != null) {
-            val bname = getbundle.getString("bk_name")
-            val bdesc = getbundle.getString("bk_desc")
-            val bcat = getbundle.getString("bk_cat")
-            name!!.setText(bname)
-            desc!!.setText(bdesc)
-            category!!.setText(bcat)
+            val bname = getbundle.getString("sbookname")
+            val bdesc = getbundle.getString("sbookdesc")
+            val bcat = getbundle.getString("sbookcat")
+
+            binding.bTitle!!.setText(bname)
+            binding.bDesc!!.setText(bdesc)
+            binding.bCat!!.setText(bcat)
         }
-        bookbtn!!.setOnClickListener { //SelectImage();
-            // opengallery();
-            Toast.makeText(applicationContext, "Fix later", Toast.LENGTH_LONG).show()
+        binding.selectImageBtn!!.setOnClickListener { //SelectImage();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (checkSelfPermission(Manifest.permission.CAMERA)
+                    == PackageManager.PERMISSION_DENIED ||
+                    checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_DENIED ||
+                    checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_DENIED
+                ) {
+                    val permission = arrayOf(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    )
+
+                    requestPermissions(permission, PERMISSION_CODE)
+                } else {
+                    showImageOptionDialog()
+                }
+            } else {
+                showImageOptionDialog()
+            }
         }
-        backbtn2 = findViewById<View>(R.id.backtoselldetails) as ImageButton
-        backbtn2!!.setOnClickListener {
+        binding.backtoselldetails!!.setOnClickListener {
             val i = Intent(this@BookPhoto, SellDetails::class.java)
             startActivity(i)
         }
-        confirm_page!!.setOnClickListener(View.OnClickListener {
-            val a = mrp!!.getText().toString()
-            val b = offeredprice!!.getText().toString()
-            val c = location!!.getText().toString()
-            val d = name!!.getText().toString()
-            val e = desc!!.getText().toString()
-            val f = category!!.getText().toString()
+        binding.proceedfab!!.setOnClickListener(View.OnClickListener {
+            val sbook_mrp = binding.mrp!!.getText().toString()
+            val sbook_op = binding.offeredPrice!!.getText().toString()
+            val sbook_loc = binding.location!!.getText().toString()
+            val sbook_name = binding.bTitle!!.getText().toString()
+            val sbook_desc = binding.bDesc!!.getText().toString()
+            val sbook_ctgry = binding.bCat!!.getText().toString()
             // book_image_string = selectedImage.toString();
-            if (name!!.length() == 0) {
-                name!!.setError("Can't be Empty")
+
+            if (binding.mrp!!.length() == 0) {
+                binding.mrp!!.setError("Can't be Empty")
             }
-            if (desc!!.length() == 0) {
-                desc!!.setError("Can't be Empty")
+            if (binding.offeredPrice!!.length() == 0) {
+                binding.offeredPrice!!.setError("Can't be Empty")
             }
-            if (category!!.length() == 0) {
-                category!!.setError("Can't be Empty")
+            if (binding.location!!.length() == 0) {
+                binding.location!!.setError("Can't be Empty")
             }
-            if (mrp!!.length() == 0) {
-                mrp!!.setError("Can't be Empty")
-            }
-            if (offeredprice!!.length() == 0) {
-                offeredprice!!.setError("Can't be Empty")
-            }
-            if (location!!.length() == 0) {
-                location!!.setError("Can't be Empty")
-            }
-            if (a.length != 0 && b.length != 0 && c.length != 0 && d.length != 0 && e.length != 0 && f.length != 0) {
-                bundle!!.putString("book_mrp", a)
-                bundle!!.putString("book_op", b)
-                bundle!!.putString("book_loc", c)
-                bundle!!.putString("book_name", d)
-                bundle!!.putString("book_desc", e)
-                bundle!!.putString("book_cat", f)
+            if (sbook_mrp.length != 0 && sbook_op.length != 0 && sbook_loc.length != 0 && sbook_name.length != 0 && sbook_desc.length != 0 && sbook_ctgry.length != 0) {
+                bundle!!.putString("book_mrp", sbook_mrp)
+                bundle!!.putString("book_op", sbook_op)
+                bundle!!.putString("book_loc", sbook_loc)
+                bundle!!.putString("book_name", sbook_name)
+                bundle!!.putString("book_desc", sbook_desc)
+                bundle!!.putString("book_cat", sbook_ctgry)
                 //  bundle.putString("book_img", book_image_string);
+
                 val intent = Intent(this@BookPhoto, ConfirmPost::class.java)
                 intent.putExtras(bundle!!)
                 startActivity(intent)
@@ -113,169 +128,130 @@ class BookPhoto : AppCompatActivity() {
         })
     }
 
-    //    private void SelectImage() {
-    //        final CharSequence[] items = {"Camera", "Gallery", "Cancel"};
-    //
-    //        AlertDialog.Builder builder = new AlertDialog.Builder(BookPhoto.this);
-    //        builder.setTitle("Add Image");
-    //        builder.setItems(items, new DialogInterface.OnClickListener() {
-    //            @Override
-    //            public void onClick(DialogInterface dialogInterface, int i) {
-    //                if (items[i].equals("Camera")) {
-    //
-    //                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-    //                    startActivityForResult(intent, REQUEST_CAMERA);
-    //                } else if (items[i].equals("Gallery")) {
-    //
-    //                    checkPermission();
-    //
-    //                    Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-    //                    intent.setType("image/*");
-    //                    startActivityForResult(intent.createChooser(intent, "Select File"), SELECT_FILE);
-    //                } else if (items[i].equals("Cancel")) {
-    //                    dialogInterface.dismiss();
-    //                }
-    //
-    //            }
-    //        });
-    //        builder.show();
-    //    }
-    //    @Override
-    //    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    //        super.onActivityResult(requestCode, resultCode, data);
-    //
-    //        if (resultCode == Activity.RESULT_OK) {
-    //
-    //            if (requestCode == REQUEST_CAMERA) {
-    //
-    //                Bundle bundle = data.getExtras();
-    //                bmp = (Bitmap) bundle.get("data");
-    //                book_photo.setImageBitmap(bmp);
-    //
-    //                book_image_string = BitMapToString(bmp);
-    //
-    //
-    //            } else if (requestCode == SELECT_FILE) {
-    //
-    //                selectedImageUri = data.getData();
-    //                book_photo.setImageURI(selectedImageUri);
-    //
-    //                book_image_string = UriToString(selectedImageUri);
-    //
-    //
-    //                //preview.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-    //
-    //            }
-    //        }
-    //    }
-    private fun opengallery() {
-        //Toast.makeText(EditProfile.this, "Open Camera", Toast.LENGTH_LONG).show();
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (checkPermission()) {
-                val i = Intent(
-                        Intent.ACTION_PICK,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-                startActivityForResult(i, RESULT_LOAD_IMAGE)
-            } else {
-                requestPermission()
-            }
-        }
+    private fun showImageOptionDialog() {
+        val options = Constants.profilePictureOptions
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.select_one))
+            .setItems(options, DialogInterface.OnClickListener { dialog, which ->
+                when (which) {
+                    0 -> getImageFromGallery()
+                    1 -> capturePictureFromCamera()
+                }
+            })
+        val dialog = builder.create()
+        dialog.show()
     }
 
-    fun BitMapToString(bitmap: Bitmap): String {
-        val temp: String
-        val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
-        val b = baos.toByteArray()
-        temp = Base64.encodeToString(b, Base64.DEFAULT)
-        return temp
+    private fun capturePictureFromCamera() {
+        val values = ContentValues()
+        values.put(MediaStore.Images.Media.TITLE, "New Picture")
+        values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera")
+        filePath = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, filePath)
+        startActivityForResult(cameraIntent, CAMERA_REQUEST)
     }
 
-    fun UriToString(imageUri: Uri?): String {
-        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = contentResolver.query(imageUri!!,
-                filePathColumn, null, null, null)
-        cursor!!.moveToFirst()
-        val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-        image_path = cursor.getString(columnIndex)
-        cursor.close()
-        val temp: String
-        val bitmap = BitmapFactory.decodeFile(image_path)
-        val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
-        val b = baos.toByteArray()
-        temp = Base64.encodeToString(b, Base64.DEFAULT)
-        return temp
+    private fun getImageFromGallery() {
+        val intent = Intent()
+        intent.action = Intent.ACTION_GET_CONTENT
+        intent.type = "image/*"
+        startActivityForResult(intent, GALLERY_REQUEST)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
-            val inflater = layoutInflater
-            //View alertLayout = inflater.inflate(R.layout.profile_pic_preview_dialog, null);
-            val preview = findViewById<ImageView>(R.id.bookimage)
-            if (requestCode == RESULT_LOAD_IMAGE) {
-                selectedImage = data.data
-                val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-                val cursor = contentResolver.query(selectedImage!!,
-                        filePathColumn, null, null, null)
-                cursor!!.moveToFirst()
-                val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-                image_path = cursor.getString(columnIndex)
-                cursor.close()
-                preview.setImageBitmap(BitmapFactory.decodeFile(image_path))
-            } else if (requestCode == 0) {
-                //Bitmap photo = (Bitmap) data.getExtras().get("data");
-                preview.setImageURI(file)
+        if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
+            filePath = data.data
+            try {
+                var selectedImage: Uri? = filePath
+                binding.image.setImageURI(selectedImage)
+                if (filePath != null)
+                    uploadFile()
+            } catch (e: IOException) {
+                e.printStackTrace()
             }
-
-            //previewBuilder.setView(alertLayout);
-
-            //previewBuilder.setCancelable(false);
-            val realImage = BitmapFactory.decodeFile(image_path)
-            val baos = ByteArrayOutputStream()
-            realImage.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-            val b = baos.toByteArray()
-            val encodedImage = Base64.encodeToString(b, Base64.DEFAULT)
-            preview.setImageBitmap(BitmapFactory.decodeFile(image_path))
-            //book_image_string = encodedImage;
-            putStringPrefs(applicationContext, "current_image_bitmap", encodedImage)
+        } else if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+            try {
+                var selectedImage: Uri? = filePath
+                binding.image.setImageURI(selectedImage)
+                if (filePath != null)
+                    uploadFile()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
         }
     }
 
-    private fun checkPermission(): Boolean {
-        //PackageManager packageManager = getPackageManager();
-        val result = ContextCompat.checkSelfPermission(this@BookPhoto, Manifest.permission.READ_EXTERNAL_STORAGE)
-        val result2 = ContextCompat.checkSelfPermission(this@BookPhoto, Manifest.permission.CAMERA)
-        return if (result == PackageManager.PERMISSION_GRANTED && result2 == PackageManager.PERMISSION_GRANTED) {
-            true
-        } else {
-            false
-        }
-    }
+    private fun uploadFile() {
+        builder = AlertDialog.Builder(this)
+        progressBinding = ProgressBinding.inflate(layoutInflater)
+        builder.setView(progressBinding.root)
+        dialog = builder.create()
+        if (filePath != null) {
+            dialog.show()
+            val sRef = storageReference!!.child(
+                Constants.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + "." + getFileExtension(
+                    filePath
+                )
+            )
+            var bitmap: Bitmap? = null
 
-    private fun requestPermission() {
-        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA), PERMISSION_REQUEST_CODE)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>,
-                                            grantResults: IntArray) {
-        //PackageManager packageManager = getPackageManager();
-        when (requestCode) {
-            PERMISSION_REQUEST_CODE -> if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this@BookPhoto, "Permission accepted", Toast.LENGTH_LONG).show()
+            if (Build.VERSION.SDK_INT < 28) {
+                bitmap = MediaStore.Images.Media.getBitmap(
+                    this.contentResolver,
+                    filePath
+                )
             } else {
-                Toast.makeText(this@BookPhoto,
-                        "Permission denied", Toast.LENGTH_LONG).show()
-                //Button sendSMS = (Button) findViewById(R.id.sendSMS);
-                //sendSMS.setEnabled(false);
-                requestPermission()
+                val source = ImageDecoder.createSource(this.contentResolver, filePath!!)
+                bitmap = ImageDecoder.decodeBitmap(source)
             }
+
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            bitmap?.compress(Bitmap.CompressFormat.JPEG, 18, byteArrayOutputStream)
+            val data = byteArrayOutputStream.toByteArray()
+
+            sRef.putBytes(data)
+                .addOnSuccessListener { taskSnapshot ->
+                    taskSnapshot.storage.downloadUrl.addOnSuccessListener(
+                        onSuccessListener {
+                            FirebaseAdapter(this).addNewImage(
+                                it.toString(),
+                                object : com.booxapp.onCompleteListener {
+                                    override fun onCallback(value: Boolean) {
+                                        dialog.dismiss()
+                                        if (value) {
+                                            Toast.makeText(
+                                                applicationContext,
+                                                "File Uploaded ",
+                                                Toast.LENGTH_LONG
+                                            ).show()
+                                            Glide.with(applicationContext).load(it.toString())
+                                                .into(binding.image)
+                                        }
+                                    }
+                                })
+                        })
+                }
+                .addOnFailureListener { exception ->
+                    dialog.dismiss()
+                    Toast.makeText(applicationContext, exception.message, Toast.LENGTH_LONG).show()
+                }
+                .addOnProgressListener { taskSnapshot ->
+                    val progress =
+                        100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount
+                }
         }
     }
 
-    companion object {
-        private const val RESULT_LOAD_IMAGE = 1
-        private const val PERMISSION_REQUEST_CODE = 1
+    private fun getFileExtension(uri: Uri?): String? {
+        val cR = contentResolver
+        val mime = MimeTypeMap.getSingleton()
+        return mime.getExtensionFromMimeType(cR.getType(uri!!))
     }
+
 }
+
+
+
+

@@ -8,14 +8,14 @@
     tools:context=".BookPhoto">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/title_cardview"
+        android:id="@+id/navbar"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
         app:cardElevation="5dp">
 
         <RelativeLayout
-            android:id="@+id/title"
+            android:id="@+id/navbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#ffffff"
@@ -50,7 +50,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/title_cardview">
+        android:layout_below="@+id/navbar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -186,7 +186,7 @@
                 android:textSize="22sp" />
 
             <Button
-                android:id="@+id/btnbook"
+                android:id="@+id/select_image_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
@@ -196,7 +196,7 @@
                 android:textColor="#ffffff" />
 
             <ImageView
-                android:id="@+id/bookimage"
+                android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:adjustViewBounds="true" />

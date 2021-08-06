@@ -7,36 +7,37 @@ import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.booxapp.SellDetails
+import com.booxapp.databinding.ActivitySellDetailsBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class SellDetails : AppCompatActivity() {
-    private var btitle: EditText? = null
-    private var bdesc: EditText? = null
-    private var bcategory: Spinner? = null
+
     private var bundle: Bundle? = null
-    private var proceedfab: FloatingActionButton? = null
+    lateinit var binding: ActivitySellDetailsBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sell_details)
-        btitle = findViewById(R.id.book_title)
-        bdesc = findViewById(R.id.book_description)
-        bcategory = findViewById(R.id.category)
+        binding = ActivitySellDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         bundle = Bundle()
-        proceedfab = findViewById(R.id.nextfab1)
-        proceedfab!!.setOnClickListener(View.OnClickListener {
-            val b_title = btitle!!.getText().toString()
-            val b_desc = bdesc!!.getText().toString()
-            val b_cat = bcategory!!.getSelectedItem().toString()
-            if (btitle!!.length() == 0) {
-                btitle!!.setError("Can't be Empty")
+
+        binding.moreBookDetailsBtn!!.setOnClickListener(View.OnClickListener {
+            val title = binding.title!!.getText().toString()
+            val desc = binding.description!!.getText().toString()
+            val cat = binding.category!!.getSelectedItem().toString()
+
+            if (binding.title!!.length() == 0) {
+                binding.title!!.setError("Can't be Empty")
             }
-            if (bdesc!!.length() == 0) {
-                bdesc!!.setError("Can't be Empty")
+            if (binding.description!!.length() == 0) {
+                binding.description!!.setError("Can't be Empty")
             }
-            if (b_title.length != 0 && b_desc.length != 0 && b_cat.length != 0) {
-                bundle!!.putString("bk_name", b_title)
-                bundle!!.putString("bk_desc", b_desc)
-                bundle!!.putString("bk_cat", b_cat)
+            if (title.length != 0 && desc.length != 0 && cat.length != 0) {
+                bundle!!.putString("sbookname", title)
+                bundle!!.putString("sbookdesc", desc)
+                bundle!!.putString("sbookcat", cat)
+
                 val intent = Intent(this@SellDetails, BookPhoto::class.java)
                 intent.putExtras(bundle!!)
                 startActivity(intent)
