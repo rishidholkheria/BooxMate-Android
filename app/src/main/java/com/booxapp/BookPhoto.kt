@@ -67,29 +67,29 @@ class BookPhoto : AppCompatActivity() {
             binding.bDesc!!.setText(bdesc)
             binding.bCat!!.setText(bcat)
         }
-        binding.selectImageBtn!!.setOnClickListener { //SelectImage();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (checkSelfPermission(Manifest.permission.CAMERA)
-                    == PackageManager.PERMISSION_DENIED ||
-                    checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_DENIED ||
-                    checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_DENIED
-                ) {
-                    val permission = arrayOf(
-                        Manifest.permission.CAMERA,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                    )
-
-                    requestPermissions(permission, PERMISSION_CODE)
-                } else {
-                    showImageOptionDialog()
-                }
-            } else {
-                showImageOptionDialog()
-            }
-        }
+//        binding.selectImageBtn!!.setOnClickListener { //SelectImage();
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                if (checkSelfPermission(Manifest.permission.CAMERA)
+//                    == PackageManager.PERMISSION_DENIED ||
+//                    checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                    == PackageManager.PERMISSION_DENIED ||
+//                    checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+//                    == PackageManager.PERMISSION_DENIED
+//                ) {
+//                    val permission = arrayOf(
+//                        Manifest.permission.CAMERA,
+//                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                        Manifest.permission.READ_EXTERNAL_STORAGE
+//                    )
+//
+//                    requestPermissions(permission, PERMISSION_CODE)
+//                } else {
+//                    showImageOptionDialog()
+//                }
+//            } else {
+//                showImageOptionDialog()
+//            }
+//        }
         binding.backtoselldetails!!.setOnClickListener {
             val i = Intent(this@BookPhoto, SellDetails::class.java)
             startActivity(i)
@@ -128,19 +128,19 @@ class BookPhoto : AppCompatActivity() {
         })
     }
 
-    private fun showImageOptionDialog() {
-        val options = Constants.profilePictureOptions
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle(getString(R.string.select_one))
-            .setItems(options, DialogInterface.OnClickListener { dialog, which ->
-                when (which) {
-                    0 -> getImageFromGallery()
-                    1 -> capturePictureFromCamera()
-                }
-            })
-        val dialog = builder.create()
-        dialog.show()
-    }
+//    private fun showImageOptionDialog() {
+//        val options = Constants.profilePictureOptions
+//        val builder = AlertDialog.Builder(this)
+//        builder.setTitle(getString(R.string.select_one))
+//            .setItems(options, DialogInterface.OnClickListener { dialog, which ->
+//                when (which) {
+//                    0 -> getImageFromGallery()
+//                    1 -> capturePictureFromCamera()
+//                }
+//            })
+//        val dialog = builder.create()
+//        dialog.show()
+//    }
 
     private fun capturePictureFromCamera() {
         val values = ContentValues()
@@ -159,90 +159,90 @@ class BookPhoto : AppCompatActivity() {
         startActivityForResult(intent, GALLERY_REQUEST)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
-            filePath = data.data
-            try {
-                var selectedImage: Uri? = filePath
-                binding.image.setImageURI(selectedImage)
-                if (filePath != null)
-                    uploadFile()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        } else if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
-            try {
-                var selectedImage: Uri? = filePath
-                binding.image.setImageURI(selectedImage)
-                if (filePath != null)
-                    uploadFile()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        }
-    }
-
-    private fun uploadFile() {
-        builder = AlertDialog.Builder(this)
-        progressBinding = ProgressBinding.inflate(layoutInflater)
-        builder.setView(progressBinding.root)
-        dialog = builder.create()
-        if (filePath != null) {
-            dialog.show()
-            val sRef = storageReference!!.child(
-                Constants.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + "." + getFileExtension(
-                    filePath
-                )
-            )
-            var bitmap: Bitmap? = null
-
-            if (Build.VERSION.SDK_INT < 28) {
-                bitmap = MediaStore.Images.Media.getBitmap(
-                    this.contentResolver,
-                    filePath
-                )
-            } else {
-                val source = ImageDecoder.createSource(this.contentResolver, filePath!!)
-                bitmap = ImageDecoder.decodeBitmap(source)
-            }
-
-            val byteArrayOutputStream = ByteArrayOutputStream()
-            bitmap?.compress(Bitmap.CompressFormat.JPEG, 18, byteArrayOutputStream)
-            val data = byteArrayOutputStream.toByteArray()
-
-            sRef.putBytes(data)
-                .addOnSuccessListener { taskSnapshot ->
-                    taskSnapshot.storage.downloadUrl.addOnSuccessListener(
-                        onSuccessListener {
-                            FirebaseAdapter(this).addNewImage(
-                                it.toString(),
-                                object : com.booxapp.onCompleteListener {
-                                    override fun onCallback(value: Boolean) {
-                                        dialog.dismiss()
-                                        if (value) {
-                                            Toast.makeText(
-                                                applicationContext,
-                                                "File Uploaded ",
-                                                Toast.LENGTH_LONG
-                                            ).show()
-                                            Glide.with(applicationContext).load(it.toString())
-                                                .into(binding.image)
-                                        }
-                                    }
-                                })
-                        })
-                }
-                .addOnFailureListener { exception ->
-                    dialog.dismiss()
-                    Toast.makeText(applicationContext, exception.message, Toast.LENGTH_LONG).show()
-                }
-                .addOnProgressListener { taskSnapshot ->
-                    val progress =
-                        100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount
-                }
-        }
-    }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
+//            filePath = data.data
+//            try {
+//                var selectedImage: Uri? = filePath
+//                binding.image.setImageURI(selectedImage)
+//                if (filePath != null)
+//                    uploadFile()
+//            } catch (e: IOException) {
+//                e.printStackTrace()
+//            }
+//        } else if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+//            try {
+//                var selectedImage: Uri? = filePath
+//                binding.image.setImageURI(selectedImage)
+//                if (filePath != null)
+//                    uploadFile()
+//            } catch (e: IOException) {
+//                e.printStackTrace()
+//            }
+//        }
+//    }
+//
+//    private fun uploadFile() {
+//        builder = AlertDialog.Builder(this)
+//        progressBinding = ProgressBinding.inflate(layoutInflater)
+//        builder.setView(progressBinding.root)
+//        dialog = builder.create()
+//        if (filePath != null) {
+//            dialog.show()
+//            val sRef = storageReference!!.child(
+//                Constants.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + "." + getFileExtension(
+//                    filePath
+//                )
+//            )
+//            var bitmap: Bitmap? = null
+//
+//            if (Build.VERSION.SDK_INT < 28) {
+//                bitmap = MediaStore.Images.Media.getBitmap(
+//                    this.contentResolver,
+//                    filePath
+//                )
+//            } else {
+//                val source = ImageDecoder.createSource(this.contentResolver, filePath!!)
+//                bitmap = ImageDecoder.decodeBitmap(source)
+//            }
+//
+//            val byteArrayOutputStream = ByteArrayOutputStream()
+//            bitmap?.compress(Bitmap.CompressFormat.JPEG, 18, byteArrayOutputStream)
+//            val data = byteArrayOutputStream.toByteArray()
+//
+//            sRef.putBytes(data)
+//                .addOnSuccessListener { taskSnapshot ->
+//                    taskSnapshot.storage.downloadUrl.addOnSuccessListener(
+//                        onSuccessListener {
+//                            FirebaseAdapter(this).addNewImage(
+//                                it.toString(),
+//                                object : com.booxapp.onCompleteListener {
+//                                    override fun onCallback(value: Boolean) {
+//                                        dialog.dismiss()
+//                                        if (value) {
+//                                            Toast.makeText(
+//                                                applicationContext,
+//                                                "File Uploaded ",
+//                                                Toast.LENGTH_LONG
+//                                            ).show()
+//                                            Glide.with(applicationContext).load(it.toString())
+//                                                .into(binding.image)
+//                                        }
+//                                    }
+//                                })
+//                        })
+//                }
+//                .addOnFailureListener { exception ->
+//                    dialog.dismiss()
+//                    Toast.makeText(applicationContext, exception.message, Toast.LENGTH_LONG).show()
+//                }
+//                .addOnProgressListener { taskSnapshot ->
+//                    val progress =
+//                        100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount
+//                }
+//        }
+//    }
 
     private fun getFileExtension(uri: Uri?): String? {
         val cR = contentResolver
