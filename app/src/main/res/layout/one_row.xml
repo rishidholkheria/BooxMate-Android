@@ -28,7 +28,6 @@
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:background="@drawable/rounded_corners"
-                android:clipToOutline="true"
                 android:padding="5dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/samosa" />
@@ -51,6 +50,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Lord of Rings : Part One (Paperback)"
+                        android:lines="2"
                         android:textColor="@android:color/black"
                         android:textSize="15sp" />
 

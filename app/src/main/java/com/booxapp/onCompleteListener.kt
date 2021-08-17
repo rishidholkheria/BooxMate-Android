@@ -1,5 +1,5 @@
 package com.booxapp
 
-interface onCompleteListener {
+interface onMaujKardiListener {
     fun onCallback(value: Boolean)
 }

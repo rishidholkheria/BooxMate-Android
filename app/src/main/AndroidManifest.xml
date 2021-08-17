@@ -9,7 +9,6 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission
         android:name="android.permission.MEDIA_CONTENT_CONTROL"
@@ -25,11 +24,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".AboutActivity"></activity>
         <activity android:name=".ViewRequests" />
-        <activity android:name=".RentConfirmSell" />
         <activity android:name=".ConfirmPost" />
         <activity android:name=".SignUp" />
         <activity android:name=".SignIn" />
-        <activity android:name=".RentBookPhoto" />
         <activity android:name=".OrderSuccesfull" />
         <activity android:name=".PurchaseCart" />
         <activity android:name=".PurchaseDetails" />

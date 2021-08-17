@@ -12,10 +12,10 @@ class FirebaseAdapter(var context: Context) {
     var mDatabase: DatabaseReference =
         FirebaseDatabase.getInstance().getReference(Constants.DB_NAME)
 
-    fun addNewImage(imageLink: String, onCompleteListener: onCompleteListener) {
+        fun addNewImage(imageLink: String, onCompleteListener: onMaujKardiListener) {
         var id: String? = FirebaseDatabase.getInstance().reference.push().key
         id?.let {
-            mDatabase.child("imageList").child(it).child("imageLink")
+            mDatabase.child("image").child(it).child("imagelink")
                 .setValue(imageLink, DatabaseReference.CompletionListener { error, ref ->
                     if (error == null) {
                         onCompleteListener.onCallback(true)

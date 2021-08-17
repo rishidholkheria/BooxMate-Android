@@ -2,6 +2,7 @@ package com.booxapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -19,6 +20,8 @@ class SignUp : AppCompatActivity() {
     var password: EditText? = null
     var loc: EditText? = null
     var mFirebaseAuth: FirebaseAuth? = null
+
+    var TAG = "SignUp"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +58,11 @@ class SignUp : AppCompatActivity() {
             } else if (!(username.isEmpty() && useremail.isEmpty() && usermno.isEmpty() && userpass.isEmpty())) {
                 mFirebaseAuth!!.createUserWithEmailAndPassword(useremail, userpass).addOnCompleteListener(this@SignUp) { task ->
                     if (!task.isSuccessful) {
+                        try {
+                            throw task.exception!!
+                        } catch (e: Exception) {
+                            Log.i(TAG, e.message!!)
+                        }
                         Toast.makeText(this@SignUp, "Something wrong in Details!", Toast.LENGTH_LONG).show()
                     } else {
                         val i = Intent(this@SignUp, MainActivity::class.java)

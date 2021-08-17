@@ -13,7 +13,6 @@
         app:cardElevation="5dp">
 
         <RelativeLayout
-            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#ffffff"
@@ -91,7 +90,6 @@
                     android:inputType="text|textCapWords"
                     android:fontFamily="@font/karla"
                     android:lines="1"
-                    android:nextFocusDown="@id/book_description"
                     android:paddingTop="5dp"
                     android:textColorHint="#000000"
                     android:textSize="16sp" />
