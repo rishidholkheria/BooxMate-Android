@@ -1,4 +1,4 @@
-package com.booxapp
+package com.booxapp.Sell
 
 import android.Manifest
 import android.app.AlertDialog
@@ -8,32 +8,34 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Base64
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.webkit.MimeTypeMap
-import android.widget.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import com.booxapp.BookPhoto
-import com.booxapp.data.Prefs.putStringPrefs
+import androidx.core.content.ContextCompat.checkSelfPermission
+import com.booxapp.Constants
+import com.booxapp.FirebaseAdapter
+import com.booxapp.R
 import com.booxapp.databinding.BookPhotoBinding
+import com.booxapp.databinding.FragmentBookImagesBinding
 import com.booxapp.databinding.ProgressBinding
+import com.booxapp.onMaujKardiListener
 import com.bumptech.glide.Glide
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.ByteArrayOutputStream
 import java.io.IOException
-import com.google.android.gms.tasks.OnSuccessListener
 
-class BookPhoto : AppCompatActivity() {
+
+class BookImages : Fragment() {
 
     private val PERMISSION_CODE = 1000
     private val GALLERY_REQUEST = 9
@@ -44,30 +46,15 @@ class BookPhoto : AppCompatActivity() {
     lateinit var dialog: Dialog
     private var storageReference: StorageReference? = null
 
-    lateinit var binding: BookPhotoBinding
-    private var bundle: Bundle? = null
+    lateinit var binding: FragmentBookImagesBinding
 
-    //final Integer PERMISSION_REQUEST_CODE = 0;
-    private val book_image_string: String? = null
-    private var image_path: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = BookPhotoBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        bundle = Bundle()
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentBookImagesBinding.inflate(inflater, container, false)
         storageReference = FirebaseStorage.getInstance().reference
 
-        val getbundle = intent.extras
-        if (getbundle != null) {
-            val bname = getbundle.getString("sbookname")
-            val bdesc = getbundle.getString("sbookdesc")
-            val bcat = getbundle.getString("sbookcat")
-
-            binding.bTitle!!.setText(bname)
-            binding.bDesc!!.setText(bdesc)
-            binding.bCat!!.setText(bcat)
-        }
         binding.selectImageBtn!!.setOnClickListener { //SelectImage();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (checkSelfPermission(Manifest.permission.CAMERA)
@@ -90,48 +77,14 @@ class BookPhoto : AppCompatActivity() {
             } else {
                 showImageOptionDialog()
             }
+
         }
-        /*binding.backtoselldetails!!.setOnClickListener {
-            val i = Intent(this@BookPhoto, SellDetails::class.java)
-            startActivity(i)
-        }*/
-        binding.proceedfab!!.setOnClickListener(View.OnClickListener {
-//            val sbook_mrp = binding.mrp!!.getText().toString()
-//            val sbook_op = binding.offeredPrice!!.getText().toString()
-//            val sbook_loc = binding.location!!.getText().toString()
-            val sbook_name = binding.bTitle!!.getText().toString()
-            val sbook_desc = binding.bDesc!!.getText().toString()
-            val sbook_ctgry = binding.bCat!!.getText().toString()
-            // book_image_string = selectedImage.toString();
-
-//            if (binding.mrp!!.length() == 0) {
-//                binding.mrp!!.setError("Can't be Empty")
-//            }
-//            if (binding.offeredPrice!!.length() == 0) {
-//                binding.offeredPrice!!.setError("Can't be Empty")
-//            }
-//            if (binding.location!!.length() == 0) {
-//                binding.location!!.setError("Can't be Empty")
-//            }
-            if (sbook_name.length != 0 && sbook_desc.length != 0 && sbook_ctgry.length != 0) {
-//                bundle!!.putString("book_mrp", sbook_mrp)
-//                bundle!!.putString("book_op", sbook_op)
-//                bundle!!.putString("book_loc", sbook_loc)
-                bundle!!.putString("book_name", sbook_name)
-                bundle!!.putString("book_desc", sbook_desc)
-                bundle!!.putString("book_cat", sbook_ctgry)
-                //  bundle.putString("book_img", book_image_string);
-
-                val intent = Intent(this@BookPhoto, ConfirmPost::class.java)
-                intent.putExtras(bundle!!)
-                startActivity(intent)
-            }
-        })
+        return binding.root
     }
 
     private fun showImageOptionDialog() {
         val options = Constants.profilePictureOptions
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(getString(R.string.select_one))
             .setItems(options, DialogInterface.OnClickListener { dialog, which ->
                 when (which) {
@@ -162,7 +115,7 @@ class BookPhoto : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
+        if (requestCode == GALLERY_REQUEST && resultCode == AppCompatActivity.RESULT_OK && data != null && data.data != null) {
             filePath = data.data
             try {
                 var selectedImage: Uri? = filePath
@@ -172,7 +125,7 @@ class BookPhoto : AppCompatActivity() {
             } catch (e: IOException) {
                 e.printStackTrace()
             }
-        } else if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+        } else if (requestCode == CAMERA_REQUEST && resultCode == AppCompatActivity.RESULT_OK) {
             try {
                 var selectedImage: Uri? = filePath
                 binding.image.setImageURI(selectedImage)
@@ -251,8 +204,5 @@ class BookPhoto : AppCompatActivity() {
         return mime.getExtensionFromMimeType(cR.getType(uri!!))
     }
 
+
 }
-
-
-
-

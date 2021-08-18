@@ -25,7 +25,11 @@ class SellFragment : Fragment(), View.OnClickListener {
 
     private val TAG = "SellFragment"
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentSellBinding.inflate(inflater, container, false)
 
         var myDataListModel: ArrayList<BookModel> = ArrayList()
@@ -33,20 +37,28 @@ class SellFragment : Fragment(), View.OnClickListener {
 
 
         var sellfab: FloatingActionButton = binding.sellbtn
-        sellfab.setOnClickListener(View.OnClickListener { startActivity(Intent(context, SellDetails::class.java)) })
+        sellfab.setOnClickListener(View.OnClickListener {
+            startActivity(
+                Intent(
+                    context,
+                    SellDetails::class.java
+                )
+            )
+        })
 
-        binding.sellrecycler.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        binding.sellrecycler.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         mynewadapter = SellAdapter(requireContext(), myDataListModel)
         binding.sellrecycler!!.adapter = mynewadapter
 
-        mDatabase.addValueEventListener(object : ValueEventListener{
+        mDatabase.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 myDataListModel.clear()
-                for (child in snapshot.children){
+                for (child in snapshot.children) {
                     child.key?.let { Log.i(TAG, it) }
                     var myDataListModelInternal = child.getValue(BookModel::class.java)
                     if (myDataListModelInternal != null) {
-                        var title : String? = myDataListModelInternal.title
+                        var title: String? = myDataListModelInternal.title
                         var offered_price: String? = myDataListModelInternal.offeredprice
                         myDataListModel.add(BookModel(title, offered_price, ""))
                     }

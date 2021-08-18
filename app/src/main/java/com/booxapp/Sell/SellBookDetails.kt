@@ -19,12 +19,6 @@ class SellBookDetails : AppCompatActivity() {
         binding = SellBookDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        backbtn1 = findViewById<View>(R.id.backbtn) as ImageButton
-        backbtn1!!.setOnClickListener {
-            val i = Intent(this@SellBookDetails, MainActivity::class.java)
-            startActivity(i)
-        }
-
         val bundle = intent.extras
         var book_title: String? = bundle!!.getString("booktitle", "Book Title")
         var offered_price: String? = bundle!!.getString("oprice", "Offered Price")
