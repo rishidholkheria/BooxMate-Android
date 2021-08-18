@@ -20,11 +20,11 @@ import android.view.ViewGroup
 import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import com.booxapp.Constants
 import com.booxapp.FirebaseAdapter
 import com.booxapp.R
-import com.booxapp.databinding.BookPhotoBinding
 import com.booxapp.databinding.FragmentBookImagesBinding
 import com.booxapp.databinding.ProgressBinding
 import com.booxapp.onMaujKardiListener
@@ -57,11 +57,11 @@ class BookImages : Fragment() {
 
         binding.selectImageBtn!!.setOnClickListener { //SelectImage();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (checkSelfPermission(Manifest.permission.CAMERA)
+                if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
                     == PackageManager.PERMISSION_DENIED ||
-                    checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_DENIED ||
-                    checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_DENIED
                 ) {
                     val permission = arrayOf(
@@ -100,7 +100,7 @@ class BookImages : Fragment() {
         val values = ContentValues()
         values.put(MediaStore.Images.Media.TITLE, "New Picture")
         values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera")
-        filePath = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+        filePath = requireActivity().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, filePath)
         startActivityForResult(cameraIntent, CAMERA_REQUEST)
@@ -138,7 +138,7 @@ class BookImages : Fragment() {
     }
 
     private fun uploadFile() {
-        builder = AlertDialog.Builder(this)
+        builder = AlertDialog.Builder(requireActivity())
         progressBinding = ProgressBinding.inflate(layoutInflater)
         builder.setView(progressBinding.root)
         dialog = builder.create()
@@ -153,11 +153,11 @@ class BookImages : Fragment() {
 
             if (Build.VERSION.SDK_INT < 28) {
                 bitmap = MediaStore.Images.Media.getBitmap(
-                    this.contentResolver,
+                    requireActivity().contentResolver,
                     filePath
                 )
             } else {
-                val source = ImageDecoder.createSource(this.contentResolver, filePath!!)
+                val source = ImageDecoder.createSource(requireActivity().contentResolver, filePath!!)
                 bitmap = ImageDecoder.decodeBitmap(source)
             }
 
@@ -168,18 +168,18 @@ class BookImages : Fragment() {
             sRef.putBytes(data)
                 .addOnSuccessListener { taskSnapshot ->
                     taskSnapshot.storage.downloadUrl.addOnSuccessListener {
-                        FirebaseAdapter(this).addNewImage(
+                        FirebaseAdapter(requireActivity()).addNewImage(
                             it.toString(),
                             object : onMaujKardiListener {
                                 override fun onCallback(value: Boolean) {
                                     dialog.dismiss()
                                     if (value) {
                                         Toast.makeText(
-                                            applicationContext,
+                                            requireActivity(),
                                             "File Uploaded ",
                                             Toast.LENGTH_LONG
                                         ).show()
-                                        Glide.with(applicationContext).load(it.toString())
+                                        Glide.with(requireActivity()).load(it.toString())
                                             .placeholder(R.drawable.ic_launcher_background)
                                             .into(binding.image)
                                     }
@@ -189,7 +189,7 @@ class BookImages : Fragment() {
                 }
                 .addOnFailureListener { exception ->
                     dialog.dismiss()
-                    Toast.makeText(applicationContext, exception.message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), exception.message, Toast.LENGTH_LONG).show()
                 }
                 .addOnProgressListener { taskSnapshot ->
                     val progress =
@@ -199,7 +199,7 @@ class BookImages : Fragment() {
     }
 
     private fun getFileExtension(uri: Uri?): String? {
-        val cR = contentResolver
+        val cR = requireActivity().contentResolver
         val mime = MimeTypeMap.getSingleton()
         return mime.getExtensionFromMimeType(cR.getType(uri!!))
     }

@@ -56,7 +56,7 @@ class MyAdapter(private val context: Context, val myDataModel: ArrayList<BookMod
             binding.tvPrice.text = bookModel.offeredprice
 
             Glide.with(context)
-                    .load("https://upload.wikimedia.org/wikipedia/commons/4/41/Sunflower_from_Silesia2.jpg")
+                    .load(bookModel.imagelink)
                     .into(binding.imageView);
 
 

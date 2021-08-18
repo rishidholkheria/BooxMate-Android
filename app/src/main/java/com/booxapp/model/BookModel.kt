@@ -11,7 +11,6 @@ class BookModel {
     var description: String? = null
     var seller_name: String? = null
     var seller_email: String? = null
-    var seller_location: String? = null
     var imagelink: String? = null
 
     constructor(title: String?, location: String?, mrp: String?, offeredprice: String?, id: String?, category: String?, bookmark: Boolean?, description: String?, seller_name: String?, seller_email: String?, imagelink: String?) {
@@ -25,7 +24,6 @@ class BookModel {
         this.description = description
         this.seller_name = seller_name
         this.seller_email = seller_email
-        this.seller_location = seller_location
         this.imagelink = imagelink
     }
 

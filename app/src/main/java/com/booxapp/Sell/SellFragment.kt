@@ -60,7 +60,7 @@ class SellFragment : Fragment(), View.OnClickListener {
                     if (myDataListModelInternal != null) {
                         var title: String? = myDataListModelInternal.title
                         var offered_price: String? = myDataListModelInternal.offeredprice
-                        myDataListModel.add(BookModel(title, offered_price, ""))
+                        myDataListModel.add(BookModel(title, offered_price, myDataListModelInternal.imagelink ))
                     }
                 }
                 mynewadapter!!.notifyDataSetChanged()

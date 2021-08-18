@@ -53,7 +53,7 @@ class PurchaseFragment : Fragment() {
                         var sellerEmail: String? = myDataListModelInternal.seller_email
                         var bookimage: String? = myDataListModelInternal.imagelink
 
-                        myDataListModel.add(BookModel(title, location, mrp, offered_price, "id", category, true, description, sellerName, sellerEmail, ""))
+                        myDataListModel.add(BookModel(title, location, mrp, offered_price, "id", category, true, description, sellerName, sellerEmail, bookimage))
                     }
                 }
                 adapter!!.notifyDataSetChanged()
