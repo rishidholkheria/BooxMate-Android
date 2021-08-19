@@ -37,6 +37,7 @@ class ConfirmPost : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_post)
+
         databasesellbooks = FirebaseDatabase.getInstance().getReference("books")
         book = findViewById(R.id.confirm_img)
         bookname = findViewById(R.id.confirmbooktitle)
@@ -46,6 +47,7 @@ class ConfirmPost : AppCompatActivity() {
         bookop = findViewById(R.id.confirm_offeredprice)
         bookdesc = findViewById(R.id.confirm_book_desc)
         confirm_button = findViewById(R.id.confirm_post)
+
         getbundle = Bundle()
         storage = FirebaseStorage.getInstance()
         storageReference = storage!!.reference
@@ -93,11 +95,24 @@ class ConfirmPost : AppCompatActivity() {
 
         if (!TextUtils.isEmpty(book_name)) {
             val id = databasesellbooks!!.push().key
-            val book = BookModel(book_name, book_location, book_mrp, book_offeredprice, id, book_category, true, book_description, "Rishi", "rd@gmail.com", "")
+            val book = BookModel(
+                book_name,
+                book_location,
+                book_mrp,
+                book_offeredprice,
+                id,
+                book_category,
+                true,
+                book_description,
+                "Rishi",
+                "rd@gmail.com",
+                ""
+            )
             databasesellbooks!!.child(id!!).setValue(book)
             Toast.makeText(this, "Book Added", Toast.LENGTH_LONG).show()
             val i = Intent(this@ConfirmPost, MainActivity::class.java)
-            i.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK //Stack of activities is cleared.
+            i.flags =
+                Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK //Stack of activities is cleared.
             startActivity(i)
         } else {
             Toast.makeText(this, "You should Enter a name", Toast.LENGTH_LONG).show()
@@ -119,29 +134,29 @@ class ConfirmPost : AppCompatActivity() {
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.reference.child("images")
         storageRef.child(file.name).putFile(imageuri!!)
-                .addOnSuccessListener { taskSnapshot -> // Image uploaded successfully
-                    // Dismiss dialog
-                    progressDialog.dismiss()
-                    Toast.makeText(this@ConfirmPost, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
-                    val downloadUri = taskSnapshot.storage.downloadUrl
-                    if (downloadUri.isSuccessful) {
-                        val generatedFilePath = downloadUri.result.toString()
-                        image_link = generatedFilePath
-                        println("## Stored path is $generatedFilePath")
-                        Log.e("done", generatedFilePath)
-                    }
-                    addBook()
+            .addOnSuccessListener { taskSnapshot -> // Image uploaded successfully
+                // Dismiss dialog
+                progressDialog.dismiss()
+                Toast.makeText(this@ConfirmPost, "Image Uploaded!!", Toast.LENGTH_SHORT).show()
+                val downloadUri = taskSnapshot.storage.downloadUrl
+                if (downloadUri.isSuccessful) {
+                    val generatedFilePath = downloadUri.result.toString()
+                    image_link = generatedFilePath
+                    println("## Stored path is $generatedFilePath")
+                    Log.e("done", generatedFilePath)
                 }
-                .addOnFailureListener { e -> // Error, Image not uploaded
-                    progressDialog.dismiss()
-                    Toast.makeText(this@ConfirmPost, "Failed " + e.message, Toast.LENGTH_SHORT).show()
-                }
-                .addOnProgressListener { taskSnapshot ->
+                addBook()
+            }
+            .addOnFailureListener { e -> // Error, Image not uploaded
+                progressDialog.dismiss()
+                Toast.makeText(this@ConfirmPost, "Failed " + e.message, Toast.LENGTH_SHORT).show()
+            }
+            .addOnProgressListener { taskSnapshot ->
 
-                    // Progress Listener for loading
-                    // percentage on the dialog box
-                    val progress = 100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount
-                    progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
-                }
+                // Progress Listener for loading
+                // percentage on the dialog box
+                val progress = 100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount
+                progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
+            }
     }
 }

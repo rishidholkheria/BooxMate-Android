@@ -91,10 +91,7 @@ class BookPhoto : AppCompatActivity() {
                 showImageOptionDialog()
             }
         }
-        /*binding.backtoselldetails!!.setOnClickListener {
-            val i = Intent(this@BookPhoto, SellDetails::class.java)
-            startActivity(i)
-        }*/
+
         binding.proceedfab!!.setOnClickListener(View.OnClickListener {
 //            val sbook_mrp = binding.mrp!!.getText().toString()
 //            val sbook_op = binding.offeredPrice!!.getText().toString()

@@ -12,18 +12,19 @@ class FirebaseAdapter(var context: Context) {
     var mDatabase: DatabaseReference =
         FirebaseDatabase.getInstance().getReference(Constants.DB_NAME)
 
-        fun addNewImage(imageLink: String, onCompleteListener: onMaujKardiListener) {
-        var id: String? = FirebaseDatabase.getInstance().reference.push().key
-        id?.let {
-            mDatabase.child("image").child(it).child("imagelink")
-                .setValue(imageLink, DatabaseReference.CompletionListener { error, ref ->
-                    if (error == null) {
-                        onCompleteListener.onCallback(true)
-                    } else {
-                        Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
-                        onCompleteListener.onCallback(false)
-                    }
-                })
-        }
+    fun addNewImage(imageLink: String, onCompleteListener: onMaujKardiListener) {
+//        var id: String? = FirebaseDatabase.getInstance().reference.push().key
+//        id?.let {
+        var id: String? = mDatabase.child("books").push().getKey();
+        mDatabase.child(id!!).child("imagelink")
+            .setValue(imageLink, DatabaseReference.CompletionListener { error, ref ->
+                if (error == null) {
+                    onCompleteListener.onCallback(true)
+                } else {
+                    Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
+                    onCompleteListener.onCallback(false)
+                }
+            })
+//        }
     }
 }

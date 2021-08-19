@@ -13,7 +13,6 @@ class SellBookDetails : AppCompatActivity() {
 
     lateinit var binding: SellBookDetailsBinding
 
-    var backbtn1: ImageButton? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = SellBookDetailsBinding.inflate(layoutInflater)

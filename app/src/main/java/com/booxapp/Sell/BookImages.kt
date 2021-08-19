@@ -59,9 +59,15 @@ class BookImages : Fragment() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
                     == PackageManager.PERMISSION_DENIED ||
-                    ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    ActivityCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    )
                     == PackageManager.PERMISSION_DENIED ||
-                    ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+                    ActivityCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    )
                     == PackageManager.PERMISSION_DENIED
                 ) {
                     val permission = arrayOf(
@@ -100,7 +106,10 @@ class BookImages : Fragment() {
         val values = ContentValues()
         values.put(MediaStore.Images.Media.TITLE, "New Picture")
         values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera")
-        filePath = requireActivity().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+        filePath = requireActivity().contentResolver.insert(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            values
+        )
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, filePath)
         startActivityForResult(cameraIntent, CAMERA_REQUEST)
@@ -157,7 +166,8 @@ class BookImages : Fragment() {
                     filePath
                 )
             } else {
-                val source = ImageDecoder.createSource(requireActivity().contentResolver, filePath!!)
+                val source =
+                    ImageDecoder.createSource(requireActivity().contentResolver, filePath!!)
                 bitmap = ImageDecoder.decodeBitmap(source)
             }
 
