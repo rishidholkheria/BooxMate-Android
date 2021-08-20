@@ -38,8 +38,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.1"
-                    android:paddingEnd="4dp"
                     android:gravity="center"
+                    android:paddingStart="2dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -84,7 +84,8 @@
                         android:layout_gravity="start"
                         android:lines="1"
                         android:text="₹ 2500"
-                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        android:textColor="#343239"
                         android:layout_marginTop="4dp"
                         android:textSize="15sp" />
 
@@ -97,10 +98,10 @@
 
                     <ImageView
                         android:id="@+id/iv_bookmark"
-                        android:layout_width="20dp"
+                        android:layout_width="23dp"
                         android:layout_height="27dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="4dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="4dp"
                         android:src="@drawable/ic_bookmark" />
 
                     <TextView
