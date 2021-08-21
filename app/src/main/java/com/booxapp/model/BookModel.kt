@@ -34,4 +34,20 @@ class BookModel {
         this.offeredprice = offeredprice
         this.imagelink = imagelink
     }
+
+    constructor(
+        title: String?,
+        location: String?,
+        mrp: String?,
+        offeredprice: String?,
+        category: String?,
+        description: String?
+    ) {
+        this.title = title
+        this.location = location
+        this.mrp = mrp
+        this.offeredprice = offeredprice
+        this.category = category
+        this.description = description
+    }
 }

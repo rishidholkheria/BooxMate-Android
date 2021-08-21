@@ -1,16 +1,17 @@
 package com.booxapp
 
 import android.os.Bundle
-import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.booxapp.Sell.BookImages
 import com.booxapp.Sell.PublishDetails
 import com.booxapp.databinding.ActivitySellDetailsBinding
+import com.booxapp.model.BookModel
 
-class SellDetails : AppCompatActivity() {
 
-    private var bundle: Bundle? = null
+class SellDetails : AppCompatActivity(), ShareData {
+
     lateinit var binding: ActivitySellDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +19,6 @@ class SellDetails : AppCompatActivity() {
 
         binding = ActivitySellDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        bundle = Bundle()
 
         replaceFragment(PublishDetails())
 
@@ -45,16 +45,25 @@ class SellDetails : AppCompatActivity() {
 //            }
 //        })
 
-        binding.bookPhotoFab!!.setOnClickListener(View.OnClickListener {
-            replaceFragment(BookImages())
-        })
+        object : ShareData {
+            override fun passingData(choice: Int, bookModel1: BookModel) {
+            }
+        }
     }
 
-    private fun replaceFragment(fragment: Fragment){
+    private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.publish_fragments_container, fragment)
         fragmentTransaction.commit()
+    }
+
+
+    override fun passingData(choice: Int, bookModel1: BookModel) {
+        if (choice == 1) {
+            Toast.makeText(applicationContext, "I was here", Toast.LENGTH_SHORT).show()
+            replaceFragment(BookImages())
+        }
     }
 
 }
