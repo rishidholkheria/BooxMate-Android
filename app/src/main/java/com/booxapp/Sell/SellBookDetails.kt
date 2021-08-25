@@ -7,15 +7,16 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.booxapp.databinding.ActivityBookDetailsBinding
 import com.booxapp.databinding.SellBookDetailsBinding
 
 class SellBookDetails : AppCompatActivity() {
 
-    lateinit var binding: SellBookDetailsBinding
+    lateinit var binding: ActivityBookDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = SellBookDetailsBinding.inflate(layoutInflater)
+        binding = ActivityBookDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val bundle = intent.extras

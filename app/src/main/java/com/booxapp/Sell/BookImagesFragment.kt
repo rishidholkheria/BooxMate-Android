@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.ContentValues
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -22,12 +23,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
-import com.booxapp.Constants
-import com.booxapp.FirebaseAdapter
-import com.booxapp.R
+import com.booxapp.*
 import com.booxapp.databinding.FragmentBookImagesBinding
 import com.booxapp.databinding.ProgressBinding
-import com.booxapp.onMaujKardiListener
+import com.booxapp.model.BookModel
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -47,6 +46,17 @@ class BookImages : Fragment() {
     private var storageReference: StorageReference? = null
 
     lateinit var binding: FragmentBookImagesBinding
+    lateinit var shareData: ShareData
+    var imageFlag = false
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+            shareData = activity as ShareData
+        } catch (e: ClassCastException) {
+            throw ClassCastException("$activity must implement ShareData")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -84,6 +94,15 @@ class BookImages : Fragment() {
                 showImageOptionDialog()
             }
 
+        }
+        binding.confirmPublishFab.setOnClickListener {
+            shareData.passingData(2, null)
+            if (imageFlag == true) {
+                uploadFile()
+            } else {
+                Toast.makeText(requireContext(), "Image not added!", Toast.LENGTH_SHORT)
+                    .show()
+            }
         }
         return binding.root
     }
@@ -130,7 +149,13 @@ class BookImages : Fragment() {
                 var selectedImage: Uri? = filePath
                 binding.image.setImageURI(selectedImage)
                 if (filePath != null)
-                    uploadFile()
+//                    uploadFile()
+                    Toast.makeText(
+                        requireContext(),
+                        "Image Added from Gallery!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                imageFlag = true
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -139,7 +164,10 @@ class BookImages : Fragment() {
                 var selectedImage: Uri? = filePath
                 binding.image.setImageURI(selectedImage)
                 if (filePath != null)
-                    uploadFile()
+//                    uploadFile()
+                    Toast.makeText(requireContext(), "Image Added from Camera!", Toast.LENGTH_SHORT)
+                        .show()
+                imageFlag = true
             } catch (e: IOException) {
                 e.printStackTrace()
             }

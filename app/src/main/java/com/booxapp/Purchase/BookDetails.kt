@@ -15,16 +15,18 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class BookDetails : AppCompatActivity() {
+
     var bottomSheetDialog: BottomSheetDialog? = null
     private var mBottomSheetBehavior: BottomSheetBehavior<*>? = null
     private var mTextViewState: TextView? = null
     private val user = FirebaseAuth.getInstance().currentUser
     private var request_refrence: DatabaseReference? = null
     private var current_bookid: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_details)
-        val t = findViewById<TextView>(R.id.title1)
+//        val t = findViewById<TextView>(R.id.title1)
         val img = findViewById<ImageView>(R.id.imageView)
         val purchase_request = findViewById<View>(R.id.request) as Button
         val bottomSheet = findViewById<View>(R.id.bottom_sheet)
@@ -33,7 +35,7 @@ class BookDetails : AppCompatActivity() {
         val c = intent.getStringExtra("bctgry")
         current_bookid = intent.getStringExtra("book_id")
         Glide.with(this).load(b).into(img)
-        t.text = a
+//        t.text = a
         mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         mTextViewState = findViewById(R.id.text_view_state)
         mBottomSheetBehavior!!.setBottomSheetCallback(object : BottomSheetCallback() {
