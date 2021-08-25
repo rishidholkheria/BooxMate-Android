@@ -95,10 +95,6 @@ class BookImages : Fragment() {
             }
 
         }
-        binding.confirmPost.setOnClickListener {
-            uploadFile()
-            shareData.passingData(2, null)
-        }
         return binding.root
     }
 
@@ -144,7 +140,9 @@ class BookImages : Fragment() {
                 var selectedImage: Uri? = filePath
                 binding.image.setImageURI(selectedImage)
                 if (filePath != null)
-//                    uploadFile()
+                    binding.confirmPost.setOnClickListener {
+                        uploadFile()
+                    }
                     Toast.makeText(
                         requireContext(),
                         "Image Added from Gallery!",
@@ -158,7 +156,9 @@ class BookImages : Fragment() {
                 var selectedImage: Uri? = filePath
                 binding.image.setImageURI(selectedImage)
                 if (filePath != null)
-//                    uploadFile()
+                    binding.confirmPost.setOnClickListener {
+                        uploadFile()
+                    }
                     Toast.makeText(requireContext(), "Image Added from Camera!", Toast.LENGTH_SHORT)
                         .show()
             } catch (e: IOException) {
@@ -199,6 +199,7 @@ class BookImages : Fragment() {
             sRef.putBytes(data)
                 .addOnSuccessListener { taskSnapshot ->
                     taskSnapshot.storage.downloadUrl.addOnSuccessListener {
+                        shareData.passingData(2, null)
                         FirebaseAdapter(requireActivity()).addNewImage(
                             it.toString(),
                             object : onMaujKardiListener {
@@ -210,6 +211,10 @@ class BookImages : Fragment() {
                                             "File Uploaded ",
                                             Toast.LENGTH_LONG
                                         ).show()
+                                        Glide.with(requireActivity()).load(it.toString())
+                                            .placeholder(R.drawable.ic_launcher_background)
+                                            .into(binding.image)
+
                                     }
                                 }
                             })
@@ -225,9 +230,6 @@ class BookImages : Fragment() {
                 }
         }
     }
-//    Glide.with(requireActivity()).load(it.toString())
-//    .placeholder(R.drawable.ic_launcher_background)
-//    .into(binding.image)
 
     private fun getFileExtension(uri: Uri?): String? {
         val cR = requireActivity().contentResolver

@@ -1,14 +1,12 @@
 package com.booxapp
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.booxapp.Sell.BookImages
 import com.booxapp.Sell.OrderSuccessfullFragment
 import com.booxapp.Sell.PublishDetails
 import com.booxapp.databinding.ActivitySellDetailsBinding
-import com.booxapp.databinding.FragmentOrderSuccessfullBinding
 import com.booxapp.model.BookModel
 
 
@@ -50,17 +48,14 @@ class SellDetails : AppCompatActivity(), ShareData {
     }
 
     private fun replaceFragment(fragment: Fragment) {
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.publish_fragments_container, fragment)
-        fragmentTransaction.commit()
+        val bundle = Bundle()
+        bundle.putString("key", "abc")
+
+        supportFragmentManager.beginTransaction().replace(R.id.publish_fragments_container, fragment).commit()
     }
 
     override fun passingData(choice: Int, bookModel1: BookModel?) {
-        var bookmodel1Var: BookModel
         if (choice == 1) {
-            bookmodel1Var = bookModel1!!
-            Toast.makeText(applicationContext, "I was here", Toast.LENGTH_SHORT).show()
             replaceFragment(BookImages())
         } else if(choice == 2){
             replaceFragment(OrderSuccessfullFragment())
