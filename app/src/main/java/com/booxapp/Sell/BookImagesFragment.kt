@@ -47,7 +47,7 @@ class BookImages : Fragment() {
 
     lateinit var binding: FragmentBookImagesBinding
     lateinit var shareData: ShareData
-    var imageFlag = false
+    var imageFlag = true
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -95,14 +95,9 @@ class BookImages : Fragment() {
             }
 
         }
-        binding.confirmPublishFab.setOnClickListener {
+        binding.confirmPost.setOnClickListener {
+            uploadFile()
             shareData.passingData(2, null)
-            if (imageFlag == true) {
-                uploadFile()
-            } else {
-                Toast.makeText(requireContext(), "Image not added!", Toast.LENGTH_SHORT)
-                    .show()
-            }
         }
         return binding.root
     }
@@ -155,7 +150,6 @@ class BookImages : Fragment() {
                         "Image Added from Gallery!",
                         Toast.LENGTH_SHORT
                     ).show()
-                imageFlag = true
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -167,7 +161,6 @@ class BookImages : Fragment() {
 //                    uploadFile()
                     Toast.makeText(requireContext(), "Image Added from Camera!", Toast.LENGTH_SHORT)
                         .show()
-                imageFlag = true
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -217,9 +210,6 @@ class BookImages : Fragment() {
                                             "File Uploaded ",
                                             Toast.LENGTH_LONG
                                         ).show()
-                                        Glide.with(requireActivity()).load(it.toString())
-                                            .placeholder(R.drawable.ic_launcher_background)
-                                            .into(binding.image)
                                     }
                                 }
                             })
@@ -235,6 +225,9 @@ class BookImages : Fragment() {
                 }
         }
     }
+//    Glide.with(requireActivity()).load(it.toString())
+//    .placeholder(R.drawable.ic_launcher_background)
+//    .into(binding.image)
 
     private fun getFileExtension(uri: Uri?): String? {
         val cR = requireActivity().contentResolver

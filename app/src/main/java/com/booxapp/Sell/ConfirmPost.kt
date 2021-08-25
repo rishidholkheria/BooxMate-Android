@@ -39,7 +39,6 @@ class ConfirmPost : AppCompatActivity() {
         setContentView(R.layout.activity_confirm_post)
 
         databasesellbooks = FirebaseDatabase.getInstance().getReference("books")
-        book = findViewById(R.id.confirm_img)
         bookname = findViewById(R.id.confirmbooktitle)
         bookcategory = findViewById(R.id.confirm_book_ctgry)
         bookloc = findViewById(R.id.confirm_seller_location)

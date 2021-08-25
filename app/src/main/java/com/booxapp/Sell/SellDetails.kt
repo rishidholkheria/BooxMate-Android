@@ -5,9 +5,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.booxapp.Sell.BookImages
-import com.booxapp.Sell.ConfirmPublishFragment
+import com.booxapp.Sell.OrderSuccessfullFragment
 import com.booxapp.Sell.PublishDetails
 import com.booxapp.databinding.ActivitySellDetailsBinding
+import com.booxapp.databinding.FragmentOrderSuccessfullBinding
 import com.booxapp.model.BookModel
 
 
@@ -62,7 +63,7 @@ class SellDetails : AppCompatActivity(), ShareData {
             Toast.makeText(applicationContext, "I was here", Toast.LENGTH_SHORT).show()
             replaceFragment(BookImages())
         } else if(choice == 2){
-            replaceFragment(ConfirmPublishFragment())
+            replaceFragment(OrderSuccessfullFragment())
         }
     }
 

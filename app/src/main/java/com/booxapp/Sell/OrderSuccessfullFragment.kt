@@ -12,7 +12,7 @@ import com.booxapp.databinding.ActivityConfirmPostBinding
 import com.booxapp.databinding.FragmentPublishDetailsBinding
 import com.booxapp.model.BookModel
 
-class ConfirmPublishFragment : Fragment() {
+class OrderSuccessfullFragment : Fragment() {
     lateinit var binding: ActivityConfirmPostBinding
     lateinit var shareData: ShareData
 
