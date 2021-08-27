@@ -3,11 +3,11 @@ package com.booxapp
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.booxapp.Sell.BookImages
-import com.booxapp.Sell.OrderSuccessfullFragment
-import com.booxapp.Sell.PublishDetails
 import com.booxapp.databinding.ActivitySellDetailsBinding
 import com.booxapp.model.BookModel
+import com.booxapp.sell.BookImages
+import com.booxapp.sell.OrderSuccessfullFragment
+import com.booxapp.sell.PublishDetails
 
 
 class SellDetails : AppCompatActivity(), ShareData {
@@ -20,7 +20,7 @@ class SellDetails : AppCompatActivity(), ShareData {
         binding = ActivitySellDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        replaceFragment(PublishDetails())
+        replaceFragment(PublishDetails(), null)
 
 //        binding.moreBookDetailsBtn!!.setOnClickListener(View.OnClickListener {
 //            val title = binding.title!!.getText().toString()
@@ -47,18 +47,23 @@ class SellDetails : AppCompatActivity(), ShareData {
 
     }
 
-    private fun replaceFragment(fragment: Fragment) {
-        val bundle = Bundle()
-        bundle.putString("key", "abc")
-
-        supportFragmentManager.beginTransaction().replace(R.id.publish_fragments_container, fragment).commit()
+    private fun replaceFragment(fragment: Fragment, bookModel: BookModel?) {
+        if (bookModel != null) {
+            val bundle = Bundle()
+            bundle.putParcelable(
+                "bookModel", bookModel
+            )
+            fragment.arguments = bundle
+        }
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.publish_fragments_container, fragment).commit()
     }
 
-    override fun passingData(choice: Int, bookModel1: BookModel?) {
+    override fun passingData(choice: Int, bookModel: BookModel?) {
         if (choice == 1) {
-            replaceFragment(BookImages())
-        } else if(choice == 2){
-            replaceFragment(OrderSuccessfullFragment())
+            replaceFragment(BookImages(), bookModel)
+        } else if (choice == 2) {
+            replaceFragment(OrderSuccessfullFragment(), null)
         }
     }
 

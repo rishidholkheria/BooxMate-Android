@@ -8,30 +8,22 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Base64
 import android.view.View
 import android.webkit.MimeTypeMap
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import com.booxapp.BookPhoto
-import com.booxapp.data.Prefs.putStringPrefs
 import com.booxapp.databinding.BookPhotoBinding
 import com.booxapp.databinding.ProgressBinding
 import com.bumptech.glide.Glide
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.ByteArrayOutputStream
 import java.io.IOException
-import com.google.android.gms.tasks.OnSuccessListener
 
 class BookPhoto : AppCompatActivity() {
 
@@ -212,23 +204,23 @@ class BookPhoto : AppCompatActivity() {
             sRef.putBytes(data)
                 .addOnSuccessListener { taskSnapshot ->
                     taskSnapshot.storage.downloadUrl.addOnSuccessListener {
-                        FirebaseAdapter(this).addNewImage(
-                            it.toString(),
-                            object : onMaujKardiListener {
-                                override fun onCallback(value: Boolean) {
-                                    dialog.dismiss()
-                                    if (value) {
-                                        Toast.makeText(
-                                            applicationContext,
-                                            "File Uploaded ",
-                                            Toast.LENGTH_LONG
-                                        ).show()
-                                        Glide.with(applicationContext).load(it.toString())
-                                            .placeholder(R.drawable.ic_launcher_background)
-                                            .into(binding.image)
-                                    }
-                                }
-                            })
+//                        FirebaseAdapter(this).addNewImage(
+//                            it.toString(),
+//                            object : onCompleteFirebase {
+//                                override fun onCallback(value: Boolean) {
+//                                    dialog.dismiss()
+//                                    if (value) {
+//                                        Toast.makeText(
+//                                            applicationContext,
+//                                            "File Uploaded ",
+//                                            Toast.LENGTH_LONG
+//                                        ).show()
+//                                        Glide.with(applicationContext).load(it.toString())
+//                                            .placeholder(R.drawable.ic_launcher_background)
+//                                            .into(binding.image)
+//                                    }
+//                                }
+//                            })
                     }
                 }
                 .addOnFailureListener { exception ->

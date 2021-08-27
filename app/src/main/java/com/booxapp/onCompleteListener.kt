@@ -1,5 +1,5 @@
 package com.booxapp
 
-interface onMaujKardiListener {
+interface onCompleteFirebase {
     fun onCallback(value: Boolean)
 }

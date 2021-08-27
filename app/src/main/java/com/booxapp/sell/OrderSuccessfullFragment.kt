@@ -1,4 +1,4 @@
-package com.booxapp.Sell
+package com.booxapp.sell
 
 import android.content.Context
 import android.os.Bundle
@@ -6,11 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.booxapp.R
 import com.booxapp.ShareData
 import com.booxapp.databinding.ActivityConfirmPostBinding
-import com.booxapp.databinding.FragmentPublishDetailsBinding
-import com.booxapp.model.BookModel
 
 class OrderSuccessfullFragment : Fragment() {
     lateinit var binding: ActivityConfirmPostBinding

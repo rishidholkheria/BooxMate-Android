@@ -1,6 +1,8 @@
-package com.booxapp.Sell
+package com.booxapp.sell
 
 import android.Manifest
+import android.R.attr.defaultValue
+import android.R.attr.key
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.ContentValues
@@ -14,7 +16,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +24,7 @@ import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.fragment.app.Fragment
 import com.booxapp.*
 import com.booxapp.databinding.FragmentBookImagesBinding
 import com.booxapp.databinding.ProgressBinding
@@ -32,6 +34,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.ByteArrayOutputStream
 import java.io.IOException
+import java.util.ArrayList
 
 
 class BookImages : Fragment() {
@@ -44,6 +47,8 @@ class BookImages : Fragment() {
     private lateinit var progressBinding: ProgressBinding
     lateinit var dialog: Dialog
     private var storageReference: StorageReference? = null
+
+    lateinit var bookModel: BookModel
 
     lateinit var binding: FragmentBookImagesBinding
     lateinit var shareData: ShareData
@@ -64,6 +69,9 @@ class BookImages : Fragment() {
     ): View? {
         binding = FragmentBookImagesBinding.inflate(inflater, container, false)
         storageReference = FirebaseStorage.getInstance().reference
+
+        val bundle = this.arguments
+        bookModel = bundle!!.getParcelable("bookModel")!!
 
         binding.selectImageBtn!!.setOnClickListener { //SelectImage();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -143,11 +151,11 @@ class BookImages : Fragment() {
                     binding.confirmPost.setOnClickListener {
                         uploadFile()
                     }
-                    Toast.makeText(
-                        requireContext(),
-                        "Image Added from Gallery!",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Image Added from Gallery!",
+                    Toast.LENGTH_SHORT
+                ).show()
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -159,8 +167,8 @@ class BookImages : Fragment() {
                     binding.confirmPost.setOnClickListener {
                         uploadFile()
                     }
-                    Toast.makeText(requireContext(), "Image Added from Camera!", Toast.LENGTH_SHORT)
-                        .show()
+                Toast.makeText(requireContext(), "Image Added from Camera!", Toast.LENGTH_SHORT)
+                    .show()
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -199,13 +207,14 @@ class BookImages : Fragment() {
             sRef.putBytes(data)
                 .addOnSuccessListener { taskSnapshot ->
                     taskSnapshot.storage.downloadUrl.addOnSuccessListener {
-                        shareData.passingData(2, null)
-                        FirebaseAdapter(requireActivity()).addNewImage(
-                            it.toString(),
-                            object : onMaujKardiListener {
+                        bookModel.imagelink = it.toString()
+                        FirebaseAdapter(requireActivity()).addNewBook(
+                            bookModel,
+                            object : onCompleteFirebase {
                                 override fun onCallback(value: Boolean) {
                                     dialog.dismiss()
                                     if (value) {
+                                        shareData.passingData(2, null)
                                         Toast.makeText(
                                             requireActivity(),
                                             "File Uploaded ",
