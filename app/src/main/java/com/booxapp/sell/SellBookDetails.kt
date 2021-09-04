@@ -9,34 +9,35 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.booxapp.databinding.ActivityBookDetailsBinding
 import com.booxapp.databinding.SellBookDetailsBinding
+import com.booxapp.model.BookModel
 
 class SellBookDetails : AppCompatActivity() {
 
     lateinit var binding: ActivityBookDetailsBinding
+    lateinit var singleBookData: BookModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBookDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        val bundle = intent.extras
-//        var book_title: String? = bundle!!.getString("booktitle", "Book Title")
-//        var offered_price: String? = bundle!!.getString("oprice", "Offered Price")
-//        var mrp: String? = bundle!!.getString("mrp", "mrp")
-//        var loc: String? = bundle!!.getString("location", "Offered Price")
-//        var category: String? = bundle!!.getString("ctgry", "Book Title")
-//        var description: String? = bundle!!.getString("desc", "Description...")
-//        var sellername: String? = bundle!!.getString("sellername", "Book Title")
-//        var selleremail: String? = bundle!!.getString("selleremail", "Offered Price")
-//        var book_image: String? = bundle!!.getString("image", "Offered Price")
-//
-//
-//        binding.bookName.text = book_title
-//        binding.bookOfferedPrice.text = offered_price
-//        binding.bookCtgry.text = category
-//        binding.bookLoc.text = loc
-//        binding.bookMrp.text = mrp
-//        binding.bookDesc.text = description
+        val bundle = intent.extras
+        binding.bookName.text = bundle!!.getString("booktitle", "Book Title")
+        binding.bookOfferedPrice.text = bundle!!.getString("oprice", "Rs ")
+        binding.bookCtgry.text = bundle!!.getString("ctgry", "Category")
+        binding.bookLoc.text = bundle!!.getString("location", "Book Title")
+        binding.bookMrp.text = bundle!!.getString("mrp", "Rs ")
+        binding.bookOp.text = bundle!!.getString("oprice", "Rs ")
+        binding.bookDesc.text = bundle!!.getString("booktitle", "No description available.")
+        binding.bookImage.imageAlpha
+
+//        binding.bookOfferedPrice.text = singleBookData.offeredprice
+//        binding.bookCtgry.text = singleBookData.category
+//        binding.bookLoc.text = singleBookData.location
+//        binding.bookMrp.text = singleBookData.mrp
+//        binding.bookOp.text = singleBookData.offeredprice
+//        binding.bookDesc.text = singleBookData.description
+
 //        binding.bookSellerName.text = sellername
 //        binding.bookSellerEmail.text = selleremail
 //        Toast.makeText(applicationContext, book_title, Toast.LENGTH_SHORT).show()

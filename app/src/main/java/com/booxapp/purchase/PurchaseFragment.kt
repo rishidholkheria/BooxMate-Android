@@ -15,9 +15,6 @@ import com.booxapp.model.BookModel
 import com.google.firebase.database.*
 import kotlin.collections.ArrayList
 
-/**
- * A simple [Fragment] subclass.
- */
 class PurchaseFragment : Fragment() {
     lateinit var mDatabase: DatabaseReference
     var adapter: MyAdapter? = null
@@ -26,24 +23,29 @@ class PurchaseFragment : Fragment() {
 
     private val TAG = "PurchaseFragment"
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentPurchaseBinding.inflate(inflater, container, false)
 
         var myDataListModel: ArrayList<BookModel> = ArrayList()
         mDatabase = FirebaseDatabase.getInstance().getReference("books")
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        binding.recyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         adapter = MyAdapter(requireContext(), myDataListModel)
         binding.recyclerView!!.adapter = adapter
 
-        mDatabase.addValueEventListener(object : ValueEventListener{
+        mDatabase.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 myDataListModel.clear()
-                for (child in snapshot.children){
+                for (child in snapshot.children) {
                     child.key?.let { Log.i(TAG, it) }
                     var myDataListModelInternal = child.getValue(BookModel::class.java)
                     if (myDataListModelInternal != null) {
-                        var title : String? = myDataListModelInternal.title
+                        var title: String? = myDataListModelInternal.title
                         var offered_price: String? = myDataListModelInternal.offeredprice
                         var mrp: String? = myDataListModelInternal.mrp
                         var location: String? = myDataListModelInternal.location
@@ -53,7 +55,21 @@ class PurchaseFragment : Fragment() {
                         var sellerEmail: String? = myDataListModelInternal.seller_email
                         var bookimage: String? = myDataListModelInternal.imagelink
 
-                        myDataListModel.add(BookModel(title, location, mrp, "₹ " + offered_price, "id", category, true, description, sellerName, sellerEmail, bookimage))
+                        myDataListModel.add(
+                            BookModel(
+                                title,
+                                location,
+                                mrp,
+                                "₹ " + offered_price,
+                                "id",
+                                category,
+                                true,
+                                description,
+                                sellerName,
+                                sellerEmail,
+                                bookimage
+                            )
+                        )
                     }
                 }
                 adapter!!.notifyDataSetChanged()

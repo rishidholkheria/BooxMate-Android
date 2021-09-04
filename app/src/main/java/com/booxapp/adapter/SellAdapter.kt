@@ -3,6 +3,7 @@ package com.booxapp.adapter
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.booxapp.R
 import com.booxapp.SellBookDetails
+import com.booxapp.databinding.PastOrderBinding
+import com.booxapp.databinding.SellBookDetailsBinding
 import com.booxapp.model.BookModel
 import com.booxapp.model.SellModel
 import com.booxapp.utils.layoutInflater
@@ -19,67 +22,57 @@ import com.bumptech.glide.Glide
 import java.util.*
 import kotlin.collections.ArrayList
 
-class SellAdapter() : RecyclerView.Adapter<SellAdapter.ViewHolder>() {
+class SellAdapter(private val context: Context, val DataModel: ArrayList<BookModel>) :
+    RecyclerView.Adapter<SellAdapter.ViewHolder>() {
 
-
-    lateinit var myContext: Context
-    lateinit var myValues: ArrayList<BookModel>
-
-    protected var myListener: ItemListener? = null
-
-
-    constructor(context: Context, values: ArrayList<BookModel>
-    ) : this() {
-        this.myContext = context
-        this.myValues = values
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(myContext).inflate(R.layout.past_order, parent, false))
+        return ViewHolder(
+            PastOrderBinding.inflate(
+                LayoutInflater.from(context),
+                parent,
+                false
+            )
+        )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(myValues[position])
+    override fun onBindViewHolder(holder: SellAdapter.ViewHolder, position: Int) {
+        holder.bind(context, DataModel[position])
     }
 
-    public override fun getItemCount(): Int {
-        return myValues.size
+    override fun getItemCount(): Int {
+        return DataModel.size
     }
 
-    inner class ViewHolder constructor(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
-        var book_name: TextView = v.findViewById(R.id.bookname)
-        var book_status: TextView = v.findViewById(R.id.book_status)
-        var book_price: TextView = v.findViewById(R.id.price)
+    inner class ViewHolder(private val binding: PastOrderBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         var item: BookModel? = null
+        fun bind(context: Context, bookModel: BookModel) {
+            binding.bookname.text = bookModel.title
+            binding.location.text = bookModel.location
+            binding.price.text = bookModel.offeredprice
+            Glide.with(context)
+                .load(bookModel.imagelink)
+                .into(binding.bookimage);
 
-        fun bind(bookModel: BookModel) {
-            book_name.text = bookModel.title
-//            book_status.text = sellModel.sellstatus
-            book_price.text = bookModel.offeredprice
-        }
+            binding.root.setOnClickListener(View.OnClickListener {
+                val bundle = Bundle()
+                bundle.putString("booktitle", bookModel.title)
+                bundle.putString("oprice", bookModel.offeredprice)
+                bundle.putString("mrp", bookModel.mrp)
+                bundle.putString("location", bookModel.location)
+                bundle.putString("ctgry", bookModel.category)
+                bundle.putString("sellername", bookModel.seller_name)
+                bundle.putString("selleremail", bookModel.seller_email)
+                bundle.putString("desc", bookModel.description)
+                bundle.putString("image", bookModel.imagelink)
 
-        override fun onClick(view: View) {
-            if (myListener != null) {
-                myListener!!.onItemClick(item)
-            }
-        }
-
-        init {
-            v.setOnClickListener(object : View.OnClickListener {
-                public override fun onClick(v: View) {
-                    val i: Intent = Intent(myContext, SellBookDetails::class.java)
-                    i.putExtra("btitle", book_name.getText().toString().trim({ it <= ' ' }))
-//                    i.putExtra("image", item!!.bookimageLink)
-                    myContext.startActivity(i)
-                }
+                var intent = Intent(context, SellBookDetails::class.java)
+                intent.putExtras(bundle)
+                context.startActivity(intent)
             })
-
         }
-    }
-
-
-    open interface ItemListener {
-        fun onItemClick(item: BookModel?)
     }
 }
+

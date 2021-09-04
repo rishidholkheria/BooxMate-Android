@@ -16,23 +16,22 @@ class BookModel : Parcelable {
     var seller_email: String? = null
     var imagelink: String? = null
 
-    constructor(parcel: Parcel) : this() {
-        title = parcel.readString()
-        location = parcel.readString()
-        mrp = parcel.readString()
-        offeredprice = parcel.readString()
-        id = parcel.readString()
-        category = parcel.readString()
-        bookmark = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
-        description = parcel.readString()
-        seller_name = parcel.readString()
-        seller_email = parcel.readString()
-        imagelink = parcel.readString()
-    }
-
     constructor() {}
 
-    constructor(title: String?, location: String?, mrp: String?, offeredprice: String?, id: String?, category: String?, bookmark: Boolean?, description: String?, seller_name: String?, seller_email: String?, imagelink: String?) {
+    //BasicModel
+    constructor(
+        title: String?,
+        location: String?,
+        mrp: String?,
+        offeredprice: String?,
+        id: String?,
+        category: String?,
+        bookmark: Boolean?,
+        description: String?,
+        seller_name: String?,
+        seller_email: String?,
+        imagelink: String?
+    ) {
         this.title = title
         this.location = location
         this.mrp = mrp
@@ -46,12 +45,7 @@ class BookModel : Parcelable {
         this.imagelink = imagelink
     }
 
-    constructor(title: String?, offeredprice: String?, imagelink: String?) {
-        this.title = title
-        this.offeredprice = offeredprice
-        this.imagelink = imagelink
-    }
-
+    //PublishDataFragment
     constructor(
         title: String?,
         location: String?,
@@ -66,6 +60,21 @@ class BookModel : Parcelable {
         this.offeredprice = offeredprice
         this.category = category
         this.description = description
+    }
+
+    //Used in Passing of data in Fragments(SellDetails)
+    constructor(parcel: Parcel) : this() {
+        title = parcel.readString()
+        location = parcel.readString()
+        mrp = parcel.readString()
+        offeredprice = parcel.readString()
+        id = parcel.readString()
+        category = parcel.readString()
+        bookmark = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        description = parcel.readString()
+        seller_name = parcel.readString()
+        seller_email = parcel.readString()
+        imagelink = parcel.readString()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

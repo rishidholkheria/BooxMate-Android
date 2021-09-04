@@ -12,15 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.booxapp.adapter.SellAdapter
 import com.booxapp.databinding.FragmentSellBinding
 import com.booxapp.model.BookModel
-import com.booxapp.model.SellModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
 import java.util.*
 
-class SellFragment : Fragment(), View.OnClickListener {
+class SellFragment : Fragment() {
 
     lateinit var mDatabase: DatabaseReference
-    var mynewadapter: SellAdapter? = null
+    var selladapter: SellAdapter? = null
     lateinit var binding: FragmentSellBinding
 
     private val TAG = "SellFragment"
@@ -48,8 +47,8 @@ class SellFragment : Fragment(), View.OnClickListener {
 
         binding.sellrecycler.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        mynewadapter = SellAdapter(requireContext(), myDataListModel)
-        binding.sellrecycler!!.adapter = mynewadapter
+        selladapter = SellAdapter(requireContext(), myDataListModel)
+        binding.sellrecycler!!.adapter = selladapter
 
         mDatabase.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -60,11 +59,32 @@ class SellFragment : Fragment(), View.OnClickListener {
                     if (myDataListModelInternal != null) {
                         var title: String? = myDataListModelInternal.title
                         var offered_price: String? = myDataListModelInternal.offeredprice
-                        var imageLink: String? = myDataListModelInternal.imagelink
-                        myDataListModel.add(BookModel(title, offered_price, imageLink))
+                        var mrp: String? = myDataListModelInternal.mrp
+                        var location: String? = myDataListModelInternal.location
+                        var category: String? = myDataListModelInternal.mrp
+                        var description: String? = myDataListModelInternal.description
+                        var sellerName: String? = myDataListModelInternal.seller_name
+                        var sellerEmail: String? = myDataListModelInternal.seller_email
+                        var bookimage: String? = myDataListModelInternal.imagelink
+
+                        myDataListModel.add(
+                            BookModel(
+                                title,
+                                location,
+                                mrp,
+                                "₹ " + offered_price,
+                                "id",
+                                category,
+                                true,
+                                description,
+                                sellerName,
+                                sellerEmail,
+                                bookimage
+                            )
+                        )
                     }
                 }
-                mynewadapter!!.notifyDataSetChanged()
+                selladapter!!.notifyDataSetChanged()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -75,5 +95,4 @@ class SellFragment : Fragment(), View.OnClickListener {
         return binding.root
     }
 
-    override fun onClick(v: View) {}
 }

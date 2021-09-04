@@ -26,17 +26,18 @@ import com.google.firebase.database.ValueEventListener
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MyAdapter(private val context: Context, val myDataModel: ArrayList<BookModel>) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
+class MyAdapter(private val context: Context, val myDataModel: ArrayList<BookModel>) :
+    RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 
     private var firebaseUser = FirebaseAuth.getInstance().currentUser
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-                OneRowBinding.inflate(
-                        LayoutInflater.from(context),
-                        parent,
-                        false
-                )
+            OneRowBinding.inflate(
+                LayoutInflater.from(context),
+                parent,
+                false
+            )
         )
     }
 
@@ -47,18 +48,18 @@ class MyAdapter(private val context: Context, val myDataModel: ArrayList<BookMod
     override fun getItemCount(): Int {
         return myDataModel.size
     }
-    inner class ViewHolder(private val binding: OneRowBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    inner class ViewHolder(private val binding: OneRowBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         var item: BookModel? = null
-        fun bind( context: Context, bookModel: BookModel) {
+        fun bind(context: Context, bookModel: BookModel) {
             binding.tvTitle.text = bookModel.title
             binding.tvLocation.text = bookModel.location
             binding.tvPrice.text = bookModel.offeredprice
-
             Glide.with(context)
-                    .load(bookModel.imagelink)
-                    .into(binding.imageView);
-
+                .load(bookModel.imagelink)
+                .into(binding.imageView);
 
             binding.root.setOnClickListener(View.OnClickListener {
                 val bundle = Bundle()
@@ -71,6 +72,7 @@ class MyAdapter(private val context: Context, val myDataModel: ArrayList<BookMod
                 bundle.putString("selleremail", bookModel.seller_email)
                 bundle.putString("desc", bookModel.description)
                 bundle.putString("image", bookModel.imagelink)
+
 //                Toast.makeText(context,bookModel.title, Toast.LENGTH_SHORT).show()
                 var intent = Intent(context, SellBookDetails::class.java)
                 intent.putExtras(bundle)
@@ -81,7 +83,8 @@ class MyAdapter(private val context: Context, val myDataModel: ArrayList<BookMod
 
 
     private fun isSaved(bookID: String, imageView: ImageView) {
-        val reference = FirebaseDatabase.getInstance().reference.child("Bookmarked").child(firebaseUser!!.uid)
+        val reference =
+            FirebaseDatabase.getInstance().reference.child("Bookmarked").child(firebaseUser!!.uid)
         reference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.child(bookID).exists()) {
@@ -92,6 +95,7 @@ class MyAdapter(private val context: Context, val myDataModel: ArrayList<BookMod
                     imageView.tag = "bookmark"
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {}
         })
     }
