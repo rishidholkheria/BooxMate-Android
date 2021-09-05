@@ -5,12 +5,13 @@ class ExchangeModel {
     var location: String? = null
     var id: String? = null
     var category: String? = null
-    var bookmark: Boolean? = null
+    var expectedBooks: String? = null
     var description: String? = null
     var seller_name: String? = null
     var seller_email: String? = null
     var imagelink: String? = null
-    var exchange_req: String? = null
+    var bookmark: Boolean? = null
+    var exchangeRequests: String? = null
 }
 
 

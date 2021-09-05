@@ -1,25 +1,16 @@
 package com.booxapp.adapter
 
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.booxapp.R
 import com.booxapp.SellBookDetails
 import com.booxapp.databinding.PastOrderBinding
-import com.booxapp.databinding.SellBookDetailsBinding
 import com.booxapp.model.BookModel
-import com.booxapp.model.SellModel
-import com.booxapp.utils.layoutInflater
 import com.bumptech.glide.Glide
-import java.util.*
 import kotlin.collections.ArrayList
 
 class SellAdapter(private val context: Context, val DataModel: ArrayList<BookModel>) :

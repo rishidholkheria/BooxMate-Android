@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.booxapp.databinding.ActivityBookDetailsBinding
 import com.booxapp.databinding.SellBookDetailsBinding
 import com.booxapp.model.BookModel
+import com.bumptech.glide.Glide
 
 class SellBookDetails : AppCompatActivity() {
 
@@ -29,7 +30,9 @@ class SellBookDetails : AppCompatActivity() {
         binding.bookMrp.text = bundle!!.getString("mrp", "Rs ")
         binding.bookOp.text = bundle!!.getString("oprice", "Rs ")
         binding.bookDesc.text = bundle!!.getString("booktitle", "No description available.")
-        binding.bookImage.imageAlpha
+        Glide.with(this)
+            .load(bundle!!.getString("image", "No Image"))
+            .into(binding.bookImage);
 
 //        binding.bookOfferedPrice.text = singleBookData.offeredprice
 //        binding.bookCtgry.text = singleBookData.category

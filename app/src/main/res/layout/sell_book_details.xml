@@ -36,7 +36,7 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="16dp"
                 android:fontFamily="@font/quicksand_medium"
-                android:text="BOOX"
+                android:text="BOOXMATE"
                 android:textAlignment="center"
                 android:textColor="#7435E4"
                 android:textSize="20dp" />
@@ -283,27 +283,27 @@ NCERT Exampler is best book for boards."
                         android:layout_marginStart="8dp"
                         android:drawableStart="@drawable/ic_user"
                         android:drawablePadding="7dp"
-                        android:paddingStart="5dp"
                         android:fontFamily="@font/karla"
+                        android:paddingStart="5dp"
                         android:paddingEnd="5dp"
                         android:text="Mukesh Ambani"
                         android:textColor="#000000"
                         android:textSize="13sp" />
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/bookSellerAddress"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:drawableStart="@drawable/ic_black_pin"-->
-<!--                        android:drawablePadding="7dp"-->
-<!--                        android:paddingStart="5dp"-->
-<!--                        android:fontFamily="@font/karla"-->
-<!--                        android:paddingTop="5dp"-->
-<!--                        android:paddingEnd="5dp"-->
-<!--                        android:text="Date of Posting"-->
-<!--                        android:textColor="#000000"-->
-<!--                        android:textSize="13sp" />-->
+                    <!--                    <TextView-->
+                    <!--                        android:id="@+id/bookSellerAddress"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginStart="8dp"-->
+                    <!--                        android:drawableStart="@drawable/ic_black_pin"-->
+                    <!--                        android:drawablePadding="7dp"-->
+                    <!--                        android:paddingStart="5dp"-->
+                    <!--                        android:fontFamily="@font/karla"-->
+                    <!--                        android:paddingTop="5dp"-->
+                    <!--                        android:paddingEnd="5dp"-->
+                    <!--                        android:text="Date of Posting"-->
+                    <!--                        android:textColor="#000000"-->
+                    <!--                        android:textSize="13sp" />-->
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -326,8 +326,8 @@ NCERT Exampler is best book for boards."
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="mukeshambani@gmail.com"
                             android:fontFamily="@font/karla"
+                            android:text="mukeshambani@gmail.com"
                             android:textColor="@android:color/black"
                             android:textSize="13sp" />
 
@@ -340,11 +340,11 @@ NCERT Exampler is best book for boards."
             <Button
                 android:id="@+id/view_request"
                 android:layout_width="match_parent"
-                android:text="View Requests"
-                android:textColor="#ffffff"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@drawable/button_bg"/>
+                android:background="@drawable/button_bg"
+                android:text="View Requests"
+                android:textColor="#ffffff" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -356,7 +356,6 @@ NCERT Exampler is best book for boards."
                 android:text="Comment"
                 android:textColor="#000000"
                 android:textSize="18sp" />
-
 
         </LinearLayout>
 
