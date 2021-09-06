@@ -16,11 +16,8 @@ import com.booxapp.model.BookModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
 import java.util.*
-import android.R
-import com.ismaeldivita.chipnavigation.ChipNavigationBar
 
-
-class ExchangeFragment : Fragment() {
+class ExPostFragment : Fragment() {
 
     lateinit var binding: FragmentExchangeBinding
 
@@ -33,14 +30,7 @@ class ExchangeFragment : Fragment() {
     ): View? {
 
         binding = FragmentExchangeBinding.inflate(inflater, container, false)
-
-        binding.exBottomNav.setItemSelected(
-            com.booxapp.R.id.exbooks,
-            true
-        );
-
-        childFragmentManager.beginTransaction()
-            .replace(com.booxapp.R.id.exchange_fragment_container, ExBuyFragment()).commit()
+        
 
         return binding.root
     }
