@@ -14,7 +14,7 @@
         android:title="Post" />
 
     <item
-        android:id="@+id/cart"
+        android:id="@+id/bookmark"
         android:icon="@drawable/ex_book"
         android:title="Bookmarked" />
 </menu>

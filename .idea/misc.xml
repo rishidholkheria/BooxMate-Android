@@ -3,12 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/drawable/annotation.xml" value="0.22870370370370371" />
+        <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/drawable/button_bg.xml" value="0.2324074074074074" />
+        <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/drawable/cancel_btn.xml" value="0.2324074074074074" />
+        <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/drawable/ic_abc.xml" value="0.22870370370370371" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/drawable/ic_arrow_forward_black_24dp.xml" value="0.24074074074074073" />
+        <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/drawable/ic_check.xml" value="0.22870370370370371" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/drawable/ic_personbook.xml" value="0.24074074074074073" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/drawable/ic_shopping_cart_black_24dp.xml" value="0.2518518518518518" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/activity_book_details.xml" value="0.264" />
+        <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/book_photo.xml" value="0.22335495829471733" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/exchange_one_row.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/exchange_past_order.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/fragment_ex_bookmark.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/fragment_ex_buy.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/fragment_ex_post.xml" value="0.18981481481481483" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/fragment_exchange.xml" value="0.25416666666666665" />

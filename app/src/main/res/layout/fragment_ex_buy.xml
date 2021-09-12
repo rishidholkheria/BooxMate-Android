@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExBuyFragment">
+    android:gravity="center"
+    tools:context=".ExBookMarkFragment">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,14 +23,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
+                android:fontFamily="@font/quicksand"
                 android:gravity="center"
                 android:text="Filter"
                 android:textSize="15sp" />
 
-
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
                 android:layout_weight="1"
                 android:padding="10dp"
                 android:scrollbars="none">
@@ -44,6 +47,7 @@
                         android:layout_height="30dp"
                         android:layout_marginStart="8dp"
                         android:background="@drawable/category_btn"
+                        android:fontFamily="@font/karla"
                         android:padding="3dp"
                         android:text="ALL"
                         android:textColor="#000000"
@@ -56,6 +60,7 @@
                         android:layout_height="30dp"
                         android:layout_marginStart="8dp"
                         android:background="@drawable/category_btn"
+                        android:fontFamily="@font/karla"
                         android:padding="3dp"
                         android:text="NOVELS"
                         android:textColor="#000000"
@@ -69,6 +74,7 @@
                         android:layout_height="30dp"
                         android:layout_marginStart="8dp"
                         android:background="@drawable/category_btn"
+                        android:fontFamily="@font/karla"
                         android:padding="3dp"
                         android:text="Educational"
                         android:textColor="#000000"
@@ -82,6 +88,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="3dp"
                         android:background="@drawable/category_btn"
+                        android:fontFamily="@font/karla"
                         android:padding="3dp"
                         android:text="Notes"
                         android:textColor="#000000"
@@ -99,17 +106,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/filter_purchase"
-            tools:listitem="@layout/exchange_one_row" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/cartfab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="20dp"
-            android:src="@drawable/ic_book" />
+            tools:listitem="@layout/one_row" />
 
     </RelativeLayout>
 
-</FrameLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

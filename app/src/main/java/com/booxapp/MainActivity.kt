@@ -8,6 +8,7 @@ import com.booxapp.adapter.ViewPagerAdapter
 import com.booxapp.adapter.ViewPagerAdapter.Companion.addFragment
 import com.booxapp.data.Prefs.putStringPrefs
 import com.booxapp.databinding.MainActivityBinding
+import com.booxapp.exchange.ExchangeFragment
 import com.booxapp.model.UserModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener

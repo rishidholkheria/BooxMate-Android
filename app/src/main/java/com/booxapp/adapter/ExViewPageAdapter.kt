@@ -3,20 +3,23 @@ package com.booxapp.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import java.util.*
+import com.booxapp.ExBuyFragment
+import com.booxapp.ExBookMarkFragment
+import com.booxapp.ExPostFragment
+import java.util.ArrayList
 
-class ViewPagerAdapter constructor(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class ExViewPageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     public override fun getItem(position: Int): Fragment {
-        return fragmentList[position]
+        return ExViewPageAdapter.fragmentList[position]
     }
 
     public override fun getCount(): Int {
-        return fragmentList.size
+        return ExViewPageAdapter.fragmentList.size
     }
 
     public override fun getPageTitle(position: Int): CharSequence? {
-        return fragmentTitle[position]
+        return ExViewPageAdapter.fragmentTitle[position]
     }
 
     companion object {

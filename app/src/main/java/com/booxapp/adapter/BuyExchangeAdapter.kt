@@ -41,23 +41,21 @@ class BuyExchangeAdapter(private val context: Context, val DataModel: ArrayList<
     inner class ViewHolder(private val binding: OneRowBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        var item: BookModel? = null
+        var item: ExchangeModel? = null
         fun bind(context: Context, exModel: ExchangeModel) {
             binding.tvTitle.text = exModel.title
             binding.tvLocation.text = exModel.location
-            Glide.with(context)
-                .load(exModel.imagelink)
-                .into(binding.imageView);
+//            Glide.with(context)
+//                .load(exModel.imagelink)
+//                .into(binding.imageView);
 
             binding.root.setOnClickListener(View.OnClickListener {
                 val bundle = Bundle()
                 bundle.putString("booktitle", exModel.title)
                 bundle.putString("location", exModel.location)
                 bundle.putString("ctgry", exModel.category)
-                bundle.putString("sellername", exModel.seller_name)
-                bundle.putString("selleremail", exModel.seller_email)
                 bundle.putString("desc", exModel.description)
-                bundle.putString("image", exModel.imagelink)
+//                bundle.putString("image", exModel.imagelink)
 
                 var intent = Intent(context, SellBookDetails::class.java)
                 intent.putExtras(bundle)

@@ -49,7 +49,7 @@ class PurchaseFragment : Fragment() {
                         var offered_price: String? = myDataListModelInternal.offeredprice
                         var mrp: String? = myDataListModelInternal.mrp
                         var location: String? = myDataListModelInternal.location
-                        var category: String? = myDataListModelInternal.mrp
+                        var category: String? = myDataListModelInternal.category
                         var description: String? = myDataListModelInternal.description
                         var sellerName: String? = myDataListModelInternal.seller_name
                         var sellerEmail: String? = myDataListModelInternal.seller_email
