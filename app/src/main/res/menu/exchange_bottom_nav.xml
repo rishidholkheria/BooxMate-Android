@@ -4,13 +4,13 @@
 
     <item
         android:id="@+id/exbooks"
-        android:icon="@drawable/ex_book"
+        android:icon="@drawable/ic_exbook"
         android:enabled="true"
         android:title="Ex-Books" />
 
     <item
         android:id="@+id/post"
-        android:icon="@drawable/ex_book"
+        android:icon="@drawable/ic_expost"
         android:title="Post" />
 
     <item

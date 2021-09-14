@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.booxapp.*
 import com.booxapp.adapter.ExViewPageAdapter
 import com.booxapp.adapter.ViewPagerAdapter
@@ -33,12 +34,29 @@ class ExchangeFragment : Fragment() {
 
         setupViewPager(binding.exViewPager)
 
+        binding.exViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                when (position) {
+                    0 -> {
+                        binding.exBottomNav.setItemSelected(R.id.exbooks, true)
+                    }
+                    1 -> {
+                        binding.exBottomNav.setItemSelected(R.id.post, true)
+                    }
+                    2 -> {
+                        binding.exBottomNav.setItemSelected(R.id.bookmark, true)
+                    }
+                }
+                super.onPageSelected(position)
+            }
+        })
+
         binding.exBottomNav.setOnItemSelectedListener(object :
             ChipNavigationBar.OnItemSelectedListener {
             override fun onItemSelected(id: Int) {
                 when (id) {
                     R.id.exbooks -> {
-                        binding.exViewPager.setCurrentItem(1)
+                        binding.exViewPager.setCurrentItem(0)
                     }
                     R.id.post -> {
                         binding.exViewPager.setCurrentItem(1)
@@ -50,41 +68,14 @@ class ExchangeFragment : Fragment() {
             }
         })
 
-        binding.exViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
-
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-            }
-
-            override fun onPageSelected(position: Int) {
-                when {
-                    position == 0 -> {
-                        binding.exBottomNav.setItemSelected(R.id.exbooks, true)
-                    }
-                    position == 1 -> {
-                        binding.exBottomNav.setItemSelected(R.id.post, true)
-                    }
-                    position == 2 -> {
-                        binding.exBottomNav.setItemSelected(R.id.bookmark, true)
-                    }
-                }
-            }
-
-            override fun onPageScrollStateChanged(state: Int) {}
-
-        })
-
         return binding.root
     }
 
-    private fun setupViewPager(viewPager: ViewPager?) {
-        val viewPagerAdapter = ExViewPageAdapter(parentFragmentManager)
-        ExViewPageAdapter.addFragment(ExBuyFragment(), "Buy")
-        ExViewPageAdapter.addFragment(ExPostFragment(), "Post")
-        ExViewPageAdapter.addFragment(ExBookMarkFragment(), "Bookmark")
-        viewPager!!.adapter = viewPagerAdapter
+    private fun setupViewPager(viewPager: ViewPager2?) {
+        val exViewPageAdapter = ExViewPageAdapter(this)
+        ExViewPageAdapter.addFragment(SellFragment(), "Sell")
+        ExViewPageAdapter.addFragment(PurchaseFragment(), "Purchase")
+        ExViewPageAdapter.addFragment(ExchangeFragment(), "Exchange")
+        viewPager!!.adapter = exViewPageAdapter
     }
 }
