@@ -77,11 +77,6 @@ class SignUp : AppCompatActivity() {
                                 Toast.LENGTH_LONG
                             ).show()
                         } else {
-//                            Prefs.putStringPrefs(
-//                                applicationContext,
-//                                "user_loc",
-//                                intent.getStringExtra("loc")
-//                            )
 
                             val current_user = UserModel()
                             current_user.name = username
@@ -92,9 +87,13 @@ class SignUp : AppCompatActivity() {
 
                             sendToFirebase(current_user)
 
-                            val i = Intent(this@SignUp, MainActivity::class.java)
+                            val i = Intent(this@SignUp, SignIn::class.java)
                             startActivity(i)
-                            Toast.makeText(this@SignUp, "Done", Toast.LENGTH_LONG).show()
+                            Toast.makeText(
+                                this@SignUp,
+                                "Registered Successfully!",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                     }
             } else {
@@ -102,10 +101,10 @@ class SignUp : AppCompatActivity() {
             }
         })
 
-//        binding.!!.setOnClickListener(View.OnClickListener {
-//            val i = Intent(this@SignUp, SignIn::class.java)
-//            startActivity(i)
-//        })
+        binding.toSignInBtn!!.setOnClickListener(View.OnClickListener {
+            val i = Intent(this@SignUp, SignIn::class.java)
+            startActivity(i)
+        })
     }
 
     private fun sendToFirebase(current_user: UserModel) {

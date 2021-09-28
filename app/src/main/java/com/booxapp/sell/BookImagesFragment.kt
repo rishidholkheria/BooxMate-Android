@@ -26,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.booxapp.*
+import com.booxapp.data.Prefs
 import com.booxapp.databinding.FragmentBookImagesBinding
 import com.booxapp.databinding.ProgressBinding
 import com.booxapp.model.BookModel
@@ -166,6 +167,7 @@ class BookImages : Fragment() {
                 if (filePath != null)
                     binding.confirmPost.setOnClickListener {
                         uploadFile()
+                        
                     }
                 Toast.makeText(requireContext(), "Image Added from Camera!", Toast.LENGTH_SHORT)
                     .show()

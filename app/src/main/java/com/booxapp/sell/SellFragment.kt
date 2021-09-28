@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.booxapp.adapter.SellAdapter
+import com.booxapp.data.Prefs
 import com.booxapp.databinding.FragmentSellBinding
 import com.booxapp.model.BookModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -63,8 +64,6 @@ class SellFragment : Fragment() {
                         var location: String? = myDataListModelInternal.location
                         var category: String? = myDataListModelInternal.mrp
                         var description: String? = myDataListModelInternal.description
-                        var sellerName: String? = myDataListModelInternal.seller_name
-                        var sellerEmail: String? = myDataListModelInternal.seller_email
                         var bookimage: String? = myDataListModelInternal.imagelink
 
                         myDataListModel.add(
@@ -77,9 +76,8 @@ class SellFragment : Fragment() {
                                 category,
                                 true,
                                 description,
-                                sellerName,
-                                sellerEmail,
-                                bookimage
+                                bookimage,
+                                ""
                             )
                         )
                     }

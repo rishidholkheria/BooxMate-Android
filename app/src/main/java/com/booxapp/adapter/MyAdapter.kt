@@ -68,8 +68,6 @@ class MyAdapter(private val context: Context, val myDataModel: ArrayList<BookMod
                 bundle.putString("mrp", bookModel.mrp)
                 bundle.putString("location", bookModel.location)
                 bundle.putString("ctgry", bookModel.category)
-                bundle.putString("sellername", bookModel.seller_name)
-                bundle.putString("selleremail", bookModel.seller_email)
                 bundle.putString("desc", bookModel.description)
                 bundle.putString("image", bookModel.imagelink)
 

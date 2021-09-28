@@ -51,8 +51,6 @@ class PurchaseFragment : Fragment() {
                         var location: String? = myDataListModelInternal.location
                         var category: String? = myDataListModelInternal.category
                         var description: String? = myDataListModelInternal.description
-                        var sellerName: String? = myDataListModelInternal.seller_name
-                        var sellerEmail: String? = myDataListModelInternal.seller_email
                         var bookimage: String? = myDataListModelInternal.imagelink
 
                         myDataListModel.add(
@@ -65,9 +63,8 @@ class PurchaseFragment : Fragment() {
                                 category,
                                 true,
                                 description,
-                                sellerName,
-                                sellerEmail,
-                                bookimage
+                                bookimage,
+                                ""
                             )
                         )
                     }

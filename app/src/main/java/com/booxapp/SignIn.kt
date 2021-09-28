@@ -9,15 +9,20 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.booxapp.SignIn
+import com.booxapp.data.Prefs
 import com.booxapp.databinding.ActivitySignInBinding
 import com.booxapp.databinding.MainActivityBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.auth.FirebaseUser
+
 
 class SignIn : AppCompatActivity() {
 
     var mFirebaseAuth: FirebaseAuth? = null
     private val mAuthStateListener: AuthStateListener? = null
+
 
     lateinit var binding: ActivitySignInBinding
 
@@ -27,23 +32,6 @@ class SignIn : AppCompatActivity() {
         setContentView(binding.root)
 
         mFirebaseAuth = FirebaseAuth.getInstance()
-
-//        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
-//            @Override
-//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//                FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
-//
-//                if (mFirebaseUser != null){
-//                    Toast.makeText(SignIn.this,"Logged into Boox",Toast.LENGTH_LONG).show();
-//                    Intent i = new Intent(SignIn.this, MainActivity.class);
-//                    startActivity(i);
-//                }
-//                else {
-//                    Toast.makeText(SignIn.this,"Please Login",Toast.LENGTH_LONG).show();
-//
-//                }
-//            }
-//        };
 
         binding.signinBtn!!.setOnClickListener(View.OnClickListener {
             val siemailid = binding.emailsignin!!.getText().toString()
@@ -61,12 +49,12 @@ class SignIn : AppCompatActivity() {
                 mFirebaseAuth!!.signInWithEmailAndPassword(siemailid, sipass)
                     .addOnCompleteListener(this@SignIn) { task ->
                         if (task.isSuccessful) {
-
+                            storeAuthId()
                             val i = Intent(this@SignIn, MainActivity::class.java)
-                            i.putExtra("type", "signin")
                             startActivity(i)
                             finish()
-                            Toast.makeText(this@SignIn, "Done", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@SignIn, "Logged In...", Toast.LENGTH_LONG).show()
+
                         } else {
                             Toast.makeText(
                                 this@SignIn,
@@ -83,6 +71,21 @@ class SignIn : AppCompatActivity() {
             val i = Intent(this@SignIn, SignUp::class.java)
             startActivity(i)
         })
+    }
+
+    private fun storeAuthId() {
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user == null) {
+            Toast.makeText(this@SignIn, "User Not Found!", Toast.LENGTH_LONG).show()
+            return;
+        }
+        val userId = user!!.uid
+        Prefs.putStringPrefs(
+            applicationContext,
+            "userId",
+            userId
+        )
+        Log.e("userrrrrrrrrrrrrrrrrr", userId)
     }
 
 }

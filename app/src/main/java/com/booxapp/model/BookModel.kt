@@ -12,9 +12,8 @@ class BookModel : Parcelable {
     var category: String? = null
     var bookmark: Boolean? = null
     var description: String? = null
-    var seller_name: String? = null
-    var seller_email: String? = null
     var imagelink: String? = null
+    var userId: String? = null
 
     constructor() {}
 
@@ -28,9 +27,8 @@ class BookModel : Parcelable {
         category: String?,
         bookmark: Boolean?,
         description: String?,
-        seller_name: String?,
-        seller_email: String?,
-        imagelink: String?
+        imagelink: String?,
+        userId: String?
     ) {
         this.title = title
         this.location = location
@@ -40,9 +38,8 @@ class BookModel : Parcelable {
         this.category = category
         this.bookmark = bookmark
         this.description = description
-        this.seller_name = seller_name
-        this.seller_email = seller_email
         this.imagelink = imagelink
+        this.userId = userId
     }
 
     //PublishDataFragment
@@ -72,8 +69,6 @@ class BookModel : Parcelable {
         category = parcel.readString()
         bookmark = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
         description = parcel.readString()
-        seller_name = parcel.readString()
-        seller_email = parcel.readString()
         imagelink = parcel.readString()
     }
 
@@ -86,8 +81,6 @@ class BookModel : Parcelable {
         parcel.writeString(category)
         parcel.writeValue(bookmark)
         parcel.writeString(description)
-        parcel.writeString(seller_name)
-        parcel.writeString(seller_email)
         parcel.writeString(imagelink)
     }
 
