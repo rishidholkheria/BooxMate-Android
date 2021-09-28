@@ -78,10 +78,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:nextFocusDown="@id/passwordsignin"
-                android:lines="1"
                 android:layout_marginEnd="12dp"
                 android:fontFamily="@font/karla"
+                android:lines="1"
+                android:nextFocusDown="@id/passwordsignin"
                 android:textColor="#90000000" />
 
             <TextView
@@ -90,29 +90,29 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/quicksand_medium"
-                android:padding="8dp"
                 android:nextFocusDown="@id/passwordsignin"
+                android:padding="8dp"
                 android:text="Password"
                 android:textColor="#ED000000"
                 android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/passwordsignin"
-                android:lines="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
                 android:fontFamily="@font/karla"
+                android:lines="1"
                 android:textColor="#90000000" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:orientation="vertical"
                 android:paddingTop="10dp"
-                android:paddingBottom="15dp"
-                android:orientation="vertical">
+                android:paddingBottom="15dp">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/signin"
@@ -124,6 +124,7 @@
                     app:cardCornerRadius="5dp">
 
                     <LinearLayout
+                        android:id="@+id/signinBtn"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
@@ -166,7 +167,6 @@
             </RelativeLayout>
 
 
-
             <TextView
                 android:id="@+id/hj"
                 android:layout_width="wrap_content"
@@ -183,7 +183,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_margin="20dp"
-                android:background="#27000000"/>
+                android:background="#27000000" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -192,12 +192,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
-                    android:textColor="#000000"
-                    android:fontFamily="@font/karla"
                     android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
                     android:layout_toStartOf="@+id/register"
-                    android:text="Register into Boox. " />
+                    android:fontFamily="@font/karla"
+                    android:text="Register into Boox. "
+                    android:textColor="#000000" />
 
 
                 <androidx.cardview.widget.CardView
@@ -214,6 +214,7 @@
                     app:cardCornerRadius="5dp">
 
                     <LinearLayout
+                        android:id="@+id/signupPageBtn"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="4dp"

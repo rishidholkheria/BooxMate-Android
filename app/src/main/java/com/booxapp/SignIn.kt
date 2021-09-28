@@ -9,24 +9,23 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.booxapp.SignIn
+import com.booxapp.databinding.ActivitySignInBinding
+import com.booxapp.databinding.MainActivityBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 
 class SignIn : AppCompatActivity() {
-    var proceed: CardView? = null
-    var signup: CardView? = null
-    var siemail: EditText? = null
-    var sipassword: EditText? = null
+
     var mFirebaseAuth: FirebaseAuth? = null
     private val mAuthStateListener: AuthStateListener? = null
 
+    lateinit var binding: ActivitySignInBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_in)
-        proceed = findViewById(R.id.signin)
-        signup = findViewById(R.id.register)
-        siemail = findViewById(R.id.emailsignin)
-        sipassword = findViewById(R.id.passwordsignin)
+        binding = ActivitySignInBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         mFirebaseAuth = FirebaseAuth.getInstance()
 
 //        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -45,38 +44,45 @@ class SignIn : AppCompatActivity() {
 //                }
 //            }
 //        };
-        proceed!!.setOnClickListener(View.OnClickListener {
-            val siemailid = siemail!!.getText().toString()
-            val sipass = sipassword!!.getText().toString()
+
+        binding.signinBtn!!.setOnClickListener(View.OnClickListener {
+            val siemailid = binding.emailsignin!!.getText().toString()
+            val sipass = binding.passwordsignin!!.getText().toString()
+
             if (siemailid.isEmpty()) {
-                siemail!!.setError("Name Required!")
-                siemail!!.requestFocus()
+                binding.emailsignin!!.setError("Name Required!")
+                binding.emailsignin!!.requestFocus()
             } else if (sipass.isEmpty()) {
-                sipassword!!.setError("EmailID required!")
-                sipassword!!.requestFocus()
+                binding.passwordsignin!!.setError("EmailID required!")
+                binding.passwordsignin!!.requestFocus()
             } else if (siemailid.isEmpty() && sipass.isEmpty()) {
                 Toast.makeText(this@SignIn, "Enter Details", Toast.LENGTH_LONG).show()
             } else if (!(siemailid.isEmpty() && sipass.isEmpty())) {
-                mFirebaseAuth!!.signInWithEmailAndPassword(siemailid, sipass).addOnCompleteListener(this@SignIn) { task ->
-                    if (task.isSuccessful) {
-                        val i = Intent(this@SignIn, MainActivity::class.java)
-                        i.putExtra("type", "signin")
-                        startActivity(i)
-                        Toast.makeText(this@SignIn, "Done", Toast.LENGTH_LONG).show()
-                    } else {
-                        Toast.makeText(this@SignIn, "Wrong Email or Password.", Toast.LENGTH_LONG).show()
-                        Log.e("SignIn Error", task.toString())
+                mFirebaseAuth!!.signInWithEmailAndPassword(siemailid, sipass)
+                    .addOnCompleteListener(this@SignIn) { task ->
+                        if (task.isSuccessful) {
+
+                            val i = Intent(this@SignIn, MainActivity::class.java)
+                            i.putExtra("type", "signin")
+                            startActivity(i)
+                            finish()
+                            Toast.makeText(this@SignIn, "Done", Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(
+                                this@SignIn,
+                                "Wrong Email or Password.",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            Log.e("SignIn Error", task.toString())
+                        }
                     }
-                }
             }
         })
-        signup!!.setOnClickListener(View.OnClickListener {
+
+        binding.signupPageBtn!!.setOnClickListener(View.OnClickListener {
             val i = Intent(this@SignIn, SignUp::class.java)
             startActivity(i)
         })
-    } //    @Override
-    //    protected void onStart() {
-    //        super.onStart();
-    //        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
-    //    }
+    }
+
 }

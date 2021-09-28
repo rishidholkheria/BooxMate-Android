@@ -14,6 +14,8 @@
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/drawable/ic_personbook.xml" value="0.24074074074074073" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/drawable/ic_shopping_cart_black_24dp.xml" value="0.2518518518518518" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/activity_book_details.xml" value="0.264" />
+        <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/activity_sign_in.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/activity_sign_up.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/book_photo.xml" value="0.22335495829471733" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/exchange_one_row.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/exchange_past_order.xml" value="0.25416666666666665" />
@@ -24,6 +26,7 @@
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/fragment_exchange_buy.xml" value="0.21944444444444444" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/fragment_purchase.xml" value="0.18981481481481483" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/fragment_rent_sell_books.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/main_activity.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/one_row.xml" value="0.21944444444444444" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/past_order.xml" value="0.21944444444444444" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/sell_book_details.xml" value="0.264" />

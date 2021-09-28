@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 object Prefs {
-    const val PREFS_NAME = "AttendanceSemList"
+    const val PREFS_NAME = "bookUser"
     private fun getPrefs(context: Context): SharedPreferences {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     }

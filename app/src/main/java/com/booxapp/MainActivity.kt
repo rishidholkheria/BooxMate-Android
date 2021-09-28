@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.booxapp.adapter.ViewPagerAdapter
 import com.booxapp.adapter.ViewPagerAdapter.Companion.addFragment
+import com.booxapp.data.Prefs.getStringPrefs
 import com.booxapp.data.Prefs.putStringPrefs
 import com.booxapp.databinding.MainActivityBinding
 import com.booxapp.exchange.ExchangeFragment
@@ -29,37 +30,8 @@ class MainActivity : AppCompatActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val i = intent
-        if (i.getStringExtra("type") != null) {
-            if (intent.getStringExtra("type") == "signup") {
-                val current_user = UserModel()
-                current_user.name = intent.getStringExtra("name")
-                current_user.email = intent.getStringExtra("email")
-                current_user.loc = intent.getStringExtra("loc")
-                current_user.phone = intent.getStringExtra("mob")
-                putStringPrefs(applicationContext, "user_loc", intent.getStringExtra("loc"))
-                sendToFirebase(current_user)
-            } else if (intent.getStringExtra("type") == "signin") {
-                userDetails
-            }
-        }
+        binding.menuIcon!!.setOnClickListener {}
 
-
-//        toolbar = (Toolbar) findViewById(R.id.mytoolbar);
-
-        binding.menuIcon!!.setOnClickListener { }
-        putStringPrefs(applicationContext, "current_userid", mFirebaseAuth.currentUser!!.uid)
-        //        logout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                FirebaseAuth.getInstance().signOut();
-//                Intent signup = new Intent(MainActivity.this, SignIn.class);
-//                startActivity(signup);
-//            }
-//        });
-
-        //  setSupportActionBar(toolbar);
         setupViewPager(binding.myViewPager)
         binding.tablayout!!.setupWithViewPager(binding.myViewPager)
     }
@@ -67,8 +39,9 @@ class MainActivity : AppCompatActivity() {
     private val userDetails: Unit
         private get() {
             val id = FirebaseAuth.getInstance().currentUser!!.uid
-            val ref = FirebaseDatabase.getInstance().getReference("User/$id")
-            ref.addValueEventListener(object : ValueEventListener {
+
+            val ref = FirebaseDatabase.getInstance().getReference("user")
+            ref.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val user = snapshot.getValue(UserModel::class.java)
                     putStringPrefs(applicationContext, "user_loc", user!!.loc)
@@ -76,15 +49,16 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onCancelled(error: DatabaseError) {}
             })
+
         }
 
-    private fun sendToFirebase(current_user: UserModel) {
-        val userid = FirebaseDatabase.getInstance().reference.key
-        val id = FirebaseAuth.getInstance().currentUser!!.uid
-        current_user.id = id
-        val user_ref = FirebaseDatabase.getInstance().getReference("Users/$userid")
-        user_ref.setValue(current_user)
-    }
+//    private fun sendToFirebase(current_user: UserModel) {
+//        val userid = FirebaseDatabase.getInstance().getReference("users").push().key.toString()
+//        val id = FirebaseAuth.getInstance().currentUser!!.uid
+//        current_user.id = id
+//        val user_ref = FirebaseDatabase.getInstance().getReference("users").child(userid)
+//        user_ref.setValue(current_user)
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
@@ -99,4 +73,5 @@ class MainActivity : AppCompatActivity() {
         addFragment(ExchangeFragment(), "Exchange")
         viewPager!!.adapter = viewPagerAdapter
     }
+
 }

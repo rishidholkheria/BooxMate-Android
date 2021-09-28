@@ -9,79 +9,113 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.booxapp.SignUp
+import com.booxapp.data.Prefs
+import com.booxapp.databinding.ActivitySignUpBinding
+import com.booxapp.databinding.MainActivityBinding
+import com.booxapp.databinding.PastOrderBinding
+import com.booxapp.model.UserModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.DatabaseReference
+
 
 class SignUp : AppCompatActivity() {
-    var proceed: CardView? = null
-    var btsignin: CardView? = null
-    var name: EditText? = null
-    var email: EditText? = null
-    var mno: EditText? = null
-    var password: EditText? = null
-    var loc: EditText? = null
+
     var mFirebaseAuth: FirebaseAuth? = null
+    var ref: DatabaseReference? = null
+
+    lateinit var binding: ActivitySignUpBinding
 
     var TAG = "SignUp"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
-        proceed = findViewById(R.id.create_account)
-        btsignin = findViewById(R.id.backtosignin)
-        name = findViewById(R.id.username)
-        email = findViewById(R.id.email)
-        mno = findViewById(R.id.mobilenumber)
-        password = findViewById(R.id.password)
-        loc = findViewById(R.id.location)
+
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         mFirebaseAuth = FirebaseAuth.getInstance()
-        proceed!!.setOnClickListener(View.OnClickListener {
-            val username = name!!.getText().toString().trim { it <= ' ' }
-            val useremail = email!!.getText().toString().trim { it <= ' ' }
-            val usermno = mno!!.getText().toString().trim { it <= ' ' }
-            val userpass = password!!.getText().toString().trim { it <= ' ' }
-            val location = loc!!.getText().toString().trim { it <= ' ' }
+        ref = FirebaseDatabase.getInstance().reference
+
+        binding.createAccount!!.setOnClickListener(View.OnClickListener {
+            val username = binding.username!!.getText().toString().trim { it <= ' ' }
+            val useremail = binding.email!!.getText().toString().trim { it <= ' ' }
+            val usermno = binding.mobilenumber!!.getText().toString().trim { it <= ' ' }
+            val userpass = binding.password!!.getText().toString().trim { it <= ' ' }
+            val location = binding.location!!.getText().toString().trim { it <= ' ' }
+
             if (username.isEmpty()) {
-                name!!.setError("Name Required!")
-                name!!.requestFocus()
+                binding.username!!.setError("Name Required!")
+                binding.username!!.requestFocus()
             } else if (useremail.isEmpty()) {
-                email!!.setError("EmailID required!")
-                email!!.requestFocus()
+                binding.email!!.setError("EmailID required!")
+                binding.email!!.requestFocus()
             } else if (usermno.isEmpty()) {
-                mno!!.setError("Mobile Number required!")
-                mno!!.requestFocus()
+                binding.mobilenumber!!.setError("Mobile Number required!")
+                binding.mobilenumber!!.requestFocus()
             } else if (location.isEmpty()) {
-                loc!!.setError("Enter your Location!")
-                loc!!.requestFocus()
+                binding.location!!.setError("Enter your Location!")
+                binding.location!!.requestFocus()
             } else if (userpass.isEmpty()) {
-                password!!.setError("Enter a Password!")
-                password!!.requestFocus()
+                binding.password!!.setError("Enter a Password!")
+                binding.password!!.requestFocus()
             } else if (!(username.isEmpty() && useremail.isEmpty() && usermno.isEmpty() && userpass.isEmpty())) {
-                mFirebaseAuth!!.createUserWithEmailAndPassword(useremail, userpass).addOnCompleteListener(this@SignUp) { task ->
-                    if (!task.isSuccessful) {
-                        try {
-                            throw task.exception!!
-                        } catch (e: Exception) {
-                            Log.i(TAG, e.message!!)
+
+                //Check if user already exists already
+
+                mFirebaseAuth!!.createUserWithEmailAndPassword(useremail, userpass)
+                    .addOnCompleteListener(this@SignUp) { task ->
+                        if (!task.isSuccessful) {
+                            try {
+                                throw task.exception!!
+                            } catch (e: Exception) {
+                                Log.i(TAG, e.message!!)
+                            }
+                            Toast.makeText(
+                                this@SignUp,
+                                "Something wrong in Details!",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        } else {
+//                            Prefs.putStringPrefs(
+//                                applicationContext,
+//                                "user_loc",
+//                                intent.getStringExtra("loc")
+//                            )
+
+                            val current_user = UserModel()
+                            current_user.name = username
+                            current_user.email = useremail
+                            current_user.loc = location
+                            current_user.phone = usermno
+                            current_user.password = userpass
+
+                            sendToFirebase(current_user)
+
+                            val i = Intent(this@SignUp, MainActivity::class.java)
+                            startActivity(i)
+                            Toast.makeText(this@SignUp, "Done", Toast.LENGTH_LONG).show()
                         }
-                        Toast.makeText(this@SignUp, "Something wrong in Details!", Toast.LENGTH_LONG).show()
-                    } else {
-                        val i = Intent(this@SignUp, MainActivity::class.java)
-                        i.putExtra("name", username)
-                        i.putExtra("email", useremail)
-                        i.putExtra("loc", location)
-                        i.putExtra("mob", usermno)
-                        i.putExtra("type", "signup")
-                        startActivity(i)
-                        Toast.makeText(this@SignUp, "Done", Toast.LENGTH_LONG).show()
                     }
-                }
             } else {
                 Toast.makeText(this@SignUp, "Enter All Details", Toast.LENGTH_LONG).show()
             }
         })
-        btsignin!!.setOnClickListener(View.OnClickListener {
-            val i = Intent(this@SignUp, SignIn::class.java)
-            startActivity(i)
-        })
+
+//        binding.!!.setOnClickListener(View.OnClickListener {
+//            val i = Intent(this@SignUp, SignIn::class.java)
+//            startActivity(i)
+//        })
     }
+
+    private fun sendToFirebase(current_user: UserModel) {
+        val userid =
+            FirebaseDatabase.getInstance().getReference("users")
+                .push().key.toString() //Firebase Id
+        val id = FirebaseAuth.getInstance().currentUser!!.uid   //Firebase-Auth-id
+        current_user.id = id
+        val user_ref = FirebaseDatabase.getInstance().getReference("users").child(userid)
+        user_ref.setValue(current_user)
+    }
+
 }
