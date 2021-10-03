@@ -24,15 +24,15 @@
         android:theme="@style/AppTheme">
         <activity android:name=".AboutActivity"></activity>
         <activity android:name=".ViewRequests" />
-        <activity android:name=".ConfirmPost" />
         <activity android:name=".SignUp" />
         <activity android:name=".SignIn" />
         <activity android:name=".OrderSuccesfull" />
         <activity android:name=".PurchaseCart" />
         <activity android:name=".PurchaseDetails" />
-        <activity android:name=".BookPhoto" />
+<!--        <activity android:name=".BookPhoto" />-->
         <activity android:name=".SellBookDetails" />
         <activity android:name=".SellDetails" />
+        <activity android:name=".ExPostInput" />
         <activity android:name=".BookDetails" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SplashScreen">

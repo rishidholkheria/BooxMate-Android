@@ -3,6 +3,7 @@ package com.booxapp
 import android.content.Context
 import android.util.Log
 import com.booxapp.model.BookModel
+import com.booxapp.model.ExchangeModel
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
@@ -12,6 +13,9 @@ class FirebaseAdapter(var context: Context) {
 
     var mDatabase: DatabaseReference =
         FirebaseDatabase.getInstance().getReference(Constants.DB_NAME)
+
+    var eDatabase: DatabaseReference =
+        FirebaseDatabase.getInstance().getReference(Constants.EX_DB_NAME)
 
     fun addNewBook(bookModel: BookModel, onCompleteListener: onCompleteFirebase) {
         var id: String? = mDatabase.child("books").push().key
@@ -27,4 +31,20 @@ class FirebaseAdapter(var context: Context) {
             })
 //        }
     }
+
+    fun addNewExBook(bookModel: ExchangeModel, onCompleteListener: onCompleteFirebase) {
+        var id: String? = eDatabase.child("exchangeBooks").push().key
+        bookModel.id = id
+        eDatabase.child(id!!)
+            .setValue(bookModel, DatabaseReference.CompletionListener { error, ref ->
+                if (error == null) {
+                    onCompleteListener.onCallback(true)
+                } else {
+                    Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
+                    onCompleteListener.onCallback(false)
+                }
+            })
+//        }
+    }
+
 }

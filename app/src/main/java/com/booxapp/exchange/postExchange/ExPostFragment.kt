@@ -31,7 +31,15 @@ class ExPostFragment : Fragment() {
     ): View? {
 
         binding = FragmentExPostBinding.inflate(inflater, container, false)
-        
+
+        binding.exchangePostBtn.setOnClickListener(View.OnClickListener {
+            startActivity(
+                Intent(
+                    context,
+                    ExPostInput::class.java
+                )
+            )
+        })
 
         return binding.root
     }

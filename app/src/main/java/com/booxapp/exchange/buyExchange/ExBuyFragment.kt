@@ -55,23 +55,17 @@ class ExBuyFragment : Fragment() {
                         var location: String? = DataListModelInternal.location
                         var category: String? = DataListModelInternal.category
                         var description: String? = DataListModelInternal.description
-                        var sellerName: String? = DataListModelInternal.seller_name
-                        var sellerEmail: String? = DataListModelInternal.seller_email
                         var bookimage: String? = DataListModelInternal.imagelink
 
                         dataListModel.add(
                             ExchangeModel(
                                 title,
                                 location,
-                                "id",
                                 category,
                                 expectedBooks,
                                 description,
-                                sellerName,
-                                sellerEmail,
-                                bookimage,
-                                true,
-                                "2"
+                                "",
+                                bookimage
                             )
                         )
                     }

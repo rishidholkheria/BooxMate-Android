@@ -54,8 +54,6 @@ class PostExchangeAdapter(private val context: Context, val DataModel: ArrayList
                 bundle.putString("booktitle", exModel.title)
                 bundle.putString("location", exModel.location)
                 bundle.putString("ctgry", exModel.category)
-                bundle.putString("sellername", exModel.seller_name)
-                bundle.putString("selleremail", exModel.seller_email)
                 bundle.putString("desc", exModel.description)
                 bundle.putString("image", exModel.imagelink)
 

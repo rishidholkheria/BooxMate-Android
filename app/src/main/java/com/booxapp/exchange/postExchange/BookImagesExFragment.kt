@@ -1,8 +1,6 @@
-package com.booxapp.sell
+package com.booxapp.exchange.postExchange
 
 import android.Manifest
-import android.R.attr.defaultValue
-import android.R.attr.key
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.ContentValues
@@ -16,7 +14,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,19 +23,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.booxapp.*
-import com.booxapp.data.Prefs
+import com.booxapp.databinding.ExbookImageFragmentBinding
 import com.booxapp.databinding.FragmentBookImagesBinding
 import com.booxapp.databinding.ProgressBinding
 import com.booxapp.model.BookModel
+import com.booxapp.model.ExchangeModel
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.ByteArrayOutputStream
 import java.io.IOException
-import java.util.ArrayList
 
-
-class BookImages : Fragment() {
+class BookImagesExFragment : Fragment() {
 
     private val PERMISSION_CODE = 1000
     private val GALLERY_REQUEST = 9
@@ -49,15 +45,15 @@ class BookImages : Fragment() {
     lateinit var dialog: Dialog
     private var storageReference: StorageReference? = null
 
-    lateinit var bookModel: BookModel
+    lateinit var exbookModel: ExchangeModel
 
-    lateinit var binding: FragmentBookImagesBinding
-    lateinit var shareData: ShareData
+    lateinit var binding: ExbookImageFragmentBinding
+    lateinit var shareData: ExShareData
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
-            shareData = activity as ShareData
+            shareData = activity as ExShareData
         } catch (e: ClassCastException) {
             throw ClassCastException("$activity must implement ShareData")
         }
@@ -67,11 +63,11 @@ class BookImages : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentBookImagesBinding.inflate(inflater, container, false)
+        binding = ExbookImageFragmentBinding.inflate(inflater, container, false)
         storageReference = FirebaseStorage.getInstance().reference
 
         val bundle = this.arguments
-        bookModel = bundle!!.getParcelable("bookModel")!!
+        exbookModel = bundle!!.getParcelable("bookModel")!!
 
         binding.selectImageBtn!!.setOnClickListener { //SelectImage();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -166,7 +162,7 @@ class BookImages : Fragment() {
                 if (filePath != null)
                     binding.confirmPost.setOnClickListener {
                         uploadFile()
-                        
+
                     }
                 Toast.makeText(requireContext(), "Image Added from Camera!", Toast.LENGTH_SHORT)
                     .show()
@@ -208,9 +204,9 @@ class BookImages : Fragment() {
             sRef.putBytes(data)
                 .addOnSuccessListener { taskSnapshot ->
                     taskSnapshot.storage.downloadUrl.addOnSuccessListener {
-                        bookModel.imagelink = it.toString()
-                        FirebaseAdapter(requireActivity()).addNewBook(
-                            bookModel,
+                        exbookModel.imagelink = it.toString()
+                        FirebaseAdapter(requireActivity()).addNewExBook(
+                            exbookModel,
                             object : onCompleteFirebase {
                                 override fun onCallback(value: Boolean) {
                                     dialog.dismiss()
