@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.booxapp.adapter.MyAdapter
+import com.booxapp.data.Prefs
 import com.booxapp.databinding.FragmentPurchaseBinding
 import com.booxapp.model.BookModel
 import com.google.firebase.database.*
@@ -38,13 +39,18 @@ class PurchaseFragment : Fragment() {
         adapter = MyAdapter(requireContext(), myDataListModel)
         binding.recyclerView!!.adapter = adapter
 
+        var uid = Prefs.getStringPrefs(
+            requireContext(),
+            "userId"
+        )
+
         mDatabase.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 myDataListModel.clear()
                 for (child in snapshot.children) {
                     child.key?.let { Log.i(TAG, it) }
                     var myDataListModelInternal = child.getValue(BookModel::class.java)
-                    if (myDataListModelInternal != null) {
+                    if (myDataListModelInternal != null && myDataListModelInternal.userId != uid) {
                         var title: String? = myDataListModelInternal.title
                         var offered_price: String? = myDataListModelInternal.offeredprice
                         var mrp: String? = myDataListModelInternal.mrp

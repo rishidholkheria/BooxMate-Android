@@ -166,7 +166,7 @@ class BookImages : Fragment() {
                 if (filePath != null)
                     binding.confirmPost.setOnClickListener {
                         uploadFile()
-                        
+
                     }
                 Toast.makeText(requireContext(), "Image Added from Camera!", Toast.LENGTH_SHORT)
                     .show()
@@ -246,6 +246,5 @@ class BookImages : Fragment() {
         val mime = MimeTypeMap.getSingleton()
         return mime.getExtensionFromMimeType(cR.getType(uri!!))
     }
-
 
 }

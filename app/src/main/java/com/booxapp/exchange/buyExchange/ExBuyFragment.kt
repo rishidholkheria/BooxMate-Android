@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.booxapp.adapter.BuyExchangeAdapter
 import com.booxapp.adapter.SellAdapter
+import com.booxapp.data.Prefs
 import com.booxapp.databinding.FragmentExBuyBinding
 import com.booxapp.databinding.FragmentExchangeBinding
 import com.booxapp.databinding.FragmentSellBinding
@@ -43,13 +44,18 @@ class ExBuyFragment : Fragment() {
         exadapter = BuyExchangeAdapter(requireContext(), dataListModel)
         binding.recyclerView!!.adapter = exadapter
 
+        var uid = Prefs.getStringPrefs(
+            requireContext(),
+            "userId"
+        )
+
         mDatabase.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 dataListModel.clear()
                 for (child in snapshot.children) {
                     child.key?.let { Log.i(TAG, it) }
                     var DataListModelInternal = child.getValue(ExchangeModel::class.java)
-                    if (DataListModelInternal != null) {
+                    if (DataListModelInternal != null && DataListModelInternal.userId != uid) {
                         var title: String? = DataListModelInternal.title
                         var expectedBooks: String? = DataListModelInternal.expectedBooks
                         var location: String? = DataListModelInternal.location
@@ -65,7 +71,8 @@ class ExBuyFragment : Fragment() {
                                 expectedBooks,
                                 description,
                                 "",
-                                bookimage
+                                bookimage,
+                                ""
                             )
                         )
                     }

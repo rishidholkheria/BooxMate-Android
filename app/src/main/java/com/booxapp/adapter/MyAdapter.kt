@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.booxapp.BookDetails
 import com.booxapp.R
 import com.booxapp.SellBookDetails
+import com.booxapp.data.Prefs
 import com.booxapp.databinding.FragmentPurchaseBinding
 import com.booxapp.databinding.FragmentSellBinding
 import com.booxapp.databinding.OneRowBinding
@@ -71,7 +72,6 @@ class MyAdapter(private val context: Context, val myDataModel: ArrayList<BookMod
                 bundle.putString("desc", bookModel.description)
                 bundle.putString("image", bookModel.imagelink)
 
-//                Toast.makeText(context,bookModel.title, Toast.LENGTH_SHORT).show()
                 var intent = Intent(context, SellBookDetails::class.java)
                 intent.putExtras(bundle)
                 context.startActivity(intent)

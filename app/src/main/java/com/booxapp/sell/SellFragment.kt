@@ -32,6 +32,11 @@ class SellFragment : Fragment() {
     ): View? {
         binding = FragmentSellBinding.inflate(inflater, container, false)
 
+        var uid = Prefs.getStringPrefs(
+            requireContext(),
+            "userId"
+        )
+
         var myDataListModel: ArrayList<BookModel> = ArrayList()
         mDatabase = FirebaseDatabase.getInstance().getReference("books")
 
@@ -57,7 +62,8 @@ class SellFragment : Fragment() {
                 for (child in snapshot.children) {
                     child.key?.let { Log.i(TAG, it) }
                     var myDataListModelInternal = child.getValue(BookModel::class.java)
-                    if (myDataListModelInternal != null) {
+
+                    if (myDataListModelInternal != null && myDataListModelInternal.userId == uid) {
                         var title: String? = myDataListModelInternal.title
                         var offered_price: String? = myDataListModelInternal.offeredprice
                         var mrp: String? = myDataListModelInternal.mrp

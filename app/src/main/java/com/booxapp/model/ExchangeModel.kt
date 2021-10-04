@@ -13,6 +13,7 @@ class ExchangeModel : Parcelable {
     var imagelink: String? = null
     var bookmark: Boolean? = null
     var exchangeRequests: String? = null
+    var userId: String? = null
 
     constructor() {}
 
@@ -23,7 +24,8 @@ class ExchangeModel : Parcelable {
         expectedBooks: String?,
         description: String?,
         id: String?,
-        imagelink: String?
+        imagelink: String?,
+        userId: String?
     ) {
         this.title = title
         this.location = location
@@ -32,6 +34,7 @@ class ExchangeModel : Parcelable {
         this.description = description
         this.imagelink = imagelink
         this.id = id
+        this.userId = userId
 
     }
 
