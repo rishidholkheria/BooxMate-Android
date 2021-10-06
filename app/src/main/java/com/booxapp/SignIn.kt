@@ -4,18 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import com.booxapp.SignIn
 import com.booxapp.data.Prefs
 import com.booxapp.databinding.ActivitySignInBinding
-import com.booxapp.databinding.MainActivityBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.auth.FirebaseUser
 
 
 class SignIn : AppCompatActivity() {
@@ -71,6 +65,12 @@ class SignIn : AppCompatActivity() {
             val i = Intent(this@SignIn, SignUp::class.java)
             startActivity(i)
         })
+
+        binding.forgetPasswordPage!!.setOnClickListener(View.OnClickListener {
+            val i = Intent(this@SignIn, ForgetPassword::class.java)
+            startActivity(i)
+        })
+
     }
 
     private fun storeAuthId() {

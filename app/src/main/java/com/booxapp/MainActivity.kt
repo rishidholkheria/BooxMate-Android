@@ -1,7 +1,9 @@
 package com.booxapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.booxapp.adapter.ViewPagerAdapter
@@ -30,7 +32,14 @@ class MainActivity : AppCompatActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.menuIcon!!.setOnClickListener {}
+
+
+        binding.logoutBtn!!.setOnClickListener {
+            mFirebaseAuth.signOut()
+            val i = Intent(this, SignIn::class.java)
+            startActivity(i)
+            Toast.makeText(this@MainActivity, "Logged Out Successfully!", Toast.LENGTH_LONG).show()
+        }
 
         setupViewPager(binding.myViewPager)
         binding.tablayout!!.setupWithViewPager(binding.myViewPager)
@@ -52,13 +61,6 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-//    private fun sendToFirebase(current_user: UserModel) {
-//        val userid = FirebaseDatabase.getInstance().getReference("users").push().key.toString()
-//        val id = FirebaseAuth.getInstance().currentUser!!.uid
-//        current_user.id = id
-//        val user_ref = FirebaseDatabase.getInstance().getReference("users").child(userid)
-//        user_ref.setValue(current_user)
-//    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
