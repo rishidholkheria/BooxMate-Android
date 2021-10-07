@@ -78,7 +78,7 @@ class SellFragment : Fragment() {
                                 location,
                                 mrp,
                                 "₹ " + offered_price,
-                                "id",
+//                                "id",
                                 category,
                                 true,
                                 description,

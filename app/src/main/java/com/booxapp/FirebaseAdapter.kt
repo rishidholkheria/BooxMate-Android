@@ -6,8 +6,11 @@ import com.booxapp.data.Prefs
 import com.booxapp.model.BookModel
 import com.booxapp.model.ExchangeModel
 import com.booxapp.model.UserModel
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import kotlin.math.log
+
 
 class FirebaseAdapter(var context: Context) {
 
@@ -22,10 +25,13 @@ class FirebaseAdapter(var context: Context) {
     var uDatabase: DatabaseReference =
         FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
 
+    var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+
     var uid = Prefs.getStringPrefs(
         context,
         "userId"
     )
+    var myKey = "";
 
     fun addNewBook(bookModel: BookModel, onCompleteListener: onCompleteFirebase) {
         var id: String? = mDatabase.child("books").push().key
@@ -41,6 +47,8 @@ class FirebaseAdapter(var context: Context) {
                 }
             })
     }
+
+
 
     fun addNewExBook(bookModel: ExchangeModel, onCompleteListener: onCompleteFirebase) {
         var id: String? = eDatabase.child("exchangeBooks").push().key
@@ -58,17 +66,57 @@ class FirebaseAdapter(var context: Context) {
     }
 
     fun addBookmark(userModel: UserModel, onCompleteListener: onCompleteFirebase) {
-        var id: String? = uDatabase.child("users").child("bookmarkedBooks").push().key
-        userModel.id = id
-        uDatabase.child(id!!)
-            .setValue(userModel, DatabaseReference.CompletionListener { error, ref ->
-                if (error == null) {
-                    onCompleteListener.onCallback(true)
-                } else {
-                    Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
-                    onCompleteListener.onCallback(false)
-                }
-            })
-    }
+        var id: String? = uDatabase.child("users").push().key
 
-}
+//        uDatabase.child("users").child("id").equalTo(uid).addListenerForSingleValueEvent(object: ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                dataSnapshot.children.forEach {
+//                    key= it.key.toString()
+//                    Log.i(TAG,"keyyyyyyyyyy: "+key)
+//                }
+//            }
+//            override fun onCancelled(p0: DatabaseError) {
+//                //do whatever you need
+//            }
+//        })
+
+//logging all ids
+        val database_listener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (ds in dataSnapshot.children) {
+                    myKey = ds.key.toString()
+                    if (uDatabase.child("users").child(myKey!!).child("id").equals(uid)){
+                        uDatabase.child("users").child(myKey!!).child("bookmarkedBooks")
+                                .setValue(userModel, DatabaseReference.CompletionListener { error, ref ->
+                                    if (error == null) {
+                                        onCompleteListener.onCallback(true)
+                                    } else {
+                                        Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
+                                        onCompleteListener.onCallback(false)
+                                    }
+                                })
+                    }
+                    Log.e(TAG, "idddddddddddddddd" + myKey)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        }
+        uDatabase.addValueEventListener(database_listener)
+
+
+
+
+//            uDatabase.child("users").child(myKey!!).child("bookmarkedBooks")
+//                    .setValue(userModel, DatabaseReference.CompletionListener { error, ref ->
+//                        if (error == null) {
+//                            onCompleteListener.onCallback(true)
+//                        } else {
+//                            Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
+//                            onCompleteListener.onCallback(false)
+//                        }
+//                    })
+        }
+    }
