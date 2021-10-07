@@ -5,4 +5,5 @@ object Constants {
     var profilePictureOptions = arrayOf("Gallery", "Camera")
     const val DB_NAME = "books"
     const val EX_DB_NAME = "exchangeBooks"
+    const val USER_DB_NAME = "users"
 }

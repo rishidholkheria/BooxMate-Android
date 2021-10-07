@@ -1,5 +1,6 @@
 package com.booxapp
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -10,17 +11,27 @@ import androidx.appcompat.app.AppCompatActivity
 import com.booxapp.databinding.ActivityBookDetailsBinding
 import com.booxapp.databinding.SellBookDetailsBinding
 import com.booxapp.model.BookModel
+import com.booxapp.model.UserModel
 import com.bumptech.glide.Glide
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class SellBookDetails : AppCompatActivity() {
 
+    lateinit var bookmarkModel: UserModel
+    lateinit var dialog: Dialog
+
     lateinit var binding: ActivityBookDetailsBinding
     lateinit var singleBookData: BookModel
+
+    var ref: DatabaseReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBookDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        ref = FirebaseDatabase.getInstance().reference
 
         val bundle = intent.extras
         binding.bookName.text = bundle!!.getString("booktitle", "Book Title")
@@ -34,15 +45,23 @@ class SellBookDetails : AppCompatActivity() {
             .load(bundle!!.getString("image", "No Image"))
             .into(binding.bookImage);
 
-//        binding.bookOfferedPrice.text = singleBookData.offeredprice
-//        binding.bookCtgry.text = singleBookData.category
-//        binding.bookLoc.text = singleBookData.location
-//        binding.bookMrp.text = singleBookData.mrp
-//        binding.bookOp.text = singleBookData.offeredprice
-//        binding.bookDesc.text = singleBookData.description
+        var bId = bundle!!.getString("bookid")
+        var title = bundle!!.getString("booktitle")
+        Toast.makeText(applicationContext, bId, Toast.LENGTH_LONG).show()
+        Toast.makeText(applicationContext, title, Toast.LENGTH_LONG).show()
+        UserModel(bId)
 
-//        binding.bookSellerName.text = sellername
-//        binding.bookSellerEmail.text = selleremail
-//        Toast.makeText(applicationContext, book_title, Toast.LENGTH_SHORT).show()
+
+        binding.bookmark.setOnClickListener(View.OnClickListener {
+            Toast.makeText(applicationContext, bId, Toast.LENGTH_LONG).show()
+            FirebaseAdapter(applicationContext).addBookmark( bookmarkModel,
+                object : onCompleteFirebase {
+                    override fun onCallback(value: Boolean) {
+                        dialog.dismiss()
+                        Toast.makeText(applicationContext, "Done", Toast.LENGTH_LONG).show()
+                    }
+                })
+        })
+
     }
 }

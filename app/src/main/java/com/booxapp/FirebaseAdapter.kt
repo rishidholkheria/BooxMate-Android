@@ -5,6 +5,7 @@ import android.util.Log
 import com.booxapp.data.Prefs
 import com.booxapp.model.BookModel
 import com.booxapp.model.ExchangeModel
+import com.booxapp.model.UserModel
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
@@ -17,6 +18,9 @@ class FirebaseAdapter(var context: Context) {
 
     var eDatabase: DatabaseReference =
         FirebaseDatabase.getInstance().getReference(Constants.EX_DB_NAME)
+
+    var uDatabase: DatabaseReference =
+        FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
 
     var uid = Prefs.getStringPrefs(
         context,
@@ -44,6 +48,20 @@ class FirebaseAdapter(var context: Context) {
         bookModel.id = id
         eDatabase.child(id!!)
             .setValue(bookModel, DatabaseReference.CompletionListener { error, ref ->
+                if (error == null) {
+                    onCompleteListener.onCallback(true)
+                } else {
+                    Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
+                    onCompleteListener.onCallback(false)
+                }
+            })
+    }
+
+    fun addBookmark(userModel: UserModel, onCompleteListener: onCompleteFirebase) {
+        var id: String? = uDatabase.child("users").child("bookmarkedBooks").push().key
+        userModel.id = id
+        uDatabase.child(id!!)
+            .setValue(userModel, DatabaseReference.CompletionListener { error, ref ->
                 if (error == null) {
                     onCompleteListener.onCallback(true)
                 } else {

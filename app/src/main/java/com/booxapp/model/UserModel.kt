@@ -7,21 +7,12 @@ class UserModel {
     var phone: String? = null
     var email: String? = null
     var password: String? = null
+    var bookmarkedBooks: String? = null
 
     constructor(
-        id: String?,
-        name: String?,
-        loc: String?,
-        phone: String?,
-        email: String?,
-        password: String?
+        bookmarkedBooks: String?
     ) {
-        this.id = id
-        this.name = name
-        this.loc = loc
-        this.phone = phone
-        this.email = email
-        this.password = password
+        this.bookmarkedBooks = bookmarkedBooks
     }
 
     constructor() {}

@@ -34,26 +34,6 @@ class BookDetails : AppCompatActivity() {
         val c = intent.getStringExtra("bctgry")
         current_bookid = intent.getStringExtra("book_id")
         Glide.with(this).load(b).into(img)
-//        t.text = a
-//        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-//        mTextViewState = findViewById(R.id.text_view_state)
-//        mBottomSheetBehavior!!.setBottomSheetCallback(object : BottomSheetCallback() {
-//            override fun onStateChanged(bottomSheet: View, newState: Int) {
-//                when (newState) {
-//                    BottomSheetBehavior.STATE_COLLAPSED -> mTextViewState!!.setText("Collapsed")
-//                    BottomSheetBehavior.STATE_EXPANDED -> mTextViewState!!.setText("Confirm Order?")
-//                    BottomSheetBehavior.STATE_HIDDEN -> mTextViewState!!.setText("Hidden")
-//                }
-//            }
 
-//            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-//                mTextViewState!!.setText("What Do You Think")
-//            }
-//        })
-//        purchase_request.setOnClickListener { mBottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_EXPANDED) }
-//        findViewById<View>(R.id.btn).setOnClickListener { //Toast.makeText(getApplicationContext(), "hkwjenwj",Toast.LENGTH_LONG).show();
-//            request_refrence = FirebaseDatabase.getInstance().getReference("PurchaseRequest/" + current_bookid + "/" + user!!.uid)
-//            request_refrence!!.setValue(true)
-//        }
     }
 }

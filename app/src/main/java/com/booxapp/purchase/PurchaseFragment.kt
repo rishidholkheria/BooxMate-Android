@@ -65,7 +65,6 @@ class PurchaseFragment : Fragment() {
                                 location,
                                 mrp,
                                 "₹ " + offered_price,
-                                "id",
                                 category,
                                 true,
                                 description,

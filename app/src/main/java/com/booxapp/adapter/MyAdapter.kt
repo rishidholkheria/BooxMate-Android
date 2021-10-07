@@ -71,6 +71,7 @@ class MyAdapter(private val context: Context, val myDataModel: ArrayList<BookMod
                 bundle.putString("ctgry", bookModel.category)
                 bundle.putString("desc", bookModel.description)
                 bundle.putString("image", bookModel.imagelink)
+                bundle.putString("bookid", bookModel.id)
 
                 var intent = Intent(context, SellBookDetails::class.java)
                 intent.putExtras(bundle)

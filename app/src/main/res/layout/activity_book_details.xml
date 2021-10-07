@@ -40,6 +40,7 @@
             <!--                android:layout_below="@+id/book_details_head"-->
 
             <RelativeLayout
+                android:id="@+id/bookmark"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignParentEnd="true"

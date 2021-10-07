@@ -11,8 +11,6 @@ import com.google.firebase.auth.FirebaseAuth
 class ForgetPassword : AppCompatActivity() {
 
     var mFirebaseAuth: FirebaseAuth? = null
-
-
     lateinit var binding: ActivityForgetPasswordBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
