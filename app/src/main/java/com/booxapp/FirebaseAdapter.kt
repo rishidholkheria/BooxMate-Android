@@ -49,7 +49,6 @@ class FirebaseAdapter(var context: Context) {
     }
 
 
-
     fun addNewExBook(bookModel: ExchangeModel, onCompleteListener: onCompleteFirebase) {
         var id: String? = eDatabase.child("exchangeBooks").push().key
         bookModel.userId = uid
@@ -85,9 +84,11 @@ class FirebaseAdapter(var context: Context) {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (ds in dataSnapshot.children) {
                     myKey = ds.key.toString()
-                    if (uDatabase.child("users").child(myKey!!).child("id").equals(uid)){
+                    if (uDatabase.child("users").child(myKey!!).child("id").equals(uid)) {
                         uDatabase.child("users").child(myKey!!).child("bookmarkedBooks")
-                                .setValue(userModel, DatabaseReference.CompletionListener { error, ref ->
+                            .setValue(
+                                userModel,
+                                DatabaseReference.CompletionListener { error, ref ->
                                     if (error == null) {
                                         onCompleteListener.onCallback(true)
                                     } else {
@@ -107,8 +108,6 @@ class FirebaseAdapter(var context: Context) {
         uDatabase.addValueEventListener(database_listener)
 
 
-
-
 //            uDatabase.child("users").child(myKey!!).child("bookmarkedBooks")
 //                    .setValue(userModel, DatabaseReference.CompletionListener { error, ref ->
 //                        if (error == null) {
@@ -118,5 +117,5 @@ class FirebaseAdapter(var context: Context) {
 //                            onCompleteListener.onCallback(false)
 //                        }
 //                    })
-        }
     }
+}

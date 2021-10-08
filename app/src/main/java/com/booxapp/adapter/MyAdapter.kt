@@ -3,6 +3,7 @@ package com.booxapp.adapter
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,14 +65,14 @@ class MyAdapter(private val context: Context, val myDataModel: ArrayList<BookMod
 
             binding.root.setOnClickListener(View.OnClickListener {
                 val bundle = Bundle()
-                bundle.putString("booktitle", bookModel.title)
-                bundle.putString("oprice", bookModel.offeredprice)
-                bundle.putString("mrp", bookModel.mrp)
-                bundle.putString("location", bookModel.location)
-                bundle.putString("ctgry", bookModel.category)
-                bundle.putString("desc", bookModel.description)
-                bundle.putString("image", bookModel.imagelink)
-                bundle.putString("bookid", bookModel.id)
+                bundle.putString("booktitle", bookModel.title!!)
+                bundle.putString("oprice", bookModel.offeredprice!!)
+                bundle.putString("mrp", bookModel.mrp!!)
+                bundle.putString("location", bookModel.location!!)
+                bundle.putString("ctgry", bookModel.category!!)
+                bundle.putString("desc", bookModel.description!!)
+                bundle.putString("image", bookModel.imagelink!!)
+                bundle.putString("bookid", bookModel.id!!)
 
                 var intent = Intent(context, SellBookDetails::class.java)
                 intent.putExtras(bundle)

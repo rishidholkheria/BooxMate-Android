@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
@@ -46,6 +47,7 @@ class SellBookDetails : AppCompatActivity() {
             .into(binding.bookImage);
 
         var bId = bundle!!.getString("bookid")
+        Log.e("userrrrrrrr", bId!!)
         var title = bundle!!.getString("booktitle")
         Toast.makeText(applicationContext, bId, Toast.LENGTH_LONG).show()
         Toast.makeText(applicationContext, title, Toast.LENGTH_LONG).show()
@@ -53,7 +55,6 @@ class SellBookDetails : AppCompatActivity() {
 
 
         binding.bookmark.setOnClickListener(View.OnClickListener {
-            Toast.makeText(applicationContext, bId, Toast.LENGTH_LONG).show()
             FirebaseAdapter(applicationContext).addBookmark( UserModel(bId),
                 object : onCompleteFirebase {
                     override fun onCallback(value: Boolean) {
