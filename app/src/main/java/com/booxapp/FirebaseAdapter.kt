@@ -2,6 +2,7 @@ package com.booxapp
 
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import com.booxapp.data.Prefs
 import com.booxapp.model.BookModel
 import com.booxapp.model.ExchangeModel
@@ -31,7 +32,10 @@ class FirebaseAdapter(var context: Context) {
         context,
         "userId"
     )
-    var myKey = "";
+    var id = Prefs.getStringPrefs(
+            context,
+            "Id"
+    )
 
     fun addNewBook(bookModel: BookModel, onCompleteListener: onCompleteFirebase) {
         var id: String? = mDatabase.child("books").push().key
@@ -66,55 +70,46 @@ class FirebaseAdapter(var context: Context) {
 
     fun addBookmark(userModel: UserModel, onCompleteListener: onCompleteFirebase) {
 
-//        uDatabase.child("users").child("id").equalTo(uid).addListenerForSingleValueEvent(object: ValueEventListener {
+        uDatabase.child(id!!).child("bookmarkedBooks")
+                .setValue(userModel, DatabaseReference.CompletionListener { error, ref ->
+                    if (error == null) {
+                        onCompleteListener.onCallback(true)
+
+                    } else {
+                        Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
+                        onCompleteListener.onCallback(false)
+                    }
+                })
+
+
+
+//logging all ids
+//        uDatabase.addValueEventListener(object : ValueEventListener {
 //            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                dataSnapshot.children.forEach {
-//                    key= it.key.toString()
-//                    Log.i(TAG,"keyyyyyyyyyy: "+key)
+//                for (ds in dataSnapshot.children) {
+//                    myKey = ds.key.toString()
+//                    Log.e(TAG, "id" + myKey)
+//                    Log.e(TAG, "uid" + uid)
+//                    /*if (uDatabase.child("users").child(myKey!!).child("id").equals(uid)) {
+//                        uDatabase.child("users").child(myKey!!).child("bookmarkedBooks")
+//                            .setValue(
+//                                userModel,
+//                                DatabaseReference.CompletionListener { error, ref ->
+//                                    if (error == null) {
+//                                        onCompleteListener.onCallback(true)
+//                                    } else {
+//                                        Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
+//                                        onCompleteListener.onCallback(false)
+//                                    }
+//                                })
+//                    }*/
 //                }
 //            }
-//            override fun onCancelled(p0: DatabaseError) {
-//                //do whatever you need
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                TODO("Not yet implemented")
 //            }
 //        })
 
-//logging all ids
-        uDatabase.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (ds in dataSnapshot.children) {
-                    myKey = ds.key.toString()
-                    Log.e(TAG, "id" + myKey)
-                    Log.e(TAG, "uid" + uid)
-                    /*if (uDatabase.child("users").child(myKey!!).child("id").equals(uid)) {
-                        uDatabase.child("users").child(myKey!!).child("bookmarkedBooks")
-                            .setValue(
-                                userModel,
-                                DatabaseReference.CompletionListener { error, ref ->
-                                    if (error == null) {
-                                        onCompleteListener.onCallback(true)
-                                    } else {
-                                        Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
-                                        onCompleteListener.onCallback(false)
-                                    }
-                                })
-                    }*/
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        })
-
-
-//            uDatabase.child("users").child(myKey!!).child("bookmarkedBooks")
-//                    .setValue(userModel, DatabaseReference.CompletionListener { error, ref ->
-//                        if (error == null) {
-//                            onCompleteListener.onCallback(true)
-//                        } else {
-//                            Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
-//                            onCompleteListener.onCallback(false)
-//                        }
-//                    })
     }
 }

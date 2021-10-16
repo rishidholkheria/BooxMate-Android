@@ -21,7 +21,7 @@ class SignIn : AppCompatActivity() {
     var mDatabase: DatabaseReference =
         FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
 
-    lateinit var myKey: String
+    var myKey: String?=null
 
     lateinit var binding: ActivitySignInBinding
 
@@ -92,27 +92,36 @@ class SignIn : AppCompatActivity() {
             userId
         )
 
-        mDatabase.addValueEventListener(object : ValueEventListener {
+//        mDatabase.addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                for (i in dataSnapshot.children) {
+//                    for (j in i.children) {
+//                        if (j.child("userId").equals(userId)) {
+//                            Toast.makeText(applicationContext, j.key, Toast.LENGTH_LONG).show()
+//                            myKey = j.key!!
+//                            Log.e("keyyyyyyyyy", j.key!!)
+//                            Log.e("keyyyyyyyyy", myKey!!)
+//                        }
+//                    }
+//                }
+//            }
+
+        mDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (i in dataSnapshot.children) {
-                    for (j in i.children) {
-                        if (j.child("userId").equals(userId)) {
-                            Prefs.putStringPrefs(
-                                applicationContext,
-                                "Id",
-                                j.key
-                            )
-                            Log.e("keyyyyyyyyy", j.key!!)
-                            Toast.makeText(applicationContext, j.key, Toast.LENGTH_LONG).show()
-                        }
-                    }
-                }
+                myKey = dataSnapshot.children.iterator().next().key!!
+                Log.e("keyyyyyyyyy", myKey!!)
             }
 
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
         })
+
+        Prefs.putStringPrefs(
+                applicationContext,
+                "Id",
+                myKey
+        )
 
     }
 
