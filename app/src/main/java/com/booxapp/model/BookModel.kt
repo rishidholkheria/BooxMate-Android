@@ -22,6 +22,7 @@ class BookModel : Parcelable {
         title: String?,
         location: String?,
         mrp: String?,
+        id: String?,
         offeredprice: String?,
         category: String?,
         bookmark: Boolean?,
@@ -32,6 +33,7 @@ class BookModel : Parcelable {
         this.title = title
         this.location = location
         this.mrp = mrp
+        this.id = id
         this.offeredprice = offeredprice
         this.category = category
         this.bookmark = bookmark

@@ -71,19 +71,21 @@ class SellFragment : Fragment() {
                         var category: String? = myDataListModelInternal.mrp
                         var description: String? = myDataListModelInternal.description
                         var bookimage: String? = myDataListModelInternal.imagelink
+                        var id: String? = myDataListModelInternal.id
+                        var userId: String? = myDataListModelInternal.userId
 
                         myDataListModel.add(
                             BookModel(
                                 title,
                                 location,
                                 mrp,
+                                id,
                                 "₹ " + offered_price,
-//                                "id",
                                 category,
                                 true,
                                 description,
                                 bookimage,
-                                ""
+                                userId
                             )
                         )
                     }

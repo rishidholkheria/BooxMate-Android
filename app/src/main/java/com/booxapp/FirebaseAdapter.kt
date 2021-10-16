@@ -65,7 +65,6 @@ class FirebaseAdapter(var context: Context) {
     }
 
     fun addBookmark(userModel: UserModel, onCompleteListener: onCompleteFirebase) {
-        var id: String? = uDatabase.child("users").push().key
 
 //        uDatabase.child("users").child("id").equalTo(uid).addListenerForSingleValueEvent(object: ValueEventListener {
 //            override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -80,11 +79,13 @@ class FirebaseAdapter(var context: Context) {
 //        })
 
 //logging all ids
-        val database_listener = object : ValueEventListener {
+        uDatabase.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (ds in dataSnapshot.children) {
                     myKey = ds.key.toString()
-                    if (uDatabase.child("users").child(myKey!!).child("id").equals(uid)) {
+                    Log.e(TAG, "id" + myKey)
+                    Log.e(TAG, "uid" + uid)
+                    /*if (uDatabase.child("users").child(myKey!!).child("id").equals(uid)) {
                         uDatabase.child("users").child(myKey!!).child("bookmarkedBooks")
                             .setValue(
                                 userModel,
@@ -96,16 +97,14 @@ class FirebaseAdapter(var context: Context) {
                                         onCompleteListener.onCallback(false)
                                     }
                                 })
-                    }
-                    Log.e(TAG, "idddddddddddddddd" + myKey)
+                    }*/
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
-        }
-        uDatabase.addValueEventListener(database_listener)
+        })
 
 
 //            uDatabase.child("users").child(myKey!!).child("bookmarkedBooks")

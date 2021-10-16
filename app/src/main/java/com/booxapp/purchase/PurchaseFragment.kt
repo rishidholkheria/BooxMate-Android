@@ -54,22 +54,25 @@ class PurchaseFragment : Fragment() {
                         var title: String? = myDataListModelInternal.title
                         var offered_price: String? = myDataListModelInternal.offeredprice
                         var mrp: String? = myDataListModelInternal.mrp
+                        var id: String? = myDataListModelInternal.id
                         var location: String? = myDataListModelInternal.location
                         var category: String? = myDataListModelInternal.category
                         var description: String? = myDataListModelInternal.description
                         var bookimage: String? = myDataListModelInternal.imagelink
+                        var userid: String? = myDataListModelInternal.userId
 
                         myDataListModel.add(
                             BookModel(
                                 title,
                                 location,
                                 mrp,
-                                "₹ " + offered_price,
+                                id,
+                                offered_price,
                                 category,
                                 true,
                                 description,
                                 bookimage,
-                                ""
+                                userid
                             )
                         )
                     }

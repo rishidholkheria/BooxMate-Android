@@ -32,8 +32,6 @@ class SellBookDetails : AppCompatActivity() {
         binding = ActivityBookDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        ref = FirebaseDatabase.getInstance().reference
-
         val bundle = intent.extras
         binding.bookName.text = bundle!!.getString("booktitle", "Book Title")
         binding.bookOfferedPrice.text = bundle!!.getString("oprice", "Rs ")

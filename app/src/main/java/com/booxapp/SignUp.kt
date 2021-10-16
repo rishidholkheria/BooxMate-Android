@@ -108,12 +108,13 @@ class SignUp : AppCompatActivity() {
     }
 
     private fun sendToFirebase(current_user: UserModel) {
-        val userid =
+        val id =
             FirebaseDatabase.getInstance().getReference("users")
                 .push().key.toString() //Firebase Id
-        val id = FirebaseAuth.getInstance().currentUser!!.uid   //Firebase-Auth-id
+        val uid = FirebaseAuth.getInstance().currentUser!!.uid   //Firebase-Auth-id
+        current_user.userId = uid
         current_user.id = id
-        val user_ref = FirebaseDatabase.getInstance().getReference("users").child(userid)
+        val user_ref = FirebaseDatabase.getInstance().getReference("users").child(id)
         user_ref.setValue(current_user)
     }
 

@@ -31,7 +31,7 @@ import kotlin.collections.ArrayList
 class MyAdapter(private val context: Context, val myDataModel: ArrayList<BookModel>) :
     RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 
-    private var firebaseUser = FirebaseAuth.getInstance().currentUser
+//    private var firebaseUser = FirebaseAuth.getInstance().currentUser
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -82,21 +82,21 @@ class MyAdapter(private val context: Context, val myDataModel: ArrayList<BookMod
     }
 
 
-    private fun isSaved(bookID: String, imageView: ImageView) {
-        val reference =
-            FirebaseDatabase.getInstance().reference.child("Bookmarked").child(firebaseUser!!.uid)
-        reference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.child(bookID).exists()) {
-                    imageView.setImageResource(R.drawable.ic_selectedbookmark)
-                    imageView.tag = "bookmarked"
-                } else {
-                    imageView.setImageResource(R.drawable.ic_bookmark)
-                    imageView.tag = "bookmark"
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
-    }
+//    private fun isSaved(bookID: String, imageView: ImageView) {
+//        val reference =
+//            FirebaseDatabase.getInstance().reference.child("Bookmarked").child(firebaseUser!!.uid)
+//        reference.addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                if (snapshot.child(bookID).exists()) {
+//                    imageView.setImageResource(R.drawable.ic_selectedbookmark)
+//                    imageView.tag = "bookmarked"
+//                } else {
+//                    imageView.setImageResource(R.drawable.ic_bookmark)
+//                    imageView.tag = "bookmark"
+//                }
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {}
+//        })
+//    }
 }

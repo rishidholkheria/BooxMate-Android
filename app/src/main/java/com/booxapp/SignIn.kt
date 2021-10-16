@@ -10,6 +10,7 @@ import com.booxapp.data.Prefs
 import com.booxapp.databinding.ActivitySignInBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
+import com.google.firebase.database.*
 
 
 class SignIn : AppCompatActivity() {
@@ -17,6 +18,10 @@ class SignIn : AppCompatActivity() {
     var mFirebaseAuth: FirebaseAuth? = null
     private val mAuthStateListener: AuthStateListener? = null
 
+    var mDatabase: DatabaseReference =
+        FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
+
+    lateinit var myKey: String
 
     lateinit var binding: ActivitySignInBinding
 
@@ -80,12 +85,35 @@ class SignIn : AppCompatActivity() {
             return;
         }
         val userId = user!!.uid
+
         Prefs.putStringPrefs(
             applicationContext,
             "userId",
             userId
         )
-        Log.e("userrrrrrrrrrrrrrrrrr", userId)
+
+        mDatabase.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (i in dataSnapshot.children) {
+                    for (j in i.children) {
+                        if (j.child("userId").equals(userId)) {
+                            Prefs.putStringPrefs(
+                                applicationContext,
+                                "Id",
+                                j.key
+                            )
+                            Log.e("keyyyyyyyyy", j.key!!)
+                            Toast.makeText(applicationContext, j.key, Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+
     }
 
 }
