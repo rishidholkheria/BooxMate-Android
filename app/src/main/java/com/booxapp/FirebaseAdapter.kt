@@ -88,7 +88,7 @@ class FirebaseAdapter {
                 for (ds in dataSnapshot.children) {
                     Log.i("Pref Id", "" + tid)
                     Log.i("Child Id", "" + ds.key.toString())
-                    if (ds.key.toString().equals("Mm9TWKDM8zjmQtDvyt_")) {
+                    if (ds.key.toString().equals(uid)) {
                         uDatabase.child(tid!!).child("bookmarkedBooks")
                             .setValue(
                                 userModel,

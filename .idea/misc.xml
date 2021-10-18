@@ -4,6 +4,20 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_book_details.xml" value="0.23958333333333334" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_main.xml" value="0.35104166666666664" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_order_succesfull.xml" value="0.35104166666666664" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/fragment_rent_sell_books.xml" value="0.35104166666666664" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/fragment_sell.xml" value="0.35104166666666664" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/main_container.xml" value="0.35104166666666664" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/menu_spinner_row.xml" value="0.35104166666666664" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/one_row.xml" value="0.35104166666666664" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/past_order.xml" value="0.35104166666666664" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/progress.xml" value="0.35104166666666664" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/purchase_cart_layout.xml" value="0.35104166666666664" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/purchase_details.xml" value="0.35104166666666664" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/purchase_request_layout.xml" value="0.35104166666666664" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/rent_purchase_layout.xml" value="0.35104166666666664" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/sell_book_details.xml" value="0.35104166666666664" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/drawable/annotation.xml" value="0.22870370370370371" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/drawable/button_bg.xml" value="0.2324074074074074" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/drawable/cancel_btn.xml" value="0.2324074074074074" />
