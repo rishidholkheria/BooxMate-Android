@@ -13,29 +13,42 @@ import com.google.firebase.database.DataSnapshot
 import kotlin.math.log
 
 
-class FirebaseAdapter(var context: Context) {
+class FirebaseAdapter {
 
     private val TAG = "FirebaseAdapter"
 
-    var mDatabase: DatabaseReference =
-        FirebaseDatabase.getInstance().getReference(Constants.DB_NAME)
+    private var context: Context
 
-    var eDatabase: DatabaseReference =
-        FirebaseDatabase.getInstance().getReference(Constants.EX_DB_NAME)
+    var mDatabase: DatabaseReference
 
-    var uDatabase: DatabaseReference =
-        FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
+    var eDatabase: DatabaseReference
+
+    var uDatabase: DatabaseReference
 
     var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
-    var uid = Prefs.getStringPrefs(
-        context,
-        "userId"
-    )
-    var tid = Prefs.getStringPrefs(
-        context,
-        "Id"
-    )
+    var uid = ""
+    var tid = ""
+
+
+    constructor(context: Context) {
+
+        this.context = context
+        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DB_NAME)
+        eDatabase = FirebaseDatabase.getInstance().getReference(Constants.EX_DB_NAME)
+        uDatabase = FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
+
+        uid = Prefs.getStringPrefs(
+            context,
+            "userId"
+        ).toString()
+
+        tid = Prefs.getStringPrefs(
+            context,
+            "Id"
+        ).toString()
+
+    }
 
     fun addNewBook(bookModel: BookModel, onCompleteListener: onCompleteFirebase) {
         var id: String? = mDatabase.child("books").push().key
@@ -73,19 +86,22 @@ class FirebaseAdapter(var context: Context) {
         uDatabase.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (ds in dataSnapshot.children) {
-                   if(ds.key.equals(tid!!))
-                   {
-                       uDatabase.child(ds.key.toString()).child("bookmarkedBooks").setValue(userModel, DatabaseReference.CompletionListener { error, ref ->
-                           if (error == null) {
-                               onCompleteListener.onCallback(true)
+                    Log.i("Pref Id", "" + tid)
+                    Log.i("Child Id", "" + ds.key.toString())
+                    if (ds.key.toString().equals("Mm9TWKDM8zjmQtDvyt_")) {
+                        uDatabase.child(tid!!).child("bookmarkedBooks")
+                            .setValue(
+                                userModel,
+                                DatabaseReference.CompletionListener { error, ref ->
+                                    if (error == null) {
+                                        onCompleteListener.onCallback(true)
 
-                           } else {
-                               Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
-                               onCompleteListener.onCallback(false)
-                           }
-                       })
-                   }
-
+                                    } else {
+                                        Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
+                                        onCompleteListener.onCallback(false)
+                                    }
+                                })
+                    }
 
                 }
             }

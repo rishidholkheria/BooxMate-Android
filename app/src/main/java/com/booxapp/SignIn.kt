@@ -110,6 +110,11 @@ class SignIn : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 myKey = dataSnapshot.children.iterator().next().key!!
                 Log.e("keyyyyyyyyy", myKey!!)
+                Prefs.putStringPrefs(
+                    applicationContext,
+                    "Id",
+                    myKey
+                )
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -117,11 +122,7 @@ class SignIn : AppCompatActivity() {
             }
         })
 
-        Prefs.putStringPrefs(
-                applicationContext,
-                "Id",
-                myKey
-        )
+
 
     }
 
