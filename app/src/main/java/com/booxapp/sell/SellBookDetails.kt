@@ -26,6 +26,7 @@ class SellBookDetails : AppCompatActivity() {
     lateinit var singleBookData: BookModel
 
     var ref: DatabaseReference? = null
+    var bookmarkedBook: MutableList<String> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,9 +52,10 @@ class SellBookDetails : AppCompatActivity() {
         Toast.makeText(applicationContext, title, Toast.LENGTH_LONG).show()
 //        UserModel(bId)
 
+        bookmarkedBook.add(bId)
 
         binding.bookmark.setOnClickListener(View.OnClickListener {
-            FirebaseAdapter(applicationContext).addBookmark( UserModel(bId),
+            FirebaseAdapter(applicationContext).addBookmark( UserModel(bookmarkedBook),
                 object : onCompleteFirebase {
                     override fun onCallback(value: Boolean) {
 //                        dialog.dismiss()

@@ -8,10 +8,11 @@ class UserModel {
     var phone: String? = null
     var email: String? = null
     var password: String? = null
-    var bookmarkedBooks: String? = null
+//    var bookmarkedBooks: String? = null
+    var bookmarkedBooks: MutableList<String> = ArrayList()
 
     constructor(
-        bookmarkedBooks: String?
+        bookmarkedBooks: MutableList<String> = ArrayList()
     ) {
         this.bookmarkedBooks = bookmarkedBooks
     }
