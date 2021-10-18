@@ -32,9 +32,9 @@ class FirebaseAdapter(var context: Context) {
         context,
         "userId"
     )
-    var id = Prefs.getStringPrefs(
-            context,
-            "Id"
+    var tid = Prefs.getStringPrefs(
+        context,
+        "Id"
     )
 
     fun addNewBook(bookModel: BookModel, onCompleteListener: onCompleteFirebase) {
@@ -70,17 +70,30 @@ class FirebaseAdapter(var context: Context) {
 
     fun addBookmark(userModel: UserModel, onCompleteListener: onCompleteFirebase) {
 
-        uDatabase.child(id!!).child("bookmarkedBooks")
-                .setValue(userModel, DatabaseReference.CompletionListener { error, ref ->
-                    if (error == null) {
-                        onCompleteListener.onCallback(true)
+        uDatabase.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (ds in dataSnapshot.children) {
+                   if(ds.key.equals(tid!!))
+                   {
+                       uDatabase.child(ds.key.toString()).child("bookmarkedBooks").setValue(userModel, DatabaseReference.CompletionListener { error, ref ->
+                           if (error == null) {
+                               onCompleteListener.onCallback(true)
 
-                    } else {
-                        Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
-                        onCompleteListener.onCallback(false)
-                    }
-                })
+                           } else {
+                               Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
+                               onCompleteListener.onCallback(false)
+                           }
+                       })
+                   }
 
+
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
 
 
 //logging all ids
