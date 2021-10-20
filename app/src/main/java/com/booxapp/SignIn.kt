@@ -92,33 +92,52 @@ class SignIn : AppCompatActivity() {
             userId
         )
 
-        mDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
+//        mDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                for (data in dataSnapshot.children) {
+//                    for (i in data.children) {
+//                        if (data.child("userId").getValue().toString() == userId) {
+//                            myKey = data.key
+//                        }
+//                    }
+//                }
+//
+//                for (i in 0 until dataSnapshot.childrenCount) {
+//
+//                }
+//
+//                Log.e("keyyyyyyyyy", myKey!!)
+//                Prefs.putStringPrefs(
+//                    applicationContext,
+//                    "Id",
+//                    myKey
+//                )
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                TODO("Not yet implemented")
+//            }
+//        })
+
+
+        mDatabase.orderByChild("userId").equalTo(userId).addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (data in dataSnapshot.children) {
-                    for (i in data.children) {
-                        if (data.child("userId").getValue().toString() == userId) {
-                            myKey = data.key
-                        }
+                    dataSnapshot.children.forEach {
+                        myKey = it.key
+                        Log.e("keyyyyyyyyy", myKey!!)
+                        Prefs.putStringPrefs(
+                            applicationContext,
+                            "Id",
+                            myKey
+                        )
                     }
-                }
 
-                for (i in 0 until dataSnapshot.childrenCount) {
-
-                }
-
-                Log.e("keyyyyyyyyy", myKey!!)
-                Prefs.putStringPrefs(
-                    applicationContext,
-                    "Id",
-                    myKey
-                )
             }
 
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
         })
-
 
     }
 
