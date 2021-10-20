@@ -19,11 +19,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 class SellBookDetails : AppCompatActivity() {
 
-    lateinit var bookmarkModel: UserModel
-//    lateinit var dialog: Dialog
-
     lateinit var binding: ActivityBookDetailsBinding
-    lateinit var singleBookData: BookModel
 
     var ref: DatabaseReference? = null
     var bookmarkedBook: MutableList<String> = ArrayList()
@@ -50,12 +46,11 @@ class SellBookDetails : AppCompatActivity() {
         var title = bundle!!.getString("booktitle")
         Toast.makeText(applicationContext, bId, Toast.LENGTH_LONG).show()
         Toast.makeText(applicationContext, title, Toast.LENGTH_LONG).show()
-//        UserModel(bId)
 
         bookmarkedBook.add(bId)
 
         binding.bookmark.setOnClickListener(View.OnClickListener {
-            FirebaseAdapter(applicationContext).addBookmark( UserModel(bookmarkedBook),
+            FirebaseAdapter(applicationContext).addBookmark(UserModel(bookmarkedBook),
                 object : onCompleteFirebase {
                     override fun onCallback(value: Boolean) {
 //                        dialog.dismiss()

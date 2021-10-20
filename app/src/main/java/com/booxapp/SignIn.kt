@@ -21,7 +21,7 @@ class SignIn : AppCompatActivity() {
     var mDatabase: DatabaseReference =
         FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
 
-    var myKey: String?=null
+    var myKey: String? = null
 
     lateinit var binding: ActivitySignInBinding
 
@@ -92,23 +92,20 @@ class SignIn : AppCompatActivity() {
             userId
         )
 
-//        mDatabase.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                for (i in dataSnapshot.children) {
-//                    for (j in i.children) {
-//                        if (j.child("userId").equals(userId)) {
-//                            Toast.makeText(applicationContext, j.key, Toast.LENGTH_LONG).show()
-//                            myKey = j.key!!
-//                            Log.e("keyyyyyyyyy", j.key!!)
-//                            Log.e("keyyyyyyyyy", myKey!!)
-//                        }
-//                    }
-//                }
-//            }
-
         mDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                myKey = dataSnapshot.children.iterator().next().key!!
+                for (data in dataSnapshot.children) {
+                    for (i in data.children) {
+                        if (data.child("userId").getValue().toString() == userId) {
+                            myKey = data.key
+                        }
+                    }
+                }
+
+                for (i in 0 until dataSnapshot.childrenCount) {
+
+                }
+
                 Log.e("keyyyyyyyyy", myKey!!)
                 Prefs.putStringPrefs(
                     applicationContext,
@@ -121,7 +118,6 @@ class SignIn : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         })
-
 
 
     }
