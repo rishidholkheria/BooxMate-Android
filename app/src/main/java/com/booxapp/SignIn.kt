@@ -90,7 +90,7 @@ class SignIn : AppCompatActivity() {
             applicationContext,
             "userId",
             userId
-        
+
         )
 
 //        mDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
