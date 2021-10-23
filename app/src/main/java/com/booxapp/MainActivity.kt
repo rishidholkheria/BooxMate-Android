@@ -6,6 +6,7 @@ import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
+import com.booxapp.BookBuzz.BookBuzz
 import com.booxapp.adapter.ViewPagerAdapter
 import com.booxapp.adapter.ViewPagerAdapter.Companion.addFragment
 import com.booxapp.data.Prefs.getStringPrefs
@@ -35,8 +36,8 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.logoutBtn!!.setOnClickListener {
-            mFirebaseAuth.signOut()
-            val i = Intent(this, SignIn::class.java)
+//            mFirebaseAuth.signOut()
+            val i = Intent(this, BookBuzz::class.java)
             startActivity(i)
             Toast.makeText(this@MainActivity, "Logged Out Successfully!", Toast.LENGTH_LONG).show()
         }
