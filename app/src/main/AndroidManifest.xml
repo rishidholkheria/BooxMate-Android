@@ -22,15 +22,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AboutActivity"></activity>
+        <activity
+            android:name=".BookBuzz.BookBuzz"
+            android:exported="true"
+            android:label="@string/title_activity_book_buzz"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AboutActivity" />
         <activity android:name=".ViewRequests" />
         <activity android:name=".SignUp" />
         <activity android:name=".SignIn" />
         <activity android:name=".ForgetPassword" />
         <activity android:name=".OrderSuccesfull" />
         <activity android:name=".PurchaseCart" />
-        <activity android:name=".PurchaseDetails" />
-<!--        <activity android:name=".BookPhoto" />-->
+        <activity android:name=".PurchaseDetails" /> <!-- <activity android:name=".BookPhoto" /> -->
         <activity android:name=".SellBookDetails" />
         <activity android:name=".SellDetails" />
         <activity android:name=".ExPostInput" />
