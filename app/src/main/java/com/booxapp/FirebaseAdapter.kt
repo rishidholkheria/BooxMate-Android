@@ -10,7 +10,6 @@ import com.booxapp.model.UserModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.DataSnapshot
-import kotlin.math.log
 
 
 class FirebaseAdapter {
@@ -86,17 +85,18 @@ class FirebaseAdapter {
         uDatabase.child(tid!!).child("bookmarkedBooks")
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    uDatabase.child(tid!!).child("bookmarkedBooks").child("${dataSnapshot.childrenCount}").setValue(
-                        bookId,
-                        DatabaseReference.CompletionListener { error, ref ->
-                            if (error == null) {
-                                onCompleteListener.onCallback(true)
+                    uDatabase.child(tid!!).child("bookmarkedBooks")
+                        .child("${dataSnapshot.childrenCount}").setValue(
+                            bookId,
+                            DatabaseReference.CompletionListener { error, ref ->
+                                if (error == null) {
+                                    onCompleteListener.onCallback(true)
 
-                            } else {
-                                Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
-                                onCompleteListener.onCallback(false)
-                            }
-                        })
+                                } else {
+                                    Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
+                                    onCompleteListener.onCallback(false)
+                                }
+                            })
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -104,4 +104,57 @@ class FirebaseAdapter {
                 }
             })
     }
+
+    fun requestSeller(sellerId: String, bookName: String) {
+        uDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (child in dataSnapshot.children) {
+//                    sellerId = child.child("userId").value.toString()
+                    if (child.child("userId").value.toString() == sellerId) saveBuyerId(
+                        child.key.toString(),
+                        bookName,
+                        object : onCompleteFirebase {
+                            override fun onCallback(value: Boolean) {
+                                Toast.makeText(context, "Done", Toast.LENGTH_LONG).show()
+                            }
+                        })
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+
+    fun saveBuyerId(sellerKey: String, bookName: String, onCompleteListener: onCompleteFirebase) {
+        uDatabase?.child(sellerKey)?.child("requests")
+            ?.addListenerForSingleValueEvent(
+                object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        uDatabase!!.child(sellerKey!!).child("requests")
+                            .child("${dataSnapshot.childrenCount}").setValue(
+                                UserModel(uid, bookName),
+                                DatabaseReference.CompletionListener { error, ref ->
+                                    if (error == null) {
+                                        onCompleteListener.onCallback(true)
+
+                                    } else {
+                                        Log.e(
+                                            TAG,
+                                            "Remove of " + ref + " failed: " + error.message
+                                        )
+                                        onCompleteListener.onCallback(false)
+                                    }
+                                })
+
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+                })
+    }
 }
+
+
