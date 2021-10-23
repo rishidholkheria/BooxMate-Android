@@ -17,7 +17,14 @@ class SellBookDetails : AppCompatActivity() {
 
     var uDatabase: DatabaseReference? =
         FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
-    var bookmarkedBook: MutableList<String> = ArrayList()
+
+    var bDatabase: DatabaseReference =
+        FirebaseDatabase.getInstance().getReference(Constants.DB_NAME)
+
+    lateinit var sellerId: String
+
+    lateinit var uid: String
+    lateinit var tid: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,16 +44,27 @@ class SellBookDetails : AppCompatActivity() {
             .into(binding.bookImage);
 
         var bId = bundle!!.getString("bookid")
-        Log.e("userrrrrrrr", bId!!)
-        var title = bundle!!.getString("booktitle")
-        Toast.makeText(applicationContext, bId, Toast.LENGTH_LONG).show()
-        Toast.makeText(applicationContext, title, Toast.LENGTH_LONG).show()
+//        Log.e("userrrrrrrr", bId!!)
+        var bTitle = bundle!!.getString("booktitle")
+//        Toast.makeText(applicationContext, bId, Toast.LENGTH_LONG).show()
+//        Toast.makeText(applicationContext, title, Toast.LENGTH_LONG).show()
+
+        tid = Prefs.getStringPrefs(
+            applicationContext,
+            "Id"
+        ).toString()
+
+        uid = Prefs.getStringPrefs(
+            applicationContext,
+            "userId"
+        ).toString()
 
 
         binding.bookmark.setOnClickListener(View.OnClickListener {
             if (binding.bookmark.isChecked) {
                 binding.bookmark.setBackgroundResource(R.drawable.ic_bookmark_selected)
-                FirebaseAdapter(applicationContext).addBookmark(bId,
+                FirebaseAdapter(applicationContext).addBookmark(
+                    bId!!,
                     object : onCompleteFirebase {
                         override fun onCallback(value: Boolean) {
                             Toast.makeText(applicationContext, "Done", Toast.LENGTH_LONG).show()
@@ -54,27 +72,42 @@ class SellBookDetails : AppCompatActivity() {
                     })
             } else {
                 binding.bookmark.setBackgroundResource(R.drawable.ic_bookmark)
-                deleteFromBookmarked(bId)
+                deleteFromBookmarked(bId!!)
             }
         })
 
-//        binding.bookmark.setOnClickListener(View.OnClickListener {
-//            FirebaseAdapter(applicationContext).addBookmark(bId,
-//                object : onCompleteFirebase {
-//                    override fun onCallback(value: Boolean) {
-//                        Toast.makeText(applicationContext, "Done", Toast.LENGTH_LONG).show()
-//                    }
-//                })
-//        })
+        binding.request.setOnClickListener(View.OnClickListener {
+//            Toast.makeText(applicationContext, "hello", Toast.LENGTH_SHORT).show()
+            bDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (child in dataSnapshot.children) {
+                        sellerId = child.child("userId").value.toString()
+                    }
+
+                    FirebaseAdapter(applicationContext).requestSeller(sellerId, bTitle!!)
+
+
+//                    Log.e("User Id from Auth", userId!!)
+//                    Log.e("User Id from Realtime", myKey!!)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+        })
 
     }
 
     fun deleteFromBookmarked(bookId: String) {
 
-        var tid = Prefs.getStringPrefs(
-            applicationContext,
-            "Id"
-        ).toString()
+        //----------------CHANGE KARNAA HAAIIIIII-------------------------------
+//        var tid = Prefs.getStringPrefs(
+//            applicationContext,
+//            "Id"
+//        ).toString()
+
+        //---------------------------------------------
 
         uDatabase?.child(tid)?.child("bookmarkedBooks")
             ?.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -95,4 +128,6 @@ class SellBookDetails : AppCompatActivity() {
 
             })
     }
+
+
 }

@@ -36,8 +36,8 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.logoutBtn!!.setOnClickListener {
-//            mFirebaseAuth.signOut()
-            val i = Intent(this, BookBuzz::class.java)
+            mFirebaseAuth.signOut()
+            val i = Intent(this, SignIn::class.java)
             startActivity(i)
             Toast.makeText(this@MainActivity, "Logged Out Successfully!", Toast.LENGTH_LONG).show()
         }
