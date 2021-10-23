@@ -17,17 +17,7 @@
             android:background="#8DEAE0F8"
             android:orientation="vertical">
 
-            <!--            <TextView-->
-            <!--                android:id="@+id/book_details_head"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:fontFamily="@font/quicksand"-->
-            <!--                android:paddingTop="20dp"-->
-            <!--                android:paddingBottom="10dp"-->
-            <!--                android:text="Book Details"-->
-            <!--                android:textAlignment="center"-->
-            <!--                android:textSize="18sp"-->
-            <!--                android:textStyle="bold" />-->
+            <!--                android:layout_below="@+id/book_details_head"-->
 
             <ImageView
                 android:id="@+id/bookImage"
@@ -37,22 +27,23 @@
                 android:padding="10dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/dummy_image2" />
-            <!--                android:layout_below="@+id/book_details_head"-->
 
             <RelativeLayout
-                android:id="@+id/bookmark"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_margin="20dp"
                 android:background="@drawable/circle_purple">
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="30dp"
+                <CheckBox
+                    android:id="@+id/bookmark"
+                    android:layout_width="30dp"
+                    android:layout_height="33dp"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/ic_bookmark" />
+                    android:background="@drawable/ic_bookmark"
+                    android:button="@null"
+                    android:checked="false" />
 
             </RelativeLayout>
 
