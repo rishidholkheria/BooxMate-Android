@@ -1,27 +1,22 @@
 package com.booxapp
 
-import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.booxapp.data.Prefs
 import com.booxapp.databinding.ActivityBookDetailsBinding
-import com.booxapp.databinding.SellBookDetailsBinding
-import com.booxapp.model.BookModel
-import com.booxapp.model.UserModel
 import com.bumptech.glide.Glide
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 
 class SellBookDetails : AppCompatActivity() {
 
     lateinit var binding: ActivityBookDetailsBinding
 
-    var ref: DatabaseReference? = null
+    var uDatabase: DatabaseReference? =
+        FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
     var bookmarkedBook: MutableList<String> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,14 +42,57 @@ class SellBookDetails : AppCompatActivity() {
         Toast.makeText(applicationContext, bId, Toast.LENGTH_LONG).show()
         Toast.makeText(applicationContext, title, Toast.LENGTH_LONG).show()
 
+
         binding.bookmark.setOnClickListener(View.OnClickListener {
-            FirebaseAdapter(applicationContext).addBookmark(bId,
-                object : onCompleteFirebase {
-                    override fun onCallback(value: Boolean) {
-                        Toast.makeText(applicationContext, "Done", Toast.LENGTH_LONG).show()
-                    }
-                })
+            if (binding.bookmark.isChecked) {
+                binding.bookmark.setBackgroundResource(R.drawable.ic_bookmark_selected)
+                FirebaseAdapter(applicationContext).addBookmark(bId,
+                    object : onCompleteFirebase {
+                        override fun onCallback(value: Boolean) {
+                            Toast.makeText(applicationContext, "Done", Toast.LENGTH_LONG).show()
+                        }
+                    })
+            } else {
+                binding.bookmark.setBackgroundResource(R.drawable.ic_bookmark)
+                deleteFromBookmarked(bId)
+            }
         })
 
+//        binding.bookmark.setOnClickListener(View.OnClickListener {
+//            FirebaseAdapter(applicationContext).addBookmark(bId,
+//                object : onCompleteFirebase {
+//                    override fun onCallback(value: Boolean) {
+//                        Toast.makeText(applicationContext, "Done", Toast.LENGTH_LONG).show()
+//                    }
+//                })
+//        })
+
+    }
+
+    fun deleteFromBookmarked(bookId: String) {
+
+        var tid = Prefs.getStringPrefs(
+            applicationContext,
+            "Id"
+        ).toString()
+
+        uDatabase?.child(tid)?.child("bookmarkedBooks")
+            ?.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (child in dataSnapshot.children) {
+                        if (child.value.toString() == bookId) {
+                            child.ref.removeValue()
+                            Log.i("Deleted", bookId)
+                            break;
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+
+            })
     }
 }
