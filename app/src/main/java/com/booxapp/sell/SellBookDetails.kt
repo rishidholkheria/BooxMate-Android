@@ -47,13 +47,10 @@ class SellBookDetails : AppCompatActivity() {
         Toast.makeText(applicationContext, bId, Toast.LENGTH_LONG).show()
         Toast.makeText(applicationContext, title, Toast.LENGTH_LONG).show()
 
-        bookmarkedBook.add(bId)
-
         binding.bookmark.setOnClickListener(View.OnClickListener {
-            FirebaseAdapter(applicationContext).addBookmark(UserModel(bookmarkedBook),
+            FirebaseAdapter(applicationContext).addBookmark(bId,
                 object : onCompleteFirebase {
                     override fun onCallback(value: Boolean) {
-//                        dialog.dismiss()
                         Toast.makeText(applicationContext, "Done", Toast.LENGTH_LONG).show()
                     }
                 })

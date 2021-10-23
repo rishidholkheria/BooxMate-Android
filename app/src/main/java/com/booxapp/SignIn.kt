@@ -92,35 +92,31 @@ class SignIn : AppCompatActivity() {
             userId
         )
 
-//        mDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                for (data in dataSnapshot.children) {
-//                    for (i in data.children) {
-//                        if (data.child("userId").getValue().toString() == userId) {
-//                            myKey = data.key
-//                        }
-//                    }
-//                }
-//
-//                for (i in 0 until dataSnapshot.childrenCount) {
-//
-//                }
-//
-//                Log.e("keyyyyyyyyy", myKey!!)
-//                Prefs.putStringPrefs(
-//                    applicationContext,
-//                    "Id",
-//                    myKey
-//                )
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//            }
-//        })
+        mDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (child in dataSnapshot.children) {
+                    if (child.child("userId").value.toString() == userId) {
+                        myKey = child.key
+                        break;
+                    }
+                }
+
+                Log.e("User Id from Auth", userId!!)
+                Log.e("User Id from Realtime", myKey!!)
+                Prefs.putStringPrefs(
+                    applicationContext,
+                    "Id",
+                    myKey
+                )
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
 
 
-        mDatabase.orderByChild("userId").equalTo(userId).addListenerForSingleValueEvent(object: ValueEventListener {
+        /*mDatabase.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                     dataSnapshot.children.forEach {
                         myKey = it.key
@@ -137,7 +133,7 @@ class SignIn : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
-        })
+        })*/
 
     }
 

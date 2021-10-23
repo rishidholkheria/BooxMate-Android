@@ -81,35 +81,27 @@ class FirebaseAdapter {
             })
     }
 
-    fun addBookmark(userModel: UserModel, onCompleteListener: onCompleteFirebase) {
+    fun addBookmark(bookId: String, onCompleteListener: onCompleteFirebase) {
 
-//        uDatabase.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                for (ds in dataSnapshot.children) {
-//                    Log.i("Pref Id", "" + tid)
-//                    Log.i("Child Id", "" + ds.key.toString())
-//                    if (ds.key.toString().equals(tid)) {
-//                        uDatabase.child(tid!!).child("bookmarkedBooks")
-//                            .setValue(
-//                                userModel,
-//                                DatabaseReference.CompletionListener { error, ref ->
-//                                    if (error == null) {
-//                                        onCompleteListener.onCallback(true)
-//
-//                                    } else {
-//                                        Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
-//                                        onCompleteListener.onCallback(false)
-//                                    }
-//                                })
-//                    }
-//
-//                }
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//            }
-//        })
+        uDatabase.child(tid!!).child("bookmarkedBooks")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    uDatabase.child(tid!!).child("bookmarkedBooks").child("${dataSnapshot.childrenCount}").setValue(
+                        bookId,
+                        DatabaseReference.CompletionListener { error, ref ->
+                            if (error == null) {
+                                onCompleteListener.onCallback(true)
 
+                            } else {
+                                Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
+                                onCompleteListener.onCallback(false)
+                            }
+                        })
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
     }
 }
