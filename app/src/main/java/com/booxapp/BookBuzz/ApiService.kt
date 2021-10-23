@@ -9,3 +9,4 @@ interface ApiService {
     @GET("v2/top-headlines?apiKey=$API_KEY")
     fun getBookHeadlines(@Query("country") country: String, @Query("page") page: Int) : Call<News>
 }
+
