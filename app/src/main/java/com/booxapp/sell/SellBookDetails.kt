@@ -1,6 +1,5 @@
 package com.booxapp
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -44,10 +43,8 @@ class SellBookDetails : AppCompatActivity() {
             .into(binding.bookImage);
 
         var bId = bundle!!.getString("bookid")
-//        Log.e("userrrrrrrr", bId!!)
         var bTitle = bundle!!.getString("booktitle")
-//        Toast.makeText(applicationContext, bId, Toast.LENGTH_LONG).show()
-//        Toast.makeText(applicationContext, title, Toast.LENGTH_LONG).show()
+
 
         tid = Prefs.getStringPrefs(
             applicationContext,
@@ -62,7 +59,7 @@ class SellBookDetails : AppCompatActivity() {
 
         binding.bookmark.setOnClickListener(View.OnClickListener {
             if (binding.bookmark.isChecked) {
-                binding.bookmark.setBackgroundResource(R.drawable.ic_bookmark_selected)
+                binding.bookmark.setBackgroundResource(R.drawable.ic_bookmark_selected1)
                 FirebaseAdapter(applicationContext).addBookmark(
                     bId!!,
                     object : onCompleteFirebase {
@@ -71,13 +68,12 @@ class SellBookDetails : AppCompatActivity() {
                         }
                     })
             } else {
-                binding.bookmark.setBackgroundResource(R.drawable.ic_bookmark)
+                binding.bookmark.setBackgroundResource(R.drawable.ic_bookmark1)
                 deleteFromBookmarked(bId!!)
             }
         })
 
         binding.request.setOnClickListener(View.OnClickListener {
-//            Toast.makeText(applicationContext, "hello", Toast.LENGTH_SHORT).show()
             bDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     for (child in dataSnapshot.children) {
@@ -85,10 +81,6 @@ class SellBookDetails : AppCompatActivity() {
                     }
 
                     FirebaseAdapter(applicationContext).requestSeller(sellerId, bTitle!!)
-
-
-//                    Log.e("User Id from Auth", userId!!)
-//                    Log.e("User Id from Realtime", myKey!!)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
