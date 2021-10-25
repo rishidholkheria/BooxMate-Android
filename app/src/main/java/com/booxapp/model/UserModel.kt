@@ -1,5 +1,7 @@
 package com.booxapp.model
 
+import com.booxapp.purchase.BookmarkedBooks
+
 class UserModel {
     var id: String? = null
     var userId: String? = null
@@ -8,7 +10,7 @@ class UserModel {
     var phone: String? = null
     var email: String? = null
     var password: String? = null
-    var bookmarkedBooks: String? = null
+    var bookmarkedBooks: ArrayList<String>? = null
     var requestedBook: String? = null
 
     constructor() {}
@@ -18,5 +20,8 @@ class UserModel {
         this.requestedBook = requestedBook
     }
 
+    constructor(bookmarkedBooks: ArrayList<String>){
+        this.bookmarkedBooks = bookmarkedBooks
+    }
 
 }

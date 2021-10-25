@@ -14,6 +14,7 @@ import com.booxapp.data.Prefs.putStringPrefs
 import com.booxapp.databinding.MainActivityBinding
 import com.booxapp.exchange.ExchangeFragment
 import com.booxapp.model.UserModel
+import com.booxapp.purchase.BookmarkedBooks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 import com.google.firebase.database.DataSnapshot
@@ -36,8 +37,8 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.logoutBtn!!.setOnClickListener {
-            mFirebaseAuth.signOut()
-            val i = Intent(this, SignIn::class.java)
+//            mFirebaseAuth.signOut()
+            val i = Intent(this, BookmarkedBooks::class.java)
             startActivity(i)
             Toast.makeText(this@MainActivity, "Logged Out Successfully!", Toast.LENGTH_LONG).show()
         }
