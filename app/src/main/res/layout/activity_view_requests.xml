@@ -5,10 +5,16 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".ViewRequests">
+    tools:context=".sell.ViewRequests">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:text="Testtttttttttttttt"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/request_recycler"
+        android:id="@+id/view_request_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/purchase_request_layout"/>

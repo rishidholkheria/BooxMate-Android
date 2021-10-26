@@ -97,4 +97,11 @@ class BookModel : Parcelable {
             return arrayOfNulls(size)
         }
     }
+
+
+    constructor(userId: String?) {
+        this.userId = userId
+//        this.requestedBook = requestedBook
+    }
+
 }

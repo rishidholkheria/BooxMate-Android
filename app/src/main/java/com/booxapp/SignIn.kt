@@ -115,27 +115,5 @@ class SignIn : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         })
-
-
-        /*mDatabase.addListenerForSingleValueEvent(object: ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    dataSnapshot.children.forEach {
-                        myKey = it.key
-                        Log.e("keyyyyyyyyy", myKey!!)
-                        Prefs.putStringPrefs(
-                            applicationContext,
-                            "Id",
-                            myKey
-                        )
-                    }
-
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        })*/
-
     }
-
 }
