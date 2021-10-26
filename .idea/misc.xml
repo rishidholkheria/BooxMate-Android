@@ -3,17 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/BooxMate-Android/app/src/main/res/drawable-v24/ic_bookmark_selected.xml" value="0.3671875" />
-        <entry key="..\:/BooxMate-Android/app/src/main/res/drawable-v24/ic_selectedbookmark.xml" value="0.3671875" />
-        <entry key="..\:/BooxMate-Android/app/src/main/res/drawable/ic_bookmark1.xml" value="0.3671875" />
-        <entry key="..\:/BooxMate-Android/app/src/main/res/drawable/ic_bookmark_selected1.xml" value="0.3671875" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_book_buzz.xml" value="0.36666666666666664" />
-        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_book_details.xml" value="0.4325437693099897" />
-        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_bookmarked_books.xml" value="0.36666666666666664" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_book_details.xml" value="0.23958333333333334" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_main.xml" value="0.35104166666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_order_succesfull.xml" value="0.35104166666666664" />
-        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/bookmark_item.xml" value="0.36666666666666664" />
-        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/fragment_purchase.xml" value="0.36666666666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/fragment_rent_sell_books.xml" value="0.35104166666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/fragment_sell.xml" value="0.35104166666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/main_container.xml" value="0.35104166666666664" />
@@ -46,6 +39,7 @@
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/activity_sell_details.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/activity_sign_in.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/activity_sign_up.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/activity_view_requests.xml" value="0.20092592592592592" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/book_photo.xml" value="0.22335495829471733" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/ex_past_order.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/ex_post_detail_fragment.xml" value="0.25416666666666665" />
@@ -62,10 +56,14 @@
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/fragment_purchase.xml" value="0.18981481481481483" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/fragment_rent_sell_books.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/fragment_sell.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/fragment_view_requests.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/main_activity.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/on_sale_book_details.xml" value="0.20555555555555555" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/one_row.xml" value="0.21944444444444444" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/past_order.xml" value="0.21944444444444444" />
+        <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/purchase_request_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/sell_book_details.xml" value="0.264" />
+        <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/view_requests_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/menu/exchange_bottom_nav.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/menu/menu.xml" value="0.20925925925925926" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/menu/rent_bottom_nav.xml" value="0.20925925925925926" />

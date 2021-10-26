@@ -105,36 +105,65 @@ class FirebaseAdapter {
             })
     }
 
-    fun requestSeller(sellerId: String, bookName: String) {
-        uDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (child in dataSnapshot.children) {
-//                    sellerId = child.child("userId").value.toString()
-                    if (child.child("userId").value.toString() == sellerId) saveBuyerId(
-                        child.key.toString(),
-                        bookName,
-                        object : onCompleteFirebase {
-                            override fun onCallback(value: Boolean) {
-                                Toast.makeText(context, "Done", Toast.LENGTH_LONG).show()
-                            }
-                        })
-                }
-            }
+//    fun requestSeller(sellerId: String, bookName: String) {
+//        mDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                for (child in dataSnapshot.children) {
+////                    sellerId = child.child("userId").value.toString()
+//                    if (child.child("userId").value.toString() == sellerId) saveBuyerId(
+//                        child.key.toString(),
+//                        bookName,
+//                        object : onCompleteFirebase {
+//                            override fun onCallback(value: Boolean) {
+//                                Toast.makeText(context, "Done", Toast.LENGTH_LONG).show()
+//                            }
+//                        })
+//                }
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                TODO("Not yet implemented")
+//            }
+//        })
+//    }
+//
+//    fun saveBuyerId(sellerKey: String, bookName: String, onCompleteListener: onCompleteFirebase) {
+//        mDatabase?.child(sellerKey)?.child("requests")
+//            ?.addListenerForSingleValueEvent(
+//                object : ValueEventListener {
+//                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                        mDatabase!!.child(sellerKey!!).child("requests")
+//                            .child("${dataSnapshot.childrenCount}").setValue(
+//                                UserModel(uid, bookName),
+//                                DatabaseReference.CompletionListener { error, ref ->
+//                                    if (error == null) {
+//                                        onCompleteListener.onCallback(true)
+//
+//                                    } else {
+//                                        Log.e(
+//                                            TAG,
+//                                            "Remove of " + ref + " failed: " + error.message
+//                                        )
+//                                        onCompleteListener.onCallback(false)
+//                                    }
+//                                })
+//
+//                    }
+//
+//                    override fun onCancelled(error: DatabaseError) {
+//                        TODO("Not yet implemented")
+//                    }
+//                })
+//    }
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        })
-    }
-
-    fun saveBuyerId(sellerKey: String, bookName: String, onCompleteListener: onCompleteFirebase) {
-        uDatabase?.child(sellerKey)?.child("requests")
+    fun saveBuyerId(bookId: String, onCompleteListener: onCompleteFirebase) {
+        mDatabase?.child(bookId)?.child("requests")
             ?.addListenerForSingleValueEvent(
                 object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        uDatabase!!.child(sellerKey!!).child("requests")
+                        mDatabase!!.child(bookId!!).child("requests")
                             .child("${dataSnapshot.childrenCount}").setValue(
-                                UserModel(uid, bookName),
+                                uid,
                                 DatabaseReference.CompletionListener { error, ref ->
                                     if (error == null) {
                                         onCompleteListener.onCallback(true)

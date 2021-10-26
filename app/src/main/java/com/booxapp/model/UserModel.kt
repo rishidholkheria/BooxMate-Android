@@ -1,7 +1,5 @@
 package com.booxapp.model
 
-import com.booxapp.purchase.BookmarkedBooks
-
 class UserModel {
     var id: String? = null
     var userId: String? = null
@@ -15,9 +13,15 @@ class UserModel {
 
     constructor() {}
 
-    constructor(userId: String?, requestedBook: String?) {
+    constructor(userId: String?) {
         this.userId = userId
-        this.requestedBook = requestedBook
+//        this.requestedBook = requestedBook
+    }
+
+    constructor(userId: String?, loc: String?, phone: String?) {
+        this.userId = userId
+        this.loc = loc
+        this.phone = phone
     }
 
     constructor(bookmarkedBooks: ArrayList<String>){

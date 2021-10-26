@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.booxapp.BookDetails
+import com.booxapp.PurchaseDetails
 import com.booxapp.R
 import com.booxapp.SellBookDetails
 import com.booxapp.data.Prefs
@@ -75,7 +76,7 @@ class MyAdapter(private val context: Context, val myDataModel: ArrayList<BookMod
                 bundle.putString("image", bookModel.imagelink!!)
                 bundle.putString("bookid", bookModel.id!!)
 
-                var intent = Intent(context, SellBookDetails::class.java)
+                var intent = Intent(context, PurchaseDetails::class.java)
                 intent.putExtras(bundle)
                 context.startActivity(intent)
             })
