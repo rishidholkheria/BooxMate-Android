@@ -43,6 +43,7 @@ class SellAdapter(private val context: Context, val DataModel: ArrayList<BookMod
             binding.bookname.text = bookModel.title
             binding.location.text = bookModel.location
             binding.price.text = bookModel.offeredprice
+            binding.reqCount.text = bookModel.requests.size.toString()
             Glide.with(context)
                 .load(bookModel.imagelink)
                 .into(binding.bookimage);
@@ -56,6 +57,7 @@ class SellAdapter(private val context: Context, val DataModel: ArrayList<BookMod
                 bundle.putString("ctgry", bookModel.category)
                 bundle.putString("desc", bookModel.description)
                 bundle.putString("image", bookModel.imagelink)
+                bundle.putString("bookid", bookModel.id)
 
                 var intent = Intent(context, SellBookDetails::class.java)
                 intent.putExtras(bundle)

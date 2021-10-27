@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/BooxMate-Android/app/src/main/res/drawable/cardviewbg.xml" value="0.3671875" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_book_buzz.xml" value="0.36666666666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_book_details.xml" value="0.23958333333333334" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_main.xml" value="0.35104166666666664" />
@@ -11,6 +12,7 @@
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/fragment_sell.xml" value="0.35104166666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/main_container.xml" value="0.35104166666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/menu_spinner_row.xml" value="0.35104166666666664" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/on_sale_book_details.xml" value="0.18704710144927536" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/one_row.xml" value="0.35104166666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/past_order.xml" value="0.35104166666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/progress.xml" value="0.35104166666666664" />

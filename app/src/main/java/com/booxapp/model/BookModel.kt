@@ -14,6 +14,7 @@ class BookModel : Parcelable {
     var description: String? = null
     var imagelink: String? = null
     var userId: String? = null
+    var requests: ArrayList<String> = ArrayList()
 
     constructor() {}
 

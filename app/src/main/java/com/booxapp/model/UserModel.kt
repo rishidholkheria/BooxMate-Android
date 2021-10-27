@@ -18,8 +18,8 @@ class UserModel {
 //        this.requestedBook = requestedBook
     }
 
-    constructor(userId: String?, loc: String?, phone: String?) {
-        this.userId = userId
+    constructor(name: String?, loc: String?, phone: String?) {
+        this.name = name
         this.loc = loc
         this.phone = phone
     }

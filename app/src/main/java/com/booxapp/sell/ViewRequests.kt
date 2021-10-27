@@ -2,6 +2,7 @@ package com.booxapp.sell
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +24,8 @@ class ViewRequests : AppCompatActivity() {
     private val TAG = "View Requests"
 
     lateinit var uid: String
+    lateinit var bId: String
+
     var buyerIds: ArrayList<String> = ArrayList()
 
 
@@ -36,6 +39,12 @@ class ViewRequests : AppCompatActivity() {
         uDatabase = FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
 
         var myDataListModel: ArrayList<UserModel> = ArrayList()
+
+        val bundle = intent.extras
+//        bId = bundle!!.getString("bookid").toString()
+        bId = intent.getStringExtra("bookid").toString()
+
+        Log.e(TAG, bId)
 
         uid = Prefs.getStringPrefs(
                 applicationContext,
@@ -66,9 +75,9 @@ class ViewRequests : AppCompatActivity() {
 
                             myDataListModel.add(
                                 UserModel(
-                                    name!!,
+                                    name,
                                     loc!!,
-                                    contact!!,
+                                    contact!!
                                 )
                             )
                             break
@@ -93,8 +102,8 @@ class ViewRequests : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 //                lateinit var ids: String
                 for (child in dataSnapshot.children) {
-                    if (child.child("userId").value.toString() == uid) {
-                        buyerIds = child.child("requests").value as ArrayList<String>
+                    if (child.child("id").value.toString() == bId ) {
+                            buyerIds = child.child("requests").value as ArrayList<String>
                     }
                 }
                 Log.e(TAG, buyerIds.toString())

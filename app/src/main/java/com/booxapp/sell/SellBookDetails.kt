@@ -24,8 +24,6 @@ class SellBookDetails : AppCompatActivity() {
     var bDatabase: DatabaseReference =
         FirebaseDatabase.getInstance().getReference(Constants.DB_NAME)
 
-    lateinit var sellerId: String
-
     lateinit var uid: String
     lateinit var tid: String
 
@@ -47,7 +45,7 @@ class SellBookDetails : AppCompatActivity() {
             .into(binding.bookImage);
 
         var bId = bundle!!.getString("bookid")
-        var bTitle = bundle!!.getString("booktitle")
+        Log.e("View requests1", bId.toString())
 
 
         tid = Prefs.getStringPrefs(
@@ -60,8 +58,12 @@ class SellBookDetails : AppCompatActivity() {
             "userId"
         ).toString()
 
+
         binding.viewRequests.setOnClickListener(View.OnClickListener {
             val i = Intent(this, ViewRequests::class.java)
+            Log.e("View Requests2", bId.toString())
+//            bundle.putString("bookid", bId)
+            i.putExtra("bookid", bId)
             startActivity(i)
         })
     }
