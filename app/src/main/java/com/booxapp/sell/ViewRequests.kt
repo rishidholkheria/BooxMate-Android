@@ -54,10 +54,9 @@ class ViewRequests : AppCompatActivity() {
                 myDataListModel.clear()
                 for (child in snapshot.children) {
                     child.key?.let { Log.i(TAG, it) }
-                    var myDataListModelInternal = child.getValue(UserModel::class.java)
-
-                    buyerIds.forEach{
-                        if (myDataListModelInternal != null && myDataListModelInternal.userId!!.equals(it)) {
+                    for(subChild in buyerIds){
+                        var myDataListModelInternal = child.getValue(UserModel::class.java)
+                        if (myDataListModelInternal != null && myDataListModelInternal.userId!! == subChild) {
                             var name: String? = myDataListModelInternal.name
                             var loc: String? = myDataListModelInternal.loc
                             var contact: String? = myDataListModelInternal.phone
@@ -72,6 +71,10 @@ class ViewRequests : AppCompatActivity() {
                                     contact!!,
                                 )
                             )
+                            break
+                        }
+                        else{
+                            Log.i(TAG, "Testing it is!")
                         }
                     }
                 }
@@ -88,12 +91,14 @@ class ViewRequests : AppCompatActivity() {
     private fun addBuyersId() {
         bDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                lateinit var ids: String
                 for (child in dataSnapshot.children) {
                     if (child.child("userId").value.toString() == uid) {
-                        buyerIds.add(child.child("requests").value.toString())
-                        Log.i(TAG, buyerIds.toString())
+                        buyerIds = child.child("requests").value as ArrayList<String>
                     }
                 }
+                Log.e(TAG, buyerIds.toString())
+
             }
 
             override fun onCancelled(error: DatabaseError) {
