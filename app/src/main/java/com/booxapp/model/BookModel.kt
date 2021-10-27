@@ -14,7 +14,6 @@ class BookModel : Parcelable {
     var description: String? = null
     var imagelink: String? = null
     var userId: String? = null
-    var status: Boolean? = false
     var requests: ArrayList<String> = ArrayList()
 
     constructor() {}
@@ -105,10 +104,6 @@ class BookModel : Parcelable {
     constructor(userId: String?) {
         this.userId = userId
 //        this.requestedBook = requestedBook
-    }
-
-    constructor(status: Boolean?) {
-        this.status = status
     }
 
 }

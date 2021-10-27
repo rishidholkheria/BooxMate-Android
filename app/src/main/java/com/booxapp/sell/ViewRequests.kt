@@ -66,16 +66,16 @@ class ViewRequests : AppCompatActivity() {
                     for(subChild in buyerIds){
                         var myDataListModelInternal = child.getValue(UserModel::class.java)
                         if (myDataListModelInternal != null && myDataListModelInternal.userId!! == subChild) {
-                            var name: String? = myDataListModelInternal.name
-                            var loc: String? = myDataListModelInternal.loc
-                            var contact: String? = myDataListModelInternal.phone
+                            var name: String? = myDataListModelInternal.name!!
+                            var loc: String? = myDataListModelInternal.loc!!
+                            var contact: String? = myDataListModelInternal.phone!!
 
                             Log.i(TAG, name!!)
 
 
                             myDataListModel.add(
                                 UserModel(
-                                    name,
+                                    name!!,
                                     loc!!,
                                     contact!!
                                 )
@@ -106,7 +106,7 @@ class ViewRequests : AppCompatActivity() {
                             buyerIds = child.child("requests").value as ArrayList<String>
                     }
                 }
-                Log.e(TAG, buyerIds.toString())
+                Log.e(TAG+"boooook", buyerIds.toString())
 
             }
 
