@@ -80,12 +80,12 @@ class SellFragment : Fragment() {
                                 location,
                                 mrp,
                                 id,
-                                "₹ " + offered_price,
+                                offered_price,
                                 category,
                                 true,
                                 description,
                                 bookimage,
-                                userId
+                                userId,
                             )
                         )
                     }

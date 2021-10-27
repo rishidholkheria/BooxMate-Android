@@ -44,6 +44,9 @@ class ViewRequestsAdapter(private val context: Context, val DataModel: ArrayList
 
             binding.reqAcceptReq.setOnClickListener(View.OnClickListener {
                 Toast.makeText(context, "Accepting...", Toast.LENGTH_SHORT).show()
+
+                
+
             })
 
         }

@@ -73,7 +73,7 @@ class PurchaseFragment : Fragment() {
                                 true,
                                 description,
                                 bookimage,
-                                userid
+                                userid,
                             )
                         )
                     }
