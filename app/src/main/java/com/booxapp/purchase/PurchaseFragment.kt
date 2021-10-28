@@ -1,6 +1,7 @@
 package com.booxapp
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +15,8 @@ import com.booxapp.adapter.MyAdapter
 import com.booxapp.data.Prefs
 import com.booxapp.databinding.FragmentPurchaseBinding
 import com.booxapp.model.BookModel
+import com.booxapp.purchase.BookmarkedBooks
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
 import kotlin.collections.ArrayList
 
@@ -45,6 +48,16 @@ class PurchaseFragment : Fragment() {
             "userId"
         )
 
+        var cartfab: FloatingActionButton = binding.cartfab
+        cartfab.setOnClickListener(View.OnClickListener {
+            startActivity(
+                Intent(
+                    context,
+                    BookmarkedBooks::class.java
+                )
+            )
+        })
+
         mDatabase.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 myDataListModel.clear()
@@ -70,10 +83,10 @@ class PurchaseFragment : Fragment() {
                                 id,
                                 offered_price,
                                 category,
-                                true,
                                 description,
                                 bookimage,
                                 userid,
+                                false
                             )
                         )
                     }

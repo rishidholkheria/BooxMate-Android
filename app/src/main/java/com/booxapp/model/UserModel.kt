@@ -18,10 +18,11 @@ class UserModel {
 //        this.requestedBook = requestedBook
     }
 
-    constructor(name: String?, loc: String?, phone: String?) {
+    constructor(name: String?, loc: String?, phone: String?,id: String?) {
         this.name = name
         this.loc = loc
         this.phone = phone
+        this.id = id
     }
 
     constructor(bookmarkedBooks: ArrayList<String>){

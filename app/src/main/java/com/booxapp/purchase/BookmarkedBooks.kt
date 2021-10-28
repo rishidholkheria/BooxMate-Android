@@ -17,7 +17,7 @@ import com.booxapp.model.UserModel
 import com.google.firebase.database.*
 
 class BookmarkedBooks : AppCompatActivity() {
-    lateinit var mDatabase: DatabaseReference
+    lateinit var bDatabase: DatabaseReference
     lateinit var uDatabase: DatabaseReference
 
     var adapter: BookmarkAdapter? = null
@@ -26,7 +26,7 @@ class BookmarkedBooks : AppCompatActivity() {
 
     lateinit var bookId: String
 
-    var bookmarkModel : ArrayList<UserModel> = ArrayList()
+    var bookmarkedBooks: ArrayList<String> = ArrayList()
 
     private val TAG = "Bookmarked books"
 
@@ -36,7 +36,7 @@ class BookmarkedBooks : AppCompatActivity() {
         binding = ActivityBookmarkedBooksBinding.inflate(layoutInflater)
 
         var myDataListModel: ArrayList<BookModel> = ArrayList()
-        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DB_NAME)
+        bDatabase = FirebaseDatabase.getInstance().getReference(Constants.DB_NAME)
         uDatabase = FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
 
         binding.recyclerView.layoutManager =
@@ -51,53 +51,53 @@ class BookmarkedBooks : AppCompatActivity() {
 
         getBookMarkedBooks(uid!!)
 
+        bDatabase.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                myDataListModel.clear()
+                for (child in snapshot.children) {
+                    child.key?.let { Log.i(TAG, it) }
+                    for(subChild in bookmarkedBooks){
+                        var myDataListModelInternal = child.getValue(BookModel::class.java)
+                        if (myDataListModelInternal != null && myDataListModelInternal.id!! == subChild) {
+                            var title: String? = myDataListModelInternal.title
+                            var offered_price: String? = myDataListModelInternal.offeredprice
+                            var mrp: String? = myDataListModelInternal.mrp
+                            var id: String? = myDataListModelInternal.id
+                            var location: String? = myDataListModelInternal.location
+                            var category: String? = myDataListModelInternal.category
+                            var description: String? = myDataListModelInternal.description
+                            var bookimage: String? = myDataListModelInternal.imagelink
+                            var userid: String? = myDataListModelInternal.userId
 
-//        mDatabase.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                myDataListModel.clear()
-//                for (child in snapshot.children) {
-//                    child.key?.let { Log.i(TAG, it) }
-//                    var myDataListModelInternal = child.getValue(BookModel::class.java)
-//
-//                    if (myDataListModelInternal != null && myDataListModelInternal.id != uid) {
-//                        var title: String? = myDataListModelInternal.title
-//                        var offered_price: String? = myDataListModelInternal.offeredprice
-//                        var mrp: String? = myDataListModelInternal.mrp
-//                        var id: String? = myDataListModelInternal.id
-//                        var location: String? = myDataListModelInternal.location
-//                        var category: String? = myDataListModelInternal.category
-//                        var description: String? = myDataListModelInternal.description
-//                        var bookimage: String? = myDataListModelInternal.imagelink
-//                        var userid: String? = myDataListModelInternal.userId
-//
-//                        myDataListModel.add(
-//                            BookModel(
-//                                title,
-//                                location,
-//                                mrp,
-//                                id,
-//                                offered_price,
-//                                category,
-//                                true,
-//                                description,
-//                                bookimage,
-//                                userid
-//                            )
-//                        )
-//                    }
-//                }
-//                adapter!!.notifyDataSetChanged()
-//
-//            }
-//
-//            override fun onCancelled(databaseError: DatabaseError) {
-//                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
-//            }
-//        })
+                            myDataListModel.add(
+                                BookModel(
+                                    title,
+                                    location,
+                                    mrp,
+                                    id,
+                                    offered_price,
+                                    category,
+                                    description,
+                                    bookimage,
+                                    userid,
+                                    false
+                                )
+                            )
+                            break
+                        }
+                        else{
+                            Log.i(TAG, "Testing it is!")
+                        }
+                    }
+                }
+                adapter!!.notifyDataSetChanged()
+            }
 
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        })
 
-        progressDialog = ProgressDialog(applicationContext)
-        progressDialog!!.setMessage("Please wait...")
 
 
     }
@@ -107,13 +107,10 @@ class BookmarkedBooks : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (child in dataSnapshot.children) {
                     if (child.child("userId").value.toString() == uid) {
-                        var internalBookmarkModel =
-                            child.child("bookmarkedBooks").value
-                        Log.e(TAG, internalBookmarkModel.toString())
-                        Log.e(TAG, uid)
-
+                        bookmarkedBooks = child.child("bookmarkedBooks").value as ArrayList<String>
                     }
                 }
+                Log.e(TAG, bookmarkedBooks.toString())
             }
 
             override fun onCancelled(error: DatabaseError) {

@@ -10,11 +10,11 @@ class BookModel : Parcelable {
     var offeredprice: String? = null
     var id: String? = null
     var category: String? = null
-    var bookmark: Boolean? = null
     var description: String? = null
     var imagelink: String? = null
     var userId: String? = null
     var requests: ArrayList<String> = ArrayList()
+    var status: Boolean? = false
 
     constructor() {}
 
@@ -26,10 +26,10 @@ class BookModel : Parcelable {
         id: String?,
         offeredprice: String?,
         category: String?,
-        bookmark: Boolean?,
         description: String?,
         imagelink: String?,
         userId: String?,
+        status: Boolean?
     ) {
         this.title = title
         this.location = location
@@ -37,10 +37,10 @@ class BookModel : Parcelable {
         this.id = id
         this.offeredprice = offeredprice
         this.category = category
-        this.bookmark = bookmark
         this.description = description
         this.imagelink = imagelink
         this.userId = userId
+        this.status = status
     }
 
     //PublishDataFragment
@@ -69,7 +69,6 @@ class BookModel : Parcelable {
         offeredprice = parcel.readString()
         id = parcel.readString()
         category = parcel.readString()
-        bookmark = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
         description = parcel.readString()
         imagelink = parcel.readString()
     }
@@ -81,7 +80,6 @@ class BookModel : Parcelable {
         parcel.writeString(offeredprice)
         parcel.writeString(id)
         parcel.writeString(category)
-        parcel.writeValue(bookmark)
         parcel.writeString(description)
         parcel.writeString(imagelink)
     }
@@ -104,6 +102,11 @@ class BookModel : Parcelable {
     constructor(userId: String?) {
         this.userId = userId
 //        this.requestedBook = requestedBook
+    }
+
+    constructor(bookId: String?, status: Boolean?) {
+        this.id = bookId
+        this.status = status
     }
 
 }

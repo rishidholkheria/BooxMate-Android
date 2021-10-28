@@ -10,6 +10,7 @@ import com.booxapp.Constants
 import com.booxapp.adapter.ViewRequestsAdapter
 import com.booxapp.data.Prefs
 import com.booxapp.databinding.ActivityViewRequestsBinding
+import com.booxapp.model.BookModel
 import com.booxapp.model.UserModel
 import com.google.firebase.database.*
 
@@ -54,7 +55,7 @@ class ViewRequests : AppCompatActivity() {
 
         binding.viewRequestRecycler.layoutManager =
             LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
-        viewReqAdapter = ViewRequestsAdapter(applicationContext, myDataListModel)
+        viewReqAdapter = ViewRequestsAdapter(applicationContext, myDataListModel, bId)
         binding.viewRequestRecycler!!.adapter = viewReqAdapter
 
         uDatabase.addValueEventListener(object : ValueEventListener {
@@ -68,6 +69,7 @@ class ViewRequests : AppCompatActivity() {
                             var name: String? = myDataListModelInternal.name!!
                             var loc: String? = myDataListModelInternal.loc!!
                             var contact: String? = myDataListModelInternal.phone!!
+                            var buyerId: String? = myDataListModelInternal.id!!
 
                             Log.i(TAG, name!!)
 
@@ -76,7 +78,8 @@ class ViewRequests : AppCompatActivity() {
                                 UserModel(
                                     name!!,
                                     loc!!,
-                                    contact!!
+                                    contact!!,
+                                    buyerId
                                 )
                             )
                             break

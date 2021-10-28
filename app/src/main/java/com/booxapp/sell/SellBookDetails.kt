@@ -45,8 +45,6 @@ class SellBookDetails : AppCompatActivity() {
             .into(binding.bookImage);
 
         var bId = bundle!!.getString("bookid")
-        Log.e("View requests1", bId.toString())
-
 
         tid = Prefs.getStringPrefs(
             applicationContext,
@@ -59,12 +57,29 @@ class SellBookDetails : AppCompatActivity() {
         ).toString()
 
 
+        checkIfSold(bId.toString())
+
         binding.viewRequests.setOnClickListener(View.OnClickListener {
             val i = Intent(this, ViewRequests::class.java)
-            Log.e("View Requests2", bId.toString())
-//            bundle.putString("bookid", bId)
             i.putExtra("bookid", bId)
             startActivity(i)
         })
     }
+
+    private fun checkIfSold(bId: String) {
+            bDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (child in dataSnapshot.children) {
+                        if (child.child("id").value.toString() == bId && child.child("status").value == true) {
+                            binding.viewRequests.isClickable = false
+                            binding.viewRequests.setText("Book Sold")
+                            break;
+                        }
+                    }
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+        }
 }

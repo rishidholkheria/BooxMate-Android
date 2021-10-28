@@ -73,19 +73,6 @@ class PurchaseDetails : AppCompatActivity() {
         })
 
         binding.request.setOnClickListener(View.OnClickListener {
-//            bDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
-//                override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                    for (child in dataSnapshot.children) {
-//                        sellerId = child.child("userId").value.toString()
-//                    }
-//
-//                    FirebaseAdapter(applicationContext).requestSeller(sellerId, bTitle!!)
-//                }
-//
-//                override fun onCancelled(error: DatabaseError) {
-//                    TODO("Not yet implemented")
-//                }
-//            })
             FirebaseAdapter(applicationContext).saveBuyerId(bId!!, object : onCompleteFirebase {
                 override fun onCallback(value: Boolean) {
                     Toast.makeText(applicationContext, "Done", Toast.LENGTH_LONG).show()

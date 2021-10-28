@@ -73,6 +73,7 @@ class SellFragment : Fragment() {
                         var bookimage: String? = myDataListModelInternal.imagelink
                         var id: String? = myDataListModelInternal.id
                         var userId: String? = myDataListModelInternal.userId
+                        var status: Boolean? = myDataListModelInternal.status
 
                         myDataListModel.add(
                             BookModel(
@@ -82,10 +83,10 @@ class SellFragment : Fragment() {
                                 id,
                                 offered_price,
                                 category,
-                                true,
                                 description,
                                 bookimage,
                                 userId,
+                                status
                             )
                         )
                     }
