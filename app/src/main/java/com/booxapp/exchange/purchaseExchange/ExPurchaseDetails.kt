@@ -86,7 +86,7 @@ class ExPurchaseDetails : AppCompatActivity() {
     }
 
     fun deleteFromBookmarked(bookId: String) {
-        uDatabase?.child(tid)?.child("bookmarkedBooks")
+        uDatabase?.child(tid)?.child("exchangeBookmarkedBooks")
             ?.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     for (child in dataSnapshot.children) {

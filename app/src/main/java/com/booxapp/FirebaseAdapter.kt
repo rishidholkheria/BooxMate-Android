@@ -140,10 +140,10 @@ class FirebaseAdapter {
 
     fun eAddBookmark(bookId: String, onCompleteListener: onCompleteFirebase) {
 
-        eDatabase.child(tid!!).child("bookmarkedBooks")
+        uDatabase.child(tid!!).child("exchangeBookmarkedBooks")
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    eDatabase.child(tid!!).child("bookmarkedBooks")
+                    uDatabase.child(tid!!).child("exchangeBookmarkedBooks")
                         .child("${dataSnapshot.childrenCount}").setValue(
                             bookId,
                             DatabaseReference.CompletionListener { error, ref ->
