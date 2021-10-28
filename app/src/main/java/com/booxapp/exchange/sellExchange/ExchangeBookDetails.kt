@@ -11,6 +11,7 @@ import com.booxapp.databinding.ActivityBookDetailsBinding
 import com.booxapp.databinding.ExchangeBookDetailsBinding
 import com.booxapp.databinding.OnSaleBookDetailsBinding
 import com.booxapp.databinding.OnSellExchangeBookDetailsBinding
+import com.booxapp.exchange.sellExchange.ExchangeViewRequests
 import com.booxapp.purchase.BookmarkedBooks
 import com.booxapp.sell.ViewRequests
 import com.bumptech.glide.Glide
@@ -46,6 +47,7 @@ class ExchangeBookDetails : AppCompatActivity() {
             .into(binding.bookImage);
 
         var exBookId = bundle!!.getString("exBookId")
+//        Log.e("ExViewRequests1",exBookId.toString())
 
         tid = Prefs.getStringPrefs(
             applicationContext,
@@ -61,8 +63,9 @@ class ExchangeBookDetails : AppCompatActivity() {
         checkIfSold(exBookId.toString())
 
         binding.exViewRequests.setOnClickListener(View.OnClickListener {
-            val i = Intent(this, ViewRequests::class.java)
-            i.putExtra("bookid", exBookId)
+            val i = Intent(this, ExchangeViewRequests::class.java)
+            i.putExtra("exBookId", exBookId)
+//            Log.e("ExViewRequests2",exBookId.toString())
             startActivity(i)
         })
     }

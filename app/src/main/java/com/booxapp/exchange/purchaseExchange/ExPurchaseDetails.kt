@@ -42,7 +42,8 @@ class ExPurchaseDetails : AppCompatActivity() {
             .load(bundle!!.getString("image", "No Image"))
             .into(binding.bookImage);
 
-        var bId = bundle!!.getString("bookid")
+        var bId = bundle!!.getString("exBookId")
+        Log.e("BOOOOOOOOOOOOK IDD", bId.toString())
         var bTitle = bundle!!.getString("booktitle")
 
 

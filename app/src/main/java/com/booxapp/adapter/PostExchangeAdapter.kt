@@ -58,6 +58,7 @@ class PostExchangeAdapter(private val context: Context, val DataModel: ArrayList
                 bundle.putString("ctgry", exModel.category)
                 bundle.putString("desc", exModel.description)
                 bundle.putString("image", exModel.imagelink)
+                bundle.putString("exBookId", exModel.id)
 
                 var intent = Intent(context, ExchangeBookDetails::class.java)
                 intent.putExtras(bundle)

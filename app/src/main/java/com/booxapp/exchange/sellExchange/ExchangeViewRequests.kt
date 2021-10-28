@@ -20,7 +20,7 @@ class ExchangeViewRequests : AppCompatActivity() {
 
     var exViewReqAdapter: ExViewRequestsAdapter? = null
 
-    private val TAG = "View Requests"
+    private val TAG = "ExViewRequests"
 
     lateinit var uid: String
     lateinit var bId: String
@@ -40,9 +40,9 @@ class ExchangeViewRequests : AppCompatActivity() {
         var myDataListModel: ArrayList<UserModel> = ArrayList()
 
         val bundle = intent.extras
-        bId = bundle!!.getString("bookid").toString()
+        bId = bundle!!.getString("exBookId").toString()
 
-        Log.e(TAG, bId)
+//        Log.e(TAG+"Bookid", bId)
 
         uid = Prefs.getStringPrefs(
                 applicationContext,
@@ -60,7 +60,7 @@ class ExchangeViewRequests : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 myDataListModel.clear()
                 for (child in snapshot.children) {
-                    child.key?.let { Log.i(TAG, it) }
+//                    child.key?.let { Log.i(TAG, it) }
                     for(subChild in buyerIds){
                         var myDataListModelInternal = child.getValue(UserModel::class.java)
                         if (myDataListModelInternal != null && myDataListModelInternal.userId!! == subChild) {
@@ -69,7 +69,7 @@ class ExchangeViewRequests : AppCompatActivity() {
                             var contact: String? = myDataListModelInternal.phone!!
                             var buyerId: String? = myDataListModelInternal.id!!
 
-                            Log.i(TAG, name!!)
+//                            Log.i(TAG, name!!)
 
 
                             myDataListModel.add(
@@ -82,9 +82,9 @@ class ExchangeViewRequests : AppCompatActivity() {
                             )
                             break
                         }
-                        else{
-                            Log.i(TAG, "Testing it is!")
-                        }
+//                        else{
+//                           Log.i(TAG, "Testing it is!")
+//                        }
                     }
                 }
                 exViewReqAdapter!!.notifyDataSetChanged()
@@ -100,13 +100,13 @@ class ExchangeViewRequests : AppCompatActivity() {
     private fun addBuyersId() {
         eDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                lateinit var ids: String
+
                 for (child in dataSnapshot.children) {
                     if (child.child("id").value.toString() == bId ) {
                             buyerIds = child.child("requests").value as ArrayList<String>
                     }
                 }
-                Log.e(TAG, buyerIds.toString())
+//                Log.e(TAG, buyerIds.toString())
 
             }
 
