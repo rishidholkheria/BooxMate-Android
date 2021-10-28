@@ -72,8 +72,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViewPager(viewPager: ViewPager?) {
         val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
-        addFragment(SellFragment(), "Sell")
         addFragment(PurchaseFragment(), "Purchase")
+        addFragment(SellFragment(), "Sell")
         addFragment(ExchangeFragment(), "Exchange")
         viewPager!!.adapter = viewPagerAdapter
     }

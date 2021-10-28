@@ -214,17 +214,6 @@
                 android:layout_marginEnd="5dp"
                 android:background="#ffffff">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ctgry"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Category"
-                    android:inputType="text"
-                    android:lines="1"
-                    android:paddingTop="5dp"
-                    android:textColorHint="#000000"
-                    android:textSize="16sp" />
-
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>

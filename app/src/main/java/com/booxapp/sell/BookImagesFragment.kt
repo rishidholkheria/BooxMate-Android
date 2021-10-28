@@ -73,6 +73,14 @@ class BookImages : Fragment() {
         val bundle = this.arguments
         bookModel = bundle!!.getParcelable("bookModel")!!
 
+        binding.confirmBookTitle.text = bookModel.title
+        binding.confirmBookCategory.text = bookModel.category
+        binding.confirmSellerLocation.text = bookModel.location
+        binding.confirmBookDesc.text = bookModel.description
+        binding.confirmMrp.text = bookModel.mrp
+        binding.confirmOfferedPrice.text = bookModel.offeredprice
+
+
         binding.selectImageBtn!!.setOnClickListener { //SelectImage();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)

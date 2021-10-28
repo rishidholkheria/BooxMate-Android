@@ -42,7 +42,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/confirmbooktitle"
+                android:id="@+id/confirm_book_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
@@ -70,7 +70,7 @@
                         android:src="@drawable/ic_category" />
 
                     <TextView
-                        android:id="@+id/confirm_book_ctgry"
+                        android:id="@+id/confirm_book_category"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="7dp"
@@ -178,7 +178,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/confirm_offeredprice"
+                        android:id="@+id/confirm_offered_price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -210,8 +210,7 @@
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 android:text="NCERT Exampler is best book for boards. The condition of these books is also good.
-NCERT Exampler is best book for boards. The condition of these books is also good.
-kjnsdloiwdlkslklmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"
+NCERT Exampler is best book for boards. The condition of these books is also good."
                 android:textColor="#000000"
                 android:textSize="14sp" />
 

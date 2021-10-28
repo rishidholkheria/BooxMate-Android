@@ -21,7 +21,6 @@ class BookmarkedBooks : AppCompatActivity() {
     lateinit var uDatabase: DatabaseReference
 
     var adapter: BookmarkAdapter? = null
-    private var progressDialog: ProgressDialog? = null
     lateinit var binding: ActivityBookmarkedBooksBinding
 
     lateinit var bookId: String
