@@ -41,8 +41,7 @@ class ViewRequests : AppCompatActivity() {
         var myDataListModel: ArrayList<UserModel> = ArrayList()
 
         val bundle = intent.extras
-//        bId = bundle!!.getString("bookid").toString()
-        bId = intent.getStringExtra("bookid").toString()
+        bId = bundle!!.getString("bookid").toString()
 
         Log.e(TAG, bId)
 
@@ -106,7 +105,7 @@ class ViewRequests : AppCompatActivity() {
                             buyerIds = child.child("requests").value as ArrayList<String>
                     }
                 }
-                Log.e(TAG+"boooook", buyerIds.toString())
+                Log.e(TAG, buyerIds.toString())
 
             }
 

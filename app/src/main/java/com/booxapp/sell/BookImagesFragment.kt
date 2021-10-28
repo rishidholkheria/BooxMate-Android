@@ -209,6 +209,7 @@ class BookImages : Fragment() {
                 .addOnSuccessListener { taskSnapshot ->
                     taskSnapshot.storage.downloadUrl.addOnSuccessListener {
                         bookModel.imagelink = it.toString()
+//                        bookModel.status = false
                         FirebaseAdapter(requireActivity()).addNewBook(
                             bookModel,
                             object : onCompleteFirebase {
