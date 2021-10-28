@@ -37,9 +37,11 @@ class SellBookDetails : AppCompatActivity() {
         binding.bookOfferedPrice.text = bundle!!.getString("oprice", "Rs ")
         binding.bookCtgry.text = bundle!!.getString("ctgry", "Category")
         binding.bookLoc.text = bundle!!.getString("location", "Book Title")
+        binding.bookCity.text = bundle!!.getString("city", "City")
         binding.bookMrp.text = bundle!!.getString("mrp", "Rs ")
         binding.bookOp.text = bundle!!.getString("oprice", "Rs ")
         binding.bookDesc.text = bundle!!.getString("booktitle", "No description available.")
+
         Glide.with(this)
             .load(bundle!!.getString("image", "No Image"))
             .into(binding.bookImage);

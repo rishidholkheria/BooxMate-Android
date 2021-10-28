@@ -6,6 +6,7 @@ import android.os.Parcelable
 class BookModel : Parcelable {
     var title: String? = null
     var location: String? = null
+    var city: String? = null
     var mrp: String? = null
     var offeredprice: String? = null
     var id: String? = null
@@ -22,6 +23,7 @@ class BookModel : Parcelable {
     constructor(
         title: String?,
         location: String?,
+        city: String?,
         mrp: String?,
         id: String?,
         offeredprice: String?,
@@ -34,6 +36,7 @@ class BookModel : Parcelable {
     ) {
         this.title = title
         this.location = location
+        this.city = city
         this.mrp = mrp
         this.id = id
         this.offeredprice = offeredprice
@@ -48,6 +51,7 @@ class BookModel : Parcelable {
     constructor(
         title: String?,
         location: String?,
+        city: String?,
         mrp: String?,
         id: String?,
         offeredprice: String?,
@@ -59,6 +63,7 @@ class BookModel : Parcelable {
     ) {
         this.title = title
         this.location = location
+        this.city = city
         this.mrp = mrp
         this.id = id
         this.offeredprice = offeredprice
@@ -74,6 +79,7 @@ class BookModel : Parcelable {
     constructor(
         title: String?,
         location: String?,
+        city: String?,
         mrp: String?,
         offeredprice: String?,
         category: String?,
@@ -81,6 +87,7 @@ class BookModel : Parcelable {
     ) {
         this.title = title
         this.location = location
+        this.city = city
         this.mrp = mrp
         this.offeredprice = offeredprice
         this.category = category
@@ -92,6 +99,7 @@ class BookModel : Parcelable {
     constructor(parcel: Parcel) : this() {
         title = parcel.readString()
         location = parcel.readString()
+        city = parcel.readString()
         mrp = parcel.readString()
         offeredprice = parcel.readString()
         id = parcel.readString()
@@ -103,6 +111,7 @@ class BookModel : Parcelable {
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(title)
         parcel.writeString(location)
+        parcel.writeString(city)
         parcel.writeString(mrp)
         parcel.writeString(offeredprice)
         parcel.writeString(id)

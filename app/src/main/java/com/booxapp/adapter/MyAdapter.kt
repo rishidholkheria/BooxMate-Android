@@ -59,6 +59,7 @@ class MyAdapter(private val context: Context, val myDataModel: ArrayList<BookMod
         fun bind(context: Context, bookModel: BookModel) {
             binding.tvTitle.text = bookModel.title
             binding.tvLocation.text = bookModel.location
+            binding.tvCity.text = ", " + bookModel.city
             binding.tvPrice.text = bookModel.offeredprice
             binding.tvCat.text = bookModel.category
             Glide.with(context)
@@ -71,6 +72,7 @@ class MyAdapter(private val context: Context, val myDataModel: ArrayList<BookMod
                 bundle.putString("oprice", bookModel.offeredprice!!)
                 bundle.putString("mrp", bookModel.mrp!!)
                 bundle.putString("location", bookModel.location!!)
+                bundle.putString("city", bookModel.city!!)
                 bundle.putString("ctgry", bookModel.category!!)
                 bundle.putString("desc", bookModel.description!!)
                 bundle.putString("image", bookModel.imagelink!!)

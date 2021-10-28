@@ -205,6 +205,27 @@
                 android:inputType="textCapWords|text"
                 android:textColor="#000000" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:padding="8dp"
+                android:text="Whats your City ?"
+                android:textColor="#ED000000"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:hint="For Eg  -:  New Delhi"
+                android:inputType="textCapWords|text"
+                android:textColor="#000000" />
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"

@@ -76,11 +76,13 @@ class SellFragment : Fragment() {
                         var userId: String? = myDataListModelInternal.userId
                         var status: Boolean? = myDataListModelInternal.status
                         var requests: ArrayList<String> = myDataListModelInternal.requests
+                        var city: String? = myDataListModelInternal.city
 
                         myDataListModel.add(
                             BookModel(
                                 title,
                                 location,
+                                city,
                                 mrp,
                                 id,
                                 offered_price,

@@ -70,6 +70,7 @@ class PurchaseFragment : Fragment() {
                         var mrp: String? = myDataListModelInternal.mrp
                         var id: String? = myDataListModelInternal.id
                         var location: String? = myDataListModelInternal.location
+                        var city: String? = myDataListModelInternal.city
                         var category: String? = myDataListModelInternal.category
                         var description: String? = myDataListModelInternal.description
                         var bookimage: String? = myDataListModelInternal.imagelink
@@ -79,6 +80,7 @@ class PurchaseFragment : Fragment() {
                             BookModel(
                                 title,
                                 location,
+                                city,
                                 mrp,
                                 id,
                                 offered_price,

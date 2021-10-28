@@ -38,6 +38,7 @@ class PublishDetails : Fragment() {
             val sbook_mrp = binding.mrp!!.text.toString()
             val sbook_op = binding.offeredPrice!!.text.toString()
             val sbook_loc = binding.location!!.text.toString()
+            val sbook_city = binding.city!!.text.toString()
 
             if (isDataValid(sbook_name) && isDataValid(sbook_desc) && isDataValid(sbook_ctgry) && isDataValid(
                     sbook_mrp
@@ -45,7 +46,7 @@ class PublishDetails : Fragment() {
             ) {
                 shareData.passingData(
                     1,
-                    BookModel(sbook_name, sbook_loc, sbook_mrp, sbook_op, sbook_ctgry, sbook_desc)
+                    BookModel(sbook_name, sbook_loc, sbook_city , sbook_mrp, sbook_op, sbook_ctgry, sbook_desc)
                 )
             } else {
                 Toast.makeText(activity, "incomplete", Toast.LENGTH_SHORT).show()

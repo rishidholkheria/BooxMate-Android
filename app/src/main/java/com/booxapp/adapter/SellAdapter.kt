@@ -44,6 +44,7 @@ class SellAdapter(private val context: Context, val DataModel: ArrayList<BookMod
         fun bind(context: Context, bookModel: BookModel) {
             binding.bookname.text = bookModel.title
             binding.location.text = bookModel.location
+            binding.city.text = ", " + bookModel.city
             binding.price.text = bookModel.offeredprice
             binding.reqCount.text = bookModel.requests.size.toString()
 
@@ -62,6 +63,7 @@ class SellAdapter(private val context: Context, val DataModel: ArrayList<BookMod
                 bundle.putString("oprice", bookModel.offeredprice)
                 bundle.putString("mrp", bookModel.mrp)
                 bundle.putString("location", bookModel.location)
+                bundle.putString("city", bookModel.city)
                 bundle.putString("ctgry", bookModel.category)
                 bundle.putString("desc", bookModel.description)
                 bundle.putString("image", bookModel.imagelink)
