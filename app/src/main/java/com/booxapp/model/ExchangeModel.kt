@@ -14,6 +14,7 @@ class ExchangeModel : Parcelable {
     var bookmark: Boolean? = null
     var exchangeRequests: String? = null
     var userId: String? = null
+    var status: Boolean = false
 
     constructor() {}
 
@@ -25,7 +26,8 @@ class ExchangeModel : Parcelable {
         description: String?,
         id: String?,
         imagelink: String?,
-        userId: String?
+        userId: String?,
+        status: Boolean
     ) {
         this.title = title
         this.location = location
@@ -35,7 +37,7 @@ class ExchangeModel : Parcelable {
         this.imagelink = imagelink
         this.id = id
         this.userId = userId
-
+        this.status = status
     }
 
     constructor(

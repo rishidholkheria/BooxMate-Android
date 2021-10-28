@@ -72,7 +72,8 @@ class ExBuyFragment : Fragment() {
                                 description,
                                 "",
                                 bookimage,
-                                ""
+                                "",
+                                false
                             )
                         )
                     }

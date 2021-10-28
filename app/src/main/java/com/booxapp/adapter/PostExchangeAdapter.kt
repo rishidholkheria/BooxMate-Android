@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.booxapp.ExPurchaseDetails
+import com.booxapp.ExchangeBookDetails
 import com.booxapp.SellBookDetails
 import com.booxapp.databinding.OneRowBinding
 import com.booxapp.model.BookModel
@@ -57,7 +59,7 @@ class PostExchangeAdapter(private val context: Context, val DataModel: ArrayList
                 bundle.putString("desc", exModel.description)
                 bundle.putString("image", exModel.imagelink)
 
-                var intent = Intent(context, SellBookDetails::class.java)
+                var intent = Intent(context, ExchangeBookDetails::class.java)
                 intent.putExtras(bundle)
                 context.startActivity(intent)
             })

@@ -29,7 +29,33 @@ class BookModel : Parcelable {
         description: String?,
         imagelink: String?,
         userId: String?,
-        status: Boolean?
+        status: Boolean?,
+        requests: ArrayList<String>
+    ) {
+        this.title = title
+        this.location = location
+        this.mrp = mrp
+        this.id = id
+        this.offeredprice = offeredprice
+        this.category = category
+        this.description = description
+        this.imagelink = imagelink
+        this.userId = userId
+        this.status = status
+        this.requests = requests
+    }
+
+    constructor(
+        title: String?,
+        location: String?,
+        mrp: String?,
+        id: String?,
+        offeredprice: String?,
+        category: String?,
+        description: String?,
+        imagelink: String?,
+        userId: String?,
+        status: Boolean?,
     ) {
         this.title = title
         this.location = location
@@ -42,6 +68,7 @@ class BookModel : Parcelable {
         this.userId = userId
         this.status = status
     }
+
 
     //PublishDataFragment
     constructor(

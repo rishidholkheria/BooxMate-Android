@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.booxapp.ForgetPassword
 import com.booxapp.SellBookDetails
 import com.booxapp.databinding.BookmarkItemBinding
 import com.booxapp.databinding.OneRowBinding
@@ -14,7 +16,7 @@ import com.booxapp.model.BookModel
 import com.bumptech.glide.Glide
 
 class BookmarkAdapter(private val context: Context, val myDataModel: ArrayList<BookModel>) :
-    RecyclerView.Adapter<BookmarkAdapter.ViewHolder>()  {
+    RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -47,7 +49,7 @@ class BookmarkAdapter(private val context: Context, val myDataModel: ArrayList<B
                 .load(bookModel.imagelink)
                 .into(binding.imageView);
 
-            binding.root.setOnClickListener(View.OnClickListener {
+                binding.root.setOnClickListener(View.OnClickListener {
                 val bundle = Bundle()
                 bundle.putString("booktitle", bookModel.title!!)
                 bundle.putString("oprice", bookModel.offeredprice!!)
@@ -58,9 +60,10 @@ class BookmarkAdapter(private val context: Context, val myDataModel: ArrayList<B
                 bundle.putString("image", bookModel.imagelink!!)
                 bundle.putString("bookid", bookModel.id!!)
 
-                var intent = Intent(context, SellBookDetails::class.java)
-                intent.putExtras(bundle)
-                context.startActivity(intent)
+                val i = Intent(context, ForgetPassword::class.java)
+                i.putExtras(bundle)
+                context.startActivity(i)
+
             })
         }
     }

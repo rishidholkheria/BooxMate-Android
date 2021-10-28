@@ -33,15 +33,17 @@ class BookmarkedBooks : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityBookmarkedBooksBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
 
         var myDataListModel: ArrayList<BookModel> = ArrayList()
         bDatabase = FirebaseDatabase.getInstance().getReference(Constants.DB_NAME)
         uDatabase = FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
 
-        binding.recyclerView.layoutManager =
+        binding.bookmarkedBooksRecycler.layoutManager =
             LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
         adapter = BookmarkAdapter(applicationContext, myDataListModel)
-        binding.recyclerView!!.adapter = adapter
+        binding.bookmarkedBooksRecycler!!.adapter = adapter
 
         var uid = Prefs.getStringPrefs(
             applicationContext,
@@ -82,7 +84,6 @@ class BookmarkedBooks : AppCompatActivity() {
                                     false
                                 )
                             )
-                            break
                         }
                         else{
                             Log.i(TAG, "Testing it is!")

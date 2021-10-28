@@ -4,14 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.booxapp.databinding.ActivityExPostInputBinding
-import com.booxapp.databinding.ActivitySellDetailsBinding
-import com.booxapp.exchange.postExchange.BookImagesExFragment
-import com.booxapp.exchange.postExchange.ExPostDetailFragment
-import com.booxapp.model.BookModel
+import com.booxapp.exchange.sellExchange.BookImagesExFragment
+import com.booxapp.exchange.sellExchange.ExPostDetailFragment
 import com.booxapp.model.ExchangeModel
-import com.booxapp.sell.BookImages
 import com.booxapp.sell.OrderSuccessfullFragment
-import com.booxapp.sell.PublishDetails
 
 
 class ExPostInput : AppCompatActivity(), ExShareData {

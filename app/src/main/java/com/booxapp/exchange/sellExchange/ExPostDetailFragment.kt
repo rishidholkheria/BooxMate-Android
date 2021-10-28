@@ -1,4 +1,4 @@
-package com.booxapp.exchange.postExchange
+package com.booxapp.exchange.sellExchange
 
 import android.content.Context
 import android.os.Bundle
@@ -8,12 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.booxapp.ExShareData
-import com.booxapp.ShareData
 import com.booxapp.databinding.ExPostDetailFragmentBinding
-import com.booxapp.databinding.FragmentExPostBinding
-import com.booxapp.databinding.FragmentExchangeBinding
-import com.booxapp.databinding.FragmentPublishDetailsBinding
-import com.booxapp.model.BookModel
 import com.booxapp.model.ExchangeModel
 
 
@@ -49,7 +44,7 @@ class ExPostDetailFragment : Fragment() {
                 ) {
                     shareData.passingData(
                         1,
-                        ExchangeModel(ebook_name, ebook_expBooks, ebook_desc, ebook_cat, ebook_loc)
+                        ExchangeModel(ebook_name,ebook_loc,ebook_cat, ebook_expBooks, ebook_desc)
                     )
                 } else {
                     Toast.makeText(activity, "incomplete", Toast.LENGTH_SHORT).show()

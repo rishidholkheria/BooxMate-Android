@@ -1,4 +1,4 @@
-package com.booxapp.exchange.postExchange
+package com.booxapp.exchange.sellExchange
 
 import android.Manifest
 import android.app.AlertDialog
@@ -24,9 +24,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.booxapp.*
 import com.booxapp.databinding.ExbookImageFragmentBinding
-import com.booxapp.databinding.FragmentBookImagesBinding
 import com.booxapp.databinding.ProgressBinding
-import com.booxapp.model.BookModel
 import com.booxapp.model.ExchangeModel
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage

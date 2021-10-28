@@ -16,6 +16,7 @@ import com.booxapp.model.BookModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class SellFragment : Fragment() {
 
@@ -74,6 +75,7 @@ class SellFragment : Fragment() {
                         var id: String? = myDataListModelInternal.id
                         var userId: String? = myDataListModelInternal.userId
                         var status: Boolean? = myDataListModelInternal.status
+                        var requests: ArrayList<String> = myDataListModelInternal.requests
 
                         myDataListModel.add(
                             BookModel(
@@ -86,7 +88,8 @@ class SellFragment : Fragment() {
                                 description,
                                 bookimage,
                                 userId,
-                                status
+                                status,
+                                requests
                             )
                         )
                     }

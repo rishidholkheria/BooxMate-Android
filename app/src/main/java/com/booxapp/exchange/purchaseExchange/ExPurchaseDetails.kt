@@ -7,11 +7,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.booxapp.data.Prefs
 import com.booxapp.databinding.ActivityBookDetailsBinding
+import com.booxapp.databinding.ExchangeBookDetailsBinding
 import com.bumptech.glide.Glide
 import com.google.firebase.database.*
 
-class PurchaseDetails : AppCompatActivity() {
-    lateinit var binding: ActivityBookDetailsBinding
+class ExPurchaseDetails : AppCompatActivity() {
+    lateinit var binding: ExchangeBookDetailsBinding
 
     var uDatabase: DatabaseReference? =
         FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
@@ -26,7 +27,7 @@ class PurchaseDetails : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityBookDetailsBinding.inflate(layoutInflater)
+        binding = ExchangeBookDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val bundle = intent.extras
@@ -59,7 +60,7 @@ class PurchaseDetails : AppCompatActivity() {
         binding.bookmark.setOnClickListener(View.OnClickListener {
             if (binding.bookmark.isChecked) {
                 binding.bookmark.setBackgroundResource(R.drawable.ic_bookmark_selected1)
-                FirebaseAdapter(applicationContext).addBookmark(
+                FirebaseAdapter(applicationContext).eAddBookmark(
                     bId!!,
                     object : onCompleteFirebase {
                         override fun onCallback(value: Boolean) {
@@ -72,8 +73,8 @@ class PurchaseDetails : AppCompatActivity() {
             }
         })
 
-        binding.request.setOnClickListener(View.OnClickListener {
-            FirebaseAdapter(applicationContext).saveBuyerId(bId!!, object : onCompleteFirebase {
+        binding.requestExchangeBtn.setOnClickListener(View.OnClickListener {
+            FirebaseAdapter(applicationContext).eSaveBuyerId(bId!!, object : onCompleteFirebase {
                 override fun onCallback(value: Boolean) {
                     Toast.makeText(applicationContext, "Done", Toast.LENGTH_LONG).show()
                 }

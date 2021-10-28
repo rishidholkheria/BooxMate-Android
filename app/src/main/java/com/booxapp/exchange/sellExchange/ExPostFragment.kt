@@ -83,7 +83,8 @@ class ExPostFragment : Fragment() {
                                 description,
                                 "",
                                 bookimage,
-                                ""
+                                "",
+                                false
                             )
                         )
                     }

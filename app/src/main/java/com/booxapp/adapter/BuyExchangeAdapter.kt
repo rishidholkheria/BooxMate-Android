@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.booxapp.ExPurchaseDetails
+import com.booxapp.ExchangeBookDetails
 import com.booxapp.SellBookDetails
 import com.booxapp.databinding.OneRowBinding
 import com.booxapp.model.BookModel
@@ -17,8 +19,6 @@ import kotlin.collections.ArrayList
 
 class BuyExchangeAdapter(private val context: Context, val DataModel: ArrayList<ExchangeModel>) :
     RecyclerView.Adapter<BuyExchangeAdapter.ViewHolder>() {
-
-    private var firebaseUser = FirebaseAuth.getInstance().currentUser
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -45,9 +45,10 @@ class BuyExchangeAdapter(private val context: Context, val DataModel: ArrayList<
         fun bind(context: Context, exModel: ExchangeModel) {
             binding.tvTitle.text = exModel.title
             binding.tvLocation.text = exModel.location
-//            Glide.with(context)
-//                .load(exModel.imagelink)
-//                .into(binding.imageView);
+
+            Glide.with(context)
+                .load(exModel.imagelink)
+                .into(binding.imageView);
 
             binding.root.setOnClickListener(View.OnClickListener {
                 val bundle = Bundle()
@@ -55,31 +56,14 @@ class BuyExchangeAdapter(private val context: Context, val DataModel: ArrayList<
                 bundle.putString("location", exModel.location)
                 bundle.putString("ctgry", exModel.category)
                 bundle.putString("desc", exModel.description)
-//                bundle.putString("image", exModel.imagelink)
+                bundle.putString("image", exModel.imagelink)
+                bundle.putString("exBookId", exModel.id)
+                bundle.putString("expectedBooks", exModel.expectedBooks)
 
-                var intent = Intent(context, SellBookDetails::class.java)
+                var intent = Intent(context, ExPurchaseDetails::class.java)
                 intent.putExtras(bundle)
                 context.startActivity(intent)
             })
         }
     }
-
-
-//    private fun isSaved(bookID: String, imageView: ImageView) {
-//        val reference =
-//            FirebaseDatabase.getInstance().reference.child("Bookmarked").child(firebaseUser!!.uid)
-//        reference.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                if (snapshot.child(bookID).exists()) {
-//                    imageView.setImageResource(R.drawable.ic_selectedbookmark)
-//                    imageView.tag = "bookmarked"
-//                } else {
-//                    imageView.setImageResource(R.drawable.ic_bookmark)
-//                    imageView.tag = "bookmark"
-//                }
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {}
-//        })
-//    }
 }
