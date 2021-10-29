@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.booxapp.ExPurchaseDetails
 import com.booxapp.R
 import com.booxapp.SellBookDetails
 import com.booxapp.databinding.OneRowBinding
@@ -46,6 +47,7 @@ class ExBookMarkAdapter(private val context: Context, val DataModel: ArrayList<E
         fun bind(context: Context, bookModel: ExchangeModel) {
             binding.tvTitle.text = bookModel.title
             binding.tvLocation.text = bookModel.location
+            binding.tvCity.text = bookModel.city
             binding.tvCat.text = bookModel.category
             Glide.with(context)
                 .load(bookModel.imagelink)
@@ -55,12 +57,13 @@ class ExBookMarkAdapter(private val context: Context, val DataModel: ArrayList<E
                 val bundle = Bundle()
                 bundle.putString("booktitle", bookModel.title)
                 bundle.putString("location", bookModel.location)
+                bundle.putString("city", bookModel.city)
                 bundle.putString("ctgry", bookModel.category)
                 bundle.putString("desc", bookModel.description)
                 bundle.putString("image", bookModel.imagelink)
                 bundle.putString("bookid", bookModel.id)
 
-                var intent = Intent(context, SellBookDetails::class.java)
+                var intent = Intent(context, ExPurchaseDetails::class.java)
                 intent.putExtras(bundle)
                 context.startActivity(intent)
             })

@@ -39,6 +39,7 @@ class ExchangeBookDetails : AppCompatActivity() {
         binding.bookName.text = bundle!!.getString("booktitle", "Book Title")
         binding.bookCtgry.text = bundle!!.getString("ctgry", "Category")
         binding.bookLoc.text = bundle!!.getString("location", "Book Title")
+        binding.bookCity.text = bundle!!.getString("city", "City")
         binding.bookMrp.text = bundle!!.getString("mrp", "Rs ")
         binding.bookOp.text = bundle!!.getString("expectedBooks")
         binding.bookDesc.text = bundle!!.getString("booktitle", "No description available.")

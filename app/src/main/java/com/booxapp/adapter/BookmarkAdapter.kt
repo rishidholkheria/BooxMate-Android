@@ -1,5 +1,6 @@
 package com.booxapp.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.booxapp.ForgetPassword
+import com.booxapp.PurchaseDetails
 import com.booxapp.SellBookDetails
 import com.booxapp.databinding.BookmarkItemBinding
 import com.booxapp.databinding.OneRowBinding
@@ -62,10 +64,10 @@ class BookmarkAdapter(private val context: Context, val myDataModel: ArrayList<B
                 bundle.putString("image", bookModel.imagelink!!)
                 bundle.putString("bookid", bookModel.id!!)
 
-                val i = Intent(context, ForgetPassword::class.java)
+                val i = Intent(context, PurchaseDetails::class.java)
                 i.putExtras(bundle)
+                i.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 context.startActivity(i)
-
             })
         }
     }

@@ -139,6 +139,7 @@
                             android:textSize="13sp" />
 
                         <TextView
+                            android:id="@+id/bookCity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="New Delhi"

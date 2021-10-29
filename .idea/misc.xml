@@ -10,6 +10,8 @@
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_book_details.xml" value="0.23958333333333334" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_bookmarked_books.xml" value="0.18614130434782608" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_confirm_post.xml" value="0.36666666666666664" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_ex_post_input.xml" value="0.36666666666666664" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_forget_password.xml" value="0.18432971014492755" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_main.xml" value="0.35104166666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_order_succesfull.xml" value="0.35104166666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/activity_rent_confirm_sell.xml" value="0.34375" />
@@ -23,6 +25,7 @@
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/fragment_ex_bookmark.xml" value="0.36666666666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/fragment_ex_buy.xml" value="0.34375" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/fragment_ex_post.xml" value="0.34375" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/fragment_exchange.xml" value="0.36666666666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/fragment_publish_details.xml" value="0.34375" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/fragment_purchase.xml" value="0.17831813576494426" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/fragment_rent_sell_books.xml" value="0.35104166666666664" />
@@ -30,6 +33,7 @@
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/main_container.xml" value="0.35104166666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/menu_spinner_row.xml" value="0.35104166666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/on_sale_book_details.xml" value="0.18704710144927536" />
+        <entry key="..\:/BooxMate-Android/app/src/main/res/layout/on_sell_exchange_book_details.xml" value="0.36666666666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/one_row.xml" value="0.35104166666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/past_order.xml" value="0.35104166666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/progress.xml" value="0.35104166666666664" />

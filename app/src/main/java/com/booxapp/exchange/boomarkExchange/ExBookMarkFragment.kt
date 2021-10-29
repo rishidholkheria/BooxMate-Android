@@ -67,9 +67,10 @@ class ExBookMarkFragment : Fragment() {
 
                     for (subChild in bookmarkedBooks) {
                         var myDataListModelInternal = child.getValue(ExchangeModel::class.java)
-                        if (myDataListModelInternal != null && myDataListModelInternal.id == subChild) {
+                        if (myDataListModelInternal != null && myDataListModelInternal.id!! == subChild) {
                             var title: String? = myDataListModelInternal.title
                             var location: String? = myDataListModelInternal.location
+                            var city: String? = myDataListModelInternal.city
                             var category: String? = myDataListModelInternal.category
                             var description: String? = myDataListModelInternal.description
                             var bookimage: String? = myDataListModelInternal.imagelink
@@ -82,6 +83,7 @@ class ExBookMarkFragment : Fragment() {
                                 ExchangeModel(
                                     title,
                                     location,
+                                    city,
                                     category,
                                     expectedBooks,
                                     description,

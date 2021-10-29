@@ -42,7 +42,7 @@ class PublishDetails : Fragment() {
 
             if (isDataValid(sbook_name) && isDataValid(sbook_desc) && isDataValid(sbook_ctgry) && isDataValid(
                     sbook_mrp
-                ) && isDataValid(sbook_op) && isDataValid(sbook_loc)
+                ) && isDataValid(sbook_op) && isDataValid(sbook_loc) && isDataValid(sbook_city)
             ) {
                 shareData.passingData(
                     1,

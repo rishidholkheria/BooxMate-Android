@@ -37,14 +37,16 @@ class ExPostDetailFragment : Fragment() {
             val ebook_cat = binding.category!!.selectedItem.toString()
             val ebook_expBooks = binding.expectedBooks!!.text.toString()
             val ebook_loc = binding.location!!.text.toString()
+            val ebook_city = binding.location!!.text.toString()
 
-                if (isDataValid(ebook_name) && isDataValid(ebook_desc) && isDataValid(ebook_cat) && isDataValid(
+
+            if (isDataValid(ebook_name) && isDataValid(ebook_desc) && isDataValid(ebook_cat) && isDataValid(
                         ebook_expBooks
-                    ) && isDataValid(ebook_loc)
+                    ) && isDataValid(ebook_loc) && isDataValid(ebook_city)
                 ) {
                     shareData.passingData(
                         1,
-                        ExchangeModel(ebook_name,ebook_loc,ebook_cat, ebook_expBooks, ebook_desc)
+                        ExchangeModel(ebook_name,ebook_loc,ebook_city,ebook_cat, ebook_expBooks, ebook_desc)
                     )
                 } else {
                     Toast.makeText(activity, "incomplete", Toast.LENGTH_SHORT).show()

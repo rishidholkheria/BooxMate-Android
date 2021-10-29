@@ -25,6 +25,7 @@ class PurchaseFragment : Fragment() {
     var adapter: MyAdapter? = null
     private var progressDialog: ProgressDialog? = null
     lateinit var binding: FragmentPurchaseBinding
+    lateinit var category: String
 
     private val TAG = "PurchaseFragment"
 

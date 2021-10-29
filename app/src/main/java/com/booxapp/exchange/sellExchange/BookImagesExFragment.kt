@@ -71,6 +71,7 @@ class BookImagesExFragment : Fragment() {
         binding.confirmBookTitle.text = exbookModel.title
         binding.confirmBookCategory.text = exbookModel.category
         binding.confirmSellerLocation.text = exbookModel.location
+        binding.confirmSellerCity.text = exbookModel.city
         binding.confirmBookDesc.text = exbookModel.description
         binding.confirmMrp.text = exbookModel.expectedBooks
 

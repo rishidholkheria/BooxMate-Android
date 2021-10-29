@@ -6,6 +6,7 @@ import android.os.Parcelable
 class ExchangeModel : Parcelable {
     var title: String? = null
     var location: String? = null
+    var city: String? = null
     var id: String? = null
     var category: String? = null
     var expectedBooks: String? = null
@@ -21,6 +22,7 @@ class ExchangeModel : Parcelable {
     constructor(
         title: String?,
         location: String?,
+        city: String?,
         category: String?,
         expectedBooks: String?,
         description: String?,
@@ -31,6 +33,7 @@ class ExchangeModel : Parcelable {
     ) {
         this.title = title
         this.location = location
+        this.city = city
         this.category = category
         this.expectedBooks = expectedBooks
         this.description = description
@@ -43,12 +46,14 @@ class ExchangeModel : Parcelable {
     constructor(
         title: String?,
         location: String?,
+        city: String?,
         category: String?,
         expectedBooks: String?,
         description: String?
     ) {
         this.title = title
         this.location = location
+        this.city = city
         this.category = category
         this.expectedBooks = expectedBooks
         this.description = description
@@ -57,6 +62,7 @@ class ExchangeModel : Parcelable {
     constructor(parcel: Parcel) : this() {
         title = parcel.readString()
         location = parcel.readString()
+        city = parcel.readString()
         id = parcel.readString()
         category = parcel.readString()
         expectedBooks = parcel.readString()
@@ -67,6 +73,7 @@ class ExchangeModel : Parcelable {
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(title)
         parcel.writeString(location)
+        parcel.writeString(city)
         parcel.writeString(category)
         parcel.writeString(expectedBooks)
         parcel.writeString(description)
