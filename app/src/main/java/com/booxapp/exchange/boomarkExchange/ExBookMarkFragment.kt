@@ -28,6 +28,7 @@ class ExBookMarkFragment : Fragment() {
 
     lateinit var mDatabase: DatabaseReference
     lateinit var uDatabase: DatabaseReference
+    lateinit var uid: String
 
     var eadapter: ExBookMarkAdapter? = null
 
@@ -43,10 +44,10 @@ class ExBookMarkFragment : Fragment() {
     ): View? {
         binding = FragmentExBookmarkBinding.inflate(inflater, container, false)
 
-        var uid = Prefs.getStringPrefs(
+        uid = Prefs.getStringPrefs(
             requireContext(),
             "userId"
-        )
+        )!!
 
         var myDataListModel: ArrayList<ExchangeModel> = ArrayList()
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.EX_DB_NAME)
