@@ -33,6 +33,7 @@
         <activity android:name=".purchase.BookmarkedBooks" />
         <activity android:name=".SignUp" />
         <activity android:name=".SignIn" />
+        <activity android:name=".MyProfile" />
         <activity android:name=".ForgetPassword" />
         <activity android:name=".OrderSuccesfull" />
         <activity android:name=".PurchaseCart" />

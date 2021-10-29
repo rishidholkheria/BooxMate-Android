@@ -25,6 +25,12 @@ class UserModel {
         this.id = id
     }
 
+    constructor(name: String?, loc: String?, phone: String?) {
+        this.name = name
+        this.loc = loc
+        this.phone = phone
+    }
+
     constructor(bookmarkedBooks: ArrayList<String>){
         this.bookmarkedBooks = bookmarkedBooks
     }

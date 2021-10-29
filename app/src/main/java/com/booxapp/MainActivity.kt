@@ -34,7 +34,11 @@ class MainActivity : AppCompatActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        binding.myProfileBtn!!.setOnClickListener {
+            val i = Intent(this, MyProfile::class.java)
+            startActivity(i)
+            Toast.makeText(this@MainActivity, "My profile!", Toast.LENGTH_LONG).show()
+        }
 
         binding.logoutBtn!!.setOnClickListener {
             mFirebaseAuth.signOut()
