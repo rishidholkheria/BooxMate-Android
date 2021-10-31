@@ -2,7 +2,6 @@ package com.booxapp.sell
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -10,9 +9,9 @@ import com.booxapp.Constants
 import com.booxapp.adapter.ViewRequestsAdapter
 import com.booxapp.data.Prefs
 import com.booxapp.databinding.ActivityViewRequestsBinding
-import com.booxapp.model.BookModel
 import com.booxapp.model.UserModel
 import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
 
 
 class ViewRequests : AppCompatActivity() {
@@ -22,12 +21,13 @@ class ViewRequests : AppCompatActivity() {
 
     var viewReqAdapter: ViewRequestsAdapter? = null
 
-    private val TAG = "View Requests"
+    private val TAG = "ViewRequests"
 
     lateinit var uid: String
     lateinit var bId: String
 
     var buyerIds: ArrayList<String> = ArrayList()
+    var myDataListModel: ArrayList<UserModel> = ArrayList()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +39,6 @@ class ViewRequests : AppCompatActivity() {
         bDatabase = FirebaseDatabase.getInstance().getReference(Constants.DB_NAME)
         uDatabase = FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
 
-        var myDataListModel: ArrayList<UserModel> = ArrayList()
 
         val bundle = intent.extras
         bId = bundle!!.getString("bookid").toString()
@@ -47,8 +46,8 @@ class ViewRequests : AppCompatActivity() {
         Log.e(TAG, bId)
 
         uid = Prefs.getStringPrefs(
-                applicationContext,
-                "userId"
+            applicationContext,
+            "userId"
         ).toString()
 
         addBuyersId()
@@ -65,20 +64,20 @@ class ViewRequests : AppCompatActivity() {
                     child.key?.let { Log.i(TAG, it) }
                     for(subChild in buyerIds){
                         var myDataListModelInternal = child.getValue(UserModel::class.java)
-                        if (myDataListModelInternal != null && myDataListModelInternal.userId!! == subChild) {
-                            var name: String? = myDataListModelInternal.name!!
-                            var loc: String? = myDataListModelInternal.loc!!
-                            var contact: String? = myDataListModelInternal.phone!!
-                            var buyerId: String? = myDataListModelInternal.id!!
+                        if (myDataListModelInternal != null && myDataListModelInternal.userId == subChild) {
+                            var name: String? = myDataListModelInternal.name
+                            var loc: String? = myDataListModelInternal.loc
+                            var contact: String? = myDataListModelInternal.phone
+                            var buyerId: String? = myDataListModelInternal.id
 
                             Log.i(TAG, name!!)
 
 
                             myDataListModel.add(
                                 UserModel(
-                                    name!!,
-                                    loc!!,
-                                    contact!!,
+                                    name,
+                                    loc,
+                                    contact,
                                     buyerId
                                 )
                             )

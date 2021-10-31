@@ -1,5 +1,6 @@
 package com.booxapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -7,8 +8,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.booxapp.data.Prefs
 import com.booxapp.databinding.ActivityEditProfileBinding
-import com.booxapp.model.BookModel
-import com.booxapp.model.ExchangeModel
 import com.booxapp.model.UserModel
 import com.google.firebase.database.*
 
@@ -18,7 +17,7 @@ class MyProfile : AppCompatActivity() {
     lateinit var uDatabase: DatabaseReference
     lateinit var uid: String
     lateinit var tid: String
-    var userDetails: ArrayList<UserModel> = ArrayList()
+    var myDataListModel: ArrayList<UserModel> = ArrayList()
 
     lateinit var binding: ActivityEditProfileBinding
 
@@ -45,7 +44,7 @@ class MyProfile : AppCompatActivity() {
             "Id"
         ).toString()
 
-        loadUserData()
+//        loadUserData()
 
 
         binding.confirmEditChanges.setOnClickListener(View.OnClickListener {
@@ -53,14 +52,19 @@ class MyProfile : AppCompatActivity() {
             val editMno = binding.editProfileMobilenumber!!.getText().toString().trim { it <= ' ' }
             val editLoc = binding.editProfileLocation!!.getText().toString().trim { it <= ' ' }
 
-            userDetails.add(UserModel(editUsername, editMno, editLoc))
+            myDataListModel.add(UserModel(editUsername, editMno, editLoc))
 
-            saveUserDetails(userDetails, object : onCompleteFirebase {
-                override fun onCallback(value: Boolean) {
-                    Toast.makeText(applicationContext, "Done", Toast.LENGTH_LONG).show()
-                }
-            })
+//            saveUserDetails(myDataListModel, object : onCompleteFirebase {
+//                override fun onCallback(value: Boolean) {
+//                    Toast.makeText(applicationContext, "Done", Toast.LENGTH_LONG).show()
+//                }
+//            })
 
+        })
+
+        binding.purchasedBooks.setOnClickListener(View.OnClickListener {
+            val i = Intent(this, MyOrders::class.java)
+            startActivity(i)
         })
 
 
