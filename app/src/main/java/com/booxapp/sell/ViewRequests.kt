@@ -72,7 +72,6 @@ class ViewRequests : AppCompatActivity() {
 
                             Log.i(TAG, name!!)
 
-
                             myDataListModel.add(
                                 UserModel(
                                     name,
@@ -81,7 +80,7 @@ class ViewRequests : AppCompatActivity() {
                                     buyerId
                                 )
                             )
-                            break
+
                         }
                         else{
                             Log.i(TAG, "Testing it is!")
