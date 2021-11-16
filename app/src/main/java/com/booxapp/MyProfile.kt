@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.booxapp.data.Prefs
 import com.booxapp.databinding.ActivityEditProfileBinding
 import com.booxapp.model.UserModel
+import com.bumptech.glide.Glide
 import com.google.firebase.database.*
 
 class MyProfile : AppCompatActivity() {
@@ -16,13 +17,6 @@ class MyProfile : AppCompatActivity() {
     lateinit var uDatabase: DatabaseReference
     lateinit var uid: String
     lateinit var tid: String
-    var myDataListModel: ArrayList<UserModel> = ArrayList()
-
-
-    lateinit var uname: String
-    lateinit var uemail: String
-    lateinit var uphoneNumber: String
-    lateinit var uloc: String
 
     lateinit var binding: ActivityEditProfileBinding
 
@@ -51,12 +45,12 @@ class MyProfile : AppCompatActivity() {
 
         loadUserData()
 
-
-        //--------PROBLEM---------
         binding.confirmEditChanges.setOnClickListener(View.OnClickListener {
             val editUsername = binding.editProfileUsername!!.getText().toString().trim { it <= ' ' }
             val editMno = binding.editProfileMobilenumber!!.getText().toString().trim { it <= ' ' }
             val editLoc = binding.editProfileLocation!!.getText().toString().trim { it <= ' ' }
+
+            saveUserDetails(editUsername, editMno, editLoc)
 
         })
 
@@ -64,7 +58,6 @@ class MyProfile : AppCompatActivity() {
             val i = Intent(this, MyOrders::class.java)
             startActivity(i)
         })
-
 
     }
 
@@ -99,26 +92,27 @@ class MyProfile : AppCompatActivity() {
         })
     }
 
-//    private fun saveUserDetails(userModel: ArrayList<UserModel>, onCompleteListener: onCompleteFirebase) {
-//        uDatabase.child(tid!!).addListenerForSingleValueEvent(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                uDatabase.child(tid!!).updateChildren(
-//                    userModel,
-//                    DatabaseReference.CompletionListener { error, ref ->
-//                        if (error == null) {
-//                            onCompleteListener.onCallback(true)
+    private fun saveUserDetails(name: String, mobile: String, location: String) {
+
+        uDatabase.child(tid!!).child("name").setValue(name)
+        uDatabase.child(tid!!).child("phone").setValue(mobile)
+        uDatabase.child(tid!!).child("loc").setValue(location)
+
+        Toast.makeText(applicationContext, "Changes Saved", Toast.LENGTH_SHORT).show()
+    }
+
+//Update children example code
+
+//    fun attachWishListWithUser(onCompleteListener: onCompleteFirebase) {
 //
-//                        } else {
-//                            Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
-//                            onCompleteListener.onCallback(false)
-//                        }
-//                    })
-//            }
+//        val userLessonsValues = umodel.toMap()
 //
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//            }
-//        })
+//        val childUpdates = hashMapOf<String, Any>(
+//            "/$tid" to userLessonsValues
+//        )
+//        uDatabase.updateChildren(childUpdates)
+//
+//        onCompleteListener.onCallback(true)
 //    }
 
 }
