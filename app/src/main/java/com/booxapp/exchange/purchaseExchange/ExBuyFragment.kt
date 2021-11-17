@@ -61,6 +61,7 @@ class ExBuyFragment : Fragment() {
                         var location: String? = DataListModelInternal.location
                         var city: String? = DataListModelInternal.city
                         var category: String? = DataListModelInternal.category
+                        var mrp: String? = DataListModelInternal.mrp
                         var description: String? = DataListModelInternal.description
                         var bookimage: String? = DataListModelInternal.imagelink
                         var exId : String? = DataListModelInternal.id
@@ -71,6 +72,7 @@ class ExBuyFragment : Fragment() {
                                 location,
                                 city,
                                 category,
+                                mrp!!,
                                 expectedBooks,
                                 description,
                                 exId,

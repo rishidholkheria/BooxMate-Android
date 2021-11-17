@@ -76,6 +76,27 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="5dp"
+                android:background="#ffffff">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/mrp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Book Mrp"
+                    android:inputType="text"
+                    android:maxLength="500"
+                    android:paddingTop="5dp"
+                    android:textColorHint="#000000"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -95,6 +116,7 @@
                 android:layout_marginEnd="5dp"
                 android:entries="@array/book_category"
                 android:paddingTop="3dp" />
+
 
             <TextView
                 android:layout_width="match_parent"

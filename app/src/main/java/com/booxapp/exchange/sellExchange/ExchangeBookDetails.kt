@@ -41,7 +41,7 @@ class ExchangeBookDetails : AppCompatActivity() {
         binding.bookLoc.text = bundle!!.getString("location", "Book Title")
         binding.bookCity.text = bundle!!.getString("city", "City")
         binding.bookMrp.text = bundle!!.getString("mrp", "Rs ")
-        binding.bookOp.text = bundle!!.getString("expectedBooks")
+        binding.expectedBooks.text = bundle!!.getString("expectedBooks", "No books available")
         binding.bookDesc.text = bundle!!.getString("booktitle", "No description available.")
         Glide.with(this)
             .load(bundle!!.getString("image", "No Image"))

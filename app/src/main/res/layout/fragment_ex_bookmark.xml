@@ -12,6 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
-        tools:listitem="@layout/past_order" />
+        tools:listitem="@layout/one_row" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

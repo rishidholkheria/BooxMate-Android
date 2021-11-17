@@ -13,7 +13,7 @@ class ExchangeModel : Parcelable {
     var description: String? = null
     var imagelink: String? = null
     var bookmark: Boolean? = null
-    var exchangeRequests: String? = null
+    var mrp: String? = null
     var userId: String? = null
     var status: Boolean = false
 
@@ -24,6 +24,7 @@ class ExchangeModel : Parcelable {
         location: String?,
         city: String?,
         category: String?,
+        mrp: String,
         expectedBooks: String?,
         description: String?,
         id: String?,
@@ -35,6 +36,7 @@ class ExchangeModel : Parcelable {
         this.location = location
         this.city = city
         this.category = category
+        this.mrp = mrp
         this.expectedBooks = expectedBooks
         this.description = description
         this.imagelink = imagelink
@@ -48,6 +50,7 @@ class ExchangeModel : Parcelable {
         location: String?,
         city: String?,
         category: String?,
+        mrp: String,
         expectedBooks: String?,
         description: String?
     ) {
@@ -55,6 +58,7 @@ class ExchangeModel : Parcelable {
         this.location = location
         this.city = city
         this.category = category
+        this.mrp = mrp
         this.expectedBooks = expectedBooks
         this.description = description
     }
@@ -65,6 +69,7 @@ class ExchangeModel : Parcelable {
         city = parcel.readString()
         id = parcel.readString()
         category = parcel.readString()
+        mrp = parcel.readString()
         expectedBooks = parcel.readString()
         description = parcel.readString()
         imagelink = parcel.readString()
@@ -75,6 +80,7 @@ class ExchangeModel : Parcelable {
         parcel.writeString(location)
         parcel.writeString(city)
         parcel.writeString(category)
+        parcel.writeString(mrp)
         parcel.writeString(expectedBooks)
         parcel.writeString(description)
         parcel.writeString(imagelink)

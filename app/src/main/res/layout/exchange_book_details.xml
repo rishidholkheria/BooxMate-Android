@@ -66,14 +66,30 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/bookOfferedPrice"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="₹ 250"
-                        android:textColor="#80000000"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="₹ "
+                            android:textColor="#80000000"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/bookMrp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="250"
+                            android:textColor="#80000000"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
@@ -134,7 +150,14 @@
                             android:id="@+id/bookLoc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Karol Bagh, "
+                            android:text="Karol Bagh"
+                            android:textColor="#90000000"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=", "
                             android:textColor="#90000000"
                             android:textSize="13sp" />
 
@@ -161,36 +184,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:paddingTop="25dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="120dp"
-                            android:layout_height="25dp"
-                            android:layout_gravity="center_horizontal"
-                            android:background="@drawable/rect_button"
-                            android:gravity="center"
-                            android:text="MRP"
-                            android:textColor="#ffffff" />
-
-                        <TextView
-                            android:id="@+id/bookMrp"
-                            android:layout_width="120dp"
-                            android:layout_height="25dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:gravity="center"
-                            android:text="Rs 1000"
-                            android:textColor="#000000" />
-
-                    </LinearLayout>
 
                     <View
                         android:layout_width="1dp"
@@ -205,22 +200,20 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="120dp"
+                            android:layout_width="140dp"
                             android:layout_height="25dp"
-                            android:layout_gravity="center_horizontal"
                             android:background="@drawable/rect_button"
                             android:gravity="center"
-                            android:text="OFFER"
+                            android:text="EXPECTED BOOKS"
                             android:textColor="#ffffff" />
 
                         <TextView
-                            android:id="@+id/bookOp"
-                            android:layout_width="120dp"
+                            android:id="@+id/expectedBooks"
+                            android:layout_width="match_parent"
                             android:layout_height="25dp"
-                            android:layout_gravity="center_horizontal"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
-                            android:gravity="center"
+                            android:gravity="start"
                             android:text="Rs 250"
                             android:textColor="#000000" />
 

@@ -41,8 +41,7 @@
                     android:layout_height="40dp"
                     android:layout_centerInParent="true"
                     android:background="@drawable/ic_bookmark1"
-                    android:button="@null"
-                    android:checked="false" />
+                    android:button="@null" />
 
             </RelativeLayout>
 
@@ -68,14 +67,29 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/bookOfferedPrice"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="₹ 250"
-                        android:textColor="#80000000"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="₹ "
+                            android:textColor="#80000000"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/bookOfferedPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="250"
+                            android:textColor="#80000000"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
@@ -136,9 +150,17 @@
                             android:id="@+id/bookLoc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Karol Bagh, "
+                            android:text="Karol Bagh"
                             android:textColor="#90000000"
                             android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=", "
+                            android:textColor="#80000000"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/bookCity"

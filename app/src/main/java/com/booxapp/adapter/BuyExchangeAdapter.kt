@@ -46,6 +46,7 @@ class BuyExchangeAdapter(private val context: Context, val DataModel: ArrayList<
             binding.tvTitle.text = exModel.title
             binding.tvLocation.text = exModel.location
             binding.tvCity.text = exModel.city
+            binding.tvPrice.text = exModel.mrp
 
             Glide.with(context)
                 .load(exModel.imagelink)
@@ -57,6 +58,8 @@ class BuyExchangeAdapter(private val context: Context, val DataModel: ArrayList<
                 bundle.putString("location", exModel.location)
                 bundle.putString("city", exModel.city)
                 bundle.putString("ctgry", exModel.category)
+                bundle.putString("mrp", exModel.mrp)
+                bundle.putString("offeredBooks", exModel.expectedBooks)
                 bundle.putString("desc", exModel.description)
                 bundle.putString("image", exModel.imagelink)
                 bundle.putString("exBookId", exModel.id)

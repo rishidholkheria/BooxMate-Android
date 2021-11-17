@@ -20,7 +20,6 @@ import kotlin.collections.ArrayList
 class PostExchangeAdapter(private val context: Context, val DataModel: ArrayList<ExchangeModel>) :
     RecyclerView.Adapter<PostExchangeAdapter.ViewHolder>() {
 
-    private var firebaseUser = FirebaseAuth.getInstance().currentUser
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -49,6 +48,7 @@ class PostExchangeAdapter(private val context: Context, val DataModel: ArrayList
             binding.tvLocation.text = exModel.location
             binding.tvCity.text = exModel.city
             binding.tvCat.text = exModel.category
+            binding.tvPrice.text = exModel.mrp
 
             Glide.with(context)
                 .load(exModel.imagelink)
@@ -60,6 +60,8 @@ class PostExchangeAdapter(private val context: Context, val DataModel: ArrayList
                 bundle.putString("location", exModel.location)
                 bundle.putString("city", exModel.city)
                 bundle.putString("ctgry", exModel.category)
+                bundle.putString("mrp", exModel.mrp)
+                bundle.putString("expectedBooks", exModel.expectedBooks)
                 bundle.putString("desc", exModel.description)
                 bundle.putString("image", exModel.imagelink)
                 bundle.putString("exBookId", exModel.id)
