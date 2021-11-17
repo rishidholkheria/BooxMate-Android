@@ -3,30 +3,14 @@ package com.booxapp.adapter
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.booxapp.BookDetails
 import com.booxapp.PurchaseDetails
-import com.booxapp.R
-import com.booxapp.SellBookDetails
-import com.booxapp.data.Prefs
-import com.booxapp.databinding.FragmentPurchaseBinding
-import com.booxapp.databinding.FragmentSellBinding
 import com.booxapp.databinding.OneRowBinding
 import com.booxapp.model.BookModel
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import java.util.*
 import kotlin.collections.ArrayList
 
 class MyAdapter(private val context: Context, val myDataModel: ArrayList<BookModel>) :

@@ -37,18 +37,22 @@ class MainActivity : AppCompatActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        binding.myProfileBtn!!.setOnClickListener {
-//            val i = Intent(this, MyProfile::class.java)
-//            startActivity(i)
-//            Toast.makeText(this@MainActivity, "My profile!", Toast.LENGTH_LONG).show()
-//        }
+        binding.myProfileBtn!!.setOnClickListener {
+            val i = Intent(this, MyProfile::class.java)
+            startActivity(i)
+        }
 
-//        binding.logoutBtn!!.setOnClickListener {
-//            mFirebaseAuth.signOut()
-//            val i = Intent(this, SignIn::class.java)
-//            startActivity(i)
-//            Toast.makeText(this@MainActivity, "Logged Out Successfully!", Toast.LENGTH_LONG).show()
-//        }
+        binding.bookBuzzBtn!!.setOnClickListener {
+            val i = Intent(this, BookBuzz::class.java)
+            startActivity(i)
+        }
+
+        binding.logoutBtn!!.setOnClickListener {
+            mFirebaseAuth.signOut()
+            val i = Intent(this, SignIn::class.java)
+            startActivity(i)
+            Toast.makeText(this@MainActivity, "Logged Out Successfully!", Toast.LENGTH_LONG).show()
+        }
 
         setupViewPager(binding.myViewPager)
         binding.tablayout!!.setupWithViewPager(binding.myViewPager)

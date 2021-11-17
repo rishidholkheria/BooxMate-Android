@@ -33,7 +33,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_margin="20dp">
 
-            <!--                android:background="@drawable/circle_purple"-->
+                <!--                android:background="@drawable/circle_purple"-->
 
                 <CheckBox
                     android:id="@+id/bookmark"
@@ -418,6 +418,16 @@ NCERT Exampler is best book for boards. The condition of these books is also goo
             android:background="@drawable/button_bg"
             android:text="Request Purchase"
             android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/disable_request"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/disable_button_bg"
+            android:text="Book Requested"
+            android:textColor="#C8000000"
+            android:visibility="gone" />
 
 
     </LinearLayout>
