@@ -45,7 +45,7 @@ class BookmarkAdapter(private val context: Context, val myDataModel: ArrayList<B
         fun bind(context: Context, bookModel: BookModel) {
             binding.tvTitle.text = bookModel.title
             binding.tvLocation.text = bookModel.location
-            binding.tvCity.text = ", " + bookModel.city
+            binding.tvCity.text = bookModel.city
             binding.tvPrice.text = bookModel.offeredprice
             binding.tvCat.text = bookModel.category
             Glide.with(context)
