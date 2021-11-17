@@ -1,6 +1,7 @@
 package com.booxapp
 
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -20,6 +21,7 @@ class PurchaseDetails : AppCompatActivity() {
         FirebaseDatabase.getInstance().getReference(Constants.DB_NAME)
 
     lateinit var sellerId: String
+    private var mLastClickTime: Long = 0
 
     lateinit var uid: String
     lateinit var tid: String
@@ -73,12 +75,19 @@ class PurchaseDetails : AppCompatActivity() {
             }
         })
 
+
         binding.request.setOnClickListener(View.OnClickListener {
+
             FirebaseAdapter(applicationContext).saveBuyerId(bId!!, object : onCompleteFirebase {
                 override fun onCallback(value: Boolean) {
                     Toast.makeText(applicationContext, "Done", Toast.LENGTH_LONG).show()
                 }
             })
+
+            binding.request.isClickable = false
+            binding.request.setVisibility(View.GONE)
+            binding.disableRequest.setVisibility(View.VISIBLE)
+
 
         })
 
