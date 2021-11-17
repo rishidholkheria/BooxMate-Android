@@ -37,7 +37,7 @@ class ExPurchaseDetails : AppCompatActivity() {
         binding.bookLoc.text = bundle!!.getString("location", "Book Title")
         binding.bookCity.text = bundle!!.getString("city", "City")
         binding.expectedBooks.text = bundle!!.getString("expectedBooks", "No book available ")
-        binding.bookDesc.text = bundle!!.getString("booktitle", "No description available.")
+        binding.bookDesc.text = bundle!!.getString("desc", "No description available.")
         Glide.with(this)
             .load(bundle!!.getString("image", "No Image"))
             .into(binding.bookImage);

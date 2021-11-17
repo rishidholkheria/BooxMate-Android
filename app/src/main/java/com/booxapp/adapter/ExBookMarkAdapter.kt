@@ -49,6 +49,8 @@ class ExBookMarkAdapter(private val context: Context, val DataModel: ArrayList<E
             binding.tvLocation.text = bookModel.location
             binding.tvCity.text = bookModel.city
             binding.tvCat.text = bookModel.category
+            binding.tvPrice.text = bookModel.mrp
+
             Glide.with(context)
                 .load(bookModel.imagelink)
                 .into(binding.imageView);
@@ -59,6 +61,8 @@ class ExBookMarkAdapter(private val context: Context, val DataModel: ArrayList<E
                 bundle.putString("location", bookModel.location)
                 bundle.putString("city", bookModel.city)
                 bundle.putString("ctgry", bookModel.category)
+                bundle.putString("mrp", bookModel.mrp)
+                bundle.putString("expectedBooks", bookModel.expectedBooks)
                 bundle.putString("desc", bookModel.description)
                 bundle.putString("image", bookModel.imagelink)
                 bundle.putString("bookid", bookModel.id)

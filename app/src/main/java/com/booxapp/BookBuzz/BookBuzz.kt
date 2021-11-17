@@ -29,7 +29,7 @@ class BookBuzz : AppCompatActivity() {
 
     private fun bookBuzzCall(){
         val bookBuzzService = BookBuzzService.buildService(ApiService::class.java)
-        val call = bookBuzzService.getBookHeadlines("in",1)
+        val call = bookBuzzService.getBookHeadlines("books, new authors, new books",1)
         call.enqueue(object : Callback<News> {
             override fun onResponse(call: Call<News>, response: Response<News>) {
                 if (response.isSuccessful) {
