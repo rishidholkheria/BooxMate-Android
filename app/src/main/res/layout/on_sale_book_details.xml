@@ -405,8 +405,7 @@ NCERT Exampler is best book for boards. The condition of these books is also goo
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             app:cardCornerRadius="10dp"
-            app:cardElevation="8dp"
-            android:visibility="gone">
+            app:cardElevation="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -457,7 +456,6 @@ NCERT Exampler is best book for boards. The condition of these books is also goo
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/req_buyer_pno"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="end"

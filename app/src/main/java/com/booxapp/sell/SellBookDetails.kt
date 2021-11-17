@@ -1,6 +1,7 @@
 package com.booxapp
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -27,6 +28,7 @@ class SellBookDetails : AppCompatActivity() {
 
     lateinit var uid: String
     lateinit var tid: String
+    lateinit var phone: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,11 +64,18 @@ class SellBookDetails : AppCompatActivity() {
 
         checkIfSold(bId.toString())
 
+        binding.reqBuyerCall.setOnClickListener {
+            val callIntent = Intent(Intent.ACTION_DIAL)
+            callIntent.data = Uri.parse("tel:$phone")
+            startActivity(callIntent)
+        }
+
         binding.viewRequests.setOnClickListener(View.OnClickListener {
             val i = Intent(this, ViewRequests::class.java)
             i.putExtra("bookid", bId)
             startActivity(i)
         })
+
     }
 
     private fun checkIfSold(bId: String) {
@@ -90,6 +99,7 @@ class SellBookDetails : AppCompatActivity() {
                     TODO("Not yet implemented")
                 }
             })
+
         }
 
     private fun getBuyerDetails(buyerId: String){
@@ -99,7 +109,7 @@ class SellBookDetails : AppCompatActivity() {
                     if (child.child("id").value.toString() == buyerId ) {
                         binding.reqBuyerName.text = child.child("name").value.toString()
                         binding.reqBuyerLoc.text = child.child("loc").value.toString()
-                        binding.reqBuyerPno.text = child.child("phone").value.toString()
+                        phone = child.child("phone").value.toString()
                         break;
                     }
                 }
