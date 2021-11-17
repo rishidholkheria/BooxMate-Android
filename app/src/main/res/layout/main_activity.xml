@@ -24,14 +24,15 @@
                 android:background="#ffffff"
                 android:orientation="horizontal">
 
-                <ImageButton
-                    android:id="@+id/myProfileBtn"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="#ffffff"
-                    android:src="@drawable/ic_user" />
+<!--                <ImageButton-->
+<!--                    android:id="@+id/myProfileBtn"-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:background="#ffffff"-->
+<!--                    android:src="@drawable/ic_user" />-->
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -40,19 +41,19 @@
                     android:layout_marginTop="25dp"
                     android:layout_marginBottom="16dp"
                     android:fontFamily="@font/quicksand_medium"
-                    android:text="BOOX"
+                    android:text="BOOXMATE"
                     android:textColor="#7435E4"
                     android:textSize="20dp" />
 
-                <ImageButton
-                    android:id="@+id/logoutBtn"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="#ffffff"
-                    android:src="@drawable/ic_logout" />
+                <!--                <ImageButton-->
+<!--                    android:id="@+id/logoutBtn"-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:background="#ffffff"-->
+<!--                    android:src="@drawable/ic_logout" />-->
 
             </RelativeLayout>
 

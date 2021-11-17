@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/bookBuzz"
+        android:icon="@drawable/ic_logout"
+        android:title="Book Buzz" />
+
+    <item
+        android:id="@+id/myProfile"
+        android:icon="@drawable/ic_info_outline_black_24dp"
+        android:title="My Profile"/>
+
+</menu>

@@ -3,6 +3,7 @@ package com.booxapp
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
@@ -21,6 +22,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import android.R
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,21 +37,40 @@ class MainActivity : AppCompatActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.myProfileBtn!!.setOnClickListener {
-            val i = Intent(this, MyProfile::class.java)
-            startActivity(i)
-            Toast.makeText(this@MainActivity, "My profile!", Toast.LENGTH_LONG).show()
-        }
+//        binding.myProfileBtn!!.setOnClickListener {
+//            val i = Intent(this, MyProfile::class.java)
+//            startActivity(i)
+//            Toast.makeText(this@MainActivity, "My profile!", Toast.LENGTH_LONG).show()
+//        }
 
-        binding.logoutBtn!!.setOnClickListener {
-            mFirebaseAuth.signOut()
-            val i = Intent(this, SignIn::class.java)
-            startActivity(i)
-            Toast.makeText(this@MainActivity, "Logged Out Successfully!", Toast.LENGTH_LONG).show()
-        }
+//        binding.logoutBtn!!.setOnClickListener {
+//            mFirebaseAuth.signOut()
+//            val i = Intent(this, SignIn::class.java)
+//            startActivity(i)
+//            Toast.makeText(this@MainActivity, "Logged Out Successfully!", Toast.LENGTH_LONG).show()
+//        }
 
         setupViewPager(binding.myViewPager)
         binding.tablayout!!.setupWithViewPager(binding.myViewPager)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(com.booxapp.R.menu.side_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        com.booxapp.R.id.bookBuzz -> {
+            val intent = Intent(this@MainActivity, BookBuzz::class.java)
+            startActivity(intent)
+            true
+        }
+        com.booxapp.R.id.myProfile -> {
+            val intent = Intent(this@MainActivity, MyProfile::class.java)
+            startActivity(intent)
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     private val userDetails: Unit
@@ -66,13 +88,6 @@ class MainActivity : AppCompatActivity() {
             })
 
         }
-
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.menu, menu)
-        return true
-    }
 
     private fun setupViewPager(viewPager: ViewPager?) {
         val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
