@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.booxapp.data.Prefs
 import com.booxapp.databinding.ActivityBookDetailsBinding
 import com.booxapp.databinding.OnSaleBookDetailsBinding
@@ -75,6 +76,12 @@ class SellBookDetails : AppCompatActivity() {
                         if (child.child("id").value.toString() == bId && child.child("status").value == true) {
                             binding.viewRequests.isClickable = false
                             binding.viewRequests.setText("Book Sold")
+                            binding.buyerDetailsCv.isVisible = true
+                            var buyers: ArrayList<String> = child.child("requests").value as ArrayList<String>
+                            Log.e("Sell", buyers.toString())
+                            var buyerId: String = buyers[0]  //temporary solution
+                            getBuyerDetails(buyerId)
+
                             break;
                         }
                     }
@@ -84,4 +91,22 @@ class SellBookDetails : AppCompatActivity() {
                 }
             })
         }
+
+    private fun getBuyerDetails(buyerId: String){
+        uDatabase!!.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (child in dataSnapshot.children) {
+                    if (child.child("id").value.toString() == buyerId ) {
+                        binding.reqBuyerName.text = child.child("name").value.toString()
+                        binding.reqBuyerLoc.text = child.child("loc").value.toString()
+                        binding.reqBuyerPno.text = child.child("phone").value.toString()
+                        break;
+                    }
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
 }

@@ -91,7 +91,7 @@ class ViewRequestsAdapter(private val context: Context, val DataModel: ArrayList
         }
 
 
-        private fun acceptRequest(bId: String, onCompleteListener: onCompleteFirebase) {
+        private fun acceptRequest(bId: String,onCompleteListener: onCompleteFirebase) {
             bDatabase?.child(bId)?.child("status")
                 ?.addListenerForSingleValueEvent(
                     object : ValueEventListener {
@@ -117,6 +117,10 @@ class ViewRequestsAdapter(private val context: Context, val DataModel: ArrayList
                             TODO("Not yet implemented")
                         }
                     })
+
+            //temporary solution
+            bDatabase.child(bId).child("requests").child("0").setValue(buyerId)
+
         }
 
         private fun saveInSoldBooks(onCompleteListener: onCompleteFirebase){
