@@ -123,7 +123,6 @@ class ViewRequestsAdapter(
                         }
                     })
 
-            //temporary solution
             bDatabase.child(bId).child("soldTo").setValue(buyerId)
 
         }

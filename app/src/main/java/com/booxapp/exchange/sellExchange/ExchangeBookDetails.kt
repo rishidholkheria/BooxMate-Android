@@ -1,11 +1,13 @@
 package com.booxapp
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.booxapp.data.Prefs
 import com.booxapp.databinding.ActivityBookDetailsBinding
 import com.booxapp.databinding.ExchangeBookDetailsBinding
@@ -29,6 +31,7 @@ class ExchangeBookDetails : AppCompatActivity() {
 
     lateinit var uid: String
     lateinit var tid: String
+    lateinit var phone: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +66,12 @@ class ExchangeBookDetails : AppCompatActivity() {
 
         checkIfSold(exBookId.toString())
 
+        binding.reqBuyerCall.setOnClickListener {
+            val callIntent = Intent(Intent.ACTION_DIAL)
+            callIntent.data = Uri.parse("tel:$phone")
+            startActivity(callIntent)
+        }
+
         binding.exViewRequests.setOnClickListener(View.OnClickListener {
             val i = Intent(this, ExchangeViewRequests::class.java)
             i.putExtra("exBookId", exBookId)
@@ -78,11 +87,32 @@ class ExchangeBookDetails : AppCompatActivity() {
                     if (child.child("id").value.toString() == bId && child.child("status").value == true) {
                         binding.exViewRequests.isClickable = false
                         binding.exViewRequests.setText("Book Sold")
+                        binding.buyerDetailsCv.isVisible = true
+                        var buyerId = child.child("soldTo").value.toString()
+                        getBuyerDetails(buyerId)
                         break;
                     }
                 }
             }
 
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+
+    private fun getBuyerDetails(buyerId: String){
+        uDatabase!!.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (child in dataSnapshot.children) {
+                    if (child.child("id").value.toString() == buyerId ) {
+                        binding.reqBuyerName.text = child.child("name").value.toString()
+                        binding.reqBuyerLoc.text = child.child("loc").value.toString()
+                        phone = child.child("phone").value.toString()
+                        break;
+                    }
+                }
+            }
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }

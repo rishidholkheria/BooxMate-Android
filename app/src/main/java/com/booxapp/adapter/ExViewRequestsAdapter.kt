@@ -117,6 +117,8 @@ class ExViewRequestsAdapter(private val context: Context, val DataModel: ArrayLi
                             TODO("Not yet implemented")
                         }
                     })
+
+            eDatabase.child(bId).child("soldTo").setValue(buyerId)
         }
 
         private fun saveInSoldBooks(onCompleteListener: onCompleteFirebase){
