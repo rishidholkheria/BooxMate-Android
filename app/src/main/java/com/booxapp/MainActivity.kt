@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbarLayout.toobar)
 
-        binding.toolbarLayout.toobar.overflowIcon?.setTint(Color.BLACK)
+        binding.toolbarLayout.toobar.overflowIcon?.setTint(Color.WHITE)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(false) //For back btn
         supportActionBar?.setDisplayShowHomeEnabled(false) //Both lines for back btn

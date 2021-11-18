@@ -1,56 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toobar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:id="@+id/toobar"
-    android:background="#ffffff"
+    android:background="@color/purple"
     android:orientation="vertical">
 
 
-        <RelativeLayout
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal">
+        <!--            <androidx.appcompat.widget.LinearLayoutCompat-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:gravity="center"-->
+        <!--                android:orientation="horizontal">-->
 
-                <ImageButton
-                    android:id="@+id/myProfileBtn"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="#ffffff"
-                    android:src="@drawable/ic_user" />
+        <!--                <ImageButton-->
+        <!--                    android:id="@+id/myProfileBtn"-->
+        <!--                    android:layout_width="50dp"-->
+        <!--                    android:layout_height="50dp"-->
+        <!--                    android:layout_centerVertical="true"-->
+        <!--                    android:layout_marginEnd="10dp"-->
+        <!--                    android:background="#ffffff"-->
+        <!--                    android:src="@drawable/ic_user" />-->
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+        <!--            </androidx.appcompat.widget.LinearLayoutCompat>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="@font/quicksand_medium"
-                android:text="BOOXMATE"
-                android:textColor="#7435E4"
-                android:textSize="18sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/quicksand_medium"
+            android:paddingLeft="8dp"
+            android:text="BOOXMATE"
+            android:textColor="#fff"
+            android:textSize="20sp" />
 
 
-            <ImageButton
-                android:id="@+id/logoutBtn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="10dp"
-                android:background="#ffffff"
-                android:src="@drawable/ic_logout" />
+        <!--            <ImageButton-->
+        <!--                android:id="@+id/logoutBtn"-->
+        <!--                android:layout_width="50dp"-->
+        <!--                android:layout_height="50dp"-->
+        <!--                android:layout_alignParentEnd="true"-->
+        <!--                android:layout_centerVertical="true"-->
+        <!--                android:layout_marginEnd="10dp"-->
+        <!--                android:background="#ffffff"-->
+        <!--                android:src="@drawable/ic_logout" />-->
 
-        </RelativeLayout>
+    </RelativeLayout>
 
 </androidx.appcompat.widget.Toolbar>
