@@ -7,11 +7,13 @@
     <item
         android:id="@+id/bookBuzz"
         android:icon="@drawable/ic_logout"
-        android:title="Book Buzz" />
+        android:orderInCategory="100"
+        android:title="Book Buzz"
+        android:visible="true" />
 
     <item
         android:id="@+id/myProfile"
         android:icon="@drawable/ic_info_outline_black_24dp"
-        android:title="My Profile"/>
+        android:title="My Profile" />
 
 </menu>

@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import android.R
+import android.graphics.Color
 
 
 class MainActivity : AppCompatActivity() {
@@ -37,22 +38,29 @@ class MainActivity : AppCompatActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.myProfileBtn!!.setOnClickListener {
-            val i = Intent(this, MyProfile::class.java)
-            startActivity(i)
-        }
+        setSupportActionBar(binding.toolbarLayout.toobar)
 
-        binding.bookBuzzBtn!!.setOnClickListener {
-            val i = Intent(this, BookBuzz::class.java)
-            startActivity(i)
-        }
+        binding.toolbarLayout.toobar.overflowIcon?.setTint(Color.BLACK)
 
-        binding.logoutBtn!!.setOnClickListener {
-            mFirebaseAuth.signOut()
-            val i = Intent(this, SignIn::class.java)
-            startActivity(i)
-            Toast.makeText(this@MainActivity, "Logged Out Successfully!", Toast.LENGTH_LONG).show()
-        }
+        supportActionBar?.setDisplayHomeAsUpEnabled(false) //For back btn
+        supportActionBar?.setDisplayShowHomeEnabled(false) //Both lines for back btn
+
+//        binding.myProfileBtn!!.setOnClickListener {
+//            val i = Intent(this, MyProfile::class.java)
+//            startActivity(i)
+//        }
+//
+//        binding.bookBuzzBtn!!.setOnClickListener {
+//            val i = Intent(this, BookBuzz::class.java)
+//            startActivity(i)
+//        }
+//
+//        binding.logoutBtn!!.setOnClickListener {
+//            mFirebaseAuth.signOut()
+//            val i = Intent(this, SignIn::class.java)
+//            startActivity(i)
+//            Toast.makeText(this@MainActivity, "Logged Out Successfully!", Toast.LENGTH_LONG).show()
+//        }
 
         setupViewPager(binding.myViewPager)
         binding.tablayout!!.setupWithViewPager(binding.myViewPager)

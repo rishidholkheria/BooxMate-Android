@@ -59,7 +59,9 @@
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/drawable/ic_logout.xml" value="0.26615384615384613" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/drawable/ic_personbook.xml" value="0.24074074074074073" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/drawable/ic_shopping_cart_black_24dp.xml" value="0.2518518518518518" />
+        <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/activity_book_buzz.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/activity_book_details.xml" value="0.264" />
+        <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/activity_bookmarked_books.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/activity_edit_profile.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/activity_ex_post_input.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/activity_forget_password.xml" value="0.25416666666666665" />
@@ -90,10 +92,12 @@
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/past_order.xml" value="0.21944444444444444" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/purchase_request_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/sell_book_details.xml" value="0.264" />
+        <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/toolbar_layout.xml" value="0.6" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/layout/view_requests_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/menu/exchange_bottom_nav.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/menu/menu.xml" value="0.20925925925925926" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/menu/rent_bottom_nav.xml" value="0.20925925925925926" />
+        <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/menu/side_menu.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

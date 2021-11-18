@@ -12,70 +12,10 @@
         android:background="#ffffff"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            app:cardElevation="3dp">
+        <include
+            android:id="@+id/toolbar_layout"
+            layout="@layout/toolbar_layout" />
 
-            <RelativeLayout
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#ffffff"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <ImageButton
-                        android:id="@+id/myProfileBtn"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="10dp"
-                        android:background="#ffffff"
-                        android:src="@drawable/ic_user" />
-
-                    <ImageButton
-                        android:id="@+id/book_buzz_btn"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="10dp"
-                        android:background="#000"
-                        android:src="@drawable/ic_flash_bb" />
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginBottom="16dp"
-                    android:fontFamily="@font/quicksand_medium"
-                    android:text="BOOXMATE"
-                    android:textColor="#7435E4"
-                    android:textSize="20dp" />
-
-
-                <ImageButton
-                    android:id="@+id/logoutBtn"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="#ffffff"
-                    android:src="@drawable/ic_logout" />
-
-            </RelativeLayout>
-
-
-        </androidx.cardview.widget.CardView>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tablayout"
