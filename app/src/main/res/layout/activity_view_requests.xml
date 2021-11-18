@@ -7,6 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".sell.ViewRequests">
 
+    <include
+        android:id="@+id/toolbar_layout"
+        layout="@layout/toolbar_layout" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/view_request_recycler"
         android:layout_width="match_parent"
