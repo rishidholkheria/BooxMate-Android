@@ -15,7 +15,7 @@ class BookBuzz : AppCompatActivity() {
     private var titlesList = mutableListOf<String>()
     private var descList = mutableListOf<String>()
     private var imagesList = mutableListOf<String>()
-
+    private var urlList = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,13 +34,14 @@ class BookBuzz : AppCompatActivity() {
             override fun onResponse(call: Call<News>, response: Response<News>) {
                 if (response.isSuccessful) {
                     val news: News? = response.body()
+                    Log.e("BOOOOOK", response.body().toString())
                     for (article in news!!.articles) {
-                        addToList(article.title, article.description, article.urlToImage)
+                        addToList(article.title, article.description, article.urlToImage, article.url)
                     }
 
                     binding.bookBuzzRv.apply {
                         layoutManager = LinearLayoutManager(this@BookBuzz)
-                        adapter = BookBuzzAdapter(titlesList, descList, imagesList)
+                        adapter = BookBuzzAdapter(titlesList, descList, imagesList, urlList)
                     }
                 }
             }
@@ -50,10 +51,11 @@ class BookBuzz : AppCompatActivity() {
         })
     }
 
-    private fun addToList(title: String, description: String, urlToImage: String) {
+    private fun addToList(title: String, description: String, urlToImage: String, url: String) {
         titlesList.add(title)
         descList.add(description)
         imagesList.add(urlToImage)
+        urlList.add(url)
     }
 
 }
