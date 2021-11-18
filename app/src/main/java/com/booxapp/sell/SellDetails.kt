@@ -1,6 +1,8 @@
 package com.booxapp
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.booxapp.databinding.ActivitySellDetailsBinding
@@ -20,8 +22,24 @@ class SellDetails : AppCompatActivity(), ShareData {
         binding = ActivitySellDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbarLayout.toobar)
+
+        binding.toolbarLayout.toobar.overflowIcon?.setTint(Color.WHITE)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) //For back btn
+        supportActionBar?.setDisplayShowHomeEnabled(true) //Both lines for back btn
+
         replaceFragment(PublishDetails(), null)
     }
+
+    //for back btn toolbar
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 
     private fun replaceFragment(fragment: Fragment, bookModel: BookModel?) {
         if (bookModel != null) {

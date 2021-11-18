@@ -1,8 +1,11 @@
 package com.booxapp
 
+import android.R
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -36,6 +39,12 @@ class MyProfile : AppCompatActivity() {
 
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbarLayout.toobar)
+        binding.toolbarLayout.toobar.overflowIcon?.setTint(Color.WHITE)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) //For back btn
+        supportActionBar?.setDisplayShowHomeEnabled(true) //Both lines for back btn
 
         bDatabase = FirebaseDatabase.getInstance().getReference(Constants.DB_NAME)
         uDatabase = FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
@@ -76,7 +85,6 @@ class MyProfile : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 myDataListModel.clear()
                 for (child in snapshot.children) {
-                    child.key?.let { Log.i(TAG, it) }
                     for(subChild in purchasedBooks){
                         var myDataListModelInternal = child.getValue(BookModel::class.java)
                         if (myDataListModelInternal != null && myDataListModelInternal.id!! == subChild) {
@@ -122,21 +130,20 @@ class MyProfile : AppCompatActivity() {
 
     }
 
+    //for back btn toolbar
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun loadUserData() {
         uDatabase.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (child in dataSnapshot.children) {
                     var myDataListModelInternal = child.getValue(UserModel::class.java)
                     if (myDataListModelInternal != null && myDataListModelInternal.userId!! == uid) {
-//                        uname = myDataListModelInternal.name.toString()
-//                        uloc = myDataListModelInternal.loc.toString()
-//                        uemail = myDataListModelInternal.email.toString()
-//                        uphoneNumber = myDataListModelInternal.phone.toString()
-
-//                        binding.editProfileUsername.setText(uname)
-//                        binding.editProfileLocation.setText(uloc)
-//                        binding.editProfileEmail.setText(uemail)
-//                        binding.editProfileMobilenumber.setText(uphoneNumber)
 
                         binding.editProfileUsername.setText(myDataListModelInternal.name)
                         binding.editProfileLocation.setText(myDataListModelInternal.loc)

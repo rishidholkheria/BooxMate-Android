@@ -1,7 +1,10 @@
 package com.booxapp.BookBuzz
 
+import android.R
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.booxapp.databinding.ActivityBookBuzzBinding
@@ -23,8 +26,23 @@ class BookBuzz : AppCompatActivity() {
         binding = ActivityBookBuzzBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbarLayout.toobar)
+
+        binding.toolbarLayout.toobar.overflowIcon?.setTint(Color.WHITE)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) //For back btn
+        supportActionBar?.setDisplayShowHomeEnabled(true) //Both lines for back btn
+
         bookBuzzCall()
 
+    }
+
+    //for back btn toolbar
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun bookBuzzCall(){

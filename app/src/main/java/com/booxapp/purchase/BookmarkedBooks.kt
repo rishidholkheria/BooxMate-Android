@@ -1,5 +1,6 @@
 package com.booxapp.purchase
 
+import android.R
 import android.app.ProgressDialog
 import android.graphics.Color
 import android.os.Bundle
@@ -114,6 +115,14 @@ class BookmarkedBooks : AppCompatActivity() {
 
 
 
+    }
+
+    //for back btn toolbar
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun getBookMarkedBooks(uid: String) {
