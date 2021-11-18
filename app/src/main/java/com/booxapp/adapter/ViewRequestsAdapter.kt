@@ -18,7 +18,11 @@ import com.booxapp.onCompleteFirebase
 import com.google.firebase.database.*
 
 
-class ViewRequestsAdapter(private val context: Context, val DataModel: ArrayList<UserModel>, val bookId: String) :
+class ViewRequestsAdapter(
+    private val context: Context,
+    val DataModel: ArrayList<UserModel>,
+    val bookId: String
+) :
     RecyclerView.Adapter<ViewRequestsAdapter.ViewHolder>() {
 
 
@@ -49,9 +53,8 @@ class ViewRequestsAdapter(private val context: Context, val DataModel: ArrayList
         var uDatabase: DatabaseReference =
             FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
 
-        var userKey : String? = Prefs.getStringPrefs(context, "Id")
-        lateinit var buyerId : String
-
+        var userKey: String? = Prefs.getStringPrefs(context, "Id")
+        lateinit var buyerId: String
 
 
         var item: UserModel? = null
@@ -65,12 +68,12 @@ class ViewRequestsAdapter(private val context: Context, val DataModel: ArrayList
             binding.reqAcceptReq.setOnClickListener(View.OnClickListener {
                 Toast.makeText(context, "Working on it...", Toast.LENGTH_SHORT).show()
 
-               // set status to true
+                // set status to true
                 acceptRequest(bookId!!, object : onCompleteFirebase {
-                            override fun onCallback(value: Boolean) {
-                                Toast.makeText(context, "Status set to true", Toast.LENGTH_LONG).show()
-                            }
-                        })
+                    override fun onCallback(value: Boolean) {
+                        Toast.makeText(context, "Status set to true", Toast.LENGTH_LONG).show()
+                    }
+                })
 
                 //save in sold books
                 saveInSoldBooks(object : onCompleteFirebase {
@@ -82,7 +85,8 @@ class ViewRequestsAdapter(private val context: Context, val DataModel: ArrayList
                 //save in purchased books
                 saveInPurchasedBooks(buyerId, object : onCompleteFirebase {
                     override fun onCallback(value: Boolean) {
-                        Toast.makeText(context, "Saved in purchased books", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "Saved in purchased books", Toast.LENGTH_LONG)
+                            .show()
                     }
                 })
 
@@ -91,46 +95,13 @@ class ViewRequestsAdapter(private val context: Context, val DataModel: ArrayList
         }
 
 
-        private fun acceptRequest(bId: String,onCompleteListener: onCompleteFirebase) {
+        private fun acceptRequest(bId: String, onCompleteListener: onCompleteFirebase) {
             bDatabase?.child(bId)?.child("status")
                 ?.addListenerForSingleValueEvent(
                     object : ValueEventListener {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
                             bDatabase!!.child(bId!!).child("status").setValue(
-                                    true,
-                                    DatabaseReference.CompletionListener { error, ref ->
-                                        if (error == null) {
-                                            onCompleteListener.onCallback(true)
-
-                                        } else {
-                                            Log.e(
-                                                TAG,
-                                                "Remove of " + ref + " failed: " + error.message
-                                            )
-                                            onCompleteListener.onCallback(false)
-                                        }
-                                    })
-
-                        }
-
-                        override fun onCancelled(error: DatabaseError) {
-                            TODO("Not yet implemented")
-                        }
-                    })
-
-            //temporary solution
-            bDatabase.child(bId).child("requests").child("0").setValue(buyerId)
-
-        }
-
-        private fun saveInSoldBooks(onCompleteListener: onCompleteFirebase){
-            uDatabase?.child(userKey!!)?.child("soldBooks")
-                ?.addListenerForSingleValueEvent(
-                    object : ValueEventListener {
-                        override fun onDataChange(dataSnapshot: DataSnapshot) {
-                            uDatabase!!.child(userKey!!).child("soldBooks")
-                                .child("${dataSnapshot.childrenCount}").setValue(
-                                bookId,
+                                true,
                                 DatabaseReference.CompletionListener { error, ref ->
                                     if (error == null) {
                                         onCompleteListener.onCallback(true)
@@ -150,9 +121,42 @@ class ViewRequestsAdapter(private val context: Context, val DataModel: ArrayList
                             TODO("Not yet implemented")
                         }
                     })
+
+            //temporary solution
+            bDatabase.child(bId).child("soldTo").setValue(buyerId)
+
         }
 
-        private fun saveInPurchasedBooks(buyerKey: String, onCompleteListener: onCompleteFirebase){
+        private fun saveInSoldBooks(onCompleteListener: onCompleteFirebase) {
+            uDatabase?.child(userKey!!)?.child("soldBooks")
+                ?.addListenerForSingleValueEvent(
+                    object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            uDatabase!!.child(userKey!!).child("soldBooks")
+                                .child("${dataSnapshot.childrenCount}").setValue(
+                                    bookId,
+                                    DatabaseReference.CompletionListener { error, ref ->
+                                        if (error == null) {
+                                            onCompleteListener.onCallback(true)
+
+                                        } else {
+                                            Log.e(
+                                                TAG,
+                                                "Remove of " + ref + " failed: " + error.message
+                                            )
+                                            onCompleteListener.onCallback(false)
+                                        }
+                                    })
+
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            TODO("Not yet implemented")
+                        }
+                    })
+        }
+
+        private fun saveInPurchasedBooks(buyerKey: String, onCompleteListener: onCompleteFirebase) {
             uDatabase?.child(buyerKey!!)?.child("purchasedBooks")
                 ?.addListenerForSingleValueEvent(
                     object : ValueEventListener {

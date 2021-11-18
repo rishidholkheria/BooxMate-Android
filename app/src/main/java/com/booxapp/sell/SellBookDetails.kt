@@ -86,9 +86,7 @@ class SellBookDetails : AppCompatActivity() {
                             binding.viewRequests.isClickable = false
                             binding.viewRequests.setText("Book Sold")
                             binding.buyerDetailsCv.isVisible = true
-                            var buyers: ArrayList<String> = child.child("requests").value as ArrayList<String>
-                            Log.e("Sell", buyers.toString())
-                            var buyerId: String = buyers[0]  //temporary solution
+                            var buyerId = child.child("soldTo").value.toString()
                             getBuyerDetails(buyerId)
 
                             break;
