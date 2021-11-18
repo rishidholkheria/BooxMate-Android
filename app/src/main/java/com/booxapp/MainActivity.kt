@@ -45,22 +45,6 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(false) //For back btn
         supportActionBar?.setDisplayShowHomeEnabled(false) //Both lines for back btn
 
-//        binding.myProfileBtn!!.setOnClickListener {
-//            val i = Intent(this, MyProfile::class.java)
-//            startActivity(i)
-//        }
-//
-//        binding.bookBuzzBtn!!.setOnClickListener {
-//            val i = Intent(this, BookBuzz::class.java)
-//            startActivity(i)
-//        }
-//
-//        binding.logoutBtn!!.setOnClickListener {
-//            mFirebaseAuth.signOut()
-//            val i = Intent(this, SignIn::class.java)
-//            startActivity(i)
-//            Toast.makeText(this@MainActivity, "Logged Out Successfully!", Toast.LENGTH_LONG).show()
-//        }
 
         setupViewPager(binding.myViewPager)
         binding.tablayout!!.setupWithViewPager(binding.myViewPager)
@@ -80,6 +64,13 @@ class MainActivity : AppCompatActivity() {
         com.booxapp.R.id.myProfile -> {
             val intent = Intent(this@MainActivity, MyProfile::class.java)
             startActivity(intent)
+            true
+        }
+        com.booxapp.R.id.logoutBtn -> {
+            mFirebaseAuth.signOut()
+            val i = Intent(this, SignIn::class.java)
+            startActivity(i)
+            Toast.makeText(this@MainActivity, "Logged Out Successfully!", Toast.LENGTH_LONG).show()
             true
         }
         else -> super.onOptionsItemSelected(item)

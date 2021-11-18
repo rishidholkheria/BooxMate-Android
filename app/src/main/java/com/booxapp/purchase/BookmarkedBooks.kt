@@ -1,9 +1,11 @@
 package com.booxapp.purchase
 
 import android.app.ProgressDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.provider.SyncStateContract
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,6 +36,14 @@ class BookmarkedBooks : AppCompatActivity() {
 
         binding = ActivityBookmarkedBooksBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbarLayout.toobar)
+
+        binding.toolbarLayout.toobar.overflowIcon?.setTint(Color.WHITE)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) //For back btn
+        supportActionBar?.setDisplayShowHomeEnabled(true) //Both lines for back btn
+
 
 
         var myDataListModel: ArrayList<BookModel> = ArrayList()
@@ -93,6 +103,7 @@ class BookmarkedBooks : AppCompatActivity() {
                     }
                 }
                 adapter!!.notifyDataSetChanged()
+
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
