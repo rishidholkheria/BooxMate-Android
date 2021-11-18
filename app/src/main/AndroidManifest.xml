@@ -45,7 +45,7 @@
         <activity android:name=".SellDetails" />
         <activity android:name=".ExPostInput" />
         <activity android:name=".ExPurchaseDetails" />
-        <activity android:name=".BookDetails" />
+        <activity android:name=".BookBuzz.BookBuzzWebview" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SplashScreen">
             <intent-filter>
