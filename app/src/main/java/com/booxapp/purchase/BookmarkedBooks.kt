@@ -41,6 +41,7 @@ class BookmarkedBooks : AppCompatActivity() {
 
         binding.toolbarLayout.toobar.overflowIcon?.setTint(Color.WHITE)
 
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true) //For back btn
         supportActionBar?.setDisplayShowHomeEnabled(true) //Both lines for back btn
 

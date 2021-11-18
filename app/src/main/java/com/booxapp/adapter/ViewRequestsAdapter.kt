@@ -2,19 +2,20 @@ package com.booxapp.adapter
 
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.booxapp.Constants
+import com.booxapp.*
 import com.booxapp.data.Prefs
 import com.booxapp.databinding.PurchaseRequestLayoutBinding
 import com.booxapp.model.BookModel
 import com.booxapp.model.UserModel
 import com.booxapp.model.ViewRequestsModel
-import com.booxapp.onCompleteFirebase
 import com.google.firebase.database.*
 
 
@@ -71,7 +72,7 @@ class ViewRequestsAdapter(
                 // set status to true
                 acceptRequest(bookId!!, object : onCompleteFirebase {
                     override fun onCallback(value: Boolean) {
-                        Toast.makeText(context, "Status set to true", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "Request Accepted", Toast.LENGTH_SHORT).show()
                     }
                 })
 
@@ -96,6 +97,7 @@ class ViewRequestsAdapter(
 
 
         private fun acceptRequest(bId: String, onCompleteListener: onCompleteFirebase) {
+
             bDatabase?.child(bId)?.child("status")
                 ?.addListenerForSingleValueEvent(
                     object : ValueEventListener {
@@ -105,7 +107,6 @@ class ViewRequestsAdapter(
                                 DatabaseReference.CompletionListener { error, ref ->
                                     if (error == null) {
                                         onCompleteListener.onCallback(true)
-
                                     } else {
                                         Log.e(
                                             TAG,
@@ -138,7 +139,6 @@ class ViewRequestsAdapter(
                                     DatabaseReference.CompletionListener { error, ref ->
                                         if (error == null) {
                                             onCompleteListener.onCallback(true)
-
                                         } else {
                                             Log.e(
                                                 TAG,
@@ -167,7 +167,6 @@ class ViewRequestsAdapter(
                                     DatabaseReference.CompletionListener { error, ref ->
                                         if (error == null) {
                                             onCompleteListener.onCallback(true)
-
                                         } else {
                                             Log.e(
                                                 TAG,
@@ -177,12 +176,18 @@ class ViewRequestsAdapter(
                                         }
                                     })
 
+                            pageChange()
                         }
 
                         override fun onCancelled(error: DatabaseError) {
                             TODO("Not yet implemented")
                         }
                     })
+        }
+
+        private fun pageChange() {
+            val i = Intent(context, OrderSuccesfull::class.java)
+            context.startActivity(i)
         }
 
     }
