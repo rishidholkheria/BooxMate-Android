@@ -2,6 +2,8 @@ package com.booxapp.adapter
 
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -51,7 +53,7 @@ class ExViewRequestsAdapter(private val context: Context, val DataModel: ArrayLi
 
         var userKey : String? = Prefs.getStringPrefs(context, "Id")
         lateinit var buyerId : String
-
+        lateinit var phone : String
 
 
         var item: UserModel? = null
@@ -61,6 +63,14 @@ class ExViewRequestsAdapter(private val context: Context, val DataModel: ArrayLi
             binding.reqBuyerPno.text = reqModel.phone
 
             buyerId = reqModel.id.toString()
+            phone = reqModel.phone.toString()
+
+            binding.reqBuyerCall.setOnClickListener{
+                val callIntent = Intent(Intent.ACTION_DIAL)
+                callIntent.data = Uri.parse("tel:$phone")
+                callIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                context.startActivity(callIntent)
+            }
 
             binding.reqAcceptReq.setOnClickListener(View.OnClickListener {
                 Toast.makeText(context, "Working on it...", Toast.LENGTH_SHORT).show()

@@ -9,9 +9,10 @@
         android:id="@+id/bookBuzz"
         android:icon="@drawable/ic_flash_bb"
         android:title="Book Buzz"
-        android:visible="true"
-        app:showAsAction="always"
         tools:ignore="AppCompatResource" />
+
+    <!--        android:visible="true"-->
+<!--        app:showAsAction="always"-->
 
     <item
         android:id="@+id/myProfile"

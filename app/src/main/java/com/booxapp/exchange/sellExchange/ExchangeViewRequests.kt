@@ -1,7 +1,9 @@
 package com.booxapp.exchange.sellExchange
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,6 +35,13 @@ class ExchangeViewRequests : AppCompatActivity() {
 
         binding = ActivityViewRequestsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbarLayout.toobar)
+
+        binding.toolbarLayout.toobar.overflowIcon?.setTint(Color.WHITE)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) //For back btn
+        supportActionBar?.setDisplayShowHomeEnabled(true) //Both lines for back btn
 
         eDatabase = FirebaseDatabase.getInstance().getReference(Constants.EX_DB_NAME)
         uDatabase = FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
@@ -95,6 +104,14 @@ class ExchangeViewRequests : AppCompatActivity() {
             }
         })
 
+    }
+
+    //for back btn toolbar
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun addBuyersId() {

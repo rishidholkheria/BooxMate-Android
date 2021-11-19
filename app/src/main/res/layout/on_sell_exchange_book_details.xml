@@ -26,24 +26,6 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/ex_book" />
 
-            <RelativeLayout
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="20dp">
-
-                <CheckBox
-                    android:id="@+id/bookmark"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/ic_bookmark1"
-                    android:button="@null"
-                    android:checked="false" />
-
-            </RelativeLayout>
-
 
         </RelativeLayout>
 
