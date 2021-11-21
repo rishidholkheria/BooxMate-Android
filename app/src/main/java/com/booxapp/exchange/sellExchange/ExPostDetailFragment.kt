@@ -35,7 +35,7 @@ class ExPostDetailFragment : Fragment() {
             val ebook_name = binding.title!!.text.toString()
             val ebook_desc = binding.description!!.text.toString()
             val ebook_cat = binding.category!!.selectedItem.toString()
-            val ebook_mrp = binding.mrp!!.toString()
+            val ebook_mrp = binding.mrp!!.text.toString()
             val ebook_expBooks = binding.expectedBooks!!.text.toString()
             val ebook_loc = binding.location!!.text.toString()
             val ebook_city = binding.city!!.text.toString()
