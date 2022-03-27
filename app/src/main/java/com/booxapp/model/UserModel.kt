@@ -40,15 +40,15 @@ class UserModel {
         this.bookmarkedBooks = bookmarkedBooks
     }
 
-    @Exclude
-    fun toMap(): Map<String, Any?> {
-        return mapOf(
-            "id" to id,
-            "name" to name,
-            "loc" to loc,
-            "phone" to phone,
-            "email" to email
-        )
-    }
+//    @Exclude
+//    fun toMap(): Map<String, Any?> {
+//        return mapOf(
+//            "id" to id,
+//            "name" to name,
+//            "loc" to loc,
+//            "phone" to phone,
+//            "email" to email
+//        )
+//    }
 
 }

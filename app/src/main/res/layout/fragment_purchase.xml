@@ -105,6 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/filter_purchase"
+            android:layout_marginBottom="25dp"
             tools:listitem="@layout/one_row" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
