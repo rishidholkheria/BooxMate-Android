@@ -38,9 +38,9 @@ class MainActivity : AppCompatActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbarLayout.toobar)
+        setSupportActionBar(binding.toolbarLayout.toolbar)
 
-        binding.toolbarLayout.toobar.overflowIcon?.setTint(Color.WHITE)
+        binding.toolbarLayout.toolbar.overflowIcon?.setTint(Color.WHITE)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(false) //For back btn
         supportActionBar?.setDisplayShowHomeEnabled(false) //Both lines for back btn
@@ -63,6 +63,11 @@ class MainActivity : AppCompatActivity() {
         }
         com.booxapp.R.id.myProfile -> {
             val intent = Intent(this@MainActivity, MyProfile::class.java)
+            startActivity(intent)
+            true
+        }
+        com.booxapp.R.id.aboutUs -> {
+            val intent = Intent(this@MainActivity, HomeActivity::class.java)
             startActivity(intent)
             true
         }

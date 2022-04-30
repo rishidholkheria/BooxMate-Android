@@ -10,6 +10,7 @@ import com.booxapp.data.Prefs
 import com.booxapp.databinding.ActivityBookDetailsBinding
 import com.bumptech.glide.Glide
 import com.google.firebase.database.*
+import android.content.SharedPreferences
 
 class PurchaseDetails : AppCompatActivity() {
     lateinit var binding: ActivityBookDetailsBinding
@@ -58,9 +59,25 @@ class PurchaseDetails : AppCompatActivity() {
             "userId"
         ).toString()
 
+//        var bookmarkState = Prefs.getBooleanPrefs(
+//            applicationContext,
+//            "bookmarkState"
+//        )
+//
+//        if (bookmarkState){
+//            binding.bookmark.setBackgroundResource(R.drawable.ic_bookmark_selected1)
+//        }
+//        else{
+//            binding.bookmark.setBackgroundResource(R.drawable.ic_bookmark1)
+//        }
 
         binding.bookmark.setOnClickListener(View.OnClickListener {
             if (binding.bookmark.isChecked) {
+//                Prefs.putBooleanPrefs(
+//                    applicationContext,
+//                    "bookmarkState",
+//                    true
+//                )
                 binding.bookmark.setBackgroundResource(R.drawable.ic_bookmark_selected1)
                 FirebaseAdapter(applicationContext).addBookmark(
                     bId!!,
@@ -70,6 +87,11 @@ class PurchaseDetails : AppCompatActivity() {
                         }
                     })
             } else {
+//                Prefs.putBooleanPrefs(
+//                    applicationContext,
+//                    "bookmarkState",
+//                    false
+//                )
                 binding.bookmark.setBackgroundResource(R.drawable.ic_bookmark1)
                 deleteFromBookmarked(bId!!)
             }
@@ -88,13 +110,12 @@ class PurchaseDetails : AppCompatActivity() {
             binding.request.setVisibility(View.GONE)
             binding.disableRequest.setVisibility(View.VISIBLE)
 
-
         })
 
     }
 
     fun deleteFromBookmarked(bookId: String) {
-        uDatabase?.child(tid)?.child("exchangeBookmarkedBooks")
+        uDatabase?.child(tid)?.child("bookmarkedBooks")
             ?.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     for (child in dataSnapshot.children) {
@@ -105,12 +126,9 @@ class PurchaseDetails : AppCompatActivity() {
                         }
                     }
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                     TODO("Not yet implemented")
                 }
-
-
             })
     }
 }

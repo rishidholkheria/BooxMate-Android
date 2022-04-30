@@ -20,6 +20,7 @@
         android:title="My Profile" />
 
     <item
+        android:id="@+id/aboutUs"
         android:icon="@drawable/ic_logout"
         android:title="About Us" />
 
