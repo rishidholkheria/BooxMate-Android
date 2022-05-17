@@ -8,6 +8,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.booxapp.databinding.ActivityBookBuzzBinding
+import com.booxapp.databinding.ActivityHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,9 +27,9 @@ class BookBuzz : AppCompatActivity() {
         binding = ActivityBookBuzzBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbarLayout.toobar)
+        setSupportActionBar(binding.toolbarLayout.toolbar)
 
-        binding.toolbarLayout.toobar.overflowIcon?.setTint(Color.WHITE)
+        binding.toolbarLayout.toolbar.overflowIcon?.setTint(Color.WHITE)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true) //For back btn
         supportActionBar?.setDisplayShowHomeEnabled(true) //Both lines for back btn

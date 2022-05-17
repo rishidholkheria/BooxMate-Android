@@ -51,10 +51,15 @@
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/rent_purchase_layout.xml" value="0.35104166666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/layout/sell_book_details.xml" value="0.35104166666666664" />
         <entry key="..\:/BooxMate-Android/app/src/main/res/menu/exchange_bottom_nav.xml" value="0.36666666666666664" />
+        <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/drawable/searchview_background.xml" value="0.2203125" />
         <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/activity_book_buzz.xml" value="0.19429347826086957" />
         <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/activity_book_details.xml" value="0.19429347826086957" />
         <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/activity_edit_profile.xml" value="0.2" />
+        <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/activity_home.xml" value="0.25" />
+        <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/activity_home_items.xml" value="0.18" />
         <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/activity_order_succesfull.xml" value="0.19157608695652173" />
+        <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/activity_rent_confirm_sell.xml" value="0.19157608695652173" />
         <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/activity_sell_details.xml" value="0.2033514492753623" />
         <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/activity_sign_in.xml" value="0.19021739130434784" />
         <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/book_buzz_item.xml" value="0.19021739130434784" />
@@ -67,15 +72,15 @@
         <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/fragment_ex_post.xml" value="0.2033514492753623" />
         <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/fragment_exchange.xml" value="0.2033514492753623" />
         <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/fragment_exchange_buy.xml" value="0.2033514492753623" />
+        <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/fragment_home_activity.xml" value="0.18070652173913043" />
+        <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/fragment_publish_details.xml" value="0.2033514492753623" />
+        <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/fragment_purchase.xml" value="0.25" />
         <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/fragment_publish_details.xml" value="0.2033514492753623" />
         <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/fragment_purchase.xml" value="0.2033514492753623" />
-        <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/fragment_sell.xml" value="0.19021739130434784" />
-        <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/main_activity.xml" value="0.16983695652173914" />
-        <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/main_container.xml" value="0.2033514492753623" />
-        <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/menu_spinner_row.xml" value="0.2033514492753623" />
-        <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/on_sale_book_details.xml" value="0.19021739130434784" />
+        <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/one_row.xml" value="0.1" />
         <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/past_order.xml" value="0.2033514492753623" />
-        <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/toolbar_layout.xml" value="0.14673913043478262" />
+        <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/layout/toolbar_layout.xml" value="0.18" />
+        <entry key="..\:/My Projects/BooxMate-Android/app/src/main/res/menu/side_menu.xml" value="0.12222222222222222" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/drawable-v24/ic_bookmark_selected.xml" value="0.25833333333333336" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/drawable/annotation.xml" value="0.22870370370370371" />
         <entry key="..\:/Users/RISHI/AndroidStudioProjects/BooxMate/app/src/main/res/drawable/button_bg.xml" value="0.2324074074074074" />

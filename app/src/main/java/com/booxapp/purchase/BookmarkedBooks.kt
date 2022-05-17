@@ -38,9 +38,9 @@ class BookmarkedBooks : AppCompatActivity() {
         binding = ActivityBookmarkedBooksBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbarLayout.toobar)
+        setSupportActionBar(binding.toolbarLayout.toolbar)
 
-        binding.toolbarLayout.toobar.overflowIcon?.setTint(Color.WHITE)
+        binding.toolbarLayout.toolbar.overflowIcon?.setTint(Color.WHITE)
 
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true) //For back btn

@@ -5,4 +5,5 @@
     <color name="colorPrimaryDark">#6718F3</color>
     <color name="colorAccent">#6200EE</color>
     <color name="purple">#6718F3</color>
+    <color name="white">#fff</color>
 </resources>

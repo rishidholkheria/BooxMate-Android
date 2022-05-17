@@ -22,9 +22,9 @@ class SellDetails : AppCompatActivity(), ShareData {
         binding = ActivitySellDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbarLayout.toobar)
+        setSupportActionBar(binding.toolbarLayout.toolbar)
 
-        binding.toolbarLayout.toobar.overflowIcon?.setTint(Color.WHITE)
+        binding.toolbarLayout.toolbar.overflowIcon?.setTint(Color.WHITE)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true) //For back btn
         supportActionBar?.setDisplayShowHomeEnabled(true) //Both lines for back btn
