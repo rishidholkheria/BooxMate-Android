@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.booxapp.BookBuzz.BookBuzz
@@ -19,6 +21,7 @@ import com.booxapp.databinding.FragmentPurchaseBinding
 import com.booxapp.databinding.MainActivityBinding
 import com.booxapp.model.BookModel
 import com.booxapp.purchase.BookmarkedBooks
+import com.booxapp.store.BooxStore
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
 
@@ -46,8 +49,9 @@ class HomeActivity : AppCompatActivity() {
 
         //menu items
         binding.store.setOnClickListener {
-            val intent = Intent(this@HomeActivity, MainActivity::class.java)
-            startActivity(intent)
+            val fragment = BooxStore()
+            val fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.container, fragment).commit()
         }
 
         binding.secondhand.setOnClickListener {
@@ -55,8 +59,8 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.author.setOnClickListener {
-            val intent = Intent(this@HomeActivity, BookBuzz::class.java)
+        binding.myProfile.setOnClickListener {
+            val intent = Intent(this@HomeActivity, MyProfile::class.java)
             startActivity(intent)
         }
 

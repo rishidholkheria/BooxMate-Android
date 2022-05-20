@@ -42,8 +42,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.toolbarLayout.toolbar.overflowIcon?.setTint(Color.WHITE)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(false) //For back btn
-        supportActionBar?.setDisplayShowHomeEnabled(false) //Both lines for back btn
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) //For back btn
+        supportActionBar?.setDisplayShowHomeEnabled(true) //Both lines for back btn
 
 
         setupViewPager(binding.myViewPager)
@@ -56,6 +56,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        com.booxapp.R.id.home ->{
+            finish()
+            true
+        }
         com.booxapp.R.id.bookBuzz -> {
             val intent = Intent(this@MainActivity, BookBuzz::class.java)
             startActivity(intent)
@@ -104,5 +108,4 @@ class MainActivity : AppCompatActivity() {
         addFragment(ExchangeFragment(), "Exchange")
         viewPager!!.adapter = viewPagerAdapter
     }
-
 }

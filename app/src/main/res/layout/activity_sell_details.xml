@@ -27,6 +27,14 @@
                 android:layout_height="match_parent"
                 tools:layout="@layout/fragment_publish_details" />
 
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragment_buyer_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                tools:layout="@layout/fragment_buyer_details" />
+
+
         </LinearLayout>
 
     </ScrollView>
