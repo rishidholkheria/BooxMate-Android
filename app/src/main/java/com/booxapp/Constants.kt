@@ -6,4 +6,5 @@ object Constants {
     const val DB_NAME = "books"
     const val EX_DB_NAME = "exchangeBooks"
     const val USER_DB_NAME = "users"
+    const val BOOXSTORE = "booxstore"
 }

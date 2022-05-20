@@ -2,11 +2,10 @@ package com.booxapp
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import com.booxapp.data.Prefs
 import com.booxapp.model.BookModel
+import com.booxapp.model.BooxstoreModel
 import com.booxapp.model.ExchangeModel
-import com.booxapp.model.UserModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.DataSnapshot
@@ -22,6 +21,8 @@ class FirebaseAdapter {
 
     var eDatabase: DatabaseReference
 
+    var bDatabase: DatabaseReference
+
     var uDatabase: DatabaseReference
 
     var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -36,6 +37,7 @@ class FirebaseAdapter {
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DB_NAME)
         eDatabase = FirebaseDatabase.getInstance().getReference(Constants.EX_DB_NAME)
         uDatabase = FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
+        bDatabase = FirebaseDatabase.getInstance().getReference(Constants.BOOXSTORE)
 
         uid = Prefs.getStringPrefs(
             context,
@@ -79,6 +81,26 @@ class FirebaseAdapter {
                 }
             })
     }
+
+    fun buyBookFromBooxStore(bookModel: BooxstoreModel, onCompleteListener: onCompleteFirebase) {
+        var id = bookModel.id
+        Log.e("id", bookModel.id.toString())
+        Log.e("id", bookModel.title.toString())
+        Log.e("id", bookModel.bName.toString())
+
+
+        bookModel.buyerId = uid
+        bDatabase.child(id!!)
+            .setValue(bookModel, DatabaseReference.CompletionListener { error, ref ->
+                if (error == null) {
+                    onCompleteListener.onCallback(true)
+                } else {
+                    Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
+                    onCompleteListener.onCallback(false)
+                }
+            })
+    }
+
 
     fun addBookmark(bookId: String, onCompleteListener: onCompleteFirebase) {
 
