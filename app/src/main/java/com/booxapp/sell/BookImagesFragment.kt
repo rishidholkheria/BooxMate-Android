@@ -33,6 +33,10 @@ import com.booxapp.model.BookModel
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.label.ImageLabeler
+import com.google.mlkit.vision.label.ImageLabeling
+import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.util.ArrayList
@@ -54,6 +58,10 @@ class BookImages : Fragment() {
     lateinit var binding: FragmentBookImagesBinding
     lateinit var shareData: ShareData
 
+    lateinit var inputImage: InputImage
+    lateinit var imagelabler: ImageLabeler
+    private val TAG = "Image select"
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
@@ -69,6 +77,9 @@ class BookImages : Fragment() {
     ): View? {
         binding = FragmentBookImagesBinding.inflate(inflater, container, false)
         storageReference = FirebaseStorage.getInstance().reference
+
+        imagelabler = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
+
 
         val bundle = this.arguments
         bookModel = bundle!!.getParcelable("bookModel")!!
@@ -153,6 +164,10 @@ class BookImages : Fragment() {
         if (requestCode == GALLERY_REQUEST && resultCode == AppCompatActivity.RESULT_OK && data != null && data.data != null) {
             filePath = data.data
             try {
+                //image recognition code
+                inputImage = InputImage.fromFilePath(requireContext(), data?.data!!)
+                processImage()
+
                 var selectedImage: Uri? = filePath
                 binding.image.setImageURI(selectedImage)
                 if (filePath != null)
@@ -171,6 +186,9 @@ class BookImages : Fragment() {
             try {
                 var selectedImage: Uri? = filePath
                 binding.image.setImageURI(selectedImage)
+                inputImage = InputImage.fromFilePath(requireContext(), selectedImage!!)
+                processImage()
+
                 if (filePath != null)
                     binding.confirmPost.setOnClickListener {
                         uploadFile()
@@ -255,5 +273,24 @@ class BookImages : Fragment() {
         val mime = MimeTypeMap.getSingleton()
         return mime.getExtensionFromMimeType(cR.getType(uri!!))
     }
+
+    private fun processImage() {
+        imagelabler.process(inputImage)
+            .addOnSuccessListener {
+                var result = ""
+
+                for (label in it) {
+                    val text = label.text
+                    result = result + "\n" + label.text
+                }
+
+                binding.tvResult.text = result
+                Log.d(TAG, "processImage: ${result}")
+
+            }.addOnFailureListener {
+                Log.d(TAG, "processImage: ${it.message}")
+            }
+    }
+
 
 }
