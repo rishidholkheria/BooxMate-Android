@@ -1,7 +1,9 @@
 package com.booxapp.store
 
+import android.R
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,6 +38,7 @@ class BooxStore : Fragment() {
     ): View? {
         binding = FragmentPurchaseBinding.inflate(inflater, container, false)
         binding.toolbarLayout.toolbar.visibility = View.VISIBLE
+
 
         var myDataListModel: ArrayList<BooxstoreModel> = ArrayList()
         mDatabase = FirebaseDatabase.getInstance().getReference("booxstore")
@@ -94,11 +98,18 @@ class BooxStore : Fragment() {
                 }
                 adapter!!.notifyDataSetChanged()
             }
-
             override fun onCancelled(databaseError: DatabaseError) {
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
             }
         })
         return binding.root
+    }
+
+    //for back btn toolbar
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.home) {
+            // do something
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

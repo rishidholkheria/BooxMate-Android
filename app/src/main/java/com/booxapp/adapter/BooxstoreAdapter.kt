@@ -46,7 +46,11 @@ class BooxstoreAdapter(private val context: Context, val myDataModel: ArrayList<
             binding.tvTitle.text = bookModel.title
             binding.tvPrice.text = bookModel.offeredprice
             binding.tvCat.text = bookModel.category
-            Glide.with(context)
+            binding.tvLocation.text = "Located in "
+            binding.tvCity.text = "New Delhi"
+            binding.tvCom.visibility = View.GONE
+
+                    Glide.with(context)
                 .load(bookModel.imagelink)
                 .into(binding.imageView);
 

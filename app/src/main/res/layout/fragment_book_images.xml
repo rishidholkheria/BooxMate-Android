@@ -15,22 +15,11 @@
             android:layout_width="match_parent"
             android:layout_height="230dp">
 
-            <TextView
-                android:id="@+id/tvResult"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="Result"
-
-                android:textColor="#000000"
-                android:textSize="19sp" />
-
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="230dp"
                 android:adjustViewBounds="true"
-                android:layout_below="@+id/tvResult"
                 android:scaleType="fitCenter"
                 android:src="@drawable/photograph" />
 
@@ -51,6 +40,14 @@
             android:layout_height="match_parent"
             android:padding="20dp"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Result"
+                android:textColor="#000000"/>
 
             <TextView
                 android:id="@+id/confirm_book_title"

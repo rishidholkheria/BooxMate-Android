@@ -49,7 +49,7 @@ class SignIn : AppCompatActivity() {
                     .addOnCompleteListener(this@SignIn) { task ->
                         if (task.isSuccessful) {
                             storeAuthId()
-                            val i = Intent(this@SignIn, MainActivity::class.java)
+                            val i = Intent(this@SignIn, HomeActivity::class.java)
                             startActivity(i)
                             finish()
                             Toast.makeText(this@SignIn, "Logged In...", Toast.LENGTH_LONG).show()

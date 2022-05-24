@@ -11,18 +11,22 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.booxapp.BookBuzz.BookBuzz
 import com.booxapp.adapter.MyOrdersAdapter
 import com.booxapp.data.Prefs
 import com.booxapp.databinding.ActivityEditProfileBinding
 import com.booxapp.model.BookModel
 import com.booxapp.model.UserModel
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 class MyProfile : AppCompatActivity() {
 
     lateinit var uDatabase: DatabaseReference
     lateinit var bDatabase: DatabaseReference
+    private val mFirebaseAuth = FirebaseAuth.getInstance()
+
 
     lateinit var uid: String
     lateinit var tid: String
