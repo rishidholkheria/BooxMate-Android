@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.booxapp.ExPurchaseDetails
+import com.booxapp.ExchangeBookDetails
 import com.booxapp.SellBookDetails
 import com.booxapp.databinding.OneRowBinding
 import com.booxapp.model.BookModel
@@ -18,7 +20,6 @@ import kotlin.collections.ArrayList
 class PostExchangeAdapter(private val context: Context, val DataModel: ArrayList<ExchangeModel>) :
     RecyclerView.Adapter<PostExchangeAdapter.ViewHolder>() {
 
-    private var firebaseUser = FirebaseAuth.getInstance().currentUser
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -45,6 +46,10 @@ class PostExchangeAdapter(private val context: Context, val DataModel: ArrayList
         fun bind(context: Context, exModel: ExchangeModel) {
             binding.tvTitle.text = exModel.title
             binding.tvLocation.text = exModel.location
+            binding.tvCity.text = exModel.city
+            binding.tvCat.text = exModel.category
+            binding.tvPrice.text = exModel.mrp
+
             Glide.with(context)
                 .load(exModel.imagelink)
                 .into(binding.imageView);
@@ -53,11 +58,15 @@ class PostExchangeAdapter(private val context: Context, val DataModel: ArrayList
                 val bundle = Bundle()
                 bundle.putString("booktitle", exModel.title)
                 bundle.putString("location", exModel.location)
+                bundle.putString("city", exModel.city)
                 bundle.putString("ctgry", exModel.category)
+                bundle.putString("mrp", exModel.mrp)
+                bundle.putString("expectedBooks", exModel.expectedBooks)
                 bundle.putString("desc", exModel.description)
                 bundle.putString("image", exModel.imagelink)
+                bundle.putString("exBookId", exModel.id)
 
-                var intent = Intent(context, SellBookDetails::class.java)
+                var intent = Intent(context, ExchangeBookDetails::class.java)
                 intent.putExtras(bundle)
                 context.startActivity(intent)
             })

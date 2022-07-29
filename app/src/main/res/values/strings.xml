@@ -8,6 +8,8 @@
         <item>Educational</item>
         <item>Novel</item>
         <item>Notes</item>
+        <item>Comics</item>
+
     </array>
     <string name="title_activity_book_buzz">BookBuzz</string>
     <!-- Strings used for fragments for navigation -->

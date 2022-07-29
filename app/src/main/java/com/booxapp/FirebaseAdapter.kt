@@ -2,15 +2,13 @@ package com.booxapp
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import com.booxapp.data.Prefs
 import com.booxapp.model.BookModel
+import com.booxapp.model.BooxstoreModel
 import com.booxapp.model.ExchangeModel
-import com.booxapp.model.UserModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.DataSnapshot
-import kotlin.math.log
 
 
 class FirebaseAdapter {
@@ -22,6 +20,8 @@ class FirebaseAdapter {
     var mDatabase: DatabaseReference
 
     var eDatabase: DatabaseReference
+
+    var bDatabase: DatabaseReference
 
     var uDatabase: DatabaseReference
 
@@ -37,6 +37,7 @@ class FirebaseAdapter {
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DB_NAME)
         eDatabase = FirebaseDatabase.getInstance().getReference(Constants.EX_DB_NAME)
         uDatabase = FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
+        bDatabase = FirebaseDatabase.getInstance().getReference(Constants.BOOXSTORE)
 
         uid = Prefs.getStringPrefs(
             context,
@@ -81,22 +82,43 @@ class FirebaseAdapter {
             })
     }
 
+    fun buyBookFromBooxStore(bookModel: BooxstoreModel, onCompleteListener: onCompleteFirebase) {
+        var id = bookModel.id
+        Log.e("id", bookModel.id.toString())
+        Log.e("id", bookModel.title.toString())
+        Log.e("id", bookModel.bName.toString())
+
+
+        bookModel.buyerId = uid
+        bDatabase.child(id!!)
+            .setValue(bookModel, DatabaseReference.CompletionListener { error, ref ->
+                if (error == null) {
+                    onCompleteListener.onCallback(true)
+                } else {
+                    Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
+                    onCompleteListener.onCallback(false)
+                }
+            })
+    }
+
+
     fun addBookmark(bookId: String, onCompleteListener: onCompleteFirebase) {
 
         uDatabase.child(tid!!).child("bookmarkedBooks")
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    uDatabase.child(tid!!).child("bookmarkedBooks").child("${dataSnapshot.childrenCount}").setValue(
-                        bookId,
-                        DatabaseReference.CompletionListener { error, ref ->
-                            if (error == null) {
-                                onCompleteListener.onCallback(true)
+                    uDatabase.child(tid!!).child("bookmarkedBooks")
+                        .child("${dataSnapshot.childrenCount}").setValue(
+                            bookId,
+                            DatabaseReference.CompletionListener { error, ref ->
+                                if (error == null) {
+                                    onCompleteListener.onCallback(true)
 
-                            } else {
-                                Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
-                                onCompleteListener.onCallback(false)
-                            }
-                        })
+                                } else {
+                                    Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
+                                    onCompleteListener.onCallback(false)
+                                }
+                            })
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -104,4 +126,95 @@ class FirebaseAdapter {
                 }
             })
     }
+
+    fun saveBuyerId(bookId: String, onCompleteListener: onCompleteFirebase) {
+        mDatabase?.child(bookId)?.child("requests")
+            ?.addListenerForSingleValueEvent(
+                object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        mDatabase!!.child(bookId!!).child("requests")
+                            .child("${dataSnapshot.childrenCount}").setValue(
+                                uid,
+                                DatabaseReference.CompletionListener { error, ref ->
+                                    if (error == null) {
+                                        onCompleteListener.onCallback(true)
+
+                                    } else {
+                                        Log.e(
+                                            TAG,
+                                            "Remove of " + ref + " failed: " + error.message
+                                        )
+                                        onCompleteListener.onCallback(false)
+                                    }
+                                })
+
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+                })
+    }
+
+
+//    --------------EXCHANGE-------------------
+
+
+    fun eAddBookmark(bookId: String, onCompleteListener: onCompleteFirebase) {
+
+        uDatabase.child(tid!!).child("exchangeBookmarkedBooks")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    uDatabase.child(tid!!).child("exchangeBookmarkedBooks")
+                        .child("${dataSnapshot.childrenCount}").setValue(
+                            bookId,
+                            DatabaseReference.CompletionListener { error, ref ->
+                                if (error == null) {
+                                    onCompleteListener.onCallback(true)
+
+                                } else {
+                                    Log.e(TAG, "Remove of " + ref + " failed: " + error.message)
+                                    onCompleteListener.onCallback(false)
+                                }
+                            })
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+    }
+
+    fun eSaveBuyerId(bookId: String, onCompleteListener: onCompleteFirebase) {
+        eDatabase?.child(bookId)?.child("requests")
+            ?.addListenerForSingleValueEvent(
+                object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        eDatabase!!.child(bookId!!).child("requests")
+                            .child("${dataSnapshot.childrenCount}").setValue(
+                                uid,
+                                DatabaseReference.CompletionListener { error, ref ->
+                                    if (error == null) {
+                                        onCompleteListener.onCallback(true)
+
+                                    } else {
+                                        Log.e(
+                                            TAG,
+                                            "Remove of " + ref + " failed: " + error.message
+                                        )
+                                        onCompleteListener.onCallback(false)
+                                    }
+                                })
+
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+                })
+    }
+
+
 }
+
+

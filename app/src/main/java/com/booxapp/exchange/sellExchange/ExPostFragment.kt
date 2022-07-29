@@ -64,26 +64,32 @@ class ExPostFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 dataListModel.clear()
                 for (child in snapshot.children) {
-                    child.key?.let { Log.i(TAG, it) }
+//                    child.key?.let { Log.i(TAG, it) }
                     var DataListModelInternal = child.getValue(ExchangeModel::class.java)
                     if (DataListModelInternal != null && DataListModelInternal.userId == uid) {
                         var title: String? = DataListModelInternal.title
                         var expectedBooks: String? = DataListModelInternal.expectedBooks
                         var location: String? = DataListModelInternal.location
+                        var city: String? = DataListModelInternal.city
                         var category: String? = DataListModelInternal.category
+                        var mrp: String? = DataListModelInternal.mrp
                         var description: String? = DataListModelInternal.description
                         var bookimage: String? = DataListModelInternal.imagelink
+                        var exId: String? = DataListModelInternal.id
 
                         dataListModel.add(
                             ExchangeModel(
                                 title,
                                 location,
+                                city,
                                 category,
+                                mrp!!,
                                 expectedBooks,
                                 description,
-                                "",
+                                exId,
                                 bookimage,
-                                ""
+                                "",
+                                false
                             )
                         )
                     }

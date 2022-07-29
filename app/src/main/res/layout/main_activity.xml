@@ -6,76 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            app:cardElevation="3dp">
-
-            <RelativeLayout
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#ffffff"
-                android:orientation="horizontal">
+        <include
+            android:id="@+id/toolbar_layout"
+            layout="@layout/toolbar_layout" />
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginBottom="16dp"
-                    android:fontFamily="@font/quicksand_medium"
-                    android:text="BOOX"
-                    android:layout_centerInParent="true"
-                    android:textColor="#7435E4"
-                    android:textSize="20dp" />
-
-                <ImageButton
-                    android:id="@+id/logoutBtn"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ic_logout"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="#ffffff"/>
-
-<!--                <Spinner-->
-<!--                    android:id="@+id/menu_items"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center_vertical"-->
-<!--                    android:layout_marginLeft="10dp"-->
-<!--                    android:layout_weight="0.5"-->
-<!--                    android:dropDownHorizontalOffset="0dp"-->
-<!--                    android:dropDownVerticalOffset="20dp"-->
-<!--                    android:dropDownWidth="500dp"-->
-<!--                    android:paddingTop="2sp"-->
-<!--                    android:spinnerMode="dropdown" />-->
-
-
-            </RelativeLayout>
-
-
-        </androidx.cardview.widget.CardView>
-
-
-        <!-- <androidx.appcompat.widget.Toolbar
-             android:id="@+id/mytoolbar"
-             android:layout_width="match_parent"
-             app:title="Boox"
-             app:titleTextColor="#9868ED"
-             android:layout_height="?attr/actionBarSize"
-             app:layout_scrollFlags="enterAlways|scroll"
-             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-         -->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tablayout"
             android:layout_width="match_parent"

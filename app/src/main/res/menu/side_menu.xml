@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+
+    <item
+        android:id="@+id/bookBuzz"
+        android:icon="@drawable/ic_flash_bb"
+        android:title="Book Buzz"
+        tools:ignore="AppCompatResource" />
+
+    <!--        android:visible="true"-->
+<!--        app:showAsAction="always"-->
+
+    <item
+        android:id="@+id/myProfile"
+        android:icon="@drawable/ic_info_outline_black_24dp"
+        android:title="My Profile" />
+
+    <item
+        android:id="@+id/aboutUs"
+        android:icon="@drawable/ic_logout"
+        android:title="About Us" />
+
+    <item
+        android:id="@+id/logoutBtn"
+        android:icon="@drawable/ic_logout"
+        android:title="Logout" />
+
+</menu>

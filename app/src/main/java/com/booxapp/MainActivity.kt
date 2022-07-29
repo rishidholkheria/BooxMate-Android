@@ -3,6 +3,7 @@ package com.booxapp
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
@@ -14,12 +15,16 @@ import com.booxapp.data.Prefs.putStringPrefs
 import com.booxapp.databinding.MainActivityBinding
 import com.booxapp.exchange.ExchangeFragment
 import com.booxapp.model.UserModel
+import com.booxapp.purchase.BookmarkedBooks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import android.R
+import android.graphics.Color
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,17 +38,51 @@ class MainActivity : AppCompatActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbarLayout.toolbar)
 
+        binding.toolbarLayout.toolbar.overflowIcon?.setTint(Color.WHITE)
 
-        binding.logoutBtn!!.setOnClickListener {
-//            mFirebaseAuth.signOut()
-            val i = Intent(this, BookBuzz::class.java)
-            startActivity(i)
-            Toast.makeText(this@MainActivity, "Logged Out Successfully!", Toast.LENGTH_LONG).show()
-        }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) //For back btn
+        supportActionBar?.setDisplayShowHomeEnabled(true) //Both lines for back btn
+
 
         setupViewPager(binding.myViewPager)
         binding.tablayout!!.setupWithViewPager(binding.myViewPager)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(com.booxapp.R.menu.side_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        com.booxapp.R.id.home ->{
+            finish()
+            true
+        }
+        com.booxapp.R.id.bookBuzz -> {
+            val intent = Intent(this@MainActivity, BookBuzz::class.java)
+            startActivity(intent)
+            true
+        }
+        com.booxapp.R.id.myProfile -> {
+            val intent = Intent(this@MainActivity, MyProfile::class.java)
+            startActivity(intent)
+            true
+        }
+        com.booxapp.R.id.aboutUs -> {
+            val intent = Intent(this@MainActivity, HomeActivity::class.java)
+            startActivity(intent)
+            true
+        }
+        com.booxapp.R.id.logoutBtn -> {
+            mFirebaseAuth.signOut()
+            val i = Intent(this, SignIn::class.java)
+            startActivity(i)
+            Toast.makeText(this@MainActivity, "Logged Out Successfully!", Toast.LENGTH_LONG).show()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     private val userDetails: Unit
@@ -62,19 +101,11 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.menu, menu)
-        return true
-    }
-
     private fun setupViewPager(viewPager: ViewPager?) {
         val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
-        addFragment(SellFragment(), "Sell")
         addFragment(PurchaseFragment(), "Purchase")
+        addFragment(SellFragment(), "Sell")
         addFragment(ExchangeFragment(), "Exchange")
         viewPager!!.adapter = viewPagerAdapter
     }
-
 }

@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".exchange.postExchange.ExPostDetailFragment">
+    tools:context=".exchange.sellExchange.ExPostDetailFragment">
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -76,6 +77,27 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="5dp"
+                android:background="#ffffff">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/mrp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Book Mrp"
+                    android:inputType="text"
+                    android:maxLength="500"
+                    android:paddingTop="5dp"
+                    android:textColorHint="#000000"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -95,6 +117,7 @@
                 android:layout_marginEnd="5dp"
                 android:entries="@array/book_category"
                 android:paddingTop="3dp" />
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -141,6 +164,27 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:hint="For Eg  -:  Karol Bagh"
+                android:inputType="textCapWords|text"
+                android:textColor="#000000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:padding="8dp"
+                android:text="Whats your City ?"
+                android:textColor="#ED000000"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:hint="For Eg  -:  New Delhi"
                 android:inputType="textCapWords|text"
                 android:textColor="#000000" />
 

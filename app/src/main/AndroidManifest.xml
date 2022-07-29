@@ -10,6 +10,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission
         android:name="android.permission.MEDIA_CONTENT_CONTROL"
         tools:ignore="ProtectedPermissions" />
@@ -23,22 +24,32 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".BookBuzz.BookBuzz"
             android:exported="true"
             android:label="@string/title_activity_book_buzz"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AboutActivity" />
-        <activity android:name=".ViewRequests" />
+        <activity android:name=".sell.ViewRequests" />
+        <activity android:name=".exchange.sellExchange.ExchangeViewRequests" />
+        <activity android:name=".purchase.BookmarkedBooks" />
         <activity android:name=".SignUp" />
         <activity android:name=".SignIn" />
+        <activity android:name=".MyProfile" />
         <activity android:name=".ForgetPassword" />
         <activity android:name=".OrderSuccesfull" />
         <activity android:name=".PurchaseCart" />
         <activity android:name=".PurchaseDetails" /> <!-- <activity android:name=".BookPhoto" /> -->
         <activity android:name=".SellBookDetails" />
+        <activity android:name=".ExchangeBookDetails" />
         <activity android:name=".SellDetails" />
         <activity android:name=".ExPostInput" />
-        <activity android:name=".BookDetails" />
+        <activity android:name=".ExPurchaseDetails" />
+        <activity android:name=".store.CheckoutDetails" />
+        <activity android:name=".store.BooxPurchaseDetails" />
+        <activity android:name=".BookBuzz.BookBuzzWebview" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SplashScreen">
             <intent-filter>

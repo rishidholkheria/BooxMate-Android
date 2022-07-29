@@ -106,7 +106,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/filter_purchase"
-            tools:listitem="@layout/one_row" />
+            tools:listitem="@layout/one_row"
+            android:layout_marginBottom="25dp"/>
 
     </RelativeLayout>
 

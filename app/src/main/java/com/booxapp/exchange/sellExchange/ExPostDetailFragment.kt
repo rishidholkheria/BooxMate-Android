@@ -1,4 +1,4 @@
-package com.booxapp.exchange.postExchange
+package com.booxapp.exchange.sellExchange
 
 import android.content.Context
 import android.os.Bundle
@@ -8,12 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.booxapp.ExShareData
-import com.booxapp.ShareData
 import com.booxapp.databinding.ExPostDetailFragmentBinding
-import com.booxapp.databinding.FragmentExPostBinding
-import com.booxapp.databinding.FragmentExchangeBinding
-import com.booxapp.databinding.FragmentPublishDetailsBinding
-import com.booxapp.model.BookModel
 import com.booxapp.model.ExchangeModel
 
 
@@ -40,16 +35,19 @@ class ExPostDetailFragment : Fragment() {
             val ebook_name = binding.title!!.text.toString()
             val ebook_desc = binding.description!!.text.toString()
             val ebook_cat = binding.category!!.selectedItem.toString()
+            val ebook_mrp = binding.mrp!!.text.toString()
             val ebook_expBooks = binding.expectedBooks!!.text.toString()
             val ebook_loc = binding.location!!.text.toString()
+            val ebook_city = binding.city!!.text.toString()
 
-                if (isDataValid(ebook_name) && isDataValid(ebook_desc) && isDataValid(ebook_cat) && isDataValid(
+
+            if (isDataValid(ebook_name) && isDataValid(ebook_desc) && isDataValid(ebook_cat) && isDataValid(
                         ebook_expBooks
-                    ) && isDataValid(ebook_loc)
+                    ) && isDataValid(ebook_loc) && isDataValid(ebook_city)
                 ) {
                     shareData.passingData(
                         1,
-                        ExchangeModel(ebook_name, ebook_expBooks, ebook_desc, ebook_cat, ebook_loc)
+                        ExchangeModel(ebook_name,ebook_loc,ebook_city,ebook_cat, ebook_mrp, ebook_expBooks, ebook_desc)
                     )
                 } else {
                     Toast.makeText(activity, "incomplete", Toast.LENGTH_SHORT).show()

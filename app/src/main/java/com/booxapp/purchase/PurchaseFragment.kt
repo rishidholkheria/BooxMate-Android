@@ -1,18 +1,22 @@
 package com.booxapp
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.booxapp.adapter.MyAdapter
 import com.booxapp.data.Prefs
 import com.booxapp.databinding.FragmentPurchaseBinding
 import com.booxapp.model.BookModel
+import com.booxapp.purchase.BookmarkedBooks
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
 import kotlin.collections.ArrayList
 
@@ -21,6 +25,7 @@ class PurchaseFragment : Fragment() {
     var adapter: MyAdapter? = null
     private var progressDialog: ProgressDialog? = null
     lateinit var binding: FragmentPurchaseBinding
+    lateinit var category: String
 
     private val TAG = "PurchaseFragment"
 
@@ -44,6 +49,16 @@ class PurchaseFragment : Fragment() {
             "userId"
         )
 
+        var cartfab: FloatingActionButton = binding.cartfab
+        cartfab.setOnClickListener(View.OnClickListener {
+            startActivity(
+                Intent(
+                    context,
+                    BookmarkedBooks::class.java
+                )
+            )
+        })
+
         mDatabase.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 myDataListModel.clear()
@@ -56,6 +71,7 @@ class PurchaseFragment : Fragment() {
                         var mrp: String? = myDataListModelInternal.mrp
                         var id: String? = myDataListModelInternal.id
                         var location: String? = myDataListModelInternal.location
+                        var city: String? = myDataListModelInternal.city
                         var category: String? = myDataListModelInternal.category
                         var description: String? = myDataListModelInternal.description
                         var bookimage: String? = myDataListModelInternal.imagelink
@@ -65,14 +81,15 @@ class PurchaseFragment : Fragment() {
                             BookModel(
                                 title,
                                 location,
+                                city,
                                 mrp,
                                 id,
                                 offered_price,
                                 category,
-                                true,
                                 description,
                                 bookimage,
-                                userid
+                                userid,
+                                false
                             )
                         )
                     }

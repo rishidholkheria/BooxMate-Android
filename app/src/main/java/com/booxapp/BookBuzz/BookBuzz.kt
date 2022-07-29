@@ -1,10 +1,14 @@
 package com.booxapp.BookBuzz
 
+import android.R
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.booxapp.databinding.ActivityBookBuzzBinding
+import com.booxapp.databinding.ActivityHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,7 +19,7 @@ class BookBuzz : AppCompatActivity() {
     private var titlesList = mutableListOf<String>()
     private var descList = mutableListOf<String>()
     private var imagesList = mutableListOf<String>()
-
+    private var urlList = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,24 +27,40 @@ class BookBuzz : AppCompatActivity() {
         binding = ActivityBookBuzzBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbarLayout.toolbar)
+
+        binding.toolbarLayout.toolbar.overflowIcon?.setTint(Color.WHITE)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) //For back btn
+        supportActionBar?.setDisplayShowHomeEnabled(true) //Both lines for back btn
+
         bookBuzzCall()
 
     }
 
+    //for back btn toolbar
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun bookBuzzCall(){
         val bookBuzzService = BookBuzzService.buildService(ApiService::class.java)
-        val call = bookBuzzService.getBookHeadlines("in",1)
+        val call = bookBuzzService.getBookHeadlines("books, new authors, new books",1)
         call.enqueue(object : Callback<News> {
             override fun onResponse(call: Call<News>, response: Response<News>) {
                 if (response.isSuccessful) {
                     val news: News? = response.body()
+                    Log.e("BOOOOOK", response.body().toString())
                     for (article in news!!.articles) {
-                        addToList(article.title, article.description, article.urlToImage)
+                        addToList(article.title, article.description, article.urlToImage, article.url)
                     }
 
                     binding.bookBuzzRv.apply {
                         layoutManager = LinearLayoutManager(this@BookBuzz)
-                        adapter = BookBuzzAdapter(titlesList, descList, imagesList)
+                        adapter = BookBuzzAdapter(titlesList, descList, imagesList, urlList)
                     }
                 }
             }
@@ -50,10 +70,11 @@ class BookBuzz : AppCompatActivity() {
         })
     }
 
-    private fun addToList(title: String, description: String, urlToImage: String) {
+    private fun addToList(title: String, description: String, urlToImage: String, url: String) {
         titlesList.add(title)
         descList.add(description)
         imagesList.add(urlToImage)
+        urlList.add(url)
     }
 
 }

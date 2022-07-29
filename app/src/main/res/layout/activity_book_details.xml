@@ -1,727 +1,444 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SellBookDetails">
+    android:id="@+id/container"
+    tools:context=".store.BooxPurchaseDetails">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:background="#8DEAE0F8"
-            android:orientation="vertical">
-
-            <!--            <TextView-->
-            <!--                android:id="@+id/book_details_head"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:fontFamily="@font/quicksand"-->
-            <!--                android:paddingTop="20dp"-->
-            <!--                android:paddingBottom="10dp"-->
-            <!--                android:text="Book Details"-->
-            <!--                android:textAlignment="center"-->
-            <!--                android:textSize="18sp"-->
-            <!--                android:textStyle="bold" />-->
-
-            <ImageView
-                android:id="@+id/bookImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:padding="10dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/dummy_image2" />
-            <!--                android:layout_below="@+id/book_details_head"-->
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
 
             <RelativeLayout
-                android:id="@+id/bookmark"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="20dp"
-                android:background="@drawable/circle_purple">
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:background="#8DEAE0F8"
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="30dp"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/ic_bookmark" />
+                    android:id="@+id/bookImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/dummy_image2" />
+
+                <RelativeLayout
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="20dp">
+
+                    <!--                android:background="@drawable/circle_purple"-->
+
+                    <CheckBox
+                        android:id="@+id/bookmark"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/ic_bookmark1"
+                        android:button="@null" />
+
+                </RelativeLayout>
+
 
             </RelativeLayout>
 
-
-        </RelativeLayout>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="0dp">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="17dp">
-
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="17dp">
 
-                    <TextView
-                        android:id="@+id/bookOfferedPrice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="₹ 250"
-                        android:textColor="#80000000"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/bookName"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.5"
-                            android:maxLines="2"
-                            android:text="Wings of Fire - APJ Abdul Kalam"
-                            android:textColor="#000000"
-                            android:textSize="19sp" />
-
-                        <TextView
-                            android:id="@+id/bookCtgry"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="top"
-                            android:layout_marginStart="4dp"
-                            android:background="#f33"
-                            android:paddingStart="10dp"
-                            android:paddingTop="3dp"
-                            android:paddingEnd="10dp"
-                            android:paddingBottom="3dp"
-                            android:text="Educational"
-                            android:textColor="#fff"
-                            android:textSize="13sp" />
-
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5">
-
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="8dp">
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/bookLoc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Karol Bagh, "
-                            android:textColor="#90000000"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="New Delhi"
-                            android:textColor="#90000000"
-                            android:textSize="13sp" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:text="17 February 2020"
-                        android:textColor="#90000000"
-                        android:textSize="13sp" />
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="25dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="120dp"
-                            android:layout_height="25dp"
-                            android:layout_gravity="center_horizontal"
-                            android:background="@drawable/rect_button"
-                            android:gravity="center"
-                            android:text="MRP"
-                            android:textColor="#ffffff" />
-
-                        <TextView
-                            android:id="@+id/bookMrp"
-                            android:layout_width="120dp"
-                            android:layout_height="25dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:gravity="center"
-                            android:text="Rs 1000"
-                            android:textColor="#000000" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="end"
-                        android:background="#000000" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="120dp"
-                            android:layout_height="25dp"
-                            android:layout_gravity="center_horizontal"
-                            android:background="@drawable/rect_button"
-                            android:gravity="center"
-                            android:text="OFFER"
-                            android:textColor="#ffffff" />
-
-                        <TextView
-                            android:id="@+id/bookOp"
-                            android:layout_width="120dp"
-                            android:layout_height="25dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:gravity="center"
-                            android:text="Rs 250"
-                            android:textColor="#000000" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:text="Description"
-                    android:textColor="#000000"
-                    android:textSize="17sp" />
-
-                <TextView
-                    android:id="@+id/bookDesc"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingTop="5dp"
-                    android:text="NCERT Exampler is best book for boards. The condition of these books is also good.
-NCERT Exampler is best book for boards. The condition of these books is also good."
-                    android:textColor="#C9000000"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="20dp"
-                    android:text="Comments"
-                    android:textColor="#000000"
-                    android:textSize="17sp" />
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="20dp">
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_centerInParent="true"
-                            android:adjustViewBounds="true"
-                            android:background="@drawable/circle_white"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/profile_image" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:paddingStart="10dp">
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="John Wick"
-                                android:textColor="#000"
-                                android:textSize="18sp" />
+                                android:text="₹ "
+                                android:textColor="#80000000"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/bookOfferedPrice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="end"
-                                android:text="17 February 2020"
-                                android:textColor="#90000000"
-                                android:textSize="13sp" />
+                                android:text="250"
+                                android:textColor="#80000000"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/bookName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:maxLines="2"
+                                android:text="Wings of Fire - APJ Abdul Kalam"
+                                android:textColor="#000000"
+                                android:textSize="19sp" />
+
+                            <TextView
+                                android:id="@+id/bookCtgry"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="top"
+                                android:layout_marginStart="4dp"
+                                android:background="#f33"
+                                android:paddingStart="10dp"
+                                android:paddingTop="3dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="3dp"
+                                android:text="Educational"
+                                android:textColor="#fff"
+                                android:textSize="13sp" />
+
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
                     </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5">
+
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="8dp">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/bookLoc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Karol Bagh"
+                                android:textColor="#90000000"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=", "
+                                android:textColor="#80000000"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/bookCity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=", New Delhi"
+                                android:textColor="#90000000"
+                                android:textSize="13sp" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:text="17 February 2020"
+                            android:textColor="#90000000"
+                            android:textSize="13sp" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="25dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="120dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center_horizontal"
+                                android:background="@drawable/rect_button"
+                                android:gravity="center"
+                                android:text="MRP"
+                                android:textColor="#ffffff" />
+
+                            <TextView
+                                android:id="@+id/bookMrp"
+                                android:layout_width="120dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:gravity="center"
+                                android:text="Rs 1000"
+                                android:textColor="#000000" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="end"
+                            android:background="#000000" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="120dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center_horizontal"
+                                android:background="@drawable/rect_button"
+                                android:gravity="center"
+                                android:text="OFFER"
+                                android:textColor="#ffffff" />
+
+                            <TextView
+                                android:id="@+id/bookOp"
+                                android:layout_width="120dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:gravity="center"
+                                android:text="Rs 250"
+                                android:textColor="#000000" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:text="Description"
+                        android:textColor="#000000"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/bookDesc"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingTop="10dp"
+                        android:paddingTop="5dp"
                         android:text="NCERT Exampler is best book for boards. The condition of these books is also good.
 NCERT Exampler is best book for boards. The condition of these books is also good."
                         android:textColor="#C9000000"
                         android:textSize="13sp" />
 
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:paddingTop="20dp"-->
+<!--                        android:text="Comments"-->
+<!--                        android:textColor="#000000"-->
+<!--                        android:textSize="17sp" />-->
+
+<!--                    <androidx.appcompat.widget.LinearLayoutCompat-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical"-->
+<!--                        android:paddingTop="10dp"-->
+<!--                        android:paddingBottom="20dp">-->
+
+<!--                        <androidx.appcompat.widget.LinearLayoutCompat-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:orientation="horizontal">-->
+
+<!--                            <ImageView-->
+<!--                                android:layout_width="40dp"-->
+<!--                                android:layout_height="40dp"-->
+<!--                                android:layout_centerInParent="true"-->
+<!--                                android:adjustViewBounds="true"-->
+<!--                                android:background="@drawable/circle_white"-->
+<!--                                android:scaleType="fitCenter"-->
+<!--                                android:src="@drawable/profile_image" />-->
+
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:orientation="vertical"-->
+<!--                                android:paddingStart="10dp">-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:text="John Wick"-->
+<!--                                    android:textColor="#000"-->
+<!--                                    android:textSize="18sp" />-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="end"-->
+<!--                                    android:text="17 February 2020"-->
+<!--                                    android:textColor="#90000000"-->
+<!--                                    android:textSize="13sp" />-->
+
+<!--                            </LinearLayout>-->
+
+<!--                        </androidx.appcompat.widget.LinearLayoutCompat>-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:paddingTop="10dp"-->
+<!--                            android:text="NCERT Exampler is best book for boards. The condition of these books is also good.-->
+<!--NCERT Exampler is best book for boards. The condition of these books is also good."-->
+<!--                            android:textColor="#C9000000"-->
+<!--                            android:textSize="13sp" />-->
+
+<!--                    </androidx.appcompat.widget.LinearLayoutCompat>-->
+
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="1dp"-->
+<!--                        android:background="#9F858585" />-->
+
+<!--                    <androidx.appcompat.widget.LinearLayoutCompat-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical"-->
+<!--                        android:paddingTop="20dp"-->
+<!--                        android:paddingBottom="20dp">-->
+
+<!--                        <androidx.appcompat.widget.LinearLayoutCompat-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:orientation="horizontal">-->
+
+<!--                            <ImageView-->
+<!--                                android:layout_width="50dp"-->
+<!--                                android:layout_height="50dp"-->
+<!--                                android:layout_centerInParent="true"-->
+<!--                                android:adjustViewBounds="true"-->
+<!--                                android:background="@drawable/circle_white"-->
+<!--                                android:scaleType="fitCenter"-->
+<!--                                android:src="@drawable/profile_image" />-->
+
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:orientation="vertical"-->
+<!--                                android:paddingStart="10dp">-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:text="John Wick"-->
+<!--                                    android:textColor="#000"-->
+<!--                                    android:textSize="18sp" />-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="end"-->
+<!--                                    android:text="17 February 2020"-->
+<!--                                    android:textColor="#90000000"-->
+<!--                                    android:textSize="13sp" />-->
+
+<!--                            </LinearLayout>-->
+
+<!--                        </androidx.appcompat.widget.LinearLayoutCompat>-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:paddingTop="10dp"-->
+<!--                            android:text="NCERT Exampler is best book for boards. The condition of these books is also good.-->
+<!--NCERT Exampler is best book for boards. The condition of these books is also good."-->
+<!--                            android:textColor="#C9000000"-->
+<!--                            android:textSize="13sp" />-->
+
+<!--                    </androidx.appcompat.widget.LinearLayoutCompat>-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_margin="10dp"-->
+<!--                        android:clickable="true"-->
+<!--                        android:focusable="true"-->
+<!--                        android:text="View Comment Section..." />-->
+
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#9F858585" />
+            </androidx.cardview.widget.CardView>
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="20dp"
-                    android:paddingBottom="20dp">
+            <Button
+                android:id="@+id/request"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/button_bg"
+                android:text="Request Purchase"
+                android:textColor="#ffffff" />
 
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+            <Button
+                android:id="@+id/disable_request"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/disable_button_bg"
+                android:text="Book Requested"
+                android:textColor="#C8000000"
+                android:visibility="gone" />
 
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_centerInParent="true"
-                            android:adjustViewBounds="true"
-                            android:background="@drawable/circle_white"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/profile_image" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:paddingStart="10dp">
+        </LinearLayout>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="John Wick"
-                                android:textColor="#000"
-                                android:textSize="18sp" />
+    </ScrollView>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="end"
-                                android:text="17 February 2020"
-                                android:textColor="#90000000"
-                                android:textSize="13sp" />
 
-                        </LinearLayout>
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:paddingTop="10dp"
-                        android:text="NCERT Exampler is best book for boards. The condition of these books is also good.
-NCERT Exampler is best book for boards. The condition of these books is also good."
-                        android:textColor="#C9000000"
-                        android:textSize="13sp" />
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:text="View Comment Section..." />
-
-                <!--                <Button-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:background="@drawable/button_bg"-->
-                <!--                    android:layout_marginTop="10dp"-->
-                <!--                    android:text="Comment Section"-->
-                <!--                    android:textColor="#ffffff" />-->
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-        </androidx.cardview.widget.CardView>
-
-        <!--        <androidx.cardview.widget.CardView-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            app:cardElevation="2dp">-->
-
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="match_parent"-->
-        <!--                android:orientation="vertical"-->
-        <!--                android:padding="5dp">-->
-
-        <!--                <TextView-->
-        <!--                    android:id="@+id/bookName"-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:gravity="center"-->
-        <!--                    android:padding="5dp"-->
-        <!--                    android:text="Samosa with red and green chatni!"-->
-        <!--                    android:textColor="#000000"-->
-        <!--                    android:textSize="19sp" />-->
-
-        <!--                <LinearLayout-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:orientation="horizontal"-->
-        <!--                    android:padding="3dp">-->
-
-        <!--                    <LinearLayout-->
-        <!--                        android:layout_width="match_parent"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:layout_weight="1"-->
-        <!--                        android:gravity="center_horizontal"-->
-        <!--                        android:orientation="horizontal">-->
-
-        <!--                        <ImageView-->
-        <!--                            android:layout_width="18dp"-->
-        <!--                            android:layout_height="wrap_content"-->
-        <!--                            android:adjustViewBounds="true"-->
-        <!--                            android:padding="1dp"-->
-        <!--                            android:src="@drawable/ic_category" />-->
-
-        <!--                        <TextView-->
-        <!--                            android:id="@+id/bookCtgry"-->
-        <!--                            android:layout_width="wrap_content"-->
-        <!--                            android:layout_height="wrap_content"-->
-        <!--                            android:layout_marginStart="5dp"-->
-        <!--                            android:text="Educational"-->
-        <!--                            android:textColor="@android:color/black"-->
-        <!--                            android:textSize="12sp" />-->
-
-        <!--                    </LinearLayout>-->
-
-        <!--                    <TextView-->
-        <!--                        android:id="@+id/tv_date"-->
-        <!--                        android:layout_width="match_parent"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:layout_weight="1"-->
-        <!--                        android:gravity="center"-->
-        <!--                        android:text="17 February 2020"-->
-        <!--                        android:textColor="@android:color/black"-->
-        <!--                        android:textSize="12sp" />-->
-
-        <!--                    <TextView-->
-        <!--                        android:id="@+id/bookOfferedPrice"-->
-        <!--                        android:layout_width="match_parent"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:layout_weight="1"-->
-        <!--                        android:gravity="center"-->
-        <!--                        android:text="₹ 250"-->
-        <!--                        android:textColor="@android:color/black"-->
-        <!--                        android:textSize="14sp" />-->
-
-        <!--                </LinearLayout>-->
-
-        <!--                <androidx.appcompat.widget.LinearLayoutCompat-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:orientation="horizontal"-->
-        <!--                    android:padding="5dp">-->
-
-
-        <!--                    <androidx.appcompat.widget.LinearLayoutCompat-->
-        <!--                        android:layout_width="match_parent"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:layout_weight="1"-->
-        <!--                        android:gravity="center"-->
-        <!--                        android:orientation="horizontal">-->
-
-        <!--                        <TextView-->
-        <!--                            android:id="@+id/bookLoc"-->
-        <!--                            android:layout_width="wrap_content"-->
-        <!--                            android:layout_height="match_parent"-->
-        <!--                            android:text="Karol Bagh"-->
-        <!--                            android:textColor="@android:color/black"-->
-        <!--                            android:textSize="12sp" />-->
-
-        <!--                        <TextView-->
-        <!--                            android:id="@+id/tv_city"-->
-        <!--                            android:layout_width="wrap_content"-->
-        <!--                            android:layout_height="match_parent"-->
-        <!--                            android:text=", New Delhi"-->
-        <!--                            android:textColor="@android:color/black"-->
-        <!--                            android:textSize="12sp" />-->
-
-        <!--                    </androidx.appcompat.widget.LinearLayoutCompat>-->
-
-        <!--                    <TextView-->
-        <!--                        android:id="@+id/tv_cat"-->
-        <!--                        android:layout_width="match_parent"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:layout_weight="2"-->
-        <!--                        android:gravity="center"-->
-        <!--                        android:paddingStart="5dp"-->
-        <!--                        android:paddingTop="3dp"-->
-        <!--                        android:paddingEnd="5dp"-->
-        <!--                        android:paddingBottom="3dp"-->
-        <!--                        android:text="BOOKMARK"-->
-        <!--                        android:textColor="#000"-->
-        <!--                        android:textSize="12sp" />-->
-
-
-        <!--                </androidx.appcompat.widget.LinearLayoutCompat>-->
-
-        <!--            </LinearLayout>-->
-
-        <!--        </androidx.cardview.widget.CardView>-->
-
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:orientation="horizontal"-->
-        <!--            android:paddingTop="10dp">-->
-
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_weight="1"-->
-        <!--                android:orientation="vertical">-->
-
-        <!--                <TextView-->
-        <!--                    android:layout_width="120dp"-->
-        <!--                    android:layout_height="25dp"-->
-        <!--                    android:layout_gravity="center_horizontal"-->
-        <!--                    android:background="@drawable/rect_button"-->
-        <!--                    android:gravity="center"-->
-        <!--                    android:text="MRP"-->
-        <!--                    android:textColor="#ffffff" />-->
-
-        <!--                <TextView-->
-        <!--                    android:id="@+id/bookMrp"-->
-        <!--                    android:layout_width="120dp"-->
-        <!--                    android:layout_height="25dp"-->
-        <!--                    android:layout_gravity="center_horizontal"-->
-        <!--                    android:layout_marginTop="10dp"-->
-        <!--                    android:layout_marginBottom="10dp"-->
-        <!--                    android:gravity="center"-->
-        <!--                    android:text="Rs 1000"-->
-        <!--                    android:textColor="#000000" />-->
-
-        <!--            </LinearLayout>-->
-
-        <!--            <View-->
-        <!--                android:layout_width="1dp"-->
-        <!--                android:layout_height="match_parent"-->
-        <!--                android:layout_gravity="end"-->
-        <!--                android:background="#000000" />-->
-
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_weight="1"-->
-        <!--                android:orientation="vertical">-->
-
-        <!--                <TextView-->
-        <!--                    android:layout_width="120dp"-->
-        <!--                    android:layout_height="25dp"-->
-        <!--                    android:layout_gravity="center_horizontal"-->
-        <!--                    android:background="@drawable/rect_button"-->
-        <!--                    android:gravity="center"-->
-        <!--                    android:text="Offered"-->
-        <!--                    android:textColor="#ffffff" />-->
-
-        <!--                <TextView-->
-        <!--                    android:id="@+id/bookOffrdPrice"-->
-        <!--                    android:layout_width="120dp"-->
-        <!--                    android:layout_height="25dp"-->
-        <!--                    android:layout_gravity="center_horizontal"-->
-        <!--                    android:layout_marginTop="10dp"-->
-        <!--                    android:layout_marginBottom="10dp"-->
-        <!--                    android:gravity="center"-->
-        <!--                    android:text="Rs 250"-->
-        <!--                    android:textColor="#000000" />-->
-
-
-        <!--            </LinearLayout>-->
-
-
-        <!--        </LinearLayout>-->
-
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:orientation="vertical">-->
-
-        <!--            <TextView-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginStart="8dp"-->
-        <!--                android:padding="5dp"-->
-        <!--                android:text="Description"-->
-        <!--                android:textColor="#000000"-->
-        <!--                android:textSize="18sp" />-->
-
-        <!--            <TextView-->
-        <!--                android:id="@+id/bookDesc"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="match_parent"-->
-        <!--                android:layout_marginStart="8dp"-->
-        <!--                android:padding="5dp"-->
-        <!--                android:text="NCERT Exampler is best book for boards. The condition of these books is also good.-->
-        <!--NCERT Exampler is best book for boards. The condition of these books is also good."-->
-        <!--                android:textColor="#000000"-->
-        <!--                android:textSize="12sp" />-->
-
-        <!--        </LinearLayout>-->
-
-        <!--        <androidx.cardview.widget.CardView-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="10dp"-->
-        <!--            android:layout_marginBottom="20dp"-->
-        <!--            app:cardElevation="2dp">-->
-
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="match_parent"-->
-        <!--                android:layout_marginBottom="10dp"-->
-        <!--                android:orientation="vertical">-->
-
-        <!--                <TextView-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_marginStart="8dp"-->
-        <!--                    android:layout_marginTop="5dp"-->
-        <!--                    android:padding="5dp"-->
-        <!--                    android:text="About Seller"-->
-        <!--                    android:textColor="#000000"-->
-        <!--                    android:textSize="18sp" />-->
-
-        <!--                <TextView-->
-        <!--                    android:id="@+id/bookSellerName"-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_marginStart="8dp"-->
-        <!--                    android:drawableStart="@drawable/ic_user"-->
-        <!--                    android:drawablePadding="7dp"-->
-        <!--                    android:paddingStart="5dp"-->
-        <!--                    android:paddingEnd="5dp"-->
-        <!--                    android:text="Mukesh Ambani"-->
-        <!--                    android:textColor="#000000"-->
-        <!--                    android:textSize="12sp" />-->
-
-        <!--                <TextView-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_marginStart="8dp"-->
-        <!--                    android:drawableStart="@drawable/ic_black_pin"-->
-        <!--                    android:drawablePadding="7dp"-->
-        <!--                    android:paddingStart="5dp"-->
-        <!--                    android:paddingTop="5dp"-->
-        <!--                    android:paddingEnd="5dp"-->
-        <!--                    android:text="Karol Bagh Delhi"-->
-        <!--                    android:textColor="#000000"-->
-        <!--                    android:textSize="12sp" />-->
-
-        <!--                <LinearLayout-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="0dp"-->
-        <!--                    android:layout_marginBottom="15dp"-->
-        <!--                    android:layout_weight="1"-->
-        <!--                    android:orientation="horizontal">-->
-
-        <!--                    <ImageView-->
-        <!--                        android:layout_width="28dp"-->
-        <!--                        android:layout_height="30dp"-->
-        <!--                        android:layout_marginStart="8dp"-->
-        <!--                        android:adjustViewBounds="true"-->
-        <!--                        android:padding="8dp"-->
-        <!--                        android:scaleType="centerCrop"-->
-        <!--                        android:src="@drawable/ic_seller_mail" />-->
-
-        <!--                    <TextView-->
-        <!--                        android:id="@+id/bookSellerEmail"-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:layout_marginTop="5dp"-->
-        <!--                        android:text="mukeshambani@gmail.com"-->
-        <!--                        android:textColor="@android:color/black"-->
-        <!--                        android:textSize="12sp" />-->
-
-        <!--                </LinearLayout>-->
-
-        <!--            </LinearLayout>-->
-
-        <!--        </androidx.cardview.widget.CardView>-->
-
-        <Button
-            android:id="@+id/request"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/button_bg"
-            android:text="Request Purchase"
-            android:textColor="#ffffff" />
-
-
-    </LinearLayout>
-
-</ScrollView>
-
+</RelativeLayout>

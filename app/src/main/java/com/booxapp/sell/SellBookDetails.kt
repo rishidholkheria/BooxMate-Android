@@ -1,32 +1,38 @@
 package com.booxapp
 
-import android.app.Dialog
-import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import com.booxapp.data.Prefs
 import com.booxapp.databinding.ActivityBookDetailsBinding
-import com.booxapp.databinding.SellBookDetailsBinding
-import com.booxapp.model.BookModel
-import com.booxapp.model.UserModel
+import com.booxapp.databinding.OnSaleBookDetailsBinding
+import com.booxapp.purchase.BookmarkedBooks
+import com.booxapp.sell.ViewRequests
 import com.bumptech.glide.Glide
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 
 class SellBookDetails : AppCompatActivity() {
 
-    lateinit var binding: ActivityBookDetailsBinding
+    lateinit var binding: OnSaleBookDetailsBinding
 
-    var ref: DatabaseReference? = null
-    var bookmarkedBook: MutableList<String> = ArrayList()
+    var uDatabase: DatabaseReference? =
+        FirebaseDatabase.getInstance().getReference(Constants.USER_DB_NAME)
+
+    var bDatabase: DatabaseReference =
+        FirebaseDatabase.getInstance().getReference(Constants.DB_NAME)
+
+    lateinit var uid: String
+    lateinit var tid: String
+    lateinit var phone: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityBookDetailsBinding.inflate(layoutInflater)
+        binding = OnSaleBookDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val bundle = intent.extras
@@ -34,27 +40,81 @@ class SellBookDetails : AppCompatActivity() {
         binding.bookOfferedPrice.text = bundle!!.getString("oprice", "Rs ")
         binding.bookCtgry.text = bundle!!.getString("ctgry", "Category")
         binding.bookLoc.text = bundle!!.getString("location", "Book Title")
+        binding.bookCity.text = bundle!!.getString("city", "City")
         binding.bookMrp.text = bundle!!.getString("mrp", "Rs ")
         binding.bookOp.text = bundle!!.getString("oprice", "Rs ")
         binding.bookDesc.text = bundle!!.getString("booktitle", "No description available.")
+
         Glide.with(this)
             .load(bundle!!.getString("image", "No Image"))
             .into(binding.bookImage);
 
         var bId = bundle!!.getString("bookid")
-        Log.e("userrrrrrrr", bId!!)
-        var title = bundle!!.getString("booktitle")
-        Toast.makeText(applicationContext, bId, Toast.LENGTH_LONG).show()
-        Toast.makeText(applicationContext, title, Toast.LENGTH_LONG).show()
 
-        binding.bookmark.setOnClickListener(View.OnClickListener {
-            FirebaseAdapter(applicationContext).addBookmark(bId,
-                object : onCompleteFirebase {
-                    override fun onCallback(value: Boolean) {
-                        Toast.makeText(applicationContext, "Done", Toast.LENGTH_LONG).show()
-                    }
-                })
+        tid = Prefs.getStringPrefs(
+            applicationContext,
+            "Id"
+        ).toString()
+
+        uid = Prefs.getStringPrefs(
+            applicationContext,
+            "userId"
+        ).toString()
+
+
+        checkIfSold(bId.toString())
+
+        binding.reqBuyerCall.setOnClickListener {
+            val callIntent = Intent(Intent.ACTION_DIAL)
+            callIntent.data = Uri.parse("tel:$phone")
+            startActivity(callIntent)
+        }
+
+        binding.viewRequests.setOnClickListener(View.OnClickListener {
+            val i = Intent(this, ViewRequests::class.java)
+            i.putExtra("bookid", bId)
+            startActivity(i)
         })
 
+    }
+
+    private fun checkIfSold(bId: String) {
+            bDatabase.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (child in dataSnapshot.children) {
+                        if (child.child("id").value.toString() == bId && child.child("status").value == true) {
+                            binding.viewRequests.isClickable = false
+                            binding.viewRequests.setText("Book Sold")
+                            binding.buyerDetailsCv.isVisible = true
+                            var buyerId = child.child("soldTo").value.toString()
+                            getBuyerDetails(buyerId)
+
+                            break;
+                        }
+                    }
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+
+        }
+
+    private fun getBuyerDetails(buyerId: String){
+        uDatabase!!.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (child in dataSnapshot.children) {
+                    if (child.child("id").value.toString() == buyerId ) {
+                        binding.reqBuyerName.text = child.child("name").value.toString()
+                        binding.reqBuyerLoc.text = child.child("loc").value.toString()
+                        phone = child.child("phone").value.toString()
+                        break;
+                    }
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 }

@@ -7,33 +7,9 @@
     android:orientation="vertical"
     tools:context=".SignUp">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        app:cardElevation="7dp">
-
-        <RelativeLayout
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#ffffff"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="@font/quicksand_medium"
-                android:text="BOOX"
-                android:textAlignment="center"
-                android:textColor="#7435E4"
-                android:textSize="20dp" />
-
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
+    <include
+        android:id="@+id/toolbar_layout"
+        layout="@layout/toolbar_layout" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -74,11 +50,11 @@
                     android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nextFocusDown="@id/email"
-                    android:lines="1"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="4dp"
-                    android:layout_marginEnd="12dp" />
+                    android:layout_marginEnd="12dp"
+                    android:lines="1"
+                    android:nextFocusDown="@id/email" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -92,13 +68,13 @@
 
                 <EditText
                     android:id="@+id/email"
-                    android:nextFocusDown="@id/mobilenumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="1"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="4dp"
-                    android:layout_marginEnd="12dp" />
+                    android:layout_marginEnd="12dp"
+                    android:lines="1"
+                    android:nextFocusDown="@id/mobilenumber" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -113,12 +89,13 @@
                 <EditText
                     android:id="@+id/mobilenumber"
                     android:layout_width="match_parent"
-                    android:lines="1"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:inputType="number"
                     android:layout_marginTop="4dp"
-                    android:layout_marginEnd="12dp" />
+                    android:layout_marginEnd="12dp"
+                    android:inputType="number"
+                    android:lines="1" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -131,21 +108,21 @@
 
                 <EditText
                     android:id="@+id/location"
-                    android:nextFocusDown="@id/mobilenumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="1"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="4dp"
-                    android:layout_marginEnd="12dp" />
+                    android:layout_marginEnd="12dp"
+                    android:lines="1"
+                    android:nextFocusDown="@id/mobilenumber" />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nextFocusDown="@id/password"
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/karla"
+                    android:nextFocusDown="@id/password"
                     android:paddingLeft="12dp"
                     android:text="Password"
                     android:textColor="#000000"
@@ -156,10 +133,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:lines="1"
-                    android:inputType="textPassword"
                     android:layout_marginTop="4dp"
-                    android:layout_marginEnd="12dp" />
+                    android:layout_marginEnd="12dp"
+                    android:inputType="textPassword"
+                    android:lines="1" />
 
 
                 <RelativeLayout
@@ -226,8 +203,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="28dp"
+                    android:layout_marginEnd="20dp"
                     android:background="#4D000000" />
 
             </LinearLayout>

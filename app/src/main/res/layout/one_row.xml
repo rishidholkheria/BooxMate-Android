@@ -68,10 +68,17 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=", "
+                            android:textColor="#90000000"
+                            android:textSize="12sp" />
+
+                        <TextView
                             android:id="@+id/tv_city"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=", New Delhi"
+                            android:text="New Delhi"
                             android:textColor="#90000000"
                             android:textSize="12sp" />
 
@@ -96,30 +103,21 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.35">
 
-                    <ImageView
-                        android:id="@+id/iv_bookmark"
-                        android:layout_width="23dp"
-                        android:layout_height="27dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="4dp"
-                        android:src="@drawable/ic_bookmark" />
-
                     <TextView
                         android:id="@+id/tv_cat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Novel"
-                        android:textColor="#fff"
-                        android:background="#f33"
-                        android:paddingTop="3dp"
-                        android:paddingBottom="3dp"
-                        android:paddingStart="5dp"
-                        android:paddingEnd="5dp"
-                        android:gravity="center"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:textSize="12sp"
-                        />
+                        android:background="#f33"
+                        android:gravity="center"
+                        android:paddingStart="5dp"
+                        android:paddingTop="3dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="3dp"
+                        android:text="Novel"
+                        android:textColor="#fff"
+                        android:textSize="12sp" />
 
                 </RelativeLayout>
 

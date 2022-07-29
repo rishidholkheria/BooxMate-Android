@@ -3,10 +3,12 @@ package com.booxapp.adapter
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.booxapp.R
 import com.booxapp.SellBookDetails
 import com.booxapp.databinding.PastOrderBinding
 import com.booxapp.model.BookModel
@@ -42,7 +44,15 @@ class SellAdapter(private val context: Context, val DataModel: ArrayList<BookMod
         fun bind(context: Context, bookModel: BookModel) {
             binding.bookname.text = bookModel.title
             binding.location.text = bookModel.location
+            binding.city.text = bookModel.city
             binding.price.text = bookModel.offeredprice
+            binding.reqCount.text = bookModel.requests.size.toString()
+
+            if(bookModel.status == true){
+                binding.bookStatus.text = "Sold"
+                binding.bookStatus.setBackgroundResource(R.color.purple)
+            }
+
             Glide.with(context)
                 .load(bookModel.imagelink)
                 .into(binding.bookimage);
@@ -53,9 +63,11 @@ class SellAdapter(private val context: Context, val DataModel: ArrayList<BookMod
                 bundle.putString("oprice", bookModel.offeredprice)
                 bundle.putString("mrp", bookModel.mrp)
                 bundle.putString("location", bookModel.location)
+                bundle.putString("city", bookModel.city)
                 bundle.putString("ctgry", bookModel.category)
                 bundle.putString("desc", bookModel.description)
                 bundle.putString("image", bookModel.imagelink)
+                bundle.putString("bookid", bookModel.id)
 
                 var intent = Intent(context, SellBookDetails::class.java)
                 intent.putExtras(bundle)
